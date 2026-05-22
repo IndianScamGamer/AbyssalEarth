@@ -1,0 +1,9 @@
+DiscoveryId,DisplayName,Category,Zone,JournalText
+D_Human_SurveyElevator,Survey Elevator,HumanMade,Descent Elevator,"A surface-built descent platform forced into basalt that looks recently fractured, as if the cavern opened around it rather than being drilled."
+D_Bio_GlasscapFungus,Glasscap Fungus,Biology,Mirror Marsh,"Translucent fungal caps that gather condensation and glow from the underside, turning the marsh into a field of dim lanterns."
+D_Geo_MirrorSilt,Mirror Silt,Geology,Mirror Marsh,"Fine mineral sediment that settles beneath shallow water and creates unusually clean reflections in near darkness."
+D_Geo_PulseQuartz,Pulse Quartz,Geology,Crystal Spine,"Milky crystal veins that brighten in slow waves when exposed to scanner energy."
+D_Anomaly_ResonantVein,Resonant Vein,Anomaly,Crystal Spine,"A mineral seam that answers scanner pulses with a delayed harmonic vibration, suggesting a connected structure deeper in the cavern."
+D_Geo_EmberVent,Ember Vent,Geology,Ember Vents,"A geothermal vent whose orange mineral crust radiates heat through wet black stone."
+D_Bio_ThermalFilament,Thermal Filament,Biology,Ember Vents,"Threadlike organisms that grow only near vent exhaust, glowing briefly when heat pressure rises."
+D_Anomaly_SecondSkyCavern,Second Sky Cavern,Anomaly,Far Survey Station,"A distant chamber so large its ceiling reads like a second horizon, with suspended stone shelves fading into luminous fog."

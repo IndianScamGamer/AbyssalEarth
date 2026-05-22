@@ -1,0 +1,31 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.4",
+  "Category": "Games",
+  "Description": "A beautiful exploration adventure set in vast alien landscapes hidden inside Earth.",
+  "Modules": [
+    {
+      "Name": "AbyssalEarth",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "EnhancedInput",
+      "Enabled": true
+    },
+    {
+      "Name": "Water",
+      "Enabled": true
+    },
+    {
+      "Name": "GeometryScript",
+      "Enabled": true
+    },
+    {
+      "Name": "PCG",
+      "Enabled": true
+    }
+  ]
+}

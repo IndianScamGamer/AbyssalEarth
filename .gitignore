@@ -1,0 +1,23 @@
+# Unreal build and runtime output
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# Generated IDE project files
+.vs/
+.vscode/
+*.VC.db
+*.VC.opendb
+*.sln
+*.suo
+*.user
+*.xcodeproj/
+*.xcworkspace/
+
+# Platform and editor noise
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
