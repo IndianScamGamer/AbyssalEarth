@@ -1,6 +1,9 @@
 #include "BeaconActor.h"
+#include "BeaconSubsystem.h"
 #include "Components/PointLightComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Engine/GameInstance.h"
+#include "Engine/World.h"
 
 ABeaconActor::ABeaconActor()
 {
@@ -43,6 +46,23 @@ FGuid ABeaconActor::GetBeaconId() const
 FLinearColor ABeaconActor::GetBeaconLightColor() const
 {
     return BeaconLightColor;
+}
+
+void ABeaconActor::SetBeaconLightColor(FLinearColor NewLightColor)
+{
+    BeaconLightColor = NewLightColor;
+    ApplyBeaconVisuals();
+
+    if (UWorld* World = GetWorld())
+    {
+        if (UGameInstance* GameInstance = World->GetGameInstance())
+        {
+            if (UBeaconSubsystem* BeaconSubsystem = GameInstance->GetSubsystem<UBeaconSubsystem>())
+            {
+                BeaconSubsystem->RegisterBeacon(this);
+            }
+        }
+    }
 }
 
 void ABeaconActor::ApplyBeaconVisuals()

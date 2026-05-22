@@ -2,6 +2,7 @@
 #include "BeaconActor.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
+#include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
 
 void UBeaconSubsystem::Initialize(FSubsystemCollectionBase& Collection)
@@ -39,6 +40,73 @@ void UBeaconSubsystem::RegisterBeacon(ABeaconActor* Beacon)
 
     RestoredBeaconIds.Add(BeaconData.BeaconId);
     SaveBeacons();
+}
+
+bool UBeaconSubsystem::RemoveBeacon(ABeaconActor* Beacon)
+{
+    if (!Beacon)
+    {
+        return false;
+    }
+
+    const FGuid BeaconId = Beacon->GetBeaconId();
+    bool bMutated = false;
+
+    const int32 ExistingIndex = FindBeaconIndex(BeaconId);
+    if (ExistingIndex != INDEX_NONE)
+    {
+        SavedBeacons.RemoveAt(ExistingIndex);
+        bMutated = true;
+    }
+
+    if (BeaconId.IsValid())
+    {
+        RestoredBeaconIds.Remove(BeaconId);
+    }
+
+    Beacon->Destroy();
+
+    if (bMutated)
+    {
+        SaveBeacons();
+    }
+
+    return bMutated;
+}
+
+bool UBeaconSubsystem::RemoveBeaconById(UObject* WorldContextObject, FGuid BeaconId)
+{
+    UWorld* World = GEngine ? GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::ReturnNull) : nullptr;
+    if (!World || !BeaconId.IsValid())
+    {
+        return false;
+    }
+
+    ABeaconActor* MatchedActor = nullptr;
+    for (TActorIterator<ABeaconActor> It(World); It; ++It)
+    {
+        if (*It && It->GetBeaconId() == BeaconId)
+        {
+            MatchedActor = *It;
+            break;
+        }
+    }
+
+    if (MatchedActor)
+    {
+        return RemoveBeacon(MatchedActor);
+    }
+
+    const int32 ExistingIndex = FindBeaconIndex(BeaconId);
+    if (ExistingIndex != INDEX_NONE)
+    {
+        SavedBeacons.RemoveAt(ExistingIndex);
+        RestoredBeaconIds.Remove(BeaconId);
+        SaveBeacons();
+        return true;
+    }
+
+    return false;
 }
 
 int32 UBeaconSubsystem::RestoreSavedBeacons(UObject* WorldContextObject, TSubclassOf<ABeaconActor> BeaconClass)

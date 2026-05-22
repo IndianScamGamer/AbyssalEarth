@@ -72,3 +72,34 @@
 - Updated next-task and technical docs so the next Unreal Editor pass can create the actual readout Blueprint from this base class.
 - Verification: UnrealEditor/UnrealBuildTool are still unavailable on PATH; ran source inspection for scanner widget symbols and should compile in UE 5.4+ once installed.
 - Next: compile the project in UE, create `WBP_ScannerReadout` from `UAbyssalScannerReadoutWidget`, add it to the HUD, and verify scan/found/miss states in PIE.
+
+## 2026-05-22 EDT
+
+- Added the missing `IA_Crouch` input slot to `AAbyssalExplorerCharacter` with `StartCrouch`/`StopCrouch` handlers, set `NavAgentProps.bCanCrouch = true`, and exposed a configurable `CrouchedHalfHeight`.
+- Reattached `FirstPersonCamera` from the capsule root to the character mesh's `head` socket so future animation work (crouch dip, head bob) reads correctly.
+- Expanded `LUMINOUS_RIFT_BLOCKOUT.md` with a per-zone room-by-room placement checklist: explicit coordinates, mesh counts, point-light tints, fog setup, trigger-volume sizes, and natural beacon placement spots for all six zones.
+- Added an `Input Asset Creation Checklist` to `TECHNICAL_PLAN.md` covering IA value types, IMC bindings (keyboard + gamepad), Blueprint slot wiring, and a PIE verification sequence.
+- Added beacon recolor support (`ABeaconActor::SetBeaconLightColor`) that re-registers with `UBeaconSubsystem` for persistence; added `RemoveBeacon` and `RemoveBeaconById` to the subsystem; made `AAbyssalExplorerCharacter::PlaceBeacon` smart-context so the beacon key removes a beacon when the line trace hits one and places one otherwise.
+- Rewrote `NEXT_TASKS.md` to split editor-dependent work from code/docs work; added the Ember Vents hazard prototype and journal-shell base class as the next code targets.
+- Verification: UnrealEditor/UnrealBuildTool are still unavailable on PATH; new code matches existing UE 5.4 patterns (e.g. `TActorIterator` is already used elsewhere via `Kismet/GameplayStatics`, and `Engine/GameInstance.h` is the canonical include for `UGameInstance::GetSubsystem`). Compile once UE is installed.
+- Next: compile to confirm the C++ changes; then create the input assets in `Content/Input/`, build `MAP_LuminousRift_Blockout` from the zone checklist, and PIE-test the beacon place/remove/recolor loop.
+
+## 2026-05-22 EDT (continued)
+
+- Added `AEmberVentHazard`: a placeable actor with an Idle -> Warning -> Erupting -> Cooldown cycle on a single `FTimerHandle`, configurable per-phase durations, and a looping damage timer that calls `ApplyRadialDamage` during the Erupting phase only. `bRandomizeInitialPhaseOffset` desyncs clustered vents naturally without per-instance setup, with a manual `InitialPhaseOffset` fallback. Exposes per-phase Blueprint events plus an `OnVentPhaseChanged` multicast.
+- Rewrote the discovery storage layer: `UDiscoverySubsystem` now holds `TMap<FName, FAbyssalDiscoveryEntry>` keyed by id, where each entry carries display name, journal text, and category. Added `OnDiscoveryAdded` multicast for toast UI, new accessors (`GetDiscoveredEntries`, `GetDiscoveredEntriesByCategory`, `GetDiscoveryEntry`, `GetDiscoveredCount`), and `ClearAllDiscoveries` for debug resets. `UDiscoverySaveGame` now persists `DiscoveredEntries` and keeps the legacy `DiscoveredIds` array for back-fill on old saves.
+- Updated `ADiscoveryActor::RegisterScan` to build a full `FAbyssalDiscoveryEntry` from its own properties and call `RegisterDiscoveryEntry`, so the journal sees real names/text/category instead of bare ids.
+- Added `UAbyssalJournalWidget` as the C++ UMG base for `WBP_AbyssalJournal`. Auto-binds to `UDiscoverySubsystem` in `NativeConstruct`, exposes `SetJournalOpen`/`ToggleJournalOpen`/`IsJournalOpen`, and forwards `BP_OnJournalOpened`, `BP_OnJournalClosed`, `BP_OnNewDiscoveryAdded`, `BP_OnEntriesRefreshed` to Blueprint.
+- Wired the missing `IA_Journal` slot on `AAbyssalExplorerCharacter` -> `ToggleJournal()` -> `BP_ToggleJournal` (BlueprintImplementableEvent), so the Blueprint child can drive widget show/hide. The character now references all seven planned input actions.
+- Added non-shipping debug exec commands on the character: `AbyssalDebugDiscoverAll`, `AbyssalDebugResetDiscoveries`, `AbyssalDebugAdvanceObjective`. These let the journal, save round-trip, and objective HUD be tested without building the full route first.
+- Updated `TECHNICAL_PLAN.md` with sections for the new hazard, journal flow, expanded discovery API, and debug commands. Updated `NEXT_TASKS.md` to point the next editor session at `BP_EmberVentHazard`, `WBP_AbyssalJournal`, and the PIE test plans for each.
+- Verification: UnrealEditor/UnrealBuildTool are still unavailable on PATH. New module dependencies are not required (`UMG` and `Engine` already cover the additions). `TActorIterator` (EngineUtils.h) is the standard pattern for the debug command and beacon-by-id lookup. Damage application uses the canonical `UGameplayStatics::ApplyRadialDamage` signature.
+- Next: compile in UE 5.4+; create `BP_EmberVentHazard`, `WBP_AbyssalJournal`, `WBP_ScannerReadout` Blueprint children; place vent hazards in the Ember Vents zone of the blockout; PIE-test the journal toast + entries via `AbyssalDebugDiscoverAll`.
+
+## 2026-05-22 EDT (continued, follow-up)
+
+- Added `UAbyssalGameplayLibrary` (`UBlueprintFunctionLibrary`) with `GetDiscoverySubsystem`/`GetObjectiveSubsystem`/`GetBeaconSubsystem` world-context accessors. Saves two Blueprint nodes per subsystem read in the HUD/journal/objective widgets to come.
+- Bound `AAbyssalExplorerCharacter` to its own `OnTakeAnyDamage` in `BeginPlay`. The handler logs damage at Verbose and fires the new `BP_OnTookDamage(Damage, DamageCauser)` BlueprintImplementableEvent so future HUD/SFX can react without a real HP system yet. This closes the Ember Vent hazard testability loop.
+- Updated `TECHNICAL_PLAN.md` with sections for the gameplay library and damage hook; updated `NEXT_TASKS.md` to remove the now-done items and queue the next batch (audio cue subsystem sketch, HP component shape, ambience data table).
+- Verification: still no UnrealBuildTool on PATH; signatures match standard UE 5.4 patterns (`OnTakeAnyDamage` is `FTakeAnyDamageSignature` on `AActor`, and `GEngine->GetWorldFromContextObject` is the canonical world-context resolver).
+- Next: write the ambience CSV draft and audio subsystem stub when continuing without the editor; otherwise compile and create the Blueprint children listed above.

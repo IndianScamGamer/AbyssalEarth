@@ -1,8 +1,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "DiscoveryActor.h"
 #include "GameFramework/SaveGame.h"
 #include "DiscoverySaveGame.generated.h"
+
+USTRUCT(BlueprintType)
+struct FAbyssalDiscoveryEntry
+{
+    GENERATED_BODY()
+
+    UPROPERTY(BlueprintReadWrite, Category = "Abyssal Earth|Discovery")
+    FName DiscoveryId;
+
+    UPROPERTY(BlueprintReadWrite, Category = "Abyssal Earth|Discovery")
+    FText DisplayName;
+
+    UPROPERTY(BlueprintReadWrite, Category = "Abyssal Earth|Discovery", meta = (MultiLine = true))
+    FText JournalText;
+
+    UPROPERTY(BlueprintReadWrite, Category = "Abyssal Earth|Discovery")
+    EDiscoveryCategory Category = EDiscoveryCategory::Geology;
+};
 
 USTRUCT(BlueprintType)
 struct FAbyssalBeaconSaveData
@@ -27,6 +46,9 @@ class ABYSSALEARTH_API UDiscoverySaveGame : public USaveGame
 public:
     UPROPERTY(BlueprintReadWrite, Category = "Abyssal Earth|Save")
     TArray<FName> DiscoveredIds;
+
+    UPROPERTY(BlueprintReadWrite, Category = "Abyssal Earth|Save")
+    TArray<FAbyssalDiscoveryEntry> DiscoveredEntries;
 
     UPROPERTY(BlueprintReadWrite, Category = "Abyssal Earth|Save")
     TArray<FAbyssalBeaconSaveData> SavedBeacons;

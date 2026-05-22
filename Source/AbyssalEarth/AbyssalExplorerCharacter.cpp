@@ -1,13 +1,19 @@
 #include "AbyssalExplorerCharacter.h"
 #include "BeaconActor.h"
 #include "BeaconSubsystem.h"
+#include "DiscoveryActor.h"
+#include "DiscoverySubsystem.h"
+#include "ObjectiveSubsystem.h"
 #include "ScannerComponent.h"
 #include "Camera/CameraComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Engine/GameInstance.h"
 #include "Engine/LocalPlayer.h"
 #include "Engine/World.h"
+#include "EngineUtils.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/DamageType.h"
 #include "InputActionValue.h"
 
 AAbyssalExplorerCharacter::AAbyssalExplorerCharacter()
@@ -15,14 +21,17 @@ AAbyssalExplorerCharacter::AAbyssalExplorerCharacter()
     PrimaryActorTick.bCanEverTick = false;
 
     FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
-    FirstPersonCamera->SetupAttachment(GetRootComponent());
+    FirstPersonCamera->SetupAttachment(GetMesh(), TEXT("head"));
     FirstPersonCamera->SetRelativeLocation(FVector(0.0f, 0.0f, 64.0f));
     FirstPersonCamera->bUsePawnControlRotation = true;
 
     ScannerComponent = CreateDefaultSubobject<UScannerComponent>(TEXT("ScannerComponent"));
 
-    GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
-    GetCharacterMovement()->bOrientRotationToMovement = false;
+    UCharacterMovementComponent* Movement = GetCharacterMovement();
+    Movement->MaxWalkSpeed = WalkSpeed;
+    Movement->bOrientRotationToMovement = false;
+    Movement->NavAgentProps.bCanCrouch = true;
+    Movement->SetCrouchedHalfHeight(CrouchedHalfHeight);
     bUseControllerRotationYaw = true;
 }
 
@@ -54,6 +63,8 @@ void AAbyssalExplorerCharacter::BeginPlay()
             BeaconSubsystem->RestoreSavedBeacons(this, BeaconClass);
         }
     }
+
+    OnTakeAnyDamage.AddDynamic(this, &AAbyssalExplorerCharacter::HandleTakeAnyDamage);
 }
 
 void AAbyssalExplorerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -74,6 +85,11 @@ void AAbyssalExplorerCharacter::SetupPlayerInputComponent(UInputComponent* Playe
         EnhancedInput->BindAction(SprintAction, ETriggerEvent::Started, this, &AAbyssalExplorerCharacter::StartSprint);
         EnhancedInput->BindAction(SprintAction, ETriggerEvent::Completed, this, &AAbyssalExplorerCharacter::StopSprint);
     }
+    if (CrouchAction)
+    {
+        EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Started, this, &AAbyssalExplorerCharacter::StartCrouch);
+        EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Completed, this, &AAbyssalExplorerCharacter::StopCrouch);
+    }
     if (ScanAction)
     {
         EnhancedInput->BindAction(ScanAction, ETriggerEvent::Started, this, &AAbyssalExplorerCharacter::TriggerScan);
@@ -81,6 +97,10 @@ void AAbyssalExplorerCharacter::SetupPlayerInputComponent(UInputComponent* Playe
     if (PlaceBeaconAction)
     {
         EnhancedInput->BindAction(PlaceBeaconAction, ETriggerEvent::Started, this, &AAbyssalExplorerCharacter::PlaceBeacon);
+    }
+    if (JournalAction)
+    {
+        EnhancedInput->BindAction(JournalAction, ETriggerEvent::Started, this, &AAbyssalExplorerCharacter::ToggleJournal);
     }
 }
 
@@ -108,6 +128,16 @@ void AAbyssalExplorerCharacter::StopSprint()
     GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 }
 
+void AAbyssalExplorerCharacter::StartCrouch()
+{
+    Crouch();
+}
+
+void AAbyssalExplorerCharacter::StopCrouch()
+{
+    UnCrouch();
+}
+
 void AAbyssalExplorerCharacter::TriggerScan()
 {
     if (ScannerComponent)
@@ -115,6 +145,98 @@ void AAbyssalExplorerCharacter::TriggerScan()
         ScannerComponent->Scan();
     }
 }
+
+void AAbyssalExplorerCharacter::ToggleJournal()
+{
+    BP_ToggleJournal();
+}
+
+void AAbyssalExplorerCharacter::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+{
+    if (Damage <= 0.0f)
+    {
+        return;
+    }
+
+    UE_LOG(LogTemp, Verbose, TEXT("[AbyssalEarth] %s took %.2f damage from %s (type %s)"),
+        *GetName(),
+        Damage,
+        DamageCauser ? *DamageCauser->GetName() : TEXT("<unknown>"),
+        DamageType ? *DamageType->GetName() : TEXT("<none>"));
+
+    BP_OnTookDamage(Damage, DamageCauser);
+}
+
+#if !UE_BUILD_SHIPPING
+void AAbyssalExplorerCharacter::AbyssalDebugDiscoverAll()
+{
+    UWorld* World = GetWorld();
+    UGameInstance* GameInstance = GetGameInstance();
+    UDiscoverySubsystem* DiscoverySubsystem = GameInstance ? GameInstance->GetSubsystem<UDiscoverySubsystem>() : nullptr;
+    if (!World || !DiscoverySubsystem)
+    {
+        return;
+    }
+
+    int32 Registered = 0;
+    for (TActorIterator<ADiscoveryActor> It(World); It; ++It)
+    {
+        ADiscoveryActor* Discovery = *It;
+        if (!Discovery)
+        {
+            continue;
+        }
+
+        FAbyssalDiscoveryEntry Entry;
+        Entry.DiscoveryId = Discovery->DiscoveryId.IsNone() ? FName(*Discovery->GetName()) : Discovery->DiscoveryId;
+        Entry.DisplayName = Discovery->DisplayName.IsEmpty() ? FText::FromName(Entry.DiscoveryId) : Discovery->DisplayName;
+        Entry.JournalText = Discovery->JournalText;
+        Entry.Category = Discovery->Category;
+        if (DiscoverySubsystem->RegisterDiscoveryEntry(Entry))
+        {
+            ++Registered;
+        }
+    }
+
+    UE_LOG(LogTemp, Display, TEXT("[AbyssalDebug] Registered %d new discoveries."), Registered);
+}
+
+void AAbyssalExplorerCharacter::AbyssalDebugResetDiscoveries()
+{
+    UGameInstance* GameInstance = GetGameInstance();
+    if (!GameInstance)
+    {
+        return;
+    }
+
+    if (UDiscoverySubsystem* DiscoverySubsystem = GameInstance->GetSubsystem<UDiscoverySubsystem>())
+    {
+        DiscoverySubsystem->ClearAllDiscoveries();
+    }
+
+    if (UObjectiveSubsystem* ObjectiveSubsystem = GameInstance->GetSubsystem<UObjectiveSubsystem>())
+    {
+        ObjectiveSubsystem->ResetRoute();
+    }
+
+    UE_LOG(LogTemp, Display, TEXT("[AbyssalDebug] Discoveries cleared from save, objective route reset."));
+}
+
+void AAbyssalExplorerCharacter::AbyssalDebugAdvanceObjective()
+{
+    UGameInstance* GameInstance = GetGameInstance();
+    if (!GameInstance)
+    {
+        return;
+    }
+
+    if (UObjectiveSubsystem* ObjectiveSubsystem = GameInstance->GetSubsystem<UObjectiveSubsystem>())
+    {
+        const bool bAdvanced = ObjectiveSubsystem->CompleteCurrentObjective();
+        UE_LOG(LogTemp, Display, TEXT("[AbyssalDebug] AdvanceObjective -> %s"), bAdvanced ? TEXT("advanced") : TEXT("no-op (route complete?)"));
+    }
+}
+#endif
 
 void AAbyssalExplorerCharacter::PlaceBeacon()
 {
@@ -134,14 +256,26 @@ void AAbyssalExplorerCharacter::PlaceBeacon()
         return;
     }
 
+    UBeaconSubsystem* BeaconSubsystem = GetGameInstance() ? GetGameInstance()->GetSubsystem<UBeaconSubsystem>() : nullptr;
+
+    if (ABeaconActor* ExistingBeacon = Cast<ABeaconActor>(Hit.GetActor()))
+    {
+        if (BeaconSubsystem)
+        {
+            BeaconSubsystem->RemoveBeacon(ExistingBeacon);
+        }
+        else
+        {
+            ExistingBeacon->Destroy();
+        }
+        return;
+    }
+
     const FVector SpawnLocation = Hit.ImpactPoint + Hit.ImpactNormal * 12.0f;
     const FRotator SpawnRotation = Hit.ImpactNormal.Rotation();
     ABeaconActor* Beacon = GetWorld()->SpawnActor<ABeaconActor>(BeaconClass, SpawnLocation, SpawnRotation);
-    if (Beacon && GetGameInstance())
+    if (Beacon && BeaconSubsystem)
     {
-        if (UBeaconSubsystem* BeaconSubsystem = GetGameInstance()->GetSubsystem<UBeaconSubsystem>())
-        {
-            BeaconSubsystem->RegisterBeacon(Beacon);
-        }
+        BeaconSubsystem->RegisterBeacon(Beacon);
     }
 }

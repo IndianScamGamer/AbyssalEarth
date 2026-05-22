@@ -26,6 +26,9 @@ public:
     UFUNCTION(BlueprintPure, Category = "Abyssal Earth|Beacon")
     FLinearColor GetBeaconLightColor() const;
 
+    UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Beacon")
+    void SetBeaconLightColor(FLinearColor NewLightColor);
+
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abyssal Earth|Beacon")
     TObjectPtr<UStaticMeshComponent> Mesh;

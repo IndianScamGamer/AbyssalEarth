@@ -18,6 +18,12 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Beacon")
     void RegisterBeacon(ABeaconActor* Beacon);
 
+    UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Beacon")
+    bool RemoveBeacon(ABeaconActor* Beacon);
+
+    UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Beacon", meta=(WorldContext="WorldContextObject"))
+    bool RemoveBeaconById(UObject* WorldContextObject, FGuid BeaconId);
+
     UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Beacon", meta=(WorldContext="WorldContextObject"))
     int32 RestoreSavedBeacons(UObject* WorldContextObject, TSubclassOf<ABeaconActor> BeaconClass);
 

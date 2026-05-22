@@ -22,6 +22,23 @@ public:
     UFUNCTION(BlueprintPure, Category = "Abyssal Earth|Scanner")
     UScannerComponent* GetScannerComponent() const;
 
+    UFUNCTION(BlueprintImplementableEvent, Category = "Abyssal Earth|Journal", meta = (DisplayName = "Toggle Journal"))
+    void BP_ToggleJournal();
+
+    UFUNCTION(BlueprintImplementableEvent, Category = "Abyssal Earth|Damage", meta = (DisplayName = "Took Damage"))
+    void BP_OnTookDamage(float DamageAmount, AActor* DamageCauser);
+
+#if !UE_BUILD_SHIPPING
+    UFUNCTION(Exec)
+    void AbyssalDebugDiscoverAll();
+
+    UFUNCTION(Exec)
+    void AbyssalDebugResetDiscoveries();
+
+    UFUNCTION(Exec)
+    void AbyssalDebugAdvanceObjective();
+#endif
+
 protected:
     virtual void BeginPlay() override;
     virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
@@ -46,10 +63,16 @@ private:
     TObjectPtr<UInputAction> SprintAction;
 
     UPROPERTY(EditDefaultsOnly, Category = "Abyssal Earth|Input")
+    TObjectPtr<UInputAction> CrouchAction;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Abyssal Earth|Input")
     TObjectPtr<UInputAction> ScanAction;
 
     UPROPERTY(EditDefaultsOnly, Category = "Abyssal Earth|Input")
     TObjectPtr<UInputAction> PlaceBeaconAction;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Abyssal Earth|Input")
+    TObjectPtr<UInputAction> JournalAction;
 
     UPROPERTY(EditDefaultsOnly, Category = "Abyssal Earth|Beacon")
     TSubclassOf<ABeaconActor> BeaconClass;
@@ -63,10 +86,19 @@ private:
     UPROPERTY(EditDefaultsOnly, Category = "Abyssal Earth|Movement")
     float SprintSpeed = 680.0f;
 
+    UPROPERTY(EditDefaultsOnly, Category = "Abyssal Earth|Movement", meta=(ClampMin="0.0"))
+    float CrouchedHalfHeight = 52.0f;
+
     void Move(const FInputActionValue& Value);
     void Look(const FInputActionValue& Value);
     void StartSprint();
     void StopSprint();
+    void StartCrouch();
+    void StopCrouch();
     void TriggerScan();
     void PlaceBeacon();
+    void ToggleJournal();
+
+    UFUNCTION()
+    void HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
 };

@@ -17,7 +17,13 @@ bool ADiscoveryActor::RegisterScan()
         {
             const FName IdToRegister = DiscoveryId.IsNone() ? FName(*GetName()) : DiscoveryId;
             bWasAlreadyDiscovered = DiscoverySubsystem->IsDiscovered(IdToRegister);
-            DiscoverySubsystem->RegisterDiscovery(IdToRegister);
+
+            FAbyssalDiscoveryEntry Entry;
+            Entry.DiscoveryId = IdToRegister;
+            Entry.DisplayName = DisplayName.IsEmpty() ? FText::FromName(IdToRegister) : DisplayName;
+            Entry.JournalText = JournalText;
+            Entry.Category = Category;
+            DiscoverySubsystem->RegisterDiscoveryEntry(Entry);
         }
 
         if (!ObjectiveIdToCompleteOnScan.IsNone() && (!bCompleteObjectiveOnlyOnNewDiscovery || !bWasAlreadyDiscovered))
