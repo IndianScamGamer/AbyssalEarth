@@ -28,7 +28,6 @@ public:
     UFUNCTION(BlueprintImplementableEvent, Category = "Abyssal Earth|Damage", meta = (DisplayName = "Took Damage"))
     void BP_OnTookDamage(float DamageAmount, AActor* DamageCauser);
 
-#if !UE_BUILD_SHIPPING
     UFUNCTION(Exec)
     void AbyssalDebugDiscoverAll();
 
@@ -37,7 +36,6 @@ public:
 
     UFUNCTION(Exec)
     void AbyssalDebugAdvanceObjective();
-#endif
 
 protected:
     virtual void BeginPlay() override;

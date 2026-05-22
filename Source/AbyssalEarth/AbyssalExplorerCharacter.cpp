@@ -167,7 +167,6 @@ void AAbyssalExplorerCharacter::HandleTakeAnyDamage(AActor* DamagedActor, float 
     BP_OnTookDamage(Damage, DamageCauser);
 }
 
-#if !UE_BUILD_SHIPPING
 void AAbyssalExplorerCharacter::AbyssalDebugDiscoverAll()
 {
     UWorld* World = GetWorld();
@@ -236,7 +235,6 @@ void AAbyssalExplorerCharacter::AbyssalDebugAdvanceObjective()
         UE_LOG(LogTemp, Display, TEXT("[AbyssalDebug] AdvanceObjective -> %s"), bAdvanced ? TEXT("advanced") : TEXT("no-op (route complete?)"));
     }
 }
-#endif
 
 void AAbyssalExplorerCharacter::PlaceBeacon()
 {
