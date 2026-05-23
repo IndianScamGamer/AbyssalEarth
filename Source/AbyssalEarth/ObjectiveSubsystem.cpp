@@ -178,27 +178,27 @@ void UObjectiveSubsystem::BuildDefaultRoute()
     AddObjective(
         TEXT("OBJ_FirstOverlook"),
         NSLOCTEXT("AbyssalEarthObjectives", "FirstOverlookTitle", "Reach the first overlook"),
-        NSLOCTEXT("AbyssalEarthObjectives", "FirstOverlookDescription", "Find the ledge that reveals the Luminous Rift and the route across the marsh."));
+        NSLOCTEXT("AbyssalEarthObjectives", "FirstOverlookDescription", "Find the ledge that reveals the Luminous Rift, central orb, collector array, and ancient gate."));
 
     AddObjective(
-        TEXT("OBJ_MirrorMarsh"),
-        NSLOCTEXT("AbyssalEarthObjectives", "MirrorMarshTitle", "Cross the Mirror Marsh"),
-        NSLOCTEXT("AbyssalEarthObjectives", "MirrorMarshDescription", "Follow the bioluminescent fungus clusters through the shallow reflective water."));
+        TEXT("OBJ_AbyssalApproach"),
+        NSLOCTEXT("AbyssalEarthObjectives", "AbyssalApproachTitle", "Descend the Abyssal Approach"),
+        NSLOCTEXT("AbyssalEarthObjectives", "AbyssalApproachDescription", "Follow the broken rock ledges and ancient bridge spans down toward the suspended machine structures."));
 
     AddObjective(
-        TEXT("OBJ_CrystalSpine"),
-        NSLOCTEXT("AbyssalEarthObjectives", "CrystalSpineTitle", "Climb the Crystal Spine"),
-        NSLOCTEXT("AbyssalEarthObjectives", "CrystalSpineDescription", "Use the scanner-reactive crystal veins to trace the safe ridge path."));
+        TEXT("OBJ_CrystalGalleries"),
+        NSLOCTEXT("AbyssalEarthObjectives", "CrystalGalleriesTitle", "Enter the Crystal Galleries"),
+        NSLOCTEXT("AbyssalEarthObjectives", "CrystalGalleriesDescription", "Document the blue crystals growing through ancient carved panels."));
 
     AddObjective(
-        TEXT("OBJ_EmberVents"),
-        NSLOCTEXT("AbyssalEarthObjectives", "EmberVentsTitle", "Navigate the Ember Vents"),
-        NSLOCTEXT("AbyssalEarthObjectives", "EmberVentsDescription", "Move through the warm vent field toward the far survey lights."));
+        TEXT("OBJ_CollectorArray"),
+        NSLOCTEXT("AbyssalEarthObjectives", "CollectorArrayTitle", "Reach the Collector Array"),
+        NSLOCTEXT("AbyssalEarthObjectives", "CollectorArrayDescription", "Approach the central energy orb and its gold beam-linked hex collector panels."));
 
     AddObjective(
-        TEXT("OBJ_FarSurveyStation"),
-        NSLOCTEXT("AbyssalEarthObjectives", "FarSurveyStationTitle", "Reach the far survey station"),
-        NSLOCTEXT("AbyssalEarthObjectives", "FarSurveyStationDescription", "Enter the damaged station and scan the impossible readings beyond the rift."));
+        TEXT("OBJ_AncientGate"),
+        NSLOCTEXT("AbyssalEarthObjectives", "AncientGateTitle", "Cross the Ancient Gate"),
+        NSLOCTEXT("AbyssalEarthObjectives", "AncientGateDescription", "Move along the monumental gate wall and inspect its circular blue-lit mechanisms."));
 
     AddObjective(
         TEXT("OBJ_SecondSkyOverlook"),

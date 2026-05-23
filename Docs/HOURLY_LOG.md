@@ -103,3 +103,18 @@
 - Updated `TECHNICAL_PLAN.md` with sections for the gameplay library and damage hook; updated `NEXT_TASKS.md` to remove the now-done items and queue the next batch (audio cue subsystem sketch, HP component shape, ambience data table).
 - Verification: still no UnrealBuildTool on PATH; signatures match standard UE 5.4 patterns (`OnTakeAnyDamage` is `FTakeAnyDamageSignature` on `AActor`, and `GEngine->GetWorldFromContextObject` is the canonical world-context resolver).
 - Next: write the ambience CSV draft and audio subsystem stub when continuing without the editor; otherwise compile and create the Blueprint children listed above.
+
+## 2026-05-23 18:40 EDT
+
+- Pulled the latest remote changes from `origin/main` (fast-forward to `790adcc`) after Vivek confirmed the project opens in Unreal.
+- Saved Vivek's core concept reference image to `Content/ArtDirection/References/luminous_rift_core_reference.png`.
+- Re-anchored the Luminous Rift design around the concept art: vertical abyss, dark carved rock, ancient machine architecture, central blue-white orb, gold beam network, hex collector panels, blue crystals, suspended platforms, ancient gate wall, and human scale.
+- Added `Docs/CORE_REFERENCE_LUMINOUS_RIFT.md` with detailed visual analysis and acceptance/rejection criteria for future screenshots and assets.
+- Added `Docs/BLENDER_ASSET_PIPELINE.md` for Claude Code + Blender MCP asset generation, including scale rules, export conventions, material slot names, P0/P1 asset briefs, and a reusable worker prompt template.
+- Rewrote `Docs/ART_DIRECTION.md`, `Docs/LUMINOUS_RIFT_BLOCKOUT.md`, `Docs/MATERIAL_SPECS.md`, and `Docs/NEXT_TASKS.md` to align with the concept-art map instead of the older marsh/fungus/vent-first route.
+- Updated `Docs/GAME_DESIGN.md`, `Docs/MILESTONES.md`, `Docs/TECHNICAL_PLAN.md`, and `Content/Design/DiscoveryCatalog.csv` for the revised route: Descent Elevator, First Overlook, Abyssal Approach, Crystal Galleries, Collector Array, Ancient Gate, Second Sky Overlook.
+- Updated `UObjectiveSubsystem::BuildDefaultRoute` so the runtime objective chain now matches the revised concept-art route instead of the older Mirror Marsh / Crystal Spine / Ember Vents sequence.
+- Added `Content/Design/LuminousRiftAssetManifest.csv` and `ArtSource/Blender/LuminousRift/ASSET_NOTES.md` so Blender asset workers have concrete P0 targets and documentation slots.
+- Re-enabled the hourly Abyssal Earth cron job and updated its payload to read the new reference/pipeline docs and prioritize concept-art-accurate asset work. Updated the daily brief payload so Abyssal Earth is reported as active again.
+- Verification: docs and CSVs were inspected with shell tools; Unreal compile was not run in this session.
+- Next: have the hourly worker generate the first Blender task prompts and/or begin P0 crystal, foreground ledge, bridge, hex collector, orb apparatus, and ancient gate asset production.

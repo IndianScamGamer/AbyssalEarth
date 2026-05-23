@@ -12,7 +12,7 @@ Status: in progress.
 
 ## Milestone 1 - First Playable Traversal Slice
 
-Goal: playable first-person exploration loop in a blockout Luminous Rift map.
+Goal: playable first-person exploration loop in a blockout Luminous Rift map matching the core concept reference.
 
 Deliverables:
 
@@ -21,7 +21,7 @@ Deliverables:
 - Three scan discoveries can be logged.
 - Beacon actor can be placed as a navigation marker.
 - Basic objective chain guides player from elevator start to overlook end. C++ subsystem and trigger actor foundation are in place; Blueprint HUD and map trigger placement remain.
-- Map has readable landmark composition even with placeholder meshes.
+- Map has readable landmark composition even with placeholder meshes: first overlook, abyssal approach, crystal galleries, collector array, ancient gate, and second sky overlook.
 
 ## Milestone 2 - Beauty Pass 1
 
@@ -31,9 +31,11 @@ Deliverables:
 
 - Lumen lighting setup with cyan/amber contrast.
 - Volumetric fog and mist layers.
-- Reflective water surface.
-- Emissive crystal and fungus material prototypes.
-- Cinematic overlook composition.
+- Central blue-white orb light source.
+- Warm gold beam network with hex collector panels.
+- Emissive blue crystal material prototypes.
+- Ancient dark machine material prototypes.
+- Cinematic overlook composition matching `Content/ArtDirection/References/luminous_rift_core_reference.png`.
 - Screenshot pass at desktop resolution.
 
 ## Milestone 3 - Discovery Systems
@@ -54,7 +56,7 @@ Goal: 10-15 minute playable cavern experience.
 
 Deliverables:
 
-- Complete route through Mirror Marsh, Crystal Spine, and Ember Vents.
+- Complete route through Abyssal Approach, Crystal Galleries, Collector Array, Ancient Gate, and Second Sky Overlook.
 - Environmental hazard prototype.
 - Finished soundscape pass.
 - Polished start and end beats.

@@ -2,241 +2,323 @@
 
 ## Goal
 
-Build a 10-15 minute first playable cavern that immediately proves the visual promise: the player descends from a human-made elevator into an impossible glowing rift, crosses three distinct spaces, scans discoveries, and ends at a huge overlook.
+Build a 10-15 minute first playable cavern that matches the core concept reference: a player-scale descent into a massive vertical rift containing blue crystals, ancient machine architecture, suspended bridges, a central blue-white energy sphere, gold beam collector arrays, and a final overlook into an even deeper abyss.
+
+The old marsh/fungus/vent route is deprecated for this first map. Those ideas may return later, but `MAP_LuminousRift_Blockout` should now be built around the ancient rift machine shown in:
+
+`Content/ArtDirection/References/luminous_rift_core_reference.png`
 
 ## Scale
 
 Unreal units are centimeters.
 
-- Total playable route length: about 900 meters.
-- Main cavern height: 180-260 meters.
-- Main cavern width: 220-420 meters.
-- Player path width: 3-12 meters depending on tension.
-- Major landmarks should be visible from at least two previous route points.
+- Total playable route length: 700-1100 meters.
+- Primary visible cavern height: 300-500 meters.
+- Main vista width: 250-500 meters.
+- Abyss visual drop: at least 300 meters below the route.
+- Player path width: 3-10 meters.
+- Central orb diameter: 18-28 meters.
+- Collector array width: 80-140 meters.
+- Gate wall height: 80-140 meters.
+- Distant background towers can be much larger because they are scale silhouettes.
 
-## Route
+## Route Overview
 
 ### 1. Descent Elevator
 
-Purpose: establish human scale and contrast.
+Purpose: establish the player as a recent human intruder.
 
-- Small metal platform embedded in black basalt.
-- Flickering work lights, cables, survey crates.
-- First view is constrained until the player exits a short tunnel.
+- Surface-built elevator forced into black basalt.
+- Human lamps, survey crates, cable runs, and a temporary safety rail.
+- Exit tunnel should hide the core vista until the first overlook.
 - First discovery: `D_Human_SurveyElevator`.
 
 ### 2. First Overlook
 
-Purpose: deliver the first beauty moment.
+Purpose: recreate the core reference composition as the first beauty moment.
 
-- The tunnel opens onto a ledge above the Mirror Marsh.
-- The Crystal Spine should be visible center-left.
-- Ember Vents should glow warm in the far right distance.
-- Ceiling crystals should create faint cyan light shafts.
-- Player receives first objective: reach the far survey station.
+- Player emerges onto a dark jagged ledge.
+- The central orb is visible but partially occluded by rock and hanging slabs.
+- Gold collector beams should be readable even from this distance.
+- Blue crystals light the foreground and edges.
+- Right-side ancient gate wall is visible across the void.
+- Objective: reach the Collector Array.
 
-### 3. Mirror Marsh
+### 3. Abyssal Approach
 
-Purpose: slow movement, reflections, bioluminescent life.
+Purpose: traverse from natural rock into ancient machine structures.
 
-- Shallow ankle-to-knee water plane.
-- Clusters of translucent fungus used as route markers.
-- Low fog over water.
-- Discoveries:
-  - `D_Bio_GlasscapFungus`
-  - `D_Geo_MirrorSilt`
-- Hazard: none in milestone 1; later add spore pockets.
+- Narrow ledges and broken bridge spans descend along the left side of the abyss.
+- Crystals act as route markers.
+- Distant towers and hanging slabs deepen the vertical space.
+- Discovery: `D_Geo_BlueRiftCrystal`.
 
-### 4. Crystal Spine
+### 4. Crystal Galleries
 
-Purpose: traversal and vertical composition.
+Purpose: close-up crystal and rock-machine fusion.
 
-- Rib-like mineral ridge rises 35-50 meters above marsh.
-- Safe route winds through crystal shelves.
-- Scanner highlights pulse veins that point toward climbable ledges.
-- Discoveries:
-  - `D_Geo_PulseQuartz`
-  - `D_Anomaly_ResonantVein`
+- A side gallery where blue crystals grow through carved wall panels.
+- Player sees the orb through gaps between rock arches.
+- Discovery: `D_Anomaly_CrystalResonance`.
+- Optional hazard later: unstable crystal pulse or falling debris.
 
-### 5. Ember Vents
+### 5. Collector Array
 
-Purpose: warm color contrast and environmental danger.
+Purpose: central landmark interaction space.
 
-- Orange geothermal vents, drifting steam, wet black rocks.
-- Timed safe paths between vent bursts in later milestones.
-- For milestone 1, blockout uses visual-only vent columns.
-- Discoveries:
-  - `D_Geo_EmberVent`
-  - `D_Bio_ThermalFilament`
+- Player reaches a platform near the orb apparatus.
+- Hex collector panels surround the orb in flower-like clusters.
+- Gold beam emitter nodes connect hub to panels.
+- Discovery: `D_Anomaly_RiftEnergyOrb`.
+- Objective trigger should fire when the player reaches the safe platform near the apparatus.
 
-### 6. Far Survey Station
+### 6. Ancient Gate
 
-Purpose: objective completion and next-cavern tease.
+Purpose: monumental right-side structure from the reference.
 
-- Damaged human research outpost on a ledge.
-- Scanner reveals impossible depth readings.
-- End overlook frames a much larger cavern beyond.
+- A tall vertical wall/gate with circular blue-lit mechanisms.
+- Path crosses a bridge or broken platform in front of it.
+- Discovery: `D_Structure_AncientGate`.
+- This zone should feel colder and more architectural than the approach.
+
+### 7. Second Sky Overlook
+
+Purpose: final reveal and route completion.
+
+- The player reaches a ledge beyond the gate/collector array.
+- The lower rift opens into an even larger blue-lit abyss.
 - Final discovery: `D_Anomaly_SecondSkyCavern`.
+- Scanning this vista completes `OBJ_SecondSkyOverlook`.
 
 ## Room-by-Room Placement Checklist
 
-Coordinates assume the map origin sits at the elevator platform center, +X is the forward route direction, +Z is up. Distances are approximate; readability of landmarks matters more than exact numbers. Light intensities use Unreal default unitless values for the blockout — replace with calibrated lumens during the M2 lighting pass.
+Coordinates assume map origin at the elevator platform center, +X is the forward route direction, +Z is up. These are blockout anchors, not rigid final layout. Composition from the first overlook matters more than exact coordinates.
 
-### Zone 1 - Descent Elevator (approx X 0 to 3000)
+### Zone 1 - Descent Elevator (X 0 to 3000)
 
-Footprint: 30m tunnel + 12m platform, ceiling 8-10m, basalt enclosure on all sides.
+Footprint: 30 m access tunnel plus 10-14 m elevator platform. Ceiling 8-12 m. Black basalt surrounds everything.
 
-- [ ] `PlayerStart` at (0, 0, 100) facing +X.
-- [ ] `SM_Blockout_SurveyPlatform` at (0, 0, 0) for the elevator floor.
-- [ ] 4x `SM_Blockout_BasaltWall_Large` forming the elevator shaft, scaled to 8m height.
-- [ ] 2-3 placeholder crate static meshes along the platform edge (use engine cube primitives until art exists).
-- [ ] `BP_DiscoveryActor_Base` configured as `D_Human_SurveyElevator` at the platform's far edge (2200, 0, 100), with `ScanFocusOffset = (0, 0, 80)` so the scan trace hits the platform mid-mast.
-- [ ] 3-4 `PointLight` actors with white-amber tint (color 1.0, 0.85, 0.6), intensity 8, attenuation radius 600, slight flicker via lightmass random delay.
-- [ ] `BP_ObjectiveTrigger` for `OBJ_DescentElevator` as a box volume 600x400x300 at (2700, 0, 150). Set `RequireCurrentObjective = true`, `TriggerOnce = true`, `OnlyPlayerControlledPawn = true`.
-- [ ] Exit tunnel: `SM_Blockout_BasaltArch` at (3000, 0, 0), opens onto Zone 2.
+- [ ] `PlayerStart` at (0, 0, 100), facing +X.
+- [ ] `SM_Human_SurveyPlatform_A` or blockout platform at (0, 0, 0), 10x10 m.
+- [ ] Basalt shaft walls around platform, 10-15 m tall.
+- [ ] 4-6 human props: crates, cable coils, portable lamps, temporary rail section.
+- [ ] `BP_DiscoveryActor_Base`: `D_Human_SurveyElevator`, at (1800, 0, 120), `ScanFocusOffset = (0, 0, 80)`.
+- [ ] Human lights: white/amber, low intensity, radius 400-600.
+- [ ] `BP_ObjectiveTrigger`: `OBJ_DescentElevator`, box 600x400x300 at (2700, 0, 150).
+- [ ] Exit tunnel bends slightly so the first vista is hidden until Zone 2.
 
-### Zone 2 - First Overlook (approx X 3000 to 4200)
+### Zone 2 - First Overlook (X 3000 to 4600)
 
-Footprint: 12m wide ledge, 80m drop to marsh below, framed by basalt arches on both sides. This is the postcard shot — composition matters more than complexity.
+This is the postcard shot. Use the concept image as direct reference.
 
-- [ ] Ledge floor: 2x `SM_Blockout_Ledge_Straight` end-to-end forming a 12x4m platform at z=100.
-- [ ] Frame the view with `SM_Blockout_BasaltArch` on left (3300, -800, 0) and right (3300, 800, 0) so the player's eye is funneled toward the distance.
-- [ ] Distant landmarks must be readable from this ledge:
-  - Crystal Spine silhouette in center-left view (place Zone 4 hero crystals at z=2000+).
-  - Ember Vent glow in far right (Zone 5 vent emissives visible past the marsh).
-  - Far Survey Station as a tiny human silhouette barely visible center.
-- [ ] `ExponentialHeightFog` actor with `FogDensity = 0.02`, `FogInscatteringColor` cyan-leaning (0.3, 0.55, 0.7), `StartDistance = 800`. Volumetric fog enabled.
-- [ ] 1 `DirectionalLight` (or `SkyLight`) acting as ambient cavern bounce only — no sun. Intensity 0.2-0.4.
-- [ ] `BP_ObjectiveTrigger` for `OBJ_FirstOverlook` as a box volume 800x1000x400 covering the ledge sweet spot at (3700, 0, 200).
-- [ ] No discoveries in this zone — keep it pure as the beauty beat.
-- [ ] Descent path: ramp or stepped ledges from (4200, 0, 100) down to (4400, 0, -7900) to enter the marsh. Use 4-5 `SM_Blockout_Ledge_Curve` pieces.
+- [ ] Foreground ledge: `SM_Rift_ForegroundLedge_A` at (3600, 0, 0), playable area 8-12 m wide.
+- [ ] Dark rock overhangs frame the top and left side of the view.
+- [ ] Blue crystals in foreground left/right: 3-5 clusters, small to medium.
+- [ ] Add one visible player-scale human prop near the ledge edge: beacon, lamp, or survey tripod.
+- [ ] Central orb proxy at approximately (11500, 0, -2000), diameter 2200 cm.
+- [ ] Hex collector clusters arranged around orb, spanning roughly 100 m wide.
+- [ ] Right-side gate wall at approximately (11800, 6500, -2500), 100 m tall.
+- [ ] Lower abyss: visible blue fog column from Z -20000 downward.
+- [ ] Distant tower silhouettes behind orb and under bridge path.
+- [ ] `BP_ObjectiveTrigger`: `OBJ_FirstOverlook`, box 900x1200x400 at (3800, 0, 200).
+- [ ] No mandatory discovery in this zone; let the view breathe.
 
-### Zone 3 - Mirror Marsh (approx X 4400 to 9000, Z -8000 marsh floor)
+Lighting:
 
-Footprint: 80m diameter shallow water basin, 1.5m water depth, fungus clusters as route markers across the surface.
+- Orb visible as cool key light.
+- Gold beam splines visible but thin.
+- Foreground crystals provide small cyan edge lights.
+- Use volumetric fog. Distant shapes fade blue.
 
-- [ ] Marsh floor: 8x `SM_Blockout_BasaltWall_Large` rotated flat at z=-8050 (or `Landscape` if available).
-- [ ] Water plane: a single scaled plane mesh with `M_ShallowMirrorWater` instance, sized 8000x8000, z=-7900 (10cm below player knee height for walking-through feel).
-- [ ] 6-8 fungus clusters using mixed `SM_Blockout_FungusCap_S/M/L`, placed in a curving path that leads the eye from entry to exit. Cluster centers approximately at:
-  - (5000, -300, -8000) - entry marker
-  - (5800, 400, -8000)
-  - (6400, -200, -8000)
-  - (7100, 600, -8000) - hosts `D_Bio_GlasscapFungus` discovery
-  - (7800, -500, -8000)
-  - (8500, 100, -8000) - exit marker
-- [ ] `BP_DiscoveryActor_Base` configured as `D_Bio_GlasscapFungus` at (7100, 600, -7920) with `ScanFocusOffset = (0, 0, 150)` to hit the cap.
-- [ ] `BP_DiscoveryActor_Base` configured as `D_Geo_MirrorSilt` at (6700, -100, -7950), low to the water with `ScanFocusOffset = (0, 0, 30)`.
-- [ ] 2-3 ceiling `SM_Blockout_CrystalCluster_L` at z=2000+ to cast cyan light shafts. Add child `PointLight` per cluster, color (0.3, 0.85, 1.0), intensity 6, radius 1500.
-- [ ] Low fog layer: `ExponentialHeightFog` second-layer or a `LocalFogVolume`, `FogHeight = -7700`, density 0.06 for ankle-mist.
-- [ ] `BP_ObjectiveTrigger` for `OBJ_MirrorMarsh` as a box volume 1200x1200x500 at (8500, 0, -7800), placed past both discoveries.
-- [ ] Exit: climb path on +X side leading up to the Crystal Spine base.
+### Zone 3 - Abyssal Approach (X 4600 to 8200)
 
-### Zone 4 - Crystal Spine (approx X 9000 to 13000, Z -8000 to 2000 vertical traversal)
+The player descends from natural ledges into machine bridge slabs.
 
-Footprint: a 35-50m vertical ridge rising out of the marsh. Player ascends via crystal shelves on alternating sides.
+- [ ] 3-5 staggered rock ledges, each 6-10 m wide, descending from Z 0 to Z -3500.
+- [ ] 2 broken bridge spans: `SM_Rift_BridgeSpan_A/B_Broken`, linking ledges across small gaps.
+- [ ] Route must keep the orb visible at least twice through rock windows.
+- [ ] Crystal breadcrumb clusters every 20-35 m, mostly medium size.
+- [ ] Distant hanging slabs below and above path to sell vertical space.
+- [ ] `BP_DiscoveryActor_Base`: `D_Geo_BlueRiftCrystal` at (6500, -500, -1800), `ScanFocusOffset = (0, 0, 140)`.
+- [ ] `BP_ObjectiveTrigger`: `OBJ_AbyssalApproach`, box 1000x1000x500 at (8100, 0, -3300).
 
-- [ ] Spine hero mesh: `SM_Blockout_CrystalSpine_A` at (10500, 0, -7000), scaled to 60m tall, slightly tilted (rotation pitch 5, roll -8) for natural composition.
-- [ ] 5-7 climbable ledges using `SM_Blockout_Ledge_Straight` and `SM_Blockout_Ledge_Curve` arranged in a zig-zag from z=-7800 up to z=1800. Each ledge 4x3m, 80cm step height between them.
-- [ ] 4-6 `SM_Blockout_CrystalCluster_M` and `_L` along the ridge as visual landmarks. Each gets a child `PointLight` (0.3, 0.85, 1.0), intensity 4, radius 800.
-- [ ] `BP_DiscoveryActor_Base` configured as `D_Geo_PulseQuartz` on a mid-climb ledge at (10800, 400, -3500), `ScanFocusOffset = (0, 0, 60)`.
-- [ ] `BP_DiscoveryActor_Base` configured as `D_Anomaly_ResonantVein` at (11400, -300, 800), placed on a vein running across the upper spine. `ScanFocusOffset = (0, 0, 40)`.
-- [ ] `BP_ObjectiveTrigger` for `OBJ_CrystalSpine` as a box volume 1000x1000x600 at the ridge crest (11500, 0, 1900).
-- [ ] Ensure Ember Vents are visible warm-glow in the distance from the crest — this is the second pre-reveal moment.
-- [ ] Exit: descent path on the far side, leading down toward the Ember Vents at z=-2000.
+Safety:
 
-### Zone 5 - Ember Vents (approx X 13000 to 16500, Z -2000)
+- Use collision blockers at abyss edges for early prototype if falling is not implemented.
+- Hide blockers with low rock lips or ancient platform curbs.
 
-Footprint: a wider chamber with 4-6 visible vent columns, drifting steam, black wet rock floor. Color palette flips from cyan to amber here.
+### Zone 4 - Crystal Galleries (X 8200 to 10800)
 
-- [ ] Floor: 4-6 `SM_Blockout_BasaltWall_Large` rotated flat at z=-2050, scattered slightly for organic edges.
-- [ ] 5-6 `SM_Blockout_VentCone` placed in a loose arc:
-  - (13500, -400, -2000)
-  - (14000, 300, -2000) - hosts `D_Geo_EmberVent`
-  - (14500, -100, -2000)
-  - (15000, 500, -2000)
-  - (15500, -300, -2000)
-- [ ] Each vent gets a child `PointLight` with color (1.0, 0.45, 0.15), intensity 12, radius 700, plus a `NiagaraSystem` placeholder slot for steam (no particles needed in M1 blockout — use scaled emissive plane).
-- [ ] `BP_DiscoveryActor_Base` configured as `D_Geo_EmberVent` at (14000, 300, -1900), `ScanFocusOffset = (0, 0, 120)` to hit the cone tip.
-- [ ] `BP_DiscoveryActor_Base` configured as `D_Bio_ThermalFilament` clinging to a wet rock at (14700, -200, -1980), `ScanFocusOffset = (0, 0, 25)`.
-- [ ] `ExponentialHeightFog` override volume in this zone with amber-leaning inscatter color (0.7, 0.4, 0.2), density 0.04.
-- [ ] `BP_ObjectiveTrigger` for `OBJ_EmberVents` as a box volume 1000x1200x500 at (16000, 0, -1900), placed past all vents but before the survey station entrance.
-- [ ] Exit: a basalt arch at (16500, 0, -2000) opens toward the human station.
+A close-up space where natural crystal growth pierces ancient wall structures.
 
-### Zone 6 - Far Survey Station (approx X 16500 to 19000, Z -1500)
+- [ ] Carved wall panel modules on one side, basalt on the other.
+- [ ] 8-12 crystal clusters of mixed sizes, including at least one large 7-9 m cluster.
+- [ ] Rock arch/window framing the central orb in the distance.
+- [ ] Small platform node with circular blue-lit inset.
+- [ ] `BP_DiscoveryActor_Base`: `D_Anomaly_CrystalResonance` at (9300, 600, -3000), `ScanFocusOffset = (0, 0, 120)`.
+- [ ] Optional later hazard placeholder: pulsing crystal field marked by emissive floor cracks.
+- [ ] `BP_ObjectiveTrigger`: `OBJ_CrystalGalleries`, box 900x900x500 at (10600, 0, -2800).
 
-Footprint: small human-built outpost on a ledge, then a final overlook framing a vastly larger cavern beyond.
+Lighting:
 
-- [ ] Station platform: `SM_Blockout_SurveyPlatform` at (17000, 0, -1500), scaled to 8x6m.
-- [ ] 4-6 placeholder crates / equipment props (engine primitives are fine for M1).
-- [ ] 3-4 `PointLight` actors with cold white work-light color (0.85, 0.9, 1.0), intensity 5, radius 400 — these should look weak and human against the cavern scale.
-- [ ] `BP_ObjectiveTrigger` for `OBJ_FarSurveyStation` as a box volume 600x600x400 at (17200, 0, -1400), at the station entrance.
-- [ ] Final overlook ledge extends past the station to (18500, 0, -1500). Use 2x `SM_Blockout_Ledge_Straight`.
-- [ ] `BP_DiscoveryActor_Base` configured as `D_Anomaly_SecondSkyCavern` at (18500, 0, -1400). **Set `ObjectiveIdToCompleteOnScan = OBJ_SecondSkyOverlook` and `bCompleteObjectiveOnlyOnNewDiscovery = true`.** No trigger volume needed — scanning the vista completes the route.
-- [ ] Beyond the ledge: a vast distant chamber readable as "second sky". Place a single huge curved basalt back-wall mesh at (24000, 0, -3000) scaled to enormous (200x200x200) to suggest depth. Add a faint warm-cyan light far below (z=-8000) to imply more world.
+- Stronger blue crystal glow than Zone 3.
+- Keep orb light partially occluded for contrast.
+- Add small dust/mote VFX in shafts.
 
-## Beacon Placement Guidance
+### Zone 5 - Collector Array (X 10800 to 13500)
 
-Beacons are player-placed, but the level should have 3-4 natural "ah, I'd put one here" spots. Make sure the geometry near these points has a clear ledge or wall surface within a 900-unit `MaxBeaconPlacementDistance` line trace from the typical player path:
+Central landmark. This must read like the concept art's orb + hex panel apparatus.
 
-- First Overlook ledge near the descent ramp (handy as a "back to start" marker).
-- Mirror Marsh exit, before the climb begins.
-- Crystal Spine crest, looking back over the route taken.
-- Ember Vents entrance, in case the player wants to retreat from the warmer zone.
+- [ ] Orb actor/proxy centered around (11800, 0, -1800), diameter 1800-2800 cm.
+- [ ] `SM_Rift_OrbFrame_A` or blockout ring around/behind orb.
+- [ ] 5-8 `SM_Rift_HexCollector_Cluster_A/B` around orb, offset in depth and height.
+- [ ] Gold beam splines from hub/beam nodes to collector cluster centers.
+- [ ] Platform node near orb at (11200, -1200, -2200), not directly inside the energy.
+- [ ] Bridge span from Crystal Galleries to the platform.
+- [ ] 3-5 beam emitter nodes placed along platform and ring.
+- [ ] `BP_DiscoveryActor_Base`: `D_Anomaly_RiftEnergyOrb` at platform edge, `ScanFocusOffset = (0, 0, 300)`.
+- [ ] `BP_ObjectiveTrigger`: `OBJ_CollectorArray`, box 1200x1200x600 at (11200, -1200, -2100).
+
+Lighting:
+
+- Orb: primary cool light, high intensity, bloom controlled.
+- Beams: warm gold, visible in fog, endpoints glow.
+- Panels: faint blue-white translucent interior.
+
+Gameplay:
+
+- Keep collision away from orb; it is a landmark and scan target, not a walk-through object yet.
+- The platform should have at least two safe beacon placement surfaces.
+
+### Zone 6 - Ancient Gate (X 13500 to 16500)
+
+The player crosses in front of or through the right-side monumental gate structure.
+
+- [ ] `SM_Rift_AncientWall_Gate_A` placed as dominant right-side wall, 80-140 m tall.
+- [ ] At least one large circular blue core at player-visible height.
+- [ ] Vertical grooves and blue strips visible from 50+ m.
+- [ ] Embedded crystals at base and broken panel edges.
+- [ ] Bridge/platform route runs along the wall, 6-8 m wide.
+- [ ] `BP_DiscoveryActor_Base`: `D_Structure_AncientGate` at (14800, 1200, -2000), `ScanFocusOffset = (0, 0, 400)`.
+- [ ] `BP_ObjectiveTrigger`: `OBJ_AncientGate`, box 1000x1200x600 at (15800, 800, -2000).
+
+Lighting:
+
+- Blue gate cores are secondary focal points.
+- Gold beam spill from Collector Array should graze the wall surface.
+- Use darker exposure here to make the gate feel massive and cold.
+
+### Zone 7 - Second Sky Overlook (X 16500 to 19000)
+
+Final reveal and end beat.
+
+- [ ] Final ledge extends to (18500, 0, -1600), using foreground ledge or bridge edge kit.
+- [ ] The lower rift opens directly ahead with no flat floor visible.
+- [ ] Distant spires, hanging slabs, and blue fog create a second-horizon effect.
+- [ ] Human survey station or tiny temporary camp can sit behind the player, not in the main view.
+- [ ] `BP_DiscoveryActor_Base`: `D_Anomaly_SecondSkyCavern` at (18500, 0, -1450).
+- [ ] Set `D_Anomaly_SecondSkyCavern.ObjectiveIdToCompleteOnScan = OBJ_SecondSkyOverlook`.
+- [ ] `bCompleteObjectiveOnlyOnNewDiscovery = true`.
+- [ ] Use trigger volume only as fallback during early testing.
 
 ## Landmark Layout
 
 Top-down rough arrangement:
 
 ```
-                Second Sky Overlook
-                        |
-              Far Survey Station
-                        |
-        Ember Vents ----+---- Crystal Spine
-              \              /
-               \            /
-                Mirror Marsh
+                  Second Sky Overlook
+                           |
+                    Ancient Gate
+                           |
+       Crystal Galleries --+-- Collector Array / Orb
+              \                 /
+               \               /
+             Abyssal Approach
                     |
               First Overlook
                     |
              Descent Elevator
 ```
 
-## Lighting Notes
+Wide-shot composition from First Overlook:
 
-- First Overlook: low exposure adaptation into vast cyan/amber reveal.
-- Mirror Marsh: cyan fungus bounce with strong water reflections.
-- Crystal Spine: blue-white emissive veins and sharp silhouettes.
-- Ember Vents: orange volumetric fog with black rock shapes.
-- Far Station: human white work lights look weak against the cavern.
+```
+  dark ceiling/rock frame
+  ------------------------------------------------
+  left rock/towers       orb + hex array       ancient gate wall
+  foreground ledge       gold beams            blue circular cores
+  player silhouette      deep blue abyss       crystals/platforms
+```
+
+## Beacon Placement Guidance
+
+The level should naturally invite player beacons at:
+
+- First Overlook before leaving the safe human route.
+- Abyssal Approach halfway down the ledge descent.
+- Crystal Galleries entrance.
+- Collector Array platform.
+- Ancient Gate crossing before the final overlook.
+
+Each location needs a clear surface within the character's `MaxBeaconPlacementDistance`.
 
 ## Blockout Mesh List
 
-- `SM_Blockout_BasaltWall_Large`
-- `SM_Blockout_BasaltArch`
-- `SM_Blockout_Ledge_Straight`
-- `SM_Blockout_Ledge_Curve`
-- `SM_Blockout_CrystalSpine_A`
-- `SM_Blockout_CrystalCluster_S/M/L`
-- `SM_Blockout_FungusCap_S/M/L`
-- `SM_Blockout_VentCone`
-- `SM_Blockout_SurveyPlatform`
+P0:
+
+- `SM_Rift_ForegroundLedge_A`
+- `SM_Rift_BridgeSpan_A`
+- `SM_Rift_BridgeSpan_B_Broken`
+- `SM_Rift_PlatformNode_A`
+- `SM_Rift_AncientWall_Gate_A`
+- `SM_Rift_OrbFrame_A`
+- `SM_Rift_OrbHub_A`
+- `SM_Rift_BeamEmitterNode_A`
+- `SM_Rift_HexCollector_Tile_A`
+- `SM_Rift_HexCollector_Cluster_A`
+- `SM_Rift_CrystalCluster_S/M/L/Hero`
+
+P1:
+
+- `SM_Rift_RockArch_A/B`
+- `SM_Rift_CavernWall_Large_A/B`
+- `SM_Rift_Overhang_A/B`
+- `SM_Rift_TowerSegment_A/B/C`
+- `SM_Rift_HangingSlab_A/B/C`
+- `SM_Rift_DistantSpire_A/B`
+- `SM_Human_SurveyCrate_A`
+- `SM_Human_PortableLamp_A`
+- `SM_Human_CableCoil_A`
+- `SM_Human_FieldConsole_A`
 
 ## Objective Trigger Checklist
 
-Use Blueprint children of `AObjectiveTriggerActor` with visible editor-only labels so the first playable route can be tested before final art. Keep trigger volumes wide enough to catch normal exploration, but place them at clear spatial commitments rather than every few meters.
+- `OBJ_DescentElevator`: exit from elevator/tunnel.
+- `OBJ_FirstOverlook`: first full view of the core vista.
+- `OBJ_AbyssalApproach`: after descending onto machine bridge structures.
+- `OBJ_CrystalGalleries`: after scanning/entering the crystal-machine fusion zone.
+- `OBJ_CollectorArray`: safe platform near orb apparatus.
+- `OBJ_AncientGate`: crossing the monumental gate structure.
+- `OBJ_SecondSkyOverlook`: completed by scanning `D_Anomaly_SecondSkyCavern`.
 
-- `OBJ_DescentElevator`: just beyond the elevator platform exit, after the player steps into the basalt access tunnel.
-- `OBJ_FirstOverlook`: at the reveal ledge where the Mirror Marsh, Crystal Spine, and Ember Vents are all readable.
-- `OBJ_MirrorMarsh`: on the far side of the marsh path, after at least one fungus cluster and the mirror silt discovery placement.
-- `OBJ_CrystalSpine`: at the ridge crest, where pulse quartz and the next warm vent landmark are visible.
-- `OBJ_EmberVents`: after the final vent column cluster, before the path bends toward human survey lights.
-- `OBJ_FarSurveyStation`: at the station entrance platform, before the final scan/readout beat.
-- `OBJ_SecondSkyOverlook`: complete this from `D_Anomaly_SecondSkyCavern.ObjectiveIdToCompleteOnScan` after the player scans the final vista. Use a trigger volume only as a fallback for early blockout testing.
+## Screenshot Review Checklist
 
-Suggested Blueprint behavior:
+Take screenshots from:
 
-- Bind HUD text to `UObjectiveSubsystem::OnObjectiveChanged`.
-- Use `GetObjectiveHudText` for the compact objective line and `GetObjectiveProgress` for step counters/progress bars.
-- Play a restrained chime or scanner ping from `OnObjectiveTriggerActivated(true)`.
-- Set `ObjectiveIdToCompleteOnScan` on the final Second Sky discovery so `OnRouteCompleted` fires after the actual scan.
+- Elevator exit before reveal.
+- First Overlook, matching the concept art.
+- Mid-Abyssal Approach, with orb partially occluded.
+- Crystal Galleries, with close crystals and distant orb.
+- Collector Array platform, looking at orb/hex panels.
+- Ancient Gate crossing, looking up at circular blue cores.
+- Second Sky Overlook, looking into lower rift.
+
+For the First Overlook screenshot to pass:
+
+- The orb is the focal point.
+- Hex collector clusters and gold beams are visible.
+- Dark rock frames the shot.
+- Blue crystals appear in foreground.
+- A human scale cue is present.
+- The lower abyss reads as very deep.
+- The right-side gate wall reads clearly as ancient machinery.

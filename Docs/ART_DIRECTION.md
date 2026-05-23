@@ -1,44 +1,134 @@
 # Art Direction
 
+## Source Of Truth
+
+The attached concept image is the primary visual target for the first map.
+
+- Repository reference: `Content/ArtDirection/References/luminous_rift_core_reference.png`
+- Working title in docs: `Core Luminous Rift Reference`
+- Priority: highest. When another doc conflicts with this image, the image wins unless Vivek explicitly changes direction.
+
+The map should be modeled, lit, and textured around this exact feeling: a colossal subterranean rift where black carved geology and ancient machine architecture frame a suspended blue-white energy sphere, gold beam networks, crystalline outcrops, and vertiginous platforms above an abyss.
+
 ## Visual Target
 
-The game should feel like a nature documentary from a world hidden inside Earth: enormous, luminous, wet, mineral-rich, and impossible without becoming random fantasy noise.
+The Luminous Rift is not a normal cave, a generic alien jungle, or a simple crystal cavern. It is an impossible interior world where geology, buried megastructure, and luminous technology have fused together over ancient time.
 
-## Rendering Priorities
+The desired first impression:
 
-- Unreal Engine 5 Lumen global illumination.
-- Nanite meshes for cavern walls, cliffs, and mineral formations.
-- Volumetric fog shafts and colored mist layers.
-- Reflective water sheets and wet rock materials.
-- Bioluminescent emissive materials that softly light nearby surfaces.
-- Strong composition: overlooks, silhouettes, scale markers, and distant focal points.
+- The player stands on a dark foreground ledge, visibly tiny against the scene.
+- The cavern drops away into a deep vertical blue abyss.
+- Huge rock arches, ribbed walls, and suspended structures frame the view from all sides.
+- The central landmark is a bright, almost solar blue-white energy sphere held in place by a mechanical collector array.
+- Warm gold beams connect the sphere to hexagonal collector petals and circular mechanical nodes.
+- Blue crystals grow out of black rock and embedded architecture, acting as natural accent lights.
+- The scene feels old, wet, cold, enormous, and sacred rather than clean sci-fi.
 
-## Palette Rule
+## Composition Rules
 
-Avoid one-note blue/purple cave lighting. Each biome needs a distinct triad:
+Every major shot in the map should preserve the reference's composition language.
 
-- Luminous Rift: cyan bioluminescence, black basalt, amber geothermal vents.
-- Glassroot Forest: pale green translucent roots, pearl stone, red mineral sap.
-- Inner Sea: silver water, dark teal abyss, gold plankton trails.
-- Mantle Garden: white steam, obsidian, saturated orange and magenta heat blooms.
+### Foreground
 
-## Luminous Rift Composition
+- Use dark, high-contrast rock silhouettes to frame the scene.
+- Include a human scale marker: player body, railings, beacon, survey crate, or small platform lights.
+- Ledges should feel carved or eroded, not smooth ramps.
+- Foreground crystals should be saturated cyan-blue and sharp enough to read against the dark rock.
 
-The opening playable area should use:
+### Midground
 
-- Dark foreground rock silhouettes to frame glowing valleys.
-- A bright mid-distance landmark: the Crystal Spine.
-- A warm counter-light landmark: the Ember Vents.
-- A huge background reveal: a distant cavern ceiling with suspended mineral shelves.
+- Use bridges, suspended platforms, broken machine ribs, and vertical towers to lead the eye toward the energy sphere.
+- Put the primary traversal path on a narrow ledge/bridge system, not a wide open floor.
+- Midground shapes should overlap heavily; depth comes from layering silhouettes in fog.
+- The central orb must be visible from multiple route points, partially occluded at first and fully revealed later.
 
-## Asset Needs
+### Background
 
-Early prototype assets can be blockouts, but they should preserve final composition:
+- The abyss should continue far below the playable path, with mist and faint vertical blue light columns.
+- Distant towers and hanging structures should fade into fog.
+- The ceiling and side walls should show vertical striations, hanging slabs, and carved recesses.
+- Avoid flat backdrop walls. Even distant shapes need readable vertical depth.
 
-- Modular basalt walls and arches.
-- Crystal clusters in small, medium, and monumental sizes.
-- Bioluminescent fungus caps and stalks.
-- Shallow reflective water plane.
-- Volumetric fog cards or UE fog volumes.
-- Survey station kit: hard-surface human scale contrast.
-- Beacon lights and scanner pulse visual effect.
+## Palette
+
+The reference uses a disciplined three-part palette:
+
+- Dominant: near-black rock and ancient dark metal.
+- Cool light: cyan, blue, and blue-white emissive crystals, fog, and energy.
+- Warm accent: gold/amber beams, small machine nodes, and limited work lights.
+
+Do not let the scene become one-note blue. The gold beam network is essential; it provides contrast, focal hierarchy, and the sense that the central mechanism is active.
+
+Suggested material color anchors:
+
+- Wet basalt: almost black with blue-gray highlights, subtle green/brown mineral variation.
+- Ancient metal/stone: gunmetal, graphite, dark bronze edges, worn bevels.
+- Energy sphere: white core, cyan body, electric blue edge scatter.
+- Crystal: deep blue base, cyan inner glow, white rim highlights.
+- Beam/collector nodes: warm gold, not orange lava.
+- Human equipment: muted off-white, dark gray, small cyan status LEDs.
+
+## Lighting Rules
+
+- The central energy sphere is the primary key light.
+- Gold beams provide thin, directional warm highlights across platforms and collectors.
+- Blue crystals act as localized rim/fill lights.
+- The lower abyss glows with soft blue volumetric light but should remain unreadably deep.
+- Human work lights must be weak by comparison; they are scale cues, not primary lighting.
+- Use Lumen GI, volumetric fog, and high contrast exposure control. Keep emissive detail visible; do not over-bloom the orb into a blank white blob.
+
+## Shape Language
+
+### Natural
+
+- Jagged basalt, eroded ledges, vertical cliff faces, stalactite-like slabs.
+- Root/rib-like stone forms that curl around architecture.
+- Crystals: faceted, angular, clustered, mostly vertical.
+
+### Ancient Machine
+
+- Circular doors, ring sockets, radial hubs, recessed glowing blue strips.
+- Hexagonal collector plates arranged like honeycomb petals.
+- Tall monolithic towers with vertical grooves.
+- Suspended bridge slabs with carved panel seams and broken underside struts.
+
+### Human
+
+- Small, recent, practical, and slightly crude.
+- Survey lamps, crates, cables, temporary railings, beacon devices.
+- Human props should contrast with the ancient machinery: simple silhouettes, modern materials, smaller scale.
+
+## What To Avoid
+
+- Generic fantasy cave assets without machine integration.
+- Oversized fungus as the main identity of this map. Biology can exist later, but this reference is dominated by crystal, abyss, and ancient machinery.
+- Clean spaceship corridors. The machinery should feel buried, eroded, and fused with rock.
+- A flat arena floor. The reference is about vertical drop, bridges, ledges, and suspended structures.
+- Purple-only lighting, heavy magenta fog, or lava-dominant orange.
+- Symmetry that feels sterile. The collector/orb can be symmetric; the cave and traversal path should be broken and organic.
+
+## First-Map Asset Needs
+
+Highest priority assets for the first playable beauty pass:
+
+- Modular dark basalt cliffs, arches, ledges, and overhangs.
+- Ancient machine platform kit: floor slabs, bridge spans, wall panels, circular sockets, vertical tower segments.
+- Central orb apparatus: energy sphere mesh/VFX proxy, radial hub, beam emitters, hex collector panels.
+- Hex collector panel kit: single hex tile, 7-tile flower cluster, broken cluster variants, brass/gold frame pieces.
+- Blue crystal clusters in small, medium, large, and hero sizes.
+- Abyss dressing: distant spires, suspended debris, hanging slabs, far blue light shafts.
+- Human survey kit: player-scale platform, crates, lamps, cable coils, small console, temporary beacon.
+- VFX placeholders: blue motes, gold beam splines, volumetric fog cards, slow falling dust/debris.
+
+## Biome Naming Alignment
+
+Earlier docs used `Mirror Marsh`, `Crystal Spine`, and `Ember Vents`. Going forward, the first map should be reframed around the concept art:
+
+- `First Overlook`: the reference image composition from the player's first reveal ledge.
+- `Abyssal Approach`: narrow ledges and bridges descending toward the ancient structure.
+- `Crystal Galleries`: blue crystal clusters embedded in rock and machine ruins.
+- `Collector Array`: central orb, gold beams, hex panels, and radial hub.
+- `Ancient Gate`: the monumental right-side wall/gate structure from the reference.
+- `Second Sky Overlook`: final view into the lower rift beyond the machine.
+
+The old organic/geothermal ideas can become later biomes or side pockets, but they should not drive the core map anymore.

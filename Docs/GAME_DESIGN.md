@@ -39,15 +39,22 @@ The player is a field explorer sent below Earth's crust after impossible sensor 
 
 ## First Biome: The Luminous Rift
 
-A vast split cavern where black basalt walls open into a glowing alien valley. The floor is covered in shallow reflective water. Giant translucent fungi grow from mineral ribs. Blue-white crystal veins pulse through the ceiling like frozen lightning. Warm orange geothermal vents provide contrast and movement.
+The Luminous Rift is now anchored to the core concept reference at `Content/ArtDirection/References/luminous_rift_core_reference.png`.
 
-Primary objective: cross from the descent elevator to the far-side survey station by navigating three landmarks:
+A vast vertical cavern opens around an ancient machine complex buried inside Earth. Black basalt, blue crystals, suspended platforms, and monumental carved structures surround a radiant blue-white energy sphere. Warm gold beams connect the sphere to hexagonal collector panels, implying that the cavern is not only geologic but also part of an enormous dormant mechanism.
 
-- The Mirror Marsh: shallow water, glowing spores, reflections.
-- The Crystal Spine: climbable mineral ridge with scanner-reactive veins.
-- The Ember Vents: hot fog, orange light, and timed safe paths.
+Primary objective: cross from the descent elevator to the far-side Second Sky overlook by navigating six landmarks:
 
-Final beat: reach an overlook showing an even larger cavern beyond, establishing the scale of the full game.
+- First Overlook: the initial concept-art reveal from a dark foreground ledge.
+- Abyssal Approach: broken rock ledges and ancient bridge spans descending into the rift.
+- Crystal Galleries: blue crystals growing through carved wall panels.
+- Collector Array: central orb, gold beams, radial hub, and hex collector clusters.
+- Ancient Gate: a monumental wall with circular blue-lit mechanisms.
+- Second Sky Overlook: final view into an even deeper lower cavern.
+
+Final beat: scan the Second Sky vista and realize the visible machine is only one layer of a much larger underworld.
+
+Earlier marsh, fungus, and geothermal ideas are preserved as future biome candidates, but they should not define the first map's visual identity.
 
 ## Tone
 
