@@ -130,3 +130,11 @@
 - Added `Docs/CONCEPT_IMAGE_GENERATION.md` to preserve the exact prompt set used for the five generated images.
 - Verification: generated image files exist and report as PNG; CSV files parse cleanly; markdown references were searched with `rg`. Unreal compile was not run on this Linux side.
 - Next: create per-map docs under `Docs/Maps/`, then draft Claude/Blender prompts for each future map's highest-priority asset families.
+
+## 2026-05-23 19:32 EDT
+
+- Added six detailed Claude/Blender prompt files under `Docs/AssetPrompts/LuminousRift/` for the P0 concept-art-critical asset families: blue crystal clusters, foreground ledge/rock frame, bridge spans, hex collector panels, central orb apparatus, and ancient gate wall.
+- Updated `Content/Design/LuminousRiftAssetManifest.csv` so the prompted P0 rows are marked `PromptReady` and point to the relevant prompt file.
+- Updated `ArtSource/Blender/LuminousRift/ASSET_NOTES.md` with the prompt package index so Blender workers can start from the correct briefs and replace placeholder notes after export.
+- Verification: parsed `Content/Design/LuminousRiftAssetManifest.csv` with Python CSV reader and checked that every prompt path referenced by the manifest exists.
+- Next: Windows/Claude should start with `Docs/AssetPrompts/LuminousRift/01_BlueCrystalClusters.md`, export the crystal kit, then update `ASSET_NOTES.md` with source/export paths and known issues.

@@ -2,6 +2,19 @@
 
 This file tracks Blender-created source assets for the Luminous Rift kit. Claude/Blender workers should update it whenever they create or revise an asset.
 
+## Prompt Package
+
+Detailed Claude/Blender prompts for the first Luminous Rift asset pass live under:
+
+- Docs/AssetPrompts/LuminousRift/01_BlueCrystalClusters.md
+- Docs/AssetPrompts/LuminousRift/02_ForegroundLedge_RockFrame.md
+- Docs/AssetPrompts/LuminousRift/03_BridgeSpanKit.md
+- Docs/AssetPrompts/LuminousRift/04_HexCollectorPanels.md
+- Docs/AssetPrompts/LuminousRift/05_OrbApparatus.md
+- Docs/AssetPrompts/LuminousRift/06_AncientGateWall.md
+
+Workers should use these prompts with Docs/CORE_REFERENCE_LUMINOUS_RIFT.md, Docs/BLENDER_ASSET_PIPELINE.md, and Docs/MATERIAL_SPECS.md. After creating any mesh, replace the relevant status below with source/export paths and production notes.
+
 ## Required Note Format
 
 Each asset entry should include:
