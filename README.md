@@ -38,6 +38,40 @@ The current vertical slice route is:
 
 The goal is a 10-15 minute playable slice with first-person traversal, scan/discovery interactions, deployable beacons, objective progression, atmospheric sound, and a strong visual payoff.
 
+## World Atlas
+
+Beyond the Luminous Rift, Abyssal Earth is planned as a descent through multiple impossible inner-Earth biomes. The full planning document is `Docs/WORLD_ATLAS.md`.
+
+### Glassroot Forest
+
+![Glassroot Forest](Content/ArtDirection/WorldMaps/glassroot_forest_concept.png)
+
+A living mineral forest of translucent root-columns, pearl terraces, shallow reflective pools, pale green bioluminescence, and red mineral sap. This map should feel like a biological cathedral and introduce scanner-reactive living systems.
+
+### Inner Sea
+
+![Inner Sea](Content/ArtDirection/WorldMaps/inner_sea_concept.png)
+
+A vast underground ocean with silver-black water, dark teal fog, gold plankton trails, drowned machine ruins, broken piers, and hanging mineral shelves. This map expands navigation scale and makes beacons feel essential.
+
+### Fossil Sky
+
+![Fossil Sky](Content/ArtDirection/WorldMaps/fossil_sky_concept.png)
+
+A dry cavern where gigantic fossilized creatures line the ceiling above suspended observation walkways, amber dust shafts, bone-white stone, black chasms, and cyan scanner-reactive fossil veins.
+
+### Gravity Well
+
+![Gravity Well](Content/ArtDirection/WorldMaps/gravity_well_concept.png)
+
+A spherical anomaly chamber where basalt platforms, crystal debris, and water ribbons float around a blue-white gravity core. This map is the long-term altered-gravity traversal target.
+
+### Mantle Garden
+
+![Mantle Garden](Content/ArtDirection/WorldMaps/mantle_garden_concept.png)
+
+A dangerous geothermal garden of black obsidian ridges, white steam columns, orange heat blooms, magenta mineral flowers, and ancient heat-resistant machinery. This is the main late-game environmental hazard map.
+
 ## Core Gameplay
 
 - First-person movement with sprint, crouch, and future climb/mantle hooks.
@@ -77,7 +111,11 @@ Key documents:
 - `Docs/ART_DIRECTION.md`: visual target, palette, lighting, shape language, and what to avoid.
 - `Docs/LUMINOUS_RIFT_BLOCKOUT.md`: route, scale, zones, placement checklist, and screenshot targets.
 - `Docs/MATERIAL_SPECS.md`: master material targets and material instances.
+- `Docs/WORLD_ATLAS.md`: long-term map roadmap with generated concept references.
+- `Docs/CONCEPT_IMAGE_GENERATION.md`: prompt log for generated world-map concepts.
 - `Content/Design/LuminousRiftAssetManifest.csv`: prioritized asset manifest.
+- `Content/Design/WorldMapManifest.csv`: planned map manifest.
+- `Content/Design/WorldAssetManifest.csv`: first-pass future-map asset manifest.
 - `ArtSource/Blender/LuminousRift/ASSET_NOTES.md`: notes file for Blender-created assets.
 
 Highest-priority asset families:

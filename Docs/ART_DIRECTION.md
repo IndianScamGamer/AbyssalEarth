@@ -132,3 +132,52 @@ Earlier docs used `Mirror Marsh`, `Crystal Spine`, and `Ember Vents`. Going forw
 - `Second Sky Overlook`: final view into the lower rift beyond the machine.
 
 The old organic/geothermal ideas can become later biomes or side pockets, but they should not drive the core map anymore.
+
+## Broader Map Art Direction
+
+The world atlas images under `Content/ArtDirection/WorldMaps/` define the first set of future map identities. Each map must keep Abyssal Earth's grounded, high-fidelity inner-world tone while using a distinct color triad and silhouette language.
+
+### Glassroot Forest
+
+Reference: `Content/ArtDirection/WorldMaps/glassroot_forest_concept.png`
+
+- Palette: pale green glass, pearl stone, red mineral sap.
+- Silhouette: vertical translucent root-columns, soft terraces, shallow pools.
+- Mood: biological cathedral, quiet field-science wonder.
+- Avoid: surface jungle, leafy trees, generic fantasy forest.
+
+### Inner Sea
+
+Reference: `Content/ArtDirection/WorldMaps/inner_sea_concept.png`
+
+- Palette: silver-black water, dark teal fog, gold plankton trails.
+- Silhouette: low docks, drowned ruins, vast water plane, hanging mineral shelves.
+- Mood: lonely ocean navigation inside Earth.
+- Avoid: tropical beach, pirate imagery, surface sky.
+
+### Fossil Sky
+
+Reference: `Content/ArtDirection/WorldMaps/fossil_sky_concept.png`
+
+- Palette: bone-white limestone, amber dust, cyan fossil veins.
+- Silhouette: ceiling fossils, rib arches, suspended walkways, black chasms.
+- Mood: scientific awe and deep-time mystery.
+- Avoid: museum exhibit, horror skeleton cave, desert surface.
+
+### Gravity Well
+
+Reference: `Content/ArtDirection/WorldMaps/gravity_well_concept.png`
+
+- Palette: dark basalt, blue-white anomaly light, amber stabilizer accents.
+- Silhouette: spherical cavern, floating platforms, curved towers, suspended water ribbons.
+- Mood: physically impossible but engineered and ancient.
+- Avoid: outer space, stars, fantasy magic runes.
+
+### Mantle Garden
+
+Reference: `Content/ArtDirection/WorldMaps/mantle_garden_concept.png`
+
+- Palette: black obsidian, white steam, orange heat, magenta mineral blooms.
+- Silhouette: narrow ridges, steam columns, heat cracks, mineral flowers.
+- Mood: beautiful environmental danger near extreme heat.
+- Avoid: generic lava level, hell imagery, red-only palette.

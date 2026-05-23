@@ -59,3 +59,36 @@ Earlier marsh, fungus, and geothermal ideas are preserved as future biome candid
 ## Tone
 
 Quiet wonder with moments of danger. More `Subnautica`, `Journey`, `Outer Wilds`, and `Avatar` bioluminescence than shooter or horror. Darkness should frame beauty rather than swallow it.
+
+## World Roadmap
+
+The first map proves the core loop, but Abyssal Earth should feel like a descent through multiple impossible layers. The broader world roadmap is documented in `Docs/WORLD_ATLAS.md` and supported by generated reference images under `Content/ArtDirection/WorldMaps/`.
+
+### Map Sequence Intent
+
+1. **Luminous Rift**: ancient machine + crystal abyss. Teaches the base game.
+2. **Glassroot Forest**: living mineral ecosystem. Teaches biological scanning and softer route reading.
+3. **Inner Sea**: underground ocean. Expands route scale, navigation, and beacon value.
+4. **Fossil Sky**: deep-time fossil archive. Shifts awe upward and emphasizes scientific reconstruction.
+5. **Gravity Well**: local physics anomaly. Introduces altered traversal and orientation risk.
+6. **Mantle Garden**: geothermal edge. Pushes environmental hazards without turning the game into combat.
+
+### Long-Term Mechanical Arc
+
+- **Luminous Rift**: scanner, journal, beacons, objective route, first environmental hazards.
+- **Glassroot Forest**: scanner timing, biological responses, spore interference, living gates.
+- **Inner Sea**: route marking over water, floating beacons/buoys, possible skiff traversal.
+- **Fossil Sky**: scanner reconstruction, brittle walkways, fossil pattern matching.
+- **Gravity Well**: reorientation volumes, tether anchors, spatial route planning.
+- **Mantle Garden**: heat management, timed safe windows, low-visibility steam, pressure vents.
+
+### Discovery Philosophy
+
+Discoveries should not be collectible trivia. Each discovery should do at least one of these:
+
+- Explain how the map works.
+- Reveal a safe route or hazard rule.
+- Deepen the ancient-machine mystery.
+- Show how human survey teams are adapting.
+- Give the journal a meaningful field-science tone.
+- Foreshadow a later map.
