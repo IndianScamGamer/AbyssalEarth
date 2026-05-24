@@ -1,0 +1,889 @@
+================================================================
+  ABYSSAL EARTH — CONCEPT ART IMAGE GENERATION PROMPTS
+================================================================
+  Style baseline (append to any prompt as needed):
+  "Unreal Engine 5 AAA game environment concept art, cinematic lighting,
+  photorealistic materials, volumetric fog, atmospheric depth, high detail,
+  no UI, no text, no watermarks"
+
+  Negative baseline (append to any prompt as needed):
+  "no generic fantasy cave, no clean sci-fi corridors, no purple-only lighting,
+  no flat arena floor, no lava, no horror tone, no fungus dominant,
+  no sterile symmetry, no cartoon style"
+================================================================
+
+
+────────────────────────────────────────────────────────────────
+  MAP 01 — THE LUMINOUS RIFT
+  ESTABLISHING & HERO SHOTS
+────────────────────────────────────────────────────────────────
+
+[LR-001] HERO ESTABLISHING SHOT
+A colossal underground rift seen from a dark jagged rock ledge. The cavern is
+300 to 500 meters tall. At the center of the void floats a massive blue-white
+energy sphere 20 meters across, radiating thin warm gold beams outward to
+hexagonal collector panels arranged in flower-like clusters. The surrounding
+cave walls are black basalt, with saturated cyan crystal clusters catching the
+blue light. Deep volumetric blue-white fog fills the abyss below. A lone human
+explorer in dark survey gear stands at the ledge edge, visibly tiny against the
+scene. Foreground is dark high-contrast rock silhouette, midground has suspended
+bridge spans, background fades into blue atmospheric haze with distant towers.
+Cinematic vertical composition. Warm gold contrasts cold blue. AAA game
+environment concept art, photorealistic, volumetric fog, Unreal Engine 5.
+
+[LR-002] FIRST OVERLOOK — MOMENT OF DISCOVERY
+First-person perspective from a dark jagged rock ledge inside a massive subterranean
+cavern. The view opens suddenly into an enormous vertical void. A blue-white glowing
+sphere dominates the center-right, partially occluded by a dark stone pillar in the
+foreground. Thin gold beams radiate from the sphere toward unseen collector arrays
+below. Saturated blue crystal clusters line the ledge edge. The abyss drops 400
+meters below into blue mist. Atmospheric and quiet, awe-inspiring, not threatening.
+Cinematic composition, slightly warm rock near the viewer, cold blue-white in the
+distance. UE5 game concept art.
+
+[LR-003] WIDE PANORAMA — FULL RIFT REVEAL
+A wide panoramic establishing shot of the entire Luminous Rift cavern. Massive black
+basalt walls form the frame. The central blue-white energy sphere glows at center,
+surrounded by hexagonal collector panels on mechanical arms. Gold energy beams trace
+from the sphere hub across the void. Ancient machine towers with vertical panel
+grooves stand on the far wall. Suspended bridge slabs traverse the middle distance.
+Blue crystal clusters mark the edges of the route ledges. A tiny survey camp — crates,
+portable lamps, cable coils — sits on a ledge in the lower left, establishing scale.
+The abyss below the route fades into deep blue-white fog. Unreal Engine 5 AAA
+environment art, widescreen cinematic aspect ratio.
+
+[LR-004] DEEP VERTICAL COMPOSITION — LOOKING DOWN
+Looking straight down from a narrow suspended bridge inside the Luminous Rift. The
+bridge spans are dark ancient machine-stone with carved panel seams and blue emissive
+strips. Hundreds of meters below, a deep blue-white glowing abyss is visible through
+rolling volumetric fog. Gold beam lines are visible in the mid-depth, connecting the
+central apparatus below. The walls of the cavern on both sides show vertical striations
+and embedded crystal clusters. An explorer's boots are visible at the frame edge,
+implying scale. Vertigo-inducing but beautiful, not frightening. UE5 game concept art,
+high detail, atmospheric depth.
+
+[LR-005] LOOKING UP FROM THE ABYSS
+Looking up from below the main route in the Luminous Rift. The underside of ancient
+machine bridge slabs forms a complex dark ceiling overhead, with broken struts and
+carved panel seams. Between the spans, the central energy sphere is visible as a
+brilliant blue-white disc. Thin gold beams cross the upper middle distance. Blue
+crystal clusters glow on ledge undersides. Far above, a faint suggestion of the
+surface elevator entry shaft is visible as a warm-lit pinhole. The composition
+emphasizes impossible vertical depth. Photorealistic UE5 environment concept art.
+
+
+────────────────────────────────────────────────────────────────
+  MAP 01 — LUMINOUS RIFT
+  LANDMARK DETAIL SHOTS
+────────────────────────────────────────────────────────────────
+
+[LR-006] CENTRAL ENERGY ORB — CLOSE-UP
+Close-up concept art of the Abyssal Earth central energy orb. A blue-white glowing
+sphere 20 meters in diameter, suspended in a void. The core is near-white, the body
+is electric cyan-blue, the edge scatters into soft electric fringe. The surface has
+slow animated energy movement visible as subtle internal noise and ripple patterns.
+The orb is partially enclosed by a large radial mechanical hub — dark gunmetal and
+graphite, with angular arm frames holding the orb loosely. Warm gold beam lines
+originate from emitter nodes on the hub and radiate outward. Background is pure deep
+blue-black cave darkness. The orb is the only major light source in this close view.
+Photorealistic detail, UE5 material quality, dramatic lighting.
+
+[LR-007] HEX COLLECTOR ARRAY — MEDIUM SHOT
+The hexagonal collector array of the Luminous Rift. A cluster of 10 hexagonal panels
+arranged in a honeycomb flower pattern, 30 meters across. Each hex panel has a warm
+gold-brass outer frame and a frosted blue-white translucent interior with subtle inner
+circuit-like hexagonal linework. Some panels are chipped, broken, or tilted at odd
+angles. Small dark mechanical bracket arms connect each panel to the central hub. Thin
+warm gold energy beams connect each panel to the central orb visible in the background.
+The array floats on a dark machine platform over the void. Asymmetric and ancient, not
+sterile. UE5 game environment concept art, high fidelity material rendering.
+
+[LR-008] ANCIENT GATE WALL — MONUMENTAL SHOT
+The Ancient Gate wall of the Luminous Rift. A monumental vertical structure 100 meters
+tall and 50 meters wide, made of dark machine-stone hybrid material — gunmetal and
+graphite metal fused with black basalt. Two enormous circular ring sockets at player-
+visible heights, each with blue emissive centers and nested ring grooves. Vertical
+channeling runs from top to base. Panel seams and radial grooves detail the surface.
+The base is buried in broken rock and blue crystal clusters. The wall has visible age:
+worn bevels, cracked sections, basalt intrusions, dust and mineral deposits. It does
+not read as a clean rectangle — it has been partially excavated from the cavern wall.
+The gate has no open door — it is sealed, monumental, and ancient. UE5 concept art.
+
+[LR-009] ANCIENT GATE — CIRCULAR SOCKET DETAIL
+Close-up of one of the massive circular sockets in the Ancient Gate wall. A 15-meter
+circular recess with nested metal rings, deep radial grooves, and a central blue
+emissive core glowing with steady cold light. The rings are worn, chipped at edges,
+and have mineral deposits in the grooves. The surrounding material is dark machine-
+stone — graphite metal with basalt fused into the edges. One of the nested rings is
+cracked. Faint blue light traces along carved channels from the socket toward the
+edge of the wall. Scale indicator: an explorer's gloved hand near the wall far below
+the socket. Dark, ancient, mysterious. UE5 material detail concept art.
+
+[LR-010] BRIDGE SPAN — TRAVERSAL SHOT
+A suspended ancient machine bridge span inside the Luminous Rift. 8 meters wide, 30
+meters long. Heavy layered slab construction with carved panel seams, radial groove
+insets, and worn bevel edges. The underside has visible depth — multiple stacked slab
+layers and broken structural struts. Limited blue emissive strips run along the inner
+edge. The bridge crosses the void, and through the gap ahead, the central energy orb
+is visible in the middle distance. A lone explorer walks mid-bridge, visibly small
+against the cavern beyond. The abyss drops away on both sides. Atmospheric blue fog
+fills the void below. UE5 game environment concept art, first-person traversal scale.
+
+[LR-011] BROKEN BRIDGE SPAN — STRUCTURAL DRAMA
+A broken ancient machine bridge span in the Luminous Rift. Half the span has collapsed
+downward, leaving a jagged gap. The remaining section shows exposed internal layered
+structure — multiple slabs, snapped struts, blue emissive strips now dark and severed.
+The fallen half hangs at an angle below, still partially connected by twisted metal
+ribs. An explorer stands at the gap edge, looking across. The central orb is visible
+through the gap. The drop below is hundreds of meters. Dark, dramatic, structurally
+detailed. UE5 concept art.
+
+[LR-012] BLUE CRYSTAL GALLERY
+A close-up gallery of blue crystal formations inside the Luminous Rift. Faceted angular
+prisms cluster from the basalt wall and floor. Mixed sizes — small shards at 0.5 meters,
+medium clusters at 3 meters, a hero cluster rising 12 meters at the back. Deep blue-
+black geometry with cyan inner glow and white rim highlights on sharp facet edges.
+Clusters are varied in rotation and density — no repeating patterns. Chipped tips,
+satellite shards, embedded basalt at crystal bases. The crystals cast cyan light on
+surrounding dark rock. The energy sphere is partially visible through a gap between
+crystals in the background, providing context and depth. UE5 photorealistic material
+rendering, dramatic side-lighting from the orb.
+
+[LR-013] DESCENT ELEVATOR — HUMAN INTRUSION POINT
+The surface-to-rift descent elevator inside Abyssal Earth. A practical, improvised
+human survey platform built into a natural vertical shaft in black basalt. Steel cable
+guides run down the shaft walls. The elevator platform is a metal grate with temporary
+safety railings, a small survey lamp, and a control panel. Survey crates are stacked
+in one corner. Cables snake down into the dark below. The basalt walls of the shaft
+show drill marks and recent excavation damage. Far below, faint blue light is visible —
+the first hint of the Luminous Rift. The elevator feels temporary, recent, and human-
+scale against the ancient geology around it. Practical industrial-survey aesthetic,
+not polished. UE5 concept art.
+
+[LR-014] CRYSTAL HAZARD — PULSING CRYSTAL FIELD
+A dangerous section of the Luminous Rift where crystal growth has overtaken an ancient
+platform. Cyan-blue crystal spires pulse with rhythmic internal light — one moment dim,
+then a bright emissive surge, then dim again. The safe path is a narrow gap between
+clusters. An explorer crouches at the edge, watching the pulse timing. The crystal
+light illuminates their suit and gear in shifting blue. The surrounding rock is dark.
+The effect feels organic and alive, like breathing. Atmospheric and tense, not violent.
+UE5 concept art with implied environmental hazard.
+
+
+────────────────────────────────────────────────────────────────
+  MAP 01 — LUMINOUS RIFT
+  ATMOSPHERE & LIGHTING STUDIES
+────────────────────────────────────────────────────────────────
+
+[LR-015] COLOR STUDY — BLUE-GOLD CONTRAST
+An abstract compositional study of the Luminous Rift color language. The scene shows
+the central energy orb in the far background, gold beams crossing the mid-distance,
+blue crystals in the foreground. The image is purposefully composed to show the color
+triad: near-black basalt (dominant), cyan-blue energy (cool primary light), warm gold
+beams (warm accent). No characters. Purely atmospheric. Demonstrates how warm and cold
+contrast without conflict. UE5 lighting study concept art.
+
+[LR-016] VOLUMETRIC FOG STUDY — DEEP ABYSS
+Looking into the abyss below the Luminous Rift route. The deep void is filled with
+layered volumetric blue-white fog. Faint vertical light columns rise from unknown
+sources far below. Distant crystal formations are visible as indistinct blue glows in
+the mist. The foreground is the underside edge of a dark rock ledge. The composition
+conveys infinite depth without a visible floor. Mysterious and vast. No characters.
+Pure atmosphere study. UE5 volumetric fog render concept.
+
+[LR-017] MOTE AND BEAM ATMOSPHERE
+Close-up atmospheric study of the space between a gold energy beam and surrounding
+cave air in the Luminous Rift. Fine mineral dust and particles float in the beam's
+path, lit by the warm gold light. The beam itself is visible as a tight luminous line.
+The surrounding air is slightly hazy with cool blue atmospheric fog. Crystal surfaces
+nearby scatter blue light into the mist. Like a cathedral with light shafts through
+dust. No characters. UE5 atmospheric particle study.
+
+[LR-018] SECOND SKY OVERLOOK — FINAL REVEAL
+The second sky overlook at the end of the Luminous Rift route. The explorer reaches a
+ledge and looks outward into a second, even larger blue-lit cavern that opens below
+the first. The new abyss is wider and deeper. Distant blue light columns rise from far
+below. The scale dwarfs the Luminous Rift already explored. The explorer stands at the
+ledge edge, scanner raised, capturing the moment of discovery. Compositionally this
+is a "hero shot" — awe and scale, the horizon line is further cavern, not sky.
+Blue-white dominant. UE5 game concept art, discovery emotion.
+
+
+────────────────────────────────────────────────────────────────
+  MAP 02 — GLASSROOT FOREST
+────────────────────────────────────────────────────────────────
+
+[GR-001] ESTABLISHING SHOT — GLASSROOT FOREST
+A cathedral-sized subterranean chamber where the dominant feature is a dense grove of
+enormous translucent root-columns. Each root column is 2 to 10 meters wide and rises
+40 to 80 meters to the cavern ceiling. The root material is semi-transparent, like
+frosted glass — pale green-white with red mineral sap veins visible inside. The forest
+floor is covered with pearl-white mineral terraces, stepped like shallow pools. Some
+terraces hold a few centimeters of still reflective water that mirrors the forest above.
+Bioluminescence glows soft green-white from the undersides of root-columns and from
+small organisms in the terrace water. Gentle drifting spores float through the air
+like slow snow. A human explorer with a small lamp stands between root bases, tiny
+in comparison. Quiet, beautiful, biological, not threatening. UE5 concept art.
+
+[GR-002] GLASSROOT COLUMN — DETAIL CLOSE-UP
+Close-up concept of a single glassroot column in the Abyssal Earth subterranean forest.
+The column is roughly 5 meters wide at this height. The material is semi-transparent
+organic glass — pale green-white — with red mineral sap veins running like rivers inside.
+The surface is smooth but has texture: faint vertical growth lines, small secondary
+root tendrils branching off. Bioluminescent patches on the surface glow pale green-
+white. The sap veins catch the light and glow faintly red-amber from within. Background
+shows more columns and the overall cave chamber. Photorealistic organic material
+rendering. UE5 concept art.
+
+[GR-003] MINERAL TERRACE POOLS — REFLECTIVE BEAUTY
+Looking across a series of pearl-white mineral terraces in the Glassroot Forest. The
+terraces step down like natural infinity pools. Each holds a centimeter of still,
+clear water that perfectly reflects the translucent root-columns and green-white
+bioluminescence above. The terrace material is pearl-white stone with subtle mineral
+color variation — slight blue-gray, faint ochre. The edges are organically shaped, not
+constructed. Small organisms on the terrace surfaces emit faint green bioluminescence.
+A drifting spore floats across the frame. Still, meditative, cathedral. No characters.
+UE5 concept art.
+
+[GR-004] SPORE CLOUD HAZARD
+A pocket of dense drifting spores in the Glassroot Forest. The spores are released
+from a root-column surface — thousands of tiny luminescent particles floating upward
+and outward. They are pale green-white and beautiful but obscure scanner readouts.
+An explorer wearing a visor stands at the edge of the cloud, scanner raised, cautious.
+The spores glow around them, making the explorer's suit visible in green-white light.
+The surrounding forest is softly lit. Hazardous but visually stunning. UE5 concept art.
+
+[GR-005] ROOT GATE — TIMED PASSAGE
+A root gate in the Glassroot Forest — where two enormous root-columns have grown toward
+each other and partially merged, leaving a passage that slowly closes and opens. The
+gap between the roots is currently half-open — a 3-meter opening of pale green-white
+translucent organic material. Pulsing bioluminescent light moves through the root veins,
+indicating the organic rhythm that controls the gate. An explorer stands just before
+the gate, timing the pulse. Beyond the gate, more terrace pools are visible. Organic,
+alien, not mechanical. UE5 concept art.
+
+[GR-006] HOLLOW ROOT TUBE INTERIOR
+Inside a hollow section of a massive glassroot column. The interior is a tube 4 meters
+across. The walls are semi-transparent organic glass — through them, the blurred shapes
+of the external forest are visible as green-white shapes. Red sap veins run along the
+inner walls. Bioluminescent patches on the interior surface light the space in warm
+green-white. The tube curves slightly upward out of view. The floor is slightly sticky-
+looking organic material. An explorer with a headlamp moves through the space, torch
+light mixing with the organic glow. Interior scale, intimate, otherworldly. UE5.
+
+
+────────────────────────────────────────────────────────────────
+  MAP 03 — INNER SEA
+────────────────────────────────────────────────────────────────
+
+[IS-001] INNER SEA ESTABLISHING SHOT
+An enormous underground ocean inside the Earth, seen from a wet black basalt dock.
+The water is silver-black, perfectly still, stretching into blue-black distance
+until it vanishes. Distant cave walls are barely visible as silhouettes. Overhead
+is a low ceiling of dark hanging mineral shelves, 30 to 50 meters above the water.
+The water surface carries slow ribbons of warm gold — bioluminescent plankton trails
+that move in gentle currents and glow from within. Half-submerged ancient machine
+ruins break the water surface: collapsed towers, broken piers, submerged platform
+edges. A human survey camp on the dock has a portable lamp, crates, and a small
+skiff being prepped. Atmosphere: dark, vast, lonely, quietly beautiful. Deep teal
+atmospheric depth. No horror elements. UE5 concept art.
+
+[IS-002] PLANKTON TRAIL — CLOSE-UP WATER SURFACE
+Close-up of the Inner Sea water surface in Abyssal Earth. The water is black and
+mirror-smooth. Through it, golden bioluminescent plankton drift in loose ribbon
+patterns — warm amber-gold clouds moving just below the surface. The ribbons glow
+from within and light the water surface from underneath. The dark basalt dock edge
+is visible at the bottom of the frame. Mineral shelf ceiling is reflected in the
+water above. Peaceful, mesmerizing. No characters. UE5 close-up concept art.
+
+[IS-003] HALF-SUBMERGED RUINS
+Looking across the Inner Sea toward a cluster of half-submerged ancient machine ruins.
+Building foundations, broken tower stumps, and machine slab platforms emerge from the
+black water at various heights. One large structure is two-thirds submerged — only its
+upper section and one circular ring socket are above water. The ruins are covered in
+mineral deposits, waterline staining, and faint bioluminescent algae. The plankton
+trails glow between the ruins. An explorer's small survey skiff approaches the ruins.
+Dark, ancient, drowned. Teal atmospheric fog in the background. UE5 concept art.
+
+[IS-004] HANGING MINERAL SHELF CEILING
+Looking up from the Inner Sea. The cavern ceiling is 40 meters overhead and consists
+of massive hanging mineral shelves — stalactite-like plates of dark stone with smooth
+undersides and jagged broken edges. Mineral deposits drip down as slow stalactites.
+Some shelves have faint phosphorescent mineral growth. The water surface far below
+is visible with its gold plankton ribbons. The composition inverts perspective —
+looking up into a geological ceiling that feels like a sky of stone. No characters.
+UE5 atmospheric concept art.
+
+[IS-005] SURVEY SKIFF ON THE INNER SEA
+A small human survey skiff on the Inner Sea. The skiff is a practical, utilitarian
+vessel — dark metal, low profile, fitted with a scan antenna and two portable lamps.
+One explorer steers while a second deploys a floating scanner buoy over the side.
+Gold plankton trails glow around the hull. The surrounding water extends endlessly
+into dark teal fog. A distant island is barely visible as a silhouette. Sense of
+isolation and navigation uncertainty. The lamp light is warm and small against the
+cavern darkness. UE5 game concept art.
+
+[IS-006] DISTANT ISLAND
+A small dark basalt island in the center of the Inner Sea, seen from a distance of
+300 meters. The island is 20 meters across and 8 meters above water. On its surface,
+remnants of ancient machine structures are visible: a broken tower stub, a circular
+platform, eroded panel walls. Gold plankton trails seem to converge near the island.
+The island is surrounded by gently glowing water, and a single mineral stalactite
+drips from the ceiling directly above it. Mysterious, isolated, worth investigating.
+No characters. UE5 concept art.
+
+
+────────────────────────────────────────────────────────────────
+  MAP 04 — FOSSIL SKY
+────────────────────────────────────────────────────────────────
+
+[FS-001] FOSSIL SKY ESTABLISHING SHOT
+An enormous dry subterranean cavern where the primary visual is the ceiling. The cavern
+ceiling is 50 to 100 meters above suspended walkways and is covered in massive fossilized
+marine creatures — colossal fish, eel-like forms, and creatures with no known modern
+analogue, each 20 to 60 meters long. Their fossilized forms are embedded in the
+ceiling rock, as if they were swimming and were frozen in stone. The ceiling-as-fossil-
+sky composition inverts normal cave orientation. Amber dust shafts fall from cracks
+in the ceiling between fossil ribs. The cavern floor level is bone-white limestone and
+pale stone shelves. Narrow suspended walkways cross the space. Faint cyan scanner-
+reactive vein lines trace through some fossils. No characters. Awe-inspiring deep-time
+scale. UE5 concept art.
+
+[FS-002] LOOKING UP AT THE FOSSIL CEILING
+A first-person perspective from a suspended walkway in the Fossil Sky cavern, looking
+straight up. The walkway railing is at the frame edges. The ceiling above is completely
+filled with fossil forms — ribs, skeletal arches, curved spines, and unknown biological
+structures embedded in limestone. Amber dust falls between the ribs like slow snow.
+Sunbeam-like light shafts filter through gaps. Some fossil forms have cyan scanner-
+reactive vein highlights. The ceiling feels like a second sky — but made of bone and
+stone. Scale is conveyed by the walkway railing in the foreground. UE5 concept art.
+
+[FS-003] FOSSIL DETAIL — COLOSSAL CREATURE
+Close-up concept art of a fossilized creature in the Fossil Sky cavern ceiling. The
+creature is partially identified: a massive jaw with flat crushing teeth, partially
+embedded in limestone, 15 meters across. Bone-white and gray stone material. Amber
+dust coats the surface. Faint cyan scanner lines trace the outline of its skeleton,
+partially revealing bones embedded deeper in the rock. The fossil is clearly not a
+modern species — the jaw morphology is alien. One section has a crack where the
+limestone has shifted, partially exposing a rib. Ancient, beautiful, impossible. UE5
+photorealistic material concept.
+
+[FS-004] SUSPENDED WALKWAY — FOSSIL SKY
+A narrow suspended walkway crossing the Fossil Sky cavern. The walkway is ancient
+machine-metal, 2 meters wide, with thin safety rails. It crosses a deep black chasm
+below — the floor is not visible. On both sides, the cavern walls are pale limestone
+with fossil forms embedded at various heights. Amber dust shafts fall across the
+walkway from ceiling cracks. An explorer uses a scanner on the walkway edge, pointing
+it up at a fossil formation. The cyan scanner pulse briefly outlines the entire
+skeleton above in electric blue. UE5 game concept art.
+
+[FS-005] OBSERVATION MACHINE — FOSSIL SILHOUETTE PROJECTOR
+An ancient observation machine in the Fossil Sky cavern that projects fossil silhouettes.
+The machine is a circular stone-metal platform with a central lens device. When active,
+it projects a flat cyan light field onto the ceiling, making the scanner-reactive fossil
+veins glow brilliantly and forming a complete outline of the creature above. The
+projected silhouette shows a 40-meter creature — a composite of all the partially
+visible fossil pieces made whole by the scan. An explorer stands on the platform at
+the machine controls, looking up at the completed silhouette. Wonder and discovery.
+UE5 concept art.
+
+[FS-006] BLACK CHASM — FOSSIL SKY CHASM CROSSING
+A section of the Fossil Sky cavern where a wide black chasm splits the bone-white
+stone shelf. The chasm is 8 meters across and the bottom is not visible. A narrow
+ancient machine bridge spans it — only 1.5 meters wide, no rails. The chasm edges
+are jagged fractured limestone. On the far side, another stone shelf continues with
+more fossil formations. Amber dust drifts across the gap. An explorer approaches
+the narrow bridge. The ceiling fossils are visible overhead. Tense traversal moment.
+UE5 concept art.
+
+
+────────────────────────────────────────────────────────────────
+  MAP 05 — GRAVITY WELL
+────────────────────────────────────────────────────────────────
+
+[GW-001] GRAVITY WELL ESTABLISHING SHOT
+A colossal spherical cavern in Abyssal Earth where gravity has been fundamentally
+altered. The chamber is 400 meters across. At the center is a blue-white gravitational
+anomaly — a lensing sphere where light bends visibly around the void. Surrounding the
+anomaly, at various heights and angles, float disconnected basalt platform shelves.
+Between the platforms, ribbons of water hang suspended in mid-air, gently moving.
+Crystal debris orbits slowly around the anomaly. Ancient stabilizer towers curve
+around the chamber walls — tall cylindrical structures with amber machine lights that
+pulse in rhythm, implying they are actively maintaining stability. The paths between
+platforms curve around the void — the player would walk sideways or upside-down in
+some sections. Surreal but physically grounded, not magical. UE5 concept art.
+
+[GW-002] FLOATING PLATFORM CROSSING
+A section of the Gravity Well cavern where the explorer must cross between floating
+basalt platforms. The platforms float at different heights, sizes, and angles. Some
+tilt slightly. Between platforms, the central blue-white anomaly is visible in the
+background. Water ribbons drift between platforms. An explorer is mid-jump between
+two platforms, scanner on their back. The deep void is below, the anomaly off-center
+in the background. A tether line trails from the explorer's suit to the last platform.
+Disorienting and exciting traversal. UE5 game concept art.
+
+[GW-003] WATER RIBBON SUSPENSION
+Close-up of the suspended water ribbons in the Gravity Well chamber. A ribbon of water
+2 meters wide and 10 meters long hangs in mid-air between two platforms. The water
+ripples slowly in place, catching the blue-white light from the anomaly. Small bubbles
+drift from one end. The ribbon refracts light — the anomaly behind it is distorted,
+showing the gravity lens effect. A basalt rock fragment slowly orbits nearby. Abstract,
+physically impossible, beautiful. UE5 concept art.
+
+[GW-004] STABILIZER TOWER — DETAIL
+Close-up of an ancient stabilizer tower in the Gravity Well chamber. The tower is a
+cylindrical stone-metal column 8 meters wide, curving slightly from the base to follow
+the chamber's spherical geometry. Amber emissive machine lights pulse in panels along
+its length — warm, steady, rhythmic. The tower surface is dark gunmetal with worn panel
+seams, radial groove bands, and age cracks. At the midpoint, a large amber ring bands
+the tower — the primary emitter. The amber light casts warm color onto surrounding
+floating rock. Background shows more towers and the blue-white anomaly. UE5 concept.
+
+[GW-005] GRAVITY REORIENTATION GATE
+A gravity reorientation gate in the Gravity Well cavern. The gate is a ring structure
+2 meters wide — a dark metal ring with blue emissive inner surface and amber indicator
+lamps. On one side of the ring, the world is oriented normally (gravity down). On the
+other side, visible through the ring, the world is rotated 90 degrees — a corridor that
+runs sideways from the explorer's current perspective. An explorer stands just before
+the ring, looking through it to the sideways corridor beyond. The transition is clearly
+visible: normal floor on this side, a wall becoming a floor on the other. Conceptual
+clarity is key. UE5 game concept art.
+
+
+────────────────────────────────────────────────────────────────
+  MAP 06 — MANTLE GARDEN
+────────────────────────────────────────────────────────────────
+
+[MG-001] MANTLE GARDEN ESTABLISHING SHOT
+A geothermal cavern near the Earth's mantle in Abyssal Earth. The space is a black
+obsidian amphitheater — glossy, dark, volcanic. White steam columns rise from fissures
+in the floor, 15 to 30 meters tall, obscuring the far wall. Far below the narrow safe
+ridges, molten rock cracks glow orange in a deep chasm. The dominant materials are
+black obsidian and white steam. Scattered along safe cooler ridges are clusters of
+magenta mineral flowers — beautiful, delicate, and the only indication of a safe path
+through the heat. Ancient heat-resistant machine structures are visible through the
+steam — darkened, warped, still functioning. An explorer moves along a narrow black
+ridge between two steam columns. Dangerous but hauntingly beautiful. UE5 concept art.
+
+[MG-002] MAGENTA MINERAL FLOWERS — CLOSE-UP
+Close-up of magenta mineral flowers in the Mantle Garden. The flowers are a geological
+formation — crystalline magenta mineral growth that has formed in flower-like shapes,
+3 to 8 cm across. They grow in dense clusters on the cooler surfaces of black obsidian.
+The magenta is intense, saturated, almost unnatural against the dark background. Heat
+shimmer is visible around the base of the cluster. Thin wisps of steam drift past.
+The flowers are the only color in an otherwise black-and-white environment. They are
+beautiful and indicate safe temperature zones. Photorealistic mineral material. UE5.
+
+[MG-003] STEAM VENT ERUPTION — TIMED HAZARD
+A geothermal steam vent eruption in the Mantle Garden. The vent is a crack in the
+obsidian floor 3 meters long. A massive column of white pressurized steam erupts
+upward with force — 20 meters tall, loud, disorienting. The explorer is caught just
+to the side, pressed against the obsidian wall, visor fogged. The steam scatters
+visibility in all directions. Orange heat shimmer at the base of the vent indicates
+extreme temperature. The eruption casts bright white backlighting on everything nearby.
+Tense, dangerous, environmental. UE5 concept art.
+
+[MG-004] OBSIDIAN RIDGE — NARROW PATH
+A narrow obsidian ridge path in the Mantle Garden. The ridge is 1.5 meters wide and
+perfectly glassy black. On both sides, the drop is into the glowing orange chasm far
+below. The ridge curves slightly ahead. Steam columns rise from the chasm on both sides.
+Magenta mineral flowers mark the edges of the ridge — they only grow in safe temperature
+zones. The explorer walks carefully along the ridge centerline, scanner tracking heat
+readings. The black obsidian perfectly reflects the orange glow from below and the white
+steam from the sides. A tense, careful traversal. UE5 concept art.
+
+[MG-005] MANTLE GARDEN — HEAT-RESISTANT MACHINE
+An ancient heat-resistant machine structure partially visible through dense steam in
+the Mantle Garden. The structure is a large circular platform with a central hub, made
+of dark materials that have been subjected to extreme heat — warped, darkened, but
+still operational. Small amber status lights pulse on its surface. The machine has
+a ring of emitters around its base that seem to be generating a cool zone — the magenta
+mineral flowers grow densely around it. Steam surrounds the structure on all sides.
+The function of the machine is unclear — it has survived the heat and is still working.
+Mysterious and enduring. UE5 concept art.
+
+
+────────────────────────────────────────────────────────────────
+  LONG-TERM BIOME CANDIDATES
+────────────────────────────────────────────────────────────────
+
+[LT-001] ASHFALL CATHEDRAL
+A quiet subterranean cathedral chamber in Abyssal Earth where everything is covered
+in white and gray mineral ash. Collapsed mineral vault arches frame the space like
+the ruins of an impossibly large church. The ash drifts slowly downward from ceiling
+cracks, like snow in a winter church. Ancient machine structures are buried under
+layers of ash — only angular edges and pale emissive seams are visible. The space is
+very still, very silent. A single explorer with a lamp moves through the ash drifts,
+footprints behind them. Pale, quiet, melancholic beauty. UE5 concept art.
+
+[LT-002] MAGNETIC BLOOM FIELDS
+An open subterranean plain in Abyssal Earth covered in metallic flowers that align to
+invisible magnetic field lines. The flowers are made of iron mineral — dark metal petals
+that physically rotate and tilt in response to invisible magnetic waves moving through
+the cavern. When a magnetic wave passes, they all shift together like a murmuration
+of birds, pointing in the same direction. The field contains thousands of flowers.
+The metallic petals catch limited light sources and scatter glints across the plain.
+Some flowers are larger — 1 meter tall — acting as landmarks. An explorer stands in
+the field, scanner reading the magnetic wave patterns. Alien, mathematical, beautiful.
+UE5 concept art.
+
+[LT-003] DEEP BORE CITY
+An abandoned subterranean research settlement in Abyssal Earth where ancient and human
+architecture have been fused into a hybrid. The settlement is built inside a large dry
+cavern — ancient machine walls form the outer structure, but human habitation additions
+are layered inside: prefab modules, cable runs, lighting rigs, makeshift bridges. It
+has been abandoned for some time — human equipment is dusty and dark, ancient machine
+systems still faintly active. A survey team's last camp: overturned chairs, personal
+items left behind, datapads still glowing. The fusion of ancient alien architecture
+and improvised human survival. Eerie, inhabited-but-empty. UE5 concept art.
+
+[LT-004] SUBCRUST OBSERVATORY
+An ancient observatory built inside the Earth, facing inward toward the planet core.
+A domed ancient machine chamber with a massive lens apparatus at its center — the lens
+is 10 meters across, made of blue crystal-glass, mounted in a dark metal frame on
+mechanical pivot arms. The lens is aimed downward through a circular hole in the
+chamber floor, looking into a shaft that descends into the deep mantle. The walls of
+the chamber are covered in carved glyphs and hexagonal data panels. Some are still
+active, glowing faint blue. An explorer stands on a catwalk above the lens, looking
+down through it — through the lens, far below, a dim red-orange planetary core glow
+is just barely visible. Scale and wonder. UE5 concept art.
+
+[LT-005] BLACK RAIN VAULT
+A cavern in Abyssal Earth where mineral condensation falls in alternating cycles —
+upward and downward simultaneously in different sections of the chamber. The vault
+is large and columned. In one half of the chamber, fine black mineral droplets fall
+downward normally. In the other half, black droplets rise upward. The two streams
+meet in the center and pass through each other without interaction, defying physics.
+The droplets catch what little light exists and create two curtains of moving black
+rain in opposite directions. The chamber floor and ceiling are both stained black with
+accumulated mineral deposits. The explorer stands at the center where the streams
+cross, scanner active. Impossible, physical, beautiful. UE5 concept art.
+
+
+────────────────────────────────────────────────────────────────
+  HUMAN ELEMENTS & EXPLORER CHARACTER
+────────────────────────────────────────────────────────────────
+
+[HE-001] EXPLORER CHARACTER DESIGN — FULL BODY
+Full character concept sheet for the Abyssal Earth explorer. The explorer wears a
+practical dark survey suit — not military, not sci-fi armor. Layered dark fabric with
+reinforced elbows and knees, integrated small LED status lights on the chest (dim cyan),
+a scan device on one forearm, a utility belt with beacon deployment packs and sample
+containers. Helmet is a full visor design — dark frame with clear visor, a small
+headlamp above the brow. Backpack-mounted scanner dish, small and low-profile. The
+colors are muted: dark gray, off-black, navy undertones with minimal reflective trim.
+The suit looks worn and used. Character is medium build, capable, not military.
+Multiple views: front, side, back. UE5 game character concept art.
+
+[HE-002] EXPLORER SCANNER IN USE
+The Abyssal Earth explorer crouching on a rock ledge, using their arm-mounted scanner
+device. The scanner emits a soft cyan pulse — a disc of light expanding outward from
+their forearm. The pulse highlights nearby geology and anomalies with faint cyan
+outlines. The explorer watches the scanner readout screen on their wrist. The rift
+is visible behind them, the central orb glowing in the background. Scanner light
+contrasts with the blue-gold cavern lighting. First-person game feel, character is
+small against the cavern. UE5 concept art.
+
+[HE-003] BEACON DEPLOYMENT
+An explorer deploying a navigation beacon in the Inner Sea cave system. The beacon is
+a cylindrical stake device, 30 cm tall, pushed into the ground or clipped to a surface.
+When activated, it emits a steady colored light column — in this case, orange. Multiple
+previously deployed beacons are visible in the distance across the dark water surface,
+each a different color. The explorer watches the new beacon activate. The beacons make
+the vast dark environment navigable. UE5 game concept art.
+
+[HE-004] SURVEY CAMP AT REST
+A small human survey camp set up on a ledge inside the Luminous Rift. Two portable
+lamps cast warm yellow-white light on the camp — weak and small compared to the orb
+glow beyond. Survey crates are stacked neatly. Cable coils hang from a rock anchor.
+A field console with a glowing screen shows a rough map. Two rolled sleeping mats are
+in one corner. Personal items: a canteen, a notebook, a small personal scanner. The
+camp is on a 6-meter ledge with the full rift visible beyond — the entire cavern and
+orb stretch out behind the tiny camp. Human fragility vs. geological impossibility.
+UE5 game concept art.
+
+[HE-005] SCALE COMPARISON — HUMAN AGAINST GATE WALL
+A concept art scale comparison image. The Ancient Gate wall fills the frame — 100
+meters of dark machine-stone. At the very base of the wall, barely visible, is the
+explorer standing and looking up. The explorer is 1/100th the height of the wall.
+This emphasizes the true scale of the ancient architecture. The wall's circular
+socket, even at mid-height, is 15 meters across — larger than most buildings. The
+explorer's headlamp is a tiny warm dot against the cold blue emissive channels in
+the wall. Pure scale study. UE5 concept art.
+
+[HE-006] JOURNAL ENTRY — IN-WORLD SKETCH
+A close-up of the explorer's field journal resting on a rock. The journal pages are
+slightly worn. On the open spread: a hand-drawn sketch of the central energy orb
+and collector array with rough measurements noted, a small scribbled note about the
+gold beams ("warm, precise — not natural"), and a stamped scan result on the right
+page showing a partial geological cross-section. A pencil rests on the binding. The
+journal is lit by the faint blue crystal glow of the surrounding cave. Tactile, human,
+documentary. UE5/realistic concept art.
+
+
+────────────────────────────────────────────────────────────────
+  KEY MATERIAL STUDIES
+────────────────────────────────────────────────────────────────
+
+[MS-001] WET BASALT MATERIAL STUDY
+A material study of wet basalt rock from the Abyssal Earth environment. The rock
+surface is almost black with blue-gray highlights on raised edges. Subtle mineral
+variation: faint green and brown mineral inclusions, white quartz veins. The surface
+is wet — water traces run in the grooves, creating a slight sheen. Crystal clusters
+have begun forming in one pocket. The material reads as natural geology — not painted
+or stylized. Close-up tile at 45-degree angle. UE5 PBR material study.
+
+[MS-002] ANCIENT MACHINE MATERIAL STUDY
+A material study of the ancient machine architecture material in Abyssal Earth.
+The surface is gunmetal and graphite metal fused with dark stone at the edges.
+The metal portion has worn bevel edges, carved panel seams, and radial groove lines.
+Age: cracked sections, dust-filled grooves, mineral deposits in recesses, and faint
+oxidation on the flat faces. Recessed emissive channels glow faint blue. The material
+is not clean or shiny — it is ancient and eroded. Close-up tile at 45-degree angle.
+UE5 PBR material study.
+
+[MS-003] BLUE CRYSTAL MATERIAL STUDY
+A material study of the Abyssal Earth blue crystal material. The crystal geometry
+is angular and faceted. The crystal body is deep blue with cyan inner glow emanating
+from the center. White rim highlights appear on sharp edges when lit from the side.
+The geometry has chipped tips and irregular fractures. The base transitions to dark
+embedded basalt. The material has a strong emissive component — the crystal glows
+from within. Close-up study at multiple crystal scales. UE5 PBR material study.
+
+[MS-004] ENERGY ORB MATERIAL STUDY
+A material study of the Abyssal Earth energy sphere material. The orb surface is not
+solid — it has an atmospheric quality. White core, cyan body, electric blue fringe at
+the outer edge. The surface shows slow internal movement — animated noise patterns
+suggesting energy in flux. The material emits bright, slightly over-exposure-level
+light. No hard surface boundary — the sphere fades at edges into the surrounding air.
+Study shows the material behavior at the core, mid-sphere, and edge. UE5 concept art.
+
+[MS-005] GOLD BEAM MATERIAL STUDY
+A material study of the gold energy beam material in the Luminous Rift. The beam is
+a tight luminous line — warm gold, NOT orange or red. The beam has a bright central
+filament and a soft warm falloff. It is perfectly straight and precise — not wavy or
+organic. Fine particles float through the beam path, lit by the warm gold. At the
+emitter node end, the beam terminates in a small bright gold point of origin on a
+machine surface. Ambient warm light falls on nearby surfaces. UE5 material study.
+
+
+────────────────────────────────────────────────────────────────
+  COMPOSITION & CAMERA STUDIES
+────────────────────────────────────────────────────────────────
+
+[CC-001] RULE OF THIRDS — LUMINOUS RIFT
+A compositional study of the Luminous Rift using rule of thirds. The central orb is
+positioned at the right-side vertical third intersection. Dark foreground ledge occupies
+the lower-left quadrant. The gold beam network leads the eye from the bottom-left along
+the horizontal third toward the orb. The abyss occupies the lower-right quadrant.
+The Ancient Gate wall occupies the upper-left background. A human figure at the ledge
+edge is at the lower-right intersection. Annotated version with grid overlay showing
+compositional intention. UE5 composition study.
+
+[CC-002] SILHOUETTE READ — LUMINOUS RIFT
+A pure silhouette study of the Luminous Rift. The scene is reduced to black foreground
+shapes against a glowing blue-white background. No materials or textures — only
+silhouettes. The foreground ledge, crystal clusters, bridge span, and gate wall are
+all readable as distinct black shapes against the glowing void. The central orb is a
+bright white disc. The collector array is a flower silhouette. The explorer is a small
+distinct human shape at the bridge. This tests the readability of the composition
+without color or material information. Design tool. UE5 concept art.
+
+[CC-003] FOG LAYER DEPTH STUDY
+A depth study of the Luminous Rift using layered fog. Four distinct depth layers are
+visible: 1) foreground dark rock (no fog, sharp edges), 2) first midground bridge and
+crystals (slight blue fog, slightly muted), 3) second midground orb and collector array
+(moderate blue atmospheric fog, slightly desaturated), 4) background gate wall and
+distant towers (heavy fog, near silhouette, most desaturated). The fog creates clear
+spatial hierarchy. The explorer is in layer 1 for maximum clarity. Study shows how
+depth is communicated through atmosphere. UE5 volumetric concept study.
+
+[CC-004] LIGHT SOURCE HIERARCHY STUDY
+A lighting hierarchy study of the Luminous Rift. The image is annotated with numbered
+light source rings: 1) Central energy orb (dominant, blue-white, primary fill for
+entire scene), 2) Gold beam endpoints at collector nodes (secondary warm accent lights),
+3) Crystal cluster emissive glows (tertiary accents, cyan), 4) Human survey lamps
+(quaternary, warm yellow, weakest — establishes scale). The study shows how the warm-
+cool contrast hierarchy works and why the gold beams are essential to visual balance.
+Design documentation concept art.
+
+
+────────────────────────────────────────────────────────────────
+  CINEMATIC / NARRATIVE MOMENTS
+────────────────────────────────────────────────────────────────
+
+[NR-001] THE FIRST STEP DOWN
+A cinematic concept of the first moment of descent into Abyssal Earth. The elevator
+platform descends through black basalt. Above, the elevator shaft opening is a warm-
+lit rectangle of surface world light — small and shrinking. Below, nothing but dark.
+The explorer stands at the elevator railing, looking down. Their headlamp illuminates
+only 10 meters of basalt shaft below. The contrast between the disappearing warm light
+above and the unknown dark below is the image. The transition from known to unknown.
+Vertical composition, UE5 concept art.
+
+[NR-002] FIRST SIGHT OF THE ORB
+The exact moment the explorer first sees the central energy orb. They have just
+emerged onto the First Overlook ledge. Their back is to us — they face the void.
+The orb is visible in the background as the first real light in the cavern, blue-
+white and brilliant. The explorer's suit edges are lit by the orb's blue-white light
+on the right side, warm headlamp falloff on the rock immediately ahead. They have
+stopped moving. They raise their scanner instinctively. This is the discovery moment.
+Emotional, quiet, profound. UE5 cinematic concept art.
+
+[NR-003] SCANNING THE ANCIENT GATE
+The explorer stands before the Ancient Gate wall, scanner active. The cyan scanner
+pulse illuminates the gate surface, highlighting every carved detail — the ring
+grooves, the circular socket, the panel seams — in electric blue outline. The gate
+is 10 times the explorer's height. The scanner readout implies an age incomprehensible
+to modern geology. The explorer is small, alone, and lit by their own scanner pulse.
+The gate is cold, ancient, and sealed. The scan is the only communication across the
+gap of time. UE5 cinematic concept art.
+
+[NR-004] REACHING THE SECOND SKY
+The final moment of the Luminous Rift vertical slice. The explorer stands at the
+Second Sky Overlook ledge, looking into a second, larger, deeper cavern system below.
+The new abyss is blue-white and vast. Faint new structures are barely visible in the
+distant fog — suggesting the next zone. The explorer's scanner is raised. Behind them,
+the first Luminous Rift is now above and behind, its orb visible as a small light.
+They have crossed from one world into the hint of another. Discovery continues.
+UE5 cinematic concept art.
+
+[NR-005] WEIGHT OF SCALE
+A quiet moment concept: the explorer sits on a ledge edge, legs dangling over the
+abyss, eating from a ration pack. The full Luminous Rift cavern is behind them and
+below. The orb glows. Gold beams trace across the void. Crystal light is everywhere.
+And the explorer just... sits. The moment contrasts the impossible scale of the world
+against the ordinary humanity of a lunch break. Humor and pathos. The universe is
+enormous; the person is small; they are still here. UE5 cinematic concept art.
+
+[NR-006] JOURNAL — NAMING A DISCOVERY
+A close-up cinematic: the explorer's gloved hand writing in a field journal by scanner
+light. The page shows a quick sketch of a new crystal formation with a handwritten
+label being applied — their handwriting giving it a name for the first time. Through
+the name, the explorer claims understanding of something incomprehensible. The
+scanner's cyan light illuminates the page. The crystal formation itself is visible
+in the blurred background. Intimate, human, scientific wonder. UE5 concept art.
+
+
+────────────────────────────────────────────────────────────────
+  ADDITIONAL DETAIL SHOTS — LUMINOUS RIFT ASSETS
+────────────────────────────────────────────────────────────────
+
+[AD-001] ORB APPARATUS — MECHANICAL HUB
+The mechanical radial hub surrounding the central energy orb. The hub is a dark machine
+frame — gunmetal and graphite — with 6 to 8 radial arms extending from a central ring
+toward the orb. The arms terminate in emitter nodes where gold beam lines originate.
+The hub rotates slowly in place. Between the arms, the orb is visible. Small blue
+emissive strips run along the inner faces of the arms. The hub is ancient, worn, but
+active. Some arms are missing or damaged. Scale: the hub ring is 30 meters across.
+An explorer platform is visible below the hub at a safe distance. UE5 concept art.
+
+[AD-002] COLLECTOR PANEL — SINGLE TILE DETAIL
+A single hexagonal collector panel from the Luminous Rift array. The tile is 5 meters
+across. Gold-brass outer frame — angled faces, slightly worn, with bevel edges. The
+interior pane is frosted translucent blue-white with a subtle inner hex pattern
+visible under the glass — circuit-like linework in pale blue. The pane glows from
+behind. One corner of the frame is chipped. A thin mechanical bracket arm connects
+the tile to its cluster behind. A gold beam emitter point is visible on one bracket
+face. Close-up material study. UE5 concept art.
+
+[AD-003] TOWER SEGMENT — DISTANT STRUCTURE
+A mid-range concept of one of the distant ancient towers in the Luminous Rift abyss.
+The tower is a modular stone-metal column segment, 20 meters of visible section here.
+Vertical panel grooves run the full height. Horizontal banding at regular intervals.
+Blue emissive strips in recessed channels. The tower is partially fused with the
+cavern wall behind it — basalt has grown around its base. The upper section is broken
+off — the jagged top shows the internal structure. Fog softens the background. The
+tower reads as part of a once-larger structure, now incomplete. UE5 concept art.
+
+[AD-004] ROCK ARCH FRAMING
+A concept using a natural rock arch to frame the Luminous Rift vista. The arch is
+formed from two large basalt overhangs that nearly touch. The arch is in the extreme
+foreground — dark, rough, unlit. Through the arch, the Luminous Rift vista is perfectly
+framed: orb visible, gold beams, distant gate wall. The arch acts as a compositional
+frame and also implies a hidden approach route. Crystal clusters are visible on the
+underside of the arch. UE5 concept art — landscape and framing study.
+
+[AD-005] HUMAN SURVEY LAMP — CLOSE-UP
+Close-up of a portable survey lamp placed on a rock ledge in the Luminous Rift.
+The lamp is a practical cylinder, 40 cm tall, dark metal housing, with a warm yellow-
+white LED ring at the top. It casts a warm circle of weak light on the nearby rock.
+The rock around the lamp is lit warmly — in stark contrast to the cool blue-white
+cave lighting beyond the lamp's range. The lamp is clearly a recent human intrusion
+into an ancient space. A few centimeters of cable trail behind it. Small, humble,
+human. UE5 material concept art.
+
+[AD-006] HANGING SLAB — CEILING DETAIL
+A massive hanging basalt slab suspended from the ceiling of the Luminous Rift.
+The slab is 40 meters long and 15 meters wide, hanging by natural rock connections
+from the cave ceiling. Its underside faces down into the abyss. The edges are jagged
+and eroded. Blue crystal clusters grow on the underside. The slab partially blocks
+the view of the orb when seen from certain angles — it is a compositional layer that
+adds depth. Beneath it, the void continues. The slab catches blue-white light from
+the orb on its inner face. UE5 concept art.
+
+[AD-007] BEACON LIGHT — DEPTH MARKER
+A perspective view down a long narrow cave passage in Abyssal Earth where the explorer
+has deployed a string of navigation beacons. Each beacon is a colored light column —
+alternating blue, orange, green at intervals of 20 meters down the passage. The lights
+recede into the dark, smaller with distance. The passage curves slightly. The beacons
+are the only light source. They transform an otherwise identical dark passage into a
+readable navigable route. No characters. Navigation atmosphere concept. UE5 art.
+
+[AD-008] PLATFORM NODE — TRAVERSAL HUB
+A platform node at a key intersection in the Luminous Rift traversal path. The node
+is a circular ancient machine platform 12 meters across — flat walkable surface with
+carved panel seams and two circular emissive insets in blue. Three narrow bridge spans
+radiate from the platform to different paths. A central survey beacon has been deployed
+by the explorer. The orb is visible through one of the bridge gaps in the background.
+The platform shows how traversal paths connect. UE5 game design concept art.
+
+
+────────────────────────────────────────────────────────────────
+  PANORAMIC & FULL-WIDTH SHOTS
+────────────────────────────────────────────────────────────────
+
+[PW-001] 21:9 CINEMATIC PANORAMA — LUMINOUS RIFT
+An ultrawide 21:9 cinematic panorama of the entire Luminous Rift cavern. The full
+width of the cavern is visible. Left side: the descent elevator shaft entry and first
+ledge. Center: the central orb and collector array, in full detailed view. Right side:
+the Ancient Gate wall. The route is visible as a series of bridges and ledges crossing
+from left to center to right. The deep abyss is the bottom third of the image — blue
+fog, distant crystal glows, impossible depth. The cave ceiling is the top edge.
+Designed for widescreen game engine screenshots and promotional art. Maximum detail
+and atmospheric depth. UE5 game concept art.
+
+[PW-002] 21:9 PANORAMA — INNER SEA
+An ultrawide 21:9 cinematic panorama of the Inner Sea in Abyssal Earth. The water
+surface with its gold plankton trails occupies the bottom half. The basalt dock and
+survey camp are in the lower left. Half-submerged ancient ruins break the water surface
+across the middle. A distant island is right-center. The cave ceiling with hanging
+mineral shelves is the top quarter. The color palette is silver-black water, dark teal
+atmosphere, warm gold plankton. Lonely, vast, beautiful. UE5 game concept art.
+
+[PW-003] 21:9 PANORAMA — FOSSIL SKY
+An ultrawide 21:9 cinematic panorama of the Fossil Sky cavern. The entire ceiling is
+filled with fossilized marine creature forms embedded in limestone. Amber dust shafts
+fall through the frame. Narrow suspended walkways cross the bottom quarter. The
+camera looks up at the ceiling — the walkways are below and the fossil sky is above.
+The composition is inverted from normal cave photography. The bone-white ceiling
+with dark chasm gaps between walkway sections. Maximum detail in the fossil forms.
+UE5 game concept art.
+
+[PW-004] 21:9 PANORAMA — GLASSROOT FOREST
+An ultrawide 21:9 cinematic panorama of the Glassroot Forest. The full grove of
+translucent root-columns fills the frame. Pearl-white mineral terraces step down
+across the foreground. Multiple reflective pools catch the green-white bioluminescence
+of the roots above. Drifting spores fill the mid-air between columns. A human explorer
+with a lamp is visible at the far left, tiny among the root bases. Pale, soft, cathedral-
+quiet. Green-white dominant palette with red sap vein accents. UE5 game concept art.
+
+
+================================================================
+  END OF PROMPT COLLECTION
+  Total: 80 prompts across 11 categories
+  Categories: Luminous Rift (Establishing, Landmark, Atmosphere),
+  Glassroot Forest, Inner Sea, Fossil Sky, Gravity Well, Mantle Garden,
+  Long-Term Biomes, Human Elements, Material Studies,
+  Composition Studies, Cinematic Moments, Detail Shots, Panoramics
+================================================================
