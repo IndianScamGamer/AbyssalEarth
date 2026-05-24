@@ -120,12 +120,20 @@ Implemented or scaffolded systems include:
 
 The current asset plan is built for Claude Code + Blender MCP collaboration. Unreal Editor and Blender work is expected to happen primarily on the Windows side, while repo/docs/code support can happen from Linux/OpenClaw.
 
+Generated concept art now lives under `Content/ArtDirection/Concepts/` and is organized by production use:
+
+- `Characters/`: protagonist diver, Helios humanoids, and creature silhouette references.
+- `Environments/`: descent shaft, crashed elevator, bridge/platform kit, and machinery-detail references.
+- `Intro/`: submarine exterior/interior and expedition-wall visual references for the opening sequence.
+- `Items/`: blue crystal harvestable, ancient terminal/fabricator, expedition props, and item model toolkit references.
+
 Key documents:
 
 - `Docs/CORE_REFERENCE_LUMINOUS_RIFT.md`: detailed visual analysis of the first-map reference.
 - `Docs/BLENDER_ASSET_PIPELINE.md`: asset-generation contract for Claude/Blender workers.
 - `Docs/ART_DIRECTION.md`: visual target, palette, lighting, shape language, and what to avoid.
 - `Docs/LUMINOUS_RIFT_BLOCKOUT.md`: route, scale, zones, placement checklist, and screenshot targets.
+- `Docs/BLUEPRINT_IMPLEMENTATION_NOTES.md`: Windows/Unreal Editor instructions for the central orb, gold beam splines, hex collectors, scanner readout, journal, and objective HUD.
 - `Docs/MATERIAL_SPECS.md`: master material targets and material instances.
 - `Docs/NARRATIVE_FOUNDATION.md`: opening sequence, post-cavern story rules, main objective arc, and ending.
 - `Docs/ABYSSAL_INTERFACE_AI_SYSTEM.md`: later add-on design for an LLM-backed in-game terminal/interface and backend contract.
@@ -201,4 +209,4 @@ Never overwrite or revert unrelated work from the Windows side, Claude, or anoth
 
 ## Development Status
 
-The project is early but active. The immediate push is asset production and playable game development: turn the Luminous Rift reference into an editor-built vertical slice with a coherent custom asset kit. The current foundation is strong enough to support map blockout, Blueprint wiring, scanner/discovery flow, objective progression, beacons, and first-pass visual development. The Abyssal Interface is documented as a future add-on, not an immediate priority.
+The project is early but active. The immediate push is asset production and playable game development: turn the Luminous Rift reference into an editor-built vertical slice with a coherent custom asset kit. Generated concept references are available for the opening sequence, character direction, early survival items, and Luminous Rift environment kits. The current foundation is strong enough to support map blockout, Blueprint wiring, scanner/discovery flow, objective progression, beacons, and first-pass visual development. The Abyssal Interface is documented as a future add-on, not an immediate priority.

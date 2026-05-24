@@ -165,3 +165,11 @@
 - Updated `Docs/LUMINOUS_RIFT_BLOCKOUT.md` and `README.md` to point editor workers at the new checklist, and removed the completed checklist item from `Docs/NEXT_TASKS.md`.
 - Verification: parsed the new CSV with Python's `csv.DictReader`, checked required columns and unique checklist IDs, and verified key objective/discovery ids exist in project source/design data.
 - Next: create `Docs/BLUEPRINT_IMPLEMENTATION_NOTES.md` for `BP_RiftEnergyOrb`, `BP_RiftGoldBeamSpline`, `BP_HexCollectorCluster`, scanner/journal widgets, and the objective HUD.
+
+## 2026-05-24 00:27 EDT
+
+- Added `Docs/BLUEPRINT_IMPLEMENTATION_NOTES.md` with Windows/Unreal Editor implementation steps for `BP_RiftEnergyOrb`, `BP_RiftGoldBeamSpline`, `BP_HexCollectorCluster`, `WBP_ScannerReadout`, `WBP_AbyssalJournal`, and `WBP_ObjectiveHUD`.
+- Grounded the Blueprint notes in the current C++ API: scanner delegates/readout binding, journal discovery events, `UAbyssalGameplayLibrary` subsystem accessors, `AAbyssalExplorerCharacter::BP_ToggleJournal`, and objective subsystem progress/delegates.
+- Updated `Docs/NEXT_TASKS.md` to mark the initial Blueprint implementation notes as done and leave a follow-up for Windows-side tested deviations/screenshots.
+- Verification: checked the new doc for references to required Blueprint classes, C++ classes, and default objective ids; Unreal compile was not run on this Linux side.
+- Next: on Windows, create the listed Blueprint assets, verify scanner/journal/objective HUD in PIE with `AbyssalDebugDiscoverAll`, `AbyssalDebugResetDiscoveries`, and `AbyssalDebugAdvanceObjective`, then place the orb/beam/collector actors in `MAP_LuminousRift_Blockout`.
