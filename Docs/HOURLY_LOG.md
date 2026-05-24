@@ -121,7 +121,6 @@
 - Verification: still no UnrealBuildTool on PATH; signatures match standard UE 5.4 patterns (`OnTakeAnyDamage` is `FTakeAnyDamageSignature` on `AActor`, and `GEngine->GetWorldFromContextObject` is the canonical world-context resolver).
 - Next: write the ambience CSV draft and audio subsystem stub when continuing without the editor; otherwise compile and create the Blueprint children listed above.
 
-<<<<<<< Updated upstream
 ## 2026-05-23 18:40 EDT
 
 - Pulled the latest remote changes from `origin/main` (fast-forward to `790adcc`) after Vivek confirmed the project opens in Unreal.
@@ -208,7 +207,16 @@
 - Updated the technical and Blueprint notes with `WBP_SurvivalHUD` binding instructions and Ember Vent PIE verification steps; updated `NEXT_TASKS.md` to move health work from design to compile/HUD testing.
 - Verification: source inspected with `rg`; UnrealBuildTool is still unavailable on this Linux side, so compile must happen on Windows/UE 5.4+.
 - Next: compile in Unreal, create `WBP_SurvivalHUD`, bind it to `UAbyssalHealthComponent`, and verify `BP_EmberVentHazard` radial damage visibly reduces HP and fires death feedback.
-=======
+
+## 2026-05-24 17:49 EDT
+
+- Added `Scripts/validate_design_data.py`, a standard-library validation pass for Abyssal Earth CSV/JSON design data.
+- The script checks expected CSV headers, required fields, duplicate ids, priority/status values, Luminous Rift prompt paths, world-map reference image paths, world asset map ids, objective ids against `UObjectiveSubsystem::BuildDefaultRoute`, and the Abyssal Interface JSON parse.
+- Updated `Docs/NEXT_TASKS.md` so future design-data edits run the validator before commit.
+- Cleaned committed merge-conflict marker lines from this hourly log while preserving both sides' actual notes.
+- Verification: ran `python3 Scripts/validate_design_data.py`; it passed across 9 CSV files, 144 rows, and the JSON schema. Unreal compile was not run on this Linux side.
+- Next: keep using the validator after manifest/prompt/objective changes; Windows/Claude should continue with the blue crystal and foreground ledge asset creation/import path.
+
 ## 2026-05-22 EDT (bug fixes / UE 5.7 compatibility)
 
 **Automated fixes applied (code only, no editor required):**
@@ -220,4 +228,3 @@
 **Pending manual Unreal Editor task (blocks Blueprint editor from crashing):**
 
 - Open `BP_AbyssalExplorerCharacter` → select the **Mesh** component → assign the correct skeletal mesh in the Details panel. The Blueprint editor crashes on open until a valid mesh is assigned because the camera attachment logic runs during construction script evaluation. This is the top-priority editor task — all other Blueprint work is blocked behind it.
->>>>>>> Stashed changes

@@ -13,7 +13,6 @@ The hourly continuation worker should always pick the highest-impact available t
 
 ## Current Strategic Priority
 
-<<<<<<< Updated upstream
 The project now has two planning layers:
 
 1. **P0 vertical slice**: make `MAP_LuminousRift` match `Content/ArtDirection/References/luminous_rift_core_reference.png`.
@@ -119,7 +118,7 @@ Not a current production priority. Keep this design available for later, after t
 - In Unreal, create `BP_AudioCueRouter` from the `UAbyssalAudioCueSubsystem` notes and bind temporary SoundCue/MetaSound assets to the emitted cue ids.
 - Compile and PIE-test `UAbyssalHealthComponent`, then create `WBP_SurvivalHUD` and bind it to the component's health/damage/death delegates.
 - Review `AEmberVentHazard` and plan how it becomes the base for future Mantle Garden pressure vents.
-- Add automated CSV validation script or documentation for design CSV formats.
+- Run `python3 Scripts/validate_design_data.py` before committing design CSV, manifest, prompt, or objective-id changes.
 
 ### Unreal Editor / Windows Side
 
@@ -228,6 +227,7 @@ Follow-up tasks:
 ### Source/Docs
 
 - CSV files parse cleanly.
+- `python3 Scripts/validate_design_data.py` passes.
 - Markdown links resolve.
 - Image files exist and render on GitHub.
 - Objective IDs in docs match `UObjectiveSubsystem::BuildDefaultRoute`.
@@ -250,7 +250,6 @@ Follow-up tasks:
 - Each future map has a distinct color triad and first-overlook composition.
 - Human scale is visible in every major vista.
 - No map reads as a generic cave, generic sci-fi corridor, or flat arena.
-=======
 ### ⚠ Must do first — Blueprint editor crashes without this
 
 - Open `BP_AbyssalExplorerCharacter` → select the **Mesh** component → assign the correct skeletal mesh in the Details panel. The construction script evaluates camera attachment at edit time, and the Blueprint editor crashes until a valid mesh exists. Every other Blueprint task below is blocked on this step.
@@ -271,4 +270,3 @@ Follow-up tasks:
 - PIE test journal end-to-end: console `AbyssalDebugDiscoverAll`, open the journal, confirm all entries render with display name + journal text + category; then `AbyssalDebugResetDiscoveries` and confirm the journal empties.
 - PIE test Ember Vent cycle: place 3-4 `BP_EmberVentHazard` instances in a cluster with default offsets, confirm phases desync naturally and `OnVentErupting` fires the visual; step into the radius during erupt and confirm damage event reaches the pawn (via debug log hook above).
 - Take screenshots from each zone in `LUMINOUS_RIFT_BLOCKOUT.md` to iterate composition.
->>>>>>> Stashed changes
