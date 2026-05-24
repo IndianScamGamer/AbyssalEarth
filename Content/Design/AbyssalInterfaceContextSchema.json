@@ -1,0 +1,67 @@
+{
+  "schema": "abyssal-interface.context.v1",
+  "required": [
+    "sessionId",
+    "playerInput",
+    "mapId",
+    "zoneId",
+    "currentObjective"
+  ],
+  "properties": {
+    "sessionId": { "type": "string" },
+    "playerInput": { "type": "string", "maxLength": 500 },
+    "mapId": { "type": "string" },
+    "zoneId": { "type": "string" },
+    "currentObjective": { "type": "string" },
+    "playerState": {
+      "type": "object",
+      "properties": {
+        "health": { "type": "number" },
+        "suitIntegrity": { "type": "number" },
+        "oxygenOrPower": { "type": "number" },
+        "hazardsNearby": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "inventory": { "type": "array", "items": { "type": "string" } },
+    "discoveries": { "type": "array", "items": { "type": "string" } },
+    "recentScans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "ageSeconds": { "type": "number" }
+        }
+      }
+    },
+    "recentActions": { "type": "array", "items": { "type": "string" } },
+    "knownLoreFacts": { "type": "array", "items": { "type": "string" } },
+    "allowedResponseModes": {
+      "type": "array",
+      "items": {
+        "enum": ["dialogue", "hint", "lore", "warning", "fabrication", "eventSuggestion"]
+      }
+    }
+  },
+  "response": {
+    "required": ["mode", "speaker", "text"],
+    "properties": {
+      "mode": { "enum": ["dialogue", "hint", "lore", "warning", "fabrication", "eventSuggestion"] },
+      "speaker": { "type": "string" },
+      "text": { "type": "string", "maxLength": 700 },
+      "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+      "suggestedEvents": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "eventId": { "type": "string" },
+            "type": { "type": "string" },
+            "requiresUnrealValidation": { "type": "boolean" }
+          }
+        }
+      },
+      "memoryTags": { "type": "array", "items": { "type": "string" } }
+    }
+  }
+}

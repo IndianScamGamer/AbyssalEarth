@@ -131,6 +131,18 @@
 - Verification: generated image files exist and report as PNG; CSV files parse cleanly; markdown references were searched with `rg`. Unreal compile was not run on this Linux side.
 - Next: create per-map docs under `Docs/Maps/`, then draft Claude/Blender prompts for each future map's highest-priority asset families.
 
+## 2026-05-23 20:31 EDT
+
+- Integrated Vivek's new story direction: Abyssal Earth begins as the first major exploration expedition of Earth's abyssal plains, with the player as a verification diver inspecting the Helios robot fleet's elevator shaft.
+- Added `Docs/NARRATIVE_FOUNDATION.md` covering the submarine opening, expedition briefing display, Helios robot passage, calm elevator descent, catastrophic failure, crushed-elevator recovery, Luminous Rift reveal, and strict rule that normal story/dialogue ends after the cavern begins.
+- Added `Docs/ABYSSAL_INTERFACE_AI_SYSTEM.md` defining the in-game LLM-backed Abyssal Interface as a diegetic ancient terminal/interface, including Unreal/backend responsibilities, context payload, response schema, tone rules, progression versions, and failure states.
+- Added design data files: `Content/Design/PrologueSequence.csv`, `Content/Design/MainObjectiveArc.csv`, `Content/Design/AbyssalInterfaceResponseModes.csv`, and `Content/Design/AbyssalInterfaceContextSchema.json`.
+- Rewrote `Docs/GAME_DESIGN.md` around the new premise: survive, discover alien technology, learn to operate it, fabricate devices, build a way out, and eventually open a return rift.
+- Updated `Docs/MILESTONES.md`, `Docs/NEXT_TASKS.md`, `Docs/TECHNICAL_PLAN.md`, `README.md`, `Docs/LUMINOUS_RIFT_BLOCKOUT.md`, and `Content/Design/DiscoveryCatalog.csv` to include the prologue, main objective arc, Abyssal Interface, alien-tech fabrication path, and rift ending.
+- Updated `UObjectiveSubsystem::BuildDefaultRoute` so the runtime objective arc is now `OBJ_VERIFY_HELIOS`, `OBJ_SURVIVE`, `OBJ_DISCOVER_PLACE`, `OBJ_MAKE_MACHINE_ANSWER`, `OBJ_BUILD_WAY_OUT`, and `OBJ_OPEN_RIFT`.
+- Verification: design CSV files and the Abyssal Interface JSON schema were parsed locally; Unreal compile was not run on this Linux side.
+- Next: implement the prologue maps/sequence on Windows, then prototype `WBP_AbyssalInterfaceTerminal` and the backend endpoint contract.
+
 ## 2026-05-23 19:32 EDT
 
 - Added six detailed Claude/Blender prompt files under `Docs/AssetPrompts/LuminousRift/` for the P0 concept-art-critical asset families: blue crystal clusters, foreground ledge/rock frame, bridge spans, hex collector panels, central orb apparatus, and ancient gate wall.

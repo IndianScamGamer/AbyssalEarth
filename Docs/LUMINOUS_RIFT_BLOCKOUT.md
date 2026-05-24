@@ -88,7 +88,7 @@ Purpose: final reveal and route completion.
 - The player reaches a ledge beyond the gate/collector array.
 - The lower rift opens into an even larger blue-lit abyss.
 - Final discovery: `D_Anomaly_SecondSkyCavern`.
-- Scanning this vista completes `OBJ_SecondSkyOverlook`.
+- Scanning this vista completes `CHK_SecondSkyOverlook`.
 
 ## Room-by-Room Placement Checklist
 
@@ -108,7 +108,7 @@ Footprint: 30 m access tunnel plus 10-14 m elevator platform. Ceiling 8-12 m. Bl
 - [ ] 4-6 human props: crates, cable coils, portable lamps, temporary rail section.
 - [ ] `BP_DiscoveryActor_Base`: `D_Human_SurveyElevator`, at (1800, 0, 120), `ScanFocusOffset = (0, 0, 80)`.
 - [ ] Human lights: white/amber, low intensity, radius 400-600.
-- [ ] `BP_ObjectiveTrigger`: `OBJ_DescentElevator`, box 600x400x300 at (2700, 0, 150).
+- [ ] `BP_ObjectiveTrigger`: `CHK_DescentElevator`, box 600x400x300 at (2700, 0, 150).
 - [ ] Exit tunnel bends slightly so the first vista is hidden until Zone 2.
 
 ### Zone 2 - First Overlook (X 3000 to 4600)
@@ -124,7 +124,7 @@ This is the postcard shot. Use the concept image as direct reference.
 - [ ] Right-side gate wall at approximately (11800, 6500, -2500), 100 m tall.
 - [ ] Lower abyss: visible blue fog column from Z -20000 downward.
 - [ ] Distant tower silhouettes behind orb and under bridge path.
-- [ ] `BP_ObjectiveTrigger`: `OBJ_FirstOverlook`, box 900x1200x400 at (3800, 0, 200).
+- [ ] `BP_ObjectiveTrigger`: `CHK_FirstOverlook`, box 900x1200x400 at (3800, 0, 200).
 - [ ] No mandatory discovery in this zone; let the view breathe.
 
 Lighting:
@@ -144,7 +144,7 @@ The player descends from natural ledges into machine bridge slabs.
 - [ ] Crystal breadcrumb clusters every 20-35 m, mostly medium size.
 - [ ] Distant hanging slabs below and above path to sell vertical space.
 - [ ] `BP_DiscoveryActor_Base`: `D_Geo_BlueRiftCrystal` at (6500, -500, -1800), `ScanFocusOffset = (0, 0, 140)`.
-- [ ] `BP_ObjectiveTrigger`: `OBJ_AbyssalApproach`, box 1000x1000x500 at (8100, 0, -3300).
+- [ ] `BP_ObjectiveTrigger`: `CHK_AbyssalApproach`, box 1000x1000x500 at (8100, 0, -3300).
 
 Safety:
 
@@ -161,7 +161,7 @@ A close-up space where natural crystal growth pierces ancient wall structures.
 - [ ] Small platform node with circular blue-lit inset.
 - [ ] `BP_DiscoveryActor_Base`: `D_Anomaly_CrystalResonance` at (9300, 600, -3000), `ScanFocusOffset = (0, 0, 120)`.
 - [ ] Optional later hazard placeholder: pulsing crystal field marked by emissive floor cracks.
-- [ ] `BP_ObjectiveTrigger`: `OBJ_CrystalGalleries`, box 900x900x500 at (10600, 0, -2800).
+- [ ] `BP_ObjectiveTrigger`: `CHK_CrystalGalleries`, box 900x900x500 at (10600, 0, -2800).
 
 Lighting:
 
@@ -181,7 +181,7 @@ Central landmark. This must read like the concept art's orb + hex panel apparatu
 - [ ] Bridge span from Crystal Galleries to the platform.
 - [ ] 3-5 beam emitter nodes placed along platform and ring.
 - [ ] `BP_DiscoveryActor_Base`: `D_Anomaly_RiftEnergyOrb` at platform edge, `ScanFocusOffset = (0, 0, 300)`.
-- [ ] `BP_ObjectiveTrigger`: `OBJ_CollectorArray`, box 1200x1200x600 at (11200, -1200, -2100).
+- [ ] `BP_ObjectiveTrigger`: `CHK_CollectorArray`, box 1200x1200x600 at (11200, -1200, -2100).
 
 Lighting:
 
@@ -204,7 +204,7 @@ The player crosses in front of or through the right-side monumental gate structu
 - [ ] Embedded crystals at base and broken panel edges.
 - [ ] Bridge/platform route runs along the wall, 6-8 m wide.
 - [ ] `BP_DiscoveryActor_Base`: `D_Structure_AncientGate` at (14800, 1200, -2000), `ScanFocusOffset = (0, 0, 400)`.
-- [ ] `BP_ObjectiveTrigger`: `OBJ_AncientGate`, box 1000x1200x600 at (15800, 800, -2000).
+- [ ] `BP_ObjectiveTrigger`: `CHK_AncientGate`, box 1000x1200x600 at (15800, 800, -2000).
 
 Lighting:
 
@@ -221,7 +221,7 @@ Final reveal and end beat.
 - [ ] Distant spires, hanging slabs, and blue fog create a second-horizon effect.
 - [ ] Human survey station or tiny temporary camp can sit behind the player, not in the main view.
 - [ ] `BP_DiscoveryActor_Base`: `D_Anomaly_SecondSkyCavern` at (18500, 0, -1450).
-- [ ] Set `D_Anomaly_SecondSkyCavern.ObjectiveIdToCompleteOnScan = OBJ_SecondSkyOverlook`.
+- [ ] Set `D_Anomaly_SecondSkyCavern.ObjectiveIdToCompleteOnScan = CHK_SecondSkyOverlook`.
 - [ ] `bCompleteObjectiveOnlyOnNewDiscovery = true`.
 - [ ] Use trigger volume only as fallback during early testing.
 
@@ -297,13 +297,15 @@ P1:
 
 ## Objective Trigger Checklist
 
-- `OBJ_DescentElevator`: exit from elevator/tunnel.
-- `OBJ_FirstOverlook`: first full view of the core vista.
-- `OBJ_AbyssalApproach`: after descending onto machine bridge structures.
-- `OBJ_CrystalGalleries`: after scanning/entering the crystal-machine fusion zone.
-- `OBJ_CollectorArray`: safe platform near orb apparatus.
-- `OBJ_AncientGate`: crossing the monumental gate structure.
-- `OBJ_SecondSkyOverlook`: completed by scanning `D_Anomaly_SecondSkyCavern`.
+The `CHK_*` ids below are spatial checkpoints, not the player-facing main objective arc. The current player-facing arc is `OBJ_VERIFY_HELIOS` -> `OBJ_SURVIVE` -> `OBJ_DISCOVER_PLACE` -> `OBJ_MAKE_MACHINE_ANSWER` -> `OBJ_BUILD_WAY_OUT` -> `OBJ_OPEN_RIFT`.
+
+- `CHK_DescentElevator`: exit from elevator/tunnel.
+- `CHK_FirstOverlook`: first full view of the core vista.
+- `CHK_AbyssalApproach`: after descending onto machine bridge structures.
+- `CHK_CrystalGalleries`: after scanning/entering the crystal-machine fusion zone.
+- `CHK_CollectorArray`: safe platform near orb apparatus.
+- `CHK_AncientGate`: crossing the monumental gate structure.
+- `CHK_SecondSkyOverlook`: completed by scanning `D_Anomaly_SecondSkyCavern`.
 
 ## Screenshot Review Checklist
 

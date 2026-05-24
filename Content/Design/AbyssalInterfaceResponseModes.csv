@@ -1,0 +1,7 @@
+Mode,Use,MaxLength,CanSuggestEvents,Tone
+dialogue,"Direct response to player input",4 sentences,false,"Eerie, concise, not casual"
+hint,"Cryptic gameplay hint",3 sentences,true,"Partial, observational, leaves work to player"
+lore,"Explanation of scanned/discovered world facts",4 sentences,false,"Ancient, factual, incomplete"
+warning,"Environmental or survival warning",2 sentences,true,"Urgent but calm"
+fabrication,"Guidance for using alien tech or building a device",4 sentences,true,"Metaphorical but actionable"
+eventSuggestion,"Backend suggestion for Unreal-validated event",1 sentence,true,"Machine-like and constrained"

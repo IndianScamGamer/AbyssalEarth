@@ -146,7 +146,7 @@ FText UObjectiveSubsystem::GetObjectiveHudText() const
 {
     if (IsRouteComplete())
     {
-        return NSLOCTEXT("AbyssalEarthObjectives", "RouteCompleteHudText", "Route complete - Second Sky documented");
+        return NSLOCTEXT("AbyssalEarthObjectives", "RouteCompleteHudText", "Rift opened - surface return achieved");
     }
 
     const FAbyssalObjectiveStep& Objective = RouteObjectives[CurrentObjectiveIndex];
@@ -171,39 +171,34 @@ void UObjectiveSubsystem::BuildDefaultRoute()
     };
 
     AddObjective(
-        TEXT("OBJ_DescentElevator"),
-        NSLOCTEXT("AbyssalEarthObjectives", "DescentElevatorTitle", "Exit the descent elevator"),
-        NSLOCTEXT("AbyssalEarthObjectives", "DescentElevatorDescription", "Leave the survey platform and enter the basalt access tunnel."));
+        TEXT("OBJ_VERIFY_HELIOS"),
+        NSLOCTEXT("AbyssalEarthObjectives", "VerifyHeliosTitle", "Verify the AI Robot Fleet HELIOS's work"),
+        NSLOCTEXT("AbyssalEarthObjectives", "VerifyHeliosDescription", "Descend into the elevator shaft and inspect the autonomous construction work."));
 
     AddObjective(
-        TEXT("OBJ_FirstOverlook"),
-        NSLOCTEXT("AbyssalEarthObjectives", "FirstOverlookTitle", "Reach the first overlook"),
-        NSLOCTEXT("AbyssalEarthObjectives", "FirstOverlookDescription", "Find the ledge that reveals the Luminous Rift, central orb, collector array, and ancient gate."));
+        TEXT("OBJ_SURVIVE"),
+        NSLOCTEXT("AbyssalEarthObjectives", "SurviveTitle", "SURVIVE"),
+        NSLOCTEXT("AbyssalEarthObjectives", "SurviveDescription", "Recover from the elevator crash, escape the wreck, and find a stable path through the Luminous Rift."));
 
     AddObjective(
-        TEXT("OBJ_AbyssalApproach"),
-        NSLOCTEXT("AbyssalEarthObjectives", "AbyssalApproachTitle", "Descend the Abyssal Approach"),
-        NSLOCTEXT("AbyssalEarthObjectives", "AbyssalApproachDescription", "Follow the broken rock ledges and ancient bridge spans down toward the suspended machine structures."));
+        TEXT("OBJ_DISCOVER_PLACE"),
+        NSLOCTEXT("AbyssalEarthObjectives", "DiscoverPlaceTitle", "DISCOVER WHAT THIS PLACE IS"),
+        NSLOCTEXT("AbyssalEarthObjectives", "DiscoverPlaceDescription", "Scan alien structures, hostile environments, and impossible materials until the cavern begins to make sense."));
 
     AddObjective(
-        TEXT("OBJ_CrystalGalleries"),
-        NSLOCTEXT("AbyssalEarthObjectives", "CrystalGalleriesTitle", "Enter the Crystal Galleries"),
-        NSLOCTEXT("AbyssalEarthObjectives", "CrystalGalleriesDescription", "Document the blue crystals growing through ancient carved panels."));
+        TEXT("OBJ_MAKE_MACHINE_ANSWER"),
+        NSLOCTEXT("AbyssalEarthObjectives", "MakeMachineAnswerTitle", "MAKE THE MACHINE ANSWER"),
+        NSLOCTEXT("AbyssalEarthObjectives", "MakeMachineAnswerDescription", "Learn how to operate ancient systems, route power, and communicate with the Abyssal Interface."));
 
     AddObjective(
-        TEXT("OBJ_CollectorArray"),
-        NSLOCTEXT("AbyssalEarthObjectives", "CollectorArrayTitle", "Reach the Collector Array"),
-        NSLOCTEXT("AbyssalEarthObjectives", "CollectorArrayDescription", "Approach the central energy orb and its gold beam-linked hex collector panels."));
+        TEXT("OBJ_BUILD_WAY_OUT"),
+        NSLOCTEXT("AbyssalEarthObjectives", "BuildWayOutTitle", "BUILD A WAY OUT"),
+        NSLOCTEXT("AbyssalEarthObjectives", "BuildWayOutDescription", "Use discovered alien technology to fabricate tools, stabilize energy, and construct a return mechanism."));
 
     AddObjective(
-        TEXT("OBJ_AncientGate"),
-        NSLOCTEXT("AbyssalEarthObjectives", "AncientGateTitle", "Cross the Ancient Gate"),
-        NSLOCTEXT("AbyssalEarthObjectives", "AncientGateDescription", "Move along the monumental gate wall and inspect its circular blue-lit mechanisms."));
-
-    AddObjective(
-        TEXT("OBJ_SecondSkyOverlook"),
-        NSLOCTEXT("AbyssalEarthObjectives", "SecondSkyOverlookTitle", "Scan the Second Sky"),
-        NSLOCTEXT("AbyssalEarthObjectives", "SecondSkyOverlookDescription", "Document the larger cavern beyond the station to complete the first route."));
+        TEXT("OBJ_OPEN_RIFT"),
+        NSLOCTEXT("AbyssalEarthObjectives", "OpenRiftTitle", "OPEN THE RIFT"),
+        NSLOCTEXT("AbyssalEarthObjectives", "OpenRiftDescription", "Activate the constructed rift and return to the surface."));
 }
 
 void UObjectiveSubsystem::BroadcastCurrentObjective()

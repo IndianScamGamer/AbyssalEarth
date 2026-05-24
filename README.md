@@ -1,8 +1,8 @@
 # Abyssal Earth
 
-**Abyssal Earth** is an Unreal Engine 5 first-person exploration adventure set inside planet Earth, where immense subterranean caverns contain impossible alien landscapes, ancient buried megastructures, luminous crystals, and unknown physical systems.
+**Abyssal Earth** is an Unreal Engine 5 first-person survival-exploration adventure that begins with humanity's first major expedition into Earth's abyssal plains, then strands the player in impossible subterranean worlds filled with alien climates, monsters, ancient technology, luminous caverns, and unknown physical systems.
 
-The project prioritizes awe, atmosphere, traversal, discovery, and visual fidelity over combat. The player is not conquering the underworld. They are documenting it, navigating it, surviving it, and slowly understanding why Earth contains spaces that should not exist.
+The project prioritizes awe, atmosphere, traversal, survival, discovery, and visual fidelity over shooter-first combat. The player is not conquering the underworld. They are trying to survive long enough to understand alien technology, learn to use it, build with it, and eventually create a rift back to the surface.
 
 ![Luminous Rift core reference](Content/ArtDirection/References/luminous_rift_core_reference.png)
 
@@ -23,6 +23,19 @@ This reference is treated as the source of truth for the first map:
 3. **Discovery has weight**: scanning, naming, mapping, journaling, and revisiting findings should matter.
 4. **Human smallness**: the player is capable, but visibly tiny against the cavern worlds.
 5. **Natural mystery**: alien spaces should still feel geologic, ancient, and physically grounded.
+6. **Story ends at the cavern**: after the opening crash and Luminous Rift reveal, normal dialogue/cutscene storytelling stops. The rest is survival, discovery, experimentation, and escape.
+
+## Story Premise
+
+The game opens with a submarine alone on a flat, empty ocean above Earth's abyssal plains. Inside, the player wears the diving/exploration suit they will upgrade throughout the game. A wall display reads **FIRST MAJOR EXPLORATION EXPEDITION OF EARTH'S ABYSSAL PLAINS** and explains that the autonomous Helios robot fleet has built an elevator shaft into the abyssal plain for human verification.
+
+The player descends, docks with the shaft, passes humanoid Helios robots who warn of an unresolved anomaly, and enters the elevator anyway. The descent is calm until the system fails, the cable cuts, and the elevator falls. The player wakes in the crushed elevator, pries the doors open, and steps into the Luminous Rift.
+
+The player's final authored reaction is: **Oh... shit.**
+
+The objective becomes **SURVIVE**. From there, normal story delivery is over.
+
+The long-term objective arc becomes: survive, discover alien technology, understand how to use it, fabricate increasingly advanced devices, and eventually create a rift/portal back to the surface. End credits show the player making it out, the discoveries being announced, and future scientific progress.
 
 ## First Playable Route
 
@@ -80,6 +93,9 @@ A dangerous geothermal garden of black obsidian ridges, white steam columns, ora
 - Deployable navigation beacons with persistent save/load support.
 - Objective chain guiding the player through the first Luminous Rift route.
 - Environmental hazard foundations, currently including an Ember Vent actor prototype for future hazard zones.
+- Monster and alien-climate survival pressure without turning the game into a shooter-first design.
+- Alien technology discovery and fabrication path that eventually leads to a return rift.
+- Abyssal Interface: a diegetic LLM-powered ancient terminal/interface for cryptic hints, lore fragments, warnings, and fabrication guidance.
 - Blueprint-ready UI hooks for scanner readouts, journal views, objective HUD, damage feedback, and discovery toasts.
 
 ## Current Technical Foundation
@@ -111,6 +127,8 @@ Key documents:
 - `Docs/ART_DIRECTION.md`: visual target, palette, lighting, shape language, and what to avoid.
 - `Docs/LUMINOUS_RIFT_BLOCKOUT.md`: route, scale, zones, placement checklist, and screenshot targets.
 - `Docs/MATERIAL_SPECS.md`: master material targets and material instances.
+- `Docs/NARRATIVE_FOUNDATION.md`: opening sequence, post-cavern story rules, main objective arc, and ending.
+- `Docs/ABYSSAL_INTERFACE_AI_SYSTEM.md`: LLM-backed in-game terminal/interface design and backend contract.
 - `Docs/WORLD_ATLAS.md`: long-term map roadmap with generated concept references.
 - `Docs/CONCEPT_IMAGE_GENERATION.md`: prompt log for generated world-map concepts.
 - `Content/Design/LuminousRiftAssetManifest.csv`: prioritized asset manifest.

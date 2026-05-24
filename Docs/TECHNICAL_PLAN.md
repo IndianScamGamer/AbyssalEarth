@@ -217,14 +217,66 @@ Behavior:
 
 ### Revised Objective IDs
 
-`UObjectiveSubsystem::BuildDefaultRoute` now uses the concept-art route:
+`UObjectiveSubsystem::BuildDefaultRoute` now uses the main survival/alien-tech objective arc:
 
-- `OBJ_DescentElevator`
-- `OBJ_FirstOverlook`
-- `OBJ_AbyssalApproach`
-- `OBJ_CrystalGalleries`
-- `OBJ_CollectorArray`
-- `OBJ_AncientGate`
-- `OBJ_SecondSkyOverlook`
+- `OBJ_VERIFY_HELIOS`
+- `OBJ_SURVIVE`
+- `OBJ_DISCOVER_PLACE`
+- `OBJ_MAKE_MACHINE_ANSWER`
+- `OBJ_BUILD_WAY_OUT`
+- `OBJ_OPEN_RIFT`
 
 If older prototype saves contain previous route ids, reset route state in non-shipping builds with `AbyssalDebugResetDiscoveries`.
+
+## Abyssal Interface Technical Plan
+
+The in-game LLM system is documented in `Docs/ABYSSAL_INTERFACE_AI_SYSTEM.md`. The first implementation should be a simple text terminal that sends compact game context to a backend/agent service and renders a short diegetic response.
+
+### Version 0 Scope
+
+- Text-only terminal UI in Unreal.
+- Player input string.
+- Compact context payload containing map, zone, current objective, inventory, discoveries, recent scans, and recent actions.
+- Backend returns constrained JSON with response mode, speaker, text, confidence, suggested events, and memory tags.
+- Unreal displays text and ignores event suggestions until validation logic exists.
+
+### Proposed Unreal Types
+
+- `FAbyssalInterfaceContext`: serializable request payload.
+- `FAbyssalInterfaceResponse`: constrained response payload.
+- `UAbyssalInterfaceSubsystem`: owns request throttling, active session id, backend endpoint config, and response parsing.
+- `AAbyssalInterfaceTerminal`: interactable world actor.
+- `UAbyssalInterfaceComponent`: optional component for terminal actors or future portable interface devices.
+- `WBP_AbyssalInterfaceTerminal`: input box, send button, response log, failure state display.
+
+### Backend Contract
+
+Initial endpoint:
+
+- `POST /abyssal-interface/respond`
+
+Design schema:
+
+- `Content/Design/AbyssalInterfaceContextSchema.json`
+
+Response modes:
+
+- `Content/Design/AbyssalInterfaceResponseModes.csv`
+
+Unreal must validate all model-suggested events. The LLM cannot directly execute gameplay changes.
+
+### Tone Constraints
+
+Responses should be short, eerie, intelligent, lore-aware, and incomplete. The Interface is not Shinrou in fiction and must never expose model/provider details.
+
+### Failure Handling
+
+If the backend is unavailable, show diegetic failure text such as `signal incomplete`, `translation failed`, or `interface dormant`. Do not expose raw network errors to the player.
+
+### Future Versions
+
+- Context-aware terminal using real discoveries and inventory.
+- Fabrication guidance after prerequisite discoveries.
+- Voice/TTS with processed ancient-machine tone.
+- Portable shard/device interface.
+- AI director suggestions for atmospheric events, always Unreal-validated.

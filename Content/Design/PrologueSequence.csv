@@ -1,0 +1,10 @@
+BeatId,BeatName,Location,PlayerControl,PrimaryPurpose,KeyContent,ExitCondition
+PRO_001,Ocean Surface Establishing Shot,Ocean Surface,Cinematic,"Show isolation and abyssal-expedition tone","Submarine alone on flat endless ocean; slow push toward window",Camera reaches submarine window
+PRO_002,Submarine Room Reveal,Submarine Interior,CinematicToPlayable,"Introduce player suit and mission briefing","Player in diving suit; wall tablet headline FIRST MAJOR EXPLORATION EXPEDITION OF EARTH'S ABYSSAL PLAINS",Player gains control
+PRO_003,Submarine Walkaround,Submarine Interior,Playable,"Ground the expedition before the impossible world","Inspect briefing display, suit props, window; sunlight fades; sub lights activate",Docking sequence begins
+PRO_004,Dock With Shaft,Elevator Shaft Dock,CinematicToPlayable,"Transition from submarine to Helios-built infrastructure","Sub docks with constructed shaft; objective appears Verify HELIOS work",Submarine hatch opens
+PRO_005,Helios Passage,Access Passage,Playable,"Final normal dialogue before cavern","Humanoid Helios robots warn of unresolved anomaly and recommend delay",Player enters elevator
+PRO_006,Calm Descent,Descent Elevator,LimitedPlayable,"Create false safety and tension","Calm 30-second descent; low cable hum; player line Sounds like those bastards were lying",Warning state begins
+PRO_007,Elevator Failure,Descent Elevator,Cinematic,"Catastrophic break from grounded expedition into survival","Warnings, cable cut, screeching fall, blackout",Player wakes in wreck
+PRO_008,Crushed Elevator,Wrecked Elevator,Playable,"Give agency after crash","Broken elevator; interact/hold or QTE to pry doors open",Doors open
+PRO_009,Luminous Rift Reveal,Luminous Rift,CinematicToPlayable,"Start the real game","Massive beautiful cavern reveal; player says Oh... shit; objective changes to SURVIVE",Player steps into cavern

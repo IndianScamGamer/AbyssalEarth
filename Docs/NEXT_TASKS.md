@@ -16,9 +16,37 @@ The hourly continuation worker should always pick the highest-impact available t
 The project now has two planning layers:
 
 1. **P0 vertical slice**: make `MAP_LuminousRift` match `Content/ArtDirection/References/luminous_rift_core_reference.png`.
-2. **World atlas**: define the broader Abyssal Earth map sequence using `Docs/WORLD_ATLAS.md` and the generated concept images in `Content/ArtDirection/WorldMaps/`.
+2. **P0 story/AI foundation**: implement the submarine-to-crash prologue, then stop normal story delivery and shift to survival/discovery/alien-tech fabrication.
+3. **P0 Abyssal Interface**: build the first text terminal for LLM-backed cryptic hints/lore/fabrication guidance.
+4. **World atlas**: define the broader Abyssal Earth map sequence using `Docs/WORLD_ATLAS.md` and the generated concept images in `Content/ArtDirection/WorldMaps/`.
 
 Do not let worldbuilding distract from P0 implementation, but use the atlas to make asset, material, audio, and code decisions extensible.
+
+## P0 - Story And Prologue Work
+
+- Build the opening sequence described in `Docs/NARRATIVE_FOUNDATION.md`: ocean surface, submarine room, briefing display, Helios shaft dock, robot passage, elevator descent, elevator failure, crushed elevator, Luminous Rift reveal.
+- Create `MAP_Prologue_Submarine` or a prototype room/map for the submarine intro.
+- Create `MAP_Prologue_ElevatorShaft` or a connected sequence for docking, Helios robots, and elevator descent.
+- Create a wall tablet/briefing display asset with the headline FIRST MAJOR EXPLORATION EXPEDITION OF EARTH'S ABYSSAL PLAINS.
+- Create placeholder Helios humanoid robot actors with short pre-cavern text bubble interactions.
+- Add an objective path for `OBJ_VERIFY_HELIOS` -> `OBJ_SURVIVE` using `Content/Design/MainObjectiveArc.csv`.
+- Prototype the crushed-elevator door interaction/QTE or hold-to-pry interaction.
+- Ensure all normal story/dialogue stops after the Luminous Rift reveal.
+- Add end-credit image/vignette planning for player return, public discovery, and future scientific progress.
+
+## P0 - Abyssal Interface AI Work
+
+- Implement the first text-only `WBP_AbyssalInterfaceTerminal` UI.
+- Add `AAbyssalInterfaceTerminal` interactable actor or Blueprint equivalent.
+- Add `UAbyssalInterfaceSubsystem` or Blueprint subsystem for request/response handling.
+- Use `Content/Design/AbyssalInterfaceContextSchema.json` as the context/response contract.
+- Use `Content/Design/AbyssalInterfaceResponseModes.csv` for allowed response modes.
+- Create a local backend endpoint prototype: `POST /abyssal-interface/respond`.
+- Send compact context: map, zone, objective, inventory, discoveries, recent scans, recent actions, known lore facts.
+- Display diegetic failure states when backend is unavailable.
+- Add strict validation so LLM-suggested events cannot directly execute gameplay changes.
+- Draft the Interface tone prompt: eerie, ancient, concise, lore-aware, useful but incomplete.
+- Add a first terminal placement to the Collector Array or Ancient Gate route.
 
 ## P0 - Luminous Rift Immediate Work
 
@@ -54,15 +82,13 @@ Do not let worldbuilding distract from P0 implementation, but use the atlas to m
 - Build `MAP_LuminousRift_Blockout` from `Docs/LUMINOUS_RIFT_BLOCKOUT.md`.
 - Import or create P0 mesh proxies for the Luminous Rift kit.
 - Create master materials and instances from `Docs/MATERIAL_SPECS.md`.
-- Place objective triggers in the revised route:
-  - `OBJ_DescentElevator`
-  - `OBJ_FirstOverlook`
-  - `OBJ_AbyssalApproach`
-  - `OBJ_CrystalGalleries`
-  - `OBJ_CollectorArray`
-  - `OBJ_AncientGate`
-  - `OBJ_SecondSkyOverlook`
-- Set `D_Anomaly_SecondSkyCavern.ObjectiveIdToCompleteOnScan = OBJ_SecondSkyOverlook`.
+- Wire objective progression to the main arc:
+  - `OBJ_VERIFY_HELIOS` during the prologue shaft descent.
+  - `OBJ_SURVIVE` after the elevator crash and Luminous Rift reveal.
+  - `OBJ_DISCOVER_PLACE` after initial stable traversal and first scans.
+  - `OBJ_MAKE_MACHINE_ANSWER` when the player reaches the first Abyssal Interface or operable ancient system.
+  - `OBJ_BUILD_WAY_OUT` after the first alien-tech fabrication path is understood.
+  - `OBJ_OPEN_RIFT` for the eventual endgame return portal.
 
 ## P1 - World Atlas Planning Work
 
@@ -164,7 +190,7 @@ Follow-up tasks:
 
 - Player movement, sprint, crouch, scan, beacon placement/removal, and journal toggle.
 - Route objectives fire in order.
-- Final scan completes `OBJ_SecondSkyOverlook`.
+- Main objective arc can advance from `OBJ_VERIFY_HELIOS` through `OBJ_OPEN_RIFT`.
 - Save/load restores discoveries and beacons.
 - Debug commands work:
   - `AbyssalDebugDiscoverAll`

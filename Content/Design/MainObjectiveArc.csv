@@ -1,0 +1,7 @@
+ObjectiveId,Title,Phase,Description,GameplayMeaning
+OBJ_VERIFY_HELIOS,Verify the AI Robot Fleet HELIOS's work,Prologue,"Descend into the elevator shaft and inspect the robots' construction work.",Guides the player from submarine to shaft before the crash
+OBJ_SURVIVE,SURVIVE,Act1,"Stay alive after the elevator crash and establish a path out of immediate danger.",Initial post-crash objective
+OBJ_DISCOVER_PLACE,DISCOVER WHAT THIS PLACE IS,Act2,"Scan structures, materials, and anomalies to understand the impossible cavern.",Discovery-driven exploration
+OBJ_MAKE_MACHINE_ANSWER,MAKE THE MACHINE ANSWER,Act3,"Learn to operate ancient systems and make alien technology respond.","Terminal, power-routing, and experimentation objective"
+OBJ_BUILD_WAY_OUT,BUILD A WAY OUT,Act4,"Fabricate devices from discovered alien technology and construct a return mechanism.","Long-term crafting/fabrication arc"
+OBJ_OPEN_RIFT,OPEN THE RIFT,Act5,"Activate a player-built rift/portal back to the surface.",Final escape objective
