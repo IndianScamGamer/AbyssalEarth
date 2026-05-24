@@ -8,6 +8,7 @@ class UCameraComponent;
 class UInputAction;
 class UInputMappingContext;
 class UScannerComponent;
+class UAbyssalHealthComponent;
 class ABeaconActor;
 struct FInputActionValue;
 
@@ -21,6 +22,9 @@ public:
 
     UFUNCTION(BlueprintPure, Category = "Abyssal Earth|Scanner")
     UScannerComponent* GetScannerComponent() const;
+
+    UFUNCTION(BlueprintPure, Category = "Abyssal Earth|Health")
+    UAbyssalHealthComponent* GetHealthComponent() const;
 
     UFUNCTION(BlueprintImplementableEvent, Category = "Abyssal Earth|Journal", meta = (DisplayName = "Toggle Journal"))
     void BP_ToggleJournal();
@@ -48,6 +52,9 @@ private:
 
     UPROPERTY(VisibleAnywhere, Category = "Abyssal Earth|Scanner")
     TObjectPtr<UScannerComponent> ScannerComponent;
+
+    UPROPERTY(VisibleAnywhere, Category = "Abyssal Earth|Health")
+    TObjectPtr<UAbyssalHealthComponent> HealthComponent;
 
     UPROPERTY(EditDefaultsOnly, Category = "Abyssal Earth|Input")
     TObjectPtr<UInputMappingContext> DefaultMappingContext;
@@ -99,5 +106,5 @@ private:
     void ToggleJournal();
 
     UFUNCTION()
-    void HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
+    void HandleHealthDamaged(float DamageAmount, AActor* DamageCauser, float CurrentHealth);
 };

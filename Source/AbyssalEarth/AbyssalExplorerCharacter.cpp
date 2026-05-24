@@ -2,6 +2,7 @@
 #include "AbyssalAudioCueSubsystem.h"
 #include "BeaconActor.h"
 #include "BeaconSubsystem.h"
+#include "AbyssalHealthComponent.h"
 #include "DiscoveryActor.h"
 #include "DiscoverySubsystem.h"
 #include "ObjectiveSubsystem.h"
@@ -14,7 +15,6 @@
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/DamageType.h"
 #include "InputActionValue.h"
 
 AAbyssalExplorerCharacter::AAbyssalExplorerCharacter()
@@ -30,6 +30,7 @@ AAbyssalExplorerCharacter::AAbyssalExplorerCharacter()
     FirstPersonCamera->bUsePawnControlRotation = true;
 
     ScannerComponent = CreateDefaultSubobject<UScannerComponent>(TEXT("ScannerComponent"));
+    HealthComponent = CreateDefaultSubobject<UAbyssalHealthComponent>(TEXT("HealthComponent"));
 
     UCharacterMovementComponent* Movement = GetCharacterMovement();
     Movement->MaxWalkSpeed = WalkSpeed;
@@ -42,6 +43,11 @@ AAbyssalExplorerCharacter::AAbyssalExplorerCharacter()
 UScannerComponent* AAbyssalExplorerCharacter::GetScannerComponent() const
 {
     return ScannerComponent;
+}
+
+UAbyssalHealthComponent* AAbyssalExplorerCharacter::GetHealthComponent() const
+{
+    return HealthComponent;
 }
 
 void AAbyssalExplorerCharacter::BeginPlay()
@@ -76,11 +82,19 @@ void AAbyssalExplorerCharacter::BeginPlay()
         }
     }
 
-    OnTakeAnyDamage.AddDynamic(this, &AAbyssalExplorerCharacter::HandleTakeAnyDamage);
+    if (HealthComponent)
+    {
+        HealthComponent->OnDamaged.AddDynamic(this, &AAbyssalExplorerCharacter::HandleHealthDamaged);
+    }
 }
 
 void AAbyssalExplorerCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    if (HealthComponent)
+    {
+        HealthComponent->OnDamaged.RemoveDynamic(this, &AAbyssalExplorerCharacter::HandleHealthDamaged);
+    }
+
     if (GetGameInstance())
     {
         if (UAbyssalAudioCueSubsystem* AudioCueSubsystem = GetGameInstance()->GetSubsystem<UAbyssalAudioCueSubsystem>())
@@ -176,20 +190,9 @@ void AAbyssalExplorerCharacter::ToggleJournal()
     BP_ToggleJournal();
 }
 
-void AAbyssalExplorerCharacter::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+void AAbyssalExplorerCharacter::HandleHealthDamaged(float DamageAmount, AActor* DamageCauser, float CurrentHealth)
 {
-    if (Damage <= 0.0f)
-    {
-        return;
-    }
-
-    UE_LOG(LogTemp, Verbose, TEXT("[AbyssalEarth] %s took %.2f damage from %s (type %s)"),
-        *GetName(),
-        Damage,
-        DamageCauser ? *DamageCauser->GetName() : TEXT("<unknown>"),
-        DamageType ? *DamageType->GetName() : TEXT("<none>"));
-
-    BP_OnTookDamage(Damage, DamageCauser);
+    BP_OnTookDamage(DamageAmount, DamageCauser);
 }
 
 void AAbyssalExplorerCharacter::AbyssalDebugDiscoverAll()

@@ -13,14 +13,14 @@ Unreal Editor is not installed or not discoverable from PATH on this machine. Wo
 - `ADiscoveryActor`: placeable scan target with journal metadata.
 - `ABeaconActor`: placeable navigation marker foundation.
 - `AEmberVentHazard`: placeable cyclical hazard with Idle/Warning/Erupting/Cooldown phases, configurable radial damage during erupt, and Blueprint hooks per phase.
+- `UAbyssalHealthComponent`: reusable actor component for max/current HP, damage, healing, death state, and Blueprint HUD/death delegates.
 - `UDiscoverySubsystem`: stores discovered entries (id, display name, journal text, category) keyed by id, with an `OnDiscoveryAdded` delegate for journal/HUD toasts.
 - `UDiscoverySaveGame`: persists discovery entries and saved beacons.
 - `AAbyssalEarthGameMode`: assigns the explorer pawn.
 
 ## Next C++ Additions
 
-- Health/HP component once the vent hazard playtests confirm cycle timing feels good — the current `OnTakeAnyDamage` hook only logs.
-- Audio cue routing: a thin `UAbyssalAudioCueSubsystem` that listens to scanner/discovery/objective delegates and triggers Wwise/MetaSound assets without coupling gameplay code to a specific audio engine.
+- Add a small survival HUD base if Windows-side Blueprint binding to `UAbyssalHealthComponent` needs common helper text/progress functions.
 - Optional: dedicated `IA_RemoveBeacon` input if the smart-context place/remove behavior is unclear in playtest.
 
 ## Gameplay Library
@@ -33,9 +33,19 @@ Unreal Editor is not installed or not discoverable from PATH on this machine. Wo
 
 All return `nullptr` when the world context is invalid or the subsystem hasn't initialized yet, so Blueprints can safely chain a null check before reading.
 
-## Damage Hook
+## Health & Damage
 
-`AAbyssalExplorerCharacter` binds to its own `OnTakeAnyDamage` in `BeginPlay`. The handler logs damage at `Verbose` and fires `BP_OnTookDamage(Damage, DamageCauser)` so HUD/SFX can react. No HP system yet — the hook exists so the Ember Vent hazard is testable end-to-end before health is wired.
+`AAbyssalExplorerCharacter` owns a `UAbyssalHealthComponent` named `HealthComponent` and exposes it through `GetHealthComponent()`.
+
+`UAbyssalHealthComponent` binds to its owner's `OnTakeAnyDamage` in `BeginPlay`, logs damage at `Verbose`, subtracts HP, and broadcasts:
+
+- `OnHealthChanged(CurrentHealth, MaxHealth, Delta)`: use for bars, vignette intensity, and survival HUD values.
+- `OnDamaged(DamageAmount, DamageCauser, CurrentHealth)`: use for hit feedback, audio, and camera/UI response.
+- `OnDeath(KilledActor, DamageCauser)`: use for fade-out, respawn, or fail-state prototypes.
+
+The component also exposes `ApplyHealthDamage`, `Heal`, `RestoreFullHealth`, `Kill`, `GetCurrentHealth`, `GetMaxHealth`, `GetHealthPercent`, and `IsDead` for Blueprint. The character still forwards component damage through the existing `BP_OnTookDamage(Damage, DamageCauser)` event so any current Blueprint feedback hook remains usable.
+
+In the first PIE test, place `BP_EmberVentHazard` near the player, shorten its cycle, and confirm radial damage reduces `HealthComponent` HP while `OnDamaged` and `OnHealthChanged` fire. Death currently only broadcasts; final respawn/fail behavior is intentionally left to the vertical-slice flow.
 
 ## Beacon Controls
 

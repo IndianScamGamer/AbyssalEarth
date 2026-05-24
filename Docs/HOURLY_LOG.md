@@ -182,3 +182,11 @@
 - Extended `Docs/BLUEPRINT_IMPLEMENTATION_NOTES.md` with `BP_AudioCueRouter` setup, emitted cue ids, ambience-table usage, and PIE checks; updated `Docs/NEXT_TASKS.md` to point the next editor pass at binding temporary audio assets.
 - Verification: parsed the new ambience CSV, inspected C++ references with `rg`, and checked changed files with `git diff`; Unreal compile was not run on this Linux side.
 - Next: in Unreal, create `BP_AudioCueRouter`, bind temporary SoundCue/MetaSound assets to the emitted cue ids, add ambience trigger volumes per Luminous Rift zone, and PIE-test scanner/discovery/objective audio with the debug commands.
+
+## 2026-05-24 12:41 EDT
+
+- Added `UAbyssalHealthComponent`, a reusable Blueprint-spawnable actor component with max/current HP, damage application, healing, restore/kill helpers, death state, and `OnHealthChanged` / `OnDamaged` / `OnDeath` delegates.
+- Attached `HealthComponent` to `AAbyssalExplorerCharacter`, exposed `GetHealthComponent()`, and forwarded component damage through the existing `BP_OnTookDamage` event so current Blueprint feedback hooks remain compatible.
+- Updated the technical and Blueprint notes with `WBP_SurvivalHUD` binding instructions and Ember Vent PIE verification steps; updated `NEXT_TASKS.md` to move health work from design to compile/HUD testing.
+- Verification: source inspected with `rg`; UnrealBuildTool is still unavailable on this Linux side, so compile must happen on Windows/UE 5.4+.
+- Next: compile in Unreal, create `WBP_SurvivalHUD`, bind it to `UAbyssalHealthComponent`, and verify `BP_EmberVentHazard` radial damage visibly reduces HP and fires death feedback.

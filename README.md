@@ -115,6 +115,7 @@ Implemented or scaffolded systems include:
 - `ABeaconActor` and `UBeaconSubsystem`: persistent player navigation beacons.
 - `AEmberVentHazard`: cyclical environmental hazard prototype.
 - `UAbyssalGameplayLibrary`: Blueprint accessors for project subsystems.
+- `UAbyssalHealthComponent`: reusable HP/damage/death component attached to the explorer and ready for survival HUD binding.
 
 ## Asset Pipeline
 

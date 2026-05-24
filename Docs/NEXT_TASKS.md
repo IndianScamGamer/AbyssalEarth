@@ -114,7 +114,7 @@ Not a current production priority. Keep this design available for later, after t
   - `SM_Rift_AncientWall_Gate_A`
 - Extend `Docs/BLUEPRINT_IMPLEMENTATION_NOTES.md` after Windows-side testing with any actual Blueprint names, screenshots, and deviations from the planned setup.
 - In Unreal, create `BP_AudioCueRouter` from the `UAbyssalAudioCueSubsystem` notes and bind temporary SoundCue/MetaSound assets to the emitted cue ids.
-- Design `UAbyssalHealthComponent` with max/current HP, damage, death, and Blueprint delegates.
+- Compile and PIE-test `UAbyssalHealthComponent`, then create `WBP_SurvivalHUD` and bind it to the component's health/damage/death delegates.
 - Review `AEmberVentHazard` and plan how it becomes the base for future Mantle Garden pressure vents.
 - Add automated CSV validation script or documentation for design CSV formats.
 

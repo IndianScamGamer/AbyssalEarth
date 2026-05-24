@@ -32,6 +32,7 @@ Create Blueprint children or widgets:
 | `WBP_ScannerReadout` | `UAbyssalScannerReadoutWidget` | Scan result HUD feedback. |
 | `WBP_AbyssalJournal` | `UAbyssalJournalWidget` | Discovery journal shell. |
 | `WBP_ObjectiveHUD` | `UserWidget` | Current objective and progress display. |
+| `WBP_SurvivalHUD` | `UserWidget` | Health bar/vignette/debug readout bound to `UAbyssalHealthComponent`. |
 | `WBP_DiscoveryToast` | `UserWidget` | Short new-discovery popup used by scanner/journal HUD. |
 
 The current C++ exposes the subsystem accessors through `UAbyssalGameplayLibrary`:
@@ -42,6 +43,37 @@ The current C++ exposes the subsystem accessors through `UAbyssalGameplayLibrary
 - `GetAudioCueSubsystem(WorldContextObject)`
 
 Use those from widgets rather than manually walking through Game Instance nodes each time.
+
+## WBP_SurvivalHUD
+
+Goal: make damage from hazards visible during the first playable route without locking in a final survival UI style.
+
+Data source:
+
+- `BP_AbyssalExplorerCharacter.GetHealthComponent()`
+- `UAbyssalHealthComponent.OnHealthChanged`
+- `UAbyssalHealthComponent.OnDamaged`
+- `UAbyssalHealthComponent.OnDeath`
+
+Suggested widget:
+
+- A thin health bar in the lower-left or lower-center HUD.
+- Optional red/blue damage vignette flash when `OnDamaged` fires.
+- Optional compact debug text: `CurrentHealth / MaxHealth` while tuning hazards.
+
+Blueprint setup:
+
+1. On Construct, get owning player pawn and cast to `BP_AbyssalExplorerCharacter`.
+2. Call `GetHealthComponent`; if valid, read `GetHealthPercent` for initial bar state.
+3. Bind `OnHealthChanged` to update the bar percent and optional text.
+4. Bind `OnDamaged` to play a short damage feedback animation.
+5. Bind `OnDeath` to trigger the temporary fail-state animation or fade.
+
+PIE checks:
+
+- Run near `BP_EmberVentHazard` while it erupts and confirm HP drops by radial damage.
+- Confirm the health bar updates once per damage tick and does not continue after death unless `bCanTakeDamageWhenDead` is enabled.
+- Confirm `BP_AbyssalExplorerCharacter.BP_OnTookDamage` still fires if any existing Blueprint feedback is wired there.
 
 ## BP_RiftEnergyOrb
 
