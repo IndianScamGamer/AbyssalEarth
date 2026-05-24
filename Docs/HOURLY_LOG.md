@@ -228,3 +228,11 @@
 **Pending manual Unreal Editor task (blocks Blueprint editor from crashing):**
 
 - Open `BP_AbyssalExplorerCharacter` → select the **Mesh** component → assign the correct skeletal mesh in the Details panel. The Blueprint editor crashes on open until a valid mesh is assigned because the camera attachment logic runs during construction script evaluation. This is the top-priority editor task — all other Blueprint work is blocked behind it.
+
+## 2026-05-24 18:49 EDT
+
+- Expanded the Luminous Rift asset manifest to cover the full near-term variant set from the production order: crystal S/M/L variants, second rock arch and overhang, tower B/C, hanging slab B/C, and distant spire B.
+- Updated the crystal and background-depth Claude/Blender prompts so their asset lists match the manifest and clarify how A/B/C variants should differ.
+- Updated `ArtSource/Blender/LuminousRift/ASSET_NOTES.md` with variant intent for crystals, rock arches/overhangs, tower segments, and hanging slabs so Blender workers can fill in source/export paths after creation.
+- Verification: ran `python3 Scripts/validate_design_data.py`; it passed across 9 CSV files, 156 rows, and the JSON schema.
+- Next: Windows/Claude should start exporting `SM_Rift_CrystalCluster_S_A/B/C`, `SM_Rift_CrystalCluster_M_A/B/C`, `SM_Rift_CrystalCluster_L_A/B`, and `SM_Rift_CrystalCluster_Hero_A`, then update the asset notes with actual source/export paths and known issues.

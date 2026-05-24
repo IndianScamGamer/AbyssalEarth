@@ -18,16 +18,18 @@ Use Content/ArtDirection/References/luminous_rift_core_reference.png as the sour
 - SM_Rift_CavernWall_Large_A
 - SM_Rift_TowerSegment_A
 - SM_Rift_TowerSegment_B
+- SM_Rift_TowerSegment_C
 - SM_Rift_HangingSlab_A
 - SM_Rift_HangingSlab_B
+- SM_Rift_HangingSlab_C
 - SM_Rift_DistantSpire_A
 - SM_Rift_DistantSpire_B
 
 Optional if time allows:
 
 - SM_Rift_CavernWall_Large_B
-- SM_Rift_TowerSegment_C_Broken
-- SM_Rift_HangingSlab_C_Broken
+- SM_Rift_TowerSegment_C_Broken, if a separate broken version is useful after the C silhouette exists.
+- SM_Rift_HangingSlab_C_Broken, if a separate broken version is useful after the C silhouette exists.
 
 ## Scale Targets
 

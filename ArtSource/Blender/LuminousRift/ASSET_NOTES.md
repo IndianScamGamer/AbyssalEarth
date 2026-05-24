@@ -44,7 +44,18 @@ Each asset entry should include:
 - Material slots: `mat_wet_basalt`, `mat_crystal_blue`, `mat_blue_emissive`.
 - Nanite/LOD: Nanite recommended.
 
-### SM_Rift_CrystalCluster_S/M/L/Hero
+### SM_Rift_RockArch_A/B and SM_Rift_Overhang_A/B
+
+- Status: needed.
+- Intended use: first-overlook and second-sky vista framing so the scene reads like the core reference instead of an open arena.
+- Approximate dimensions: rock arches 30-80 m span; overhangs 20-60 m apparent depth.
+- Pivot/origin: document per mesh; use a placement-friendly base/anchor point rather than arbitrary scene center.
+- Collision: none for decorative framing pieces unless reused near the player route; use Unreal blocking volumes for player-facing uses.
+- Material slots: `mat_wet_basalt`, optional `mat_crystal_blue`, optional `mat_blue_emissive` if crystals are embedded.
+- Nanite/LOD: Nanite recommended.
+- Variant intent: A = strong primary reveal frame, B = broken/asymmetric alternate for repeated vista use.
+
+### SM_Rift_CrystalCluster_S_A/B/C, M_A/B/C, L_A/B, Hero_A
 
 - Status: needed.
 - Intended use: route language, local lighting accents, foreground silhouettes.
@@ -53,6 +64,7 @@ Each asset entry should include:
 - Collision: none for small/distant clusters; simple convex for clusters near player path.
 - Material slots: `mat_crystal_blue`, `mat_blue_emissive`, optional `mat_wet_basalt` base.
 - Nanite/LOD: Nanite acceptable for large/hero meshes; simple LODs acceptable for small clusters.
+- Variant intent: A = clean route-readable silhouette, B = broken/asymmetric wall or ledge silhouette, C = low dense scatter/breadcrumb silhouette.
 
 ### SM_Rift_BridgeSpan_A / SM_Rift_BridgeSpan_B_Broken
 
@@ -106,7 +118,7 @@ Each asset entry should include:
 - Material slots: `mat_wet_basalt`, optional `mat_crystal_blue`, optional `mat_blue_emissive`.
 - Nanite/LOD: Nanite recommended.
 
-### SM_Rift_TowerSegment_A/B
+### SM_Rift_TowerSegment_A/B/C
 
 - Status: needed.
 - Intended use: distant ancient machine silhouettes and vertical depth markers behind bridges, collectors, and gate wall.
@@ -115,8 +127,9 @@ Each asset entry should include:
 - Collision: none for distant placements; simple blocking volume only if player-adjacent.
 - Material slots: `mat_ancient_machine_dark`, `mat_ancient_machine_edge_wear`, `mat_blue_emissive`, optional `mat_wet_basalt`.
 - Nanite/LOD: Nanite recommended.
+- Variant intent: A = narrow eroded tower, B = wider stacked/stepped tower, C = broken-topped silhouette.
 
-### SM_Rift_HangingSlab_A/B
+### SM_Rift_HangingSlab_A/B/C
 
 - Status: needed.
 - Intended use: dark top/side vista frames and suspended abyss silhouettes.
@@ -125,6 +138,7 @@ Each asset entry should include:
 - Collision: none for background placements.
 - Material slots: `mat_wet_basalt`, optional `mat_ancient_machine_dark`, optional `mat_blue_emissive`.
 - Nanite/LOD: Nanite recommended.
+- Variant intent: A = broad framing slab, B = long blade-like slab, C = chunkier broken slab with fused machine fragments.
 
 ### SM_Rift_DistantSpire_A/B
 

@@ -16,9 +16,12 @@ Use Content/ArtDirection/References/luminous_rift_core_reference.png as the sour
 
 - SM_Rift_CrystalCluster_S_A
 - SM_Rift_CrystalCluster_S_B
+- SM_Rift_CrystalCluster_S_C
 - SM_Rift_CrystalCluster_M_A
 - SM_Rift_CrystalCluster_M_B
+- SM_Rift_CrystalCluster_M_C
 - SM_Rift_CrystalCluster_L_A
+- SM_Rift_CrystalCluster_L_B
 - SM_Rift_CrystalCluster_Hero_A
 
 ## Scale Targets
@@ -37,6 +40,10 @@ Use Content/ArtDirection/References/luminous_rift_core_reference.png as the sour
   - vertical spear cluster
   - fan cluster leaning out of a surface
   - low broken shard cluster
+- The A/B/C variants should be meaningfully different, not simple rotations:
+  - A variants: clean route-readable silhouette for repeated placement.
+  - B variants: broken or asymmetric silhouette for ledges and wall seams.
+  - C variants: lower, denser, scatter-friendly silhouette for breadcrumbs and set dressing.
 - Crystals should have readable dark-blue body geometry plus separate emissive areas. Do not make the entire mesh uniformly glowing.
 - Add chipped tips, smaller satellite shards, and embedded basalt/mineral buildup at the base.
 - Keep the forms sharp enough to read from first-person distance and from a wide vista.
@@ -67,4 +74,3 @@ Assign emissive slots only to inner faces, core veins, or selected shard tips. T
 - Large and hero variants can frame the Crystal Galleries and First Overlook without competing with the central orb.
 - Material slots are stable and named exactly as listed.
 - ArtSource/Blender/LuminousRift/ASSET_NOTES.md is updated with dimensions, pivot, collision, material slots, Nanite/LOD recommendation, and known issues for every exported asset.
-
