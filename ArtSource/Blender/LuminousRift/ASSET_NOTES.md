@@ -12,6 +12,7 @@ Detailed Claude/Blender prompts for the first Luminous Rift asset pass live unde
 - Docs/AssetPrompts/LuminousRift/04_HexCollectorPanels.md
 - Docs/AssetPrompts/LuminousRift/05_OrbApparatus.md
 - Docs/AssetPrompts/LuminousRift/06_AncientGateWall.md
+- Docs/AssetPrompts/LuminousRift/07_BackgroundDepthKit.md
 
 Workers should use these prompts with Docs/CORE_REFERENCE_LUMINOUS_RIFT.md, Docs/BLENDER_ASSET_PIPELINE.md, and Docs/MATERIAL_SPECS.md. After creating any mesh, replace the relevant status below with source/export paths and production notes.
 
@@ -91,3 +92,45 @@ Each asset entry should include:
 - Collision: blocking volume in Unreal; mesh can be decorative.
 - Material slots: `mat_ancient_machine_dark`, `mat_ancient_machine_edge_wear`, `mat_blue_emissive`, `mat_crystal_blue`, `mat_wet_basalt`.
 - Nanite/LOD: Nanite recommended.
+
+## Background Depth Targets
+
+### SM_Rift_CavernWall_Large_A
+
+- Status: needed.
+- Intended use: large background/side cavern shell modules for First Overlook, Abyssal Approach, Ancient Gate, and Second Sky Overlook.
+- Approximate dimensions: 40-100 m wide x 80-220 m tall x 8-30 m apparent depth.
+- Pivot/origin: bottom center or lower rear corner; document exact choice when created.
+- Collision: none for background placements; use Unreal blocking volumes if reused near the route.
+- Material slots: `mat_wet_basalt`, optional `mat_crystal_blue`, optional `mat_blue_emissive`.
+- Nanite/LOD: Nanite recommended.
+
+### SM_Rift_TowerSegment_A/B
+
+- Status: needed.
+- Intended use: distant ancient machine silhouettes and vertical depth markers behind bridges, collectors, and gate wall.
+- Approximate dimensions: 12-30 m wide x 40-120 m tall.
+- Pivot/origin: bottom center.
+- Collision: none for distant placements; simple blocking volume only if player-adjacent.
+- Material slots: `mat_ancient_machine_dark`, `mat_ancient_machine_edge_wear`, `mat_blue_emissive`, optional `mat_wet_basalt`.
+- Nanite/LOD: Nanite recommended.
+
+### SM_Rift_HangingSlab_A/B
+
+- Status: needed.
+- Intended use: dark top/side vista frames and suspended abyss silhouettes.
+- Approximate dimensions: 8-40 m wide x 20-100 m long/deep x 6-30 m thick.
+- Pivot/origin: ceiling/anchor side if meant to hang, otherwise center; document exact choice when created.
+- Collision: none for background placements.
+- Material slots: `mat_wet_basalt`, optional `mat_ancient_machine_dark`, optional `mat_blue_emissive`.
+- Nanite/LOD: Nanite recommended.
+
+### SM_Rift_DistantSpire_A/B
+
+- Status: needed.
+- Intended use: lower-abyss geology/machine silhouettes fading into blue fog.
+- Approximate dimensions: 10-40 m wide x 60-200 m tall.
+- Pivot/origin: base center.
+- Collision: none.
+- Material slots: `mat_wet_basalt`, optional `mat_ancient_machine_dark`, optional `mat_blue_emissive`.
+- Nanite/LOD: Nanite recommended for hero-distance pieces; simple LODs acceptable for very distant copies.

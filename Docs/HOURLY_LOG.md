@@ -1,5 +1,13 @@
 # Hourly Work Log
 
+## 2026-05-24 13:41 EDT
+
+- Added `Docs/AssetPrompts/LuminousRift/07_BackgroundDepthKit.md` for the Luminous Rift background depth kit: cavern wall modules, ancient tower segments, hanging slabs, and distant lower-abyss spires.
+- Updated `Content/Design/LuminousRiftAssetManifest.csv` so `SM_Rift_CavernWall_Large_A`, `SM_Rift_TowerSegment_A`, `SM_Rift_HangingSlab_A`, and `SM_Rift_DistantSpire_A` are `PromptReady` and point at the new background prompt.
+- Updated `ArtSource/Blender/LuminousRift/ASSET_NOTES.md` with background-depth target note templates so Blender workers can replace placeholders with source/export paths and production notes.
+- Verification: parsed the asset manifest and confirmed all prompt-path references exist.
+- Next: have Windows/Claude use `07_BackgroundDepthKit.md` after the P0 foreground/orb/gate assets to dress First Overlook, Collector Array, Ancient Gate, and Second Sky Overlook with real vertical depth silhouettes.
+
 ## 2026-05-18 07:30 EDT
 
 - Created the `AbyssalEarth` project folder.
