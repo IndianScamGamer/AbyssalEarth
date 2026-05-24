@@ -103,3 +103,38 @@
 - Updated `TECHNICAL_PLAN.md` with sections for the gameplay library and damage hook; updated `NEXT_TASKS.md` to remove the now-done items and queue the next batch (audio cue subsystem sketch, HP component shape, ambience data table).
 - Verification: still no UnrealBuildTool on PATH; signatures match standard UE 5.4 patterns (`OnTakeAnyDamage` is `FTakeAnyDamageSignature` on `AActor`, and `GEngine->GetWorldFromContextObject` is the canonical world-context resolver).
 - Next: write the ambience CSV draft and audio subsystem stub when continuing without the editor; otherwise compile and create the Blueprint children listed above.
+
+## 2026-05-23 18:40 EDT
+
+- Pulled the latest remote changes from `origin/main` (fast-forward to `790adcc`) after Vivek confirmed the project opens in Unreal.
+- Saved Vivek's core concept reference image to `Content/ArtDirection/References/luminous_rift_core_reference.png`.
+- Re-anchored the Luminous Rift design around the concept art: vertical abyss, dark carved rock, ancient machine architecture, central blue-white orb, gold beam network, hex collector panels, blue crystals, suspended platforms, ancient gate wall, and human scale.
+- Added `Docs/CORE_REFERENCE_LUMINOUS_RIFT.md` with detailed visual analysis and acceptance/rejection criteria for future screenshots and assets.
+- Added `Docs/BLENDER_ASSET_PIPELINE.md` for Claude Code + Blender MCP asset generation, including scale rules, export conventions, material slot names, P0/P1 asset briefs, and a reusable worker prompt template.
+- Rewrote `Docs/ART_DIRECTION.md`, `Docs/LUMINOUS_RIFT_BLOCKOUT.md`, `Docs/MATERIAL_SPECS.md`, and `Docs/NEXT_TASKS.md` to align with the concept-art map instead of the older marsh/fungus/vent-first route.
+- Updated `Docs/GAME_DESIGN.md`, `Docs/MILESTONES.md`, `Docs/TECHNICAL_PLAN.md`, and `Content/Design/DiscoveryCatalog.csv` for the revised route: Descent Elevator, First Overlook, Abyssal Approach, Crystal Galleries, Collector Array, Ancient Gate, Second Sky Overlook.
+- Updated `UObjectiveSubsystem::BuildDefaultRoute` so the runtime objective chain now matches the revised concept-art route instead of the older Mirror Marsh / Crystal Spine / Ember Vents sequence.
+- Added `Content/Design/LuminousRiftAssetManifest.csv` and `ArtSource/Blender/LuminousRift/ASSET_NOTES.md` so Blender asset workers have concrete P0 targets and documentation slots.
+- Re-enabled the hourly Abyssal Earth cron job and updated its payload to read the new reference/pipeline docs and prioritize concept-art-accurate asset work. Updated the daily brief payload so Abyssal Earth is reported as active again.
+- Verification: docs and CSVs were inspected with shell tools; Unreal compile was not run in this session.
+- Next: have the hourly worker generate the first Blender task prompts and/or begin P0 crystal, foreground ledge, bridge, hex collector, orb apparatus, and ancient gate asset production.
+
+## 2026-05-23 19:19 EDT
+
+- Ran a large world-planning and concept generation pass for future Abyssal Earth maps beyond the Luminous Rift.
+- Generated five 2048x1152 PNG concept images with OpenClaw image generation and saved them under `Content/ArtDirection/WorldMaps/`: `glassroot_forest_concept.png`, `inner_sea_concept.png`, `mantle_garden_concept.png`, `gravity_well_concept.png`, and `fossil_sky_concept.png`.
+- Added `Docs/WORLD_ATLAS.md` defining the broader map roadmap: Luminous Rift, Glassroot Forest, Inner Sea, Fossil Sky, Gravity Well, and Mantle Garden.
+- Added `Content/Design/WorldMapManifest.csv` and `Content/Design/WorldAssetManifest.csv` to track future maps and first-pass asset families.
+- Rewrote `Docs/NEXT_TASKS.md` into a larger backlog covering P0 Luminous Rift implementation, P1 world-atlas planning, generated-image follow-ups, per-map docs, materials, hazards, and verification targets.
+- Expanded `Docs/GAME_DESIGN.md`, `Docs/ART_DIRECTION.md`, and `README.md` with the broader world roadmap and generated concept images.
+- Added `Docs/CONCEPT_IMAGE_GENERATION.md` to preserve the exact prompt set used for the five generated images.
+- Verification: generated image files exist and report as PNG; CSV files parse cleanly; markdown references were searched with `rg`. Unreal compile was not run on this Linux side.
+- Next: create per-map docs under `Docs/Maps/`, then draft Claude/Blender prompts for each future map's highest-priority asset families.
+
+## 2026-05-23 19:32 EDT
+
+- Added six detailed Claude/Blender prompt files under `Docs/AssetPrompts/LuminousRift/` for the P0 concept-art-critical asset families: blue crystal clusters, foreground ledge/rock frame, bridge spans, hex collector panels, central orb apparatus, and ancient gate wall.
+- Updated `Content/Design/LuminousRiftAssetManifest.csv` so the prompted P0 rows are marked `PromptReady` and point to the relevant prompt file.
+- Updated `ArtSource/Blender/LuminousRift/ASSET_NOTES.md` with the prompt package index so Blender workers can start from the correct briefs and replace placeholder notes after export.
+- Verification: parsed `Content/Design/LuminousRiftAssetManifest.csv` with Python CSV reader and checked that every prompt path referenced by the manifest exists.
+- Next: Windows/Claude should start with `Docs/AssetPrompts/LuminousRift/01_BlueCrystalClusters.md`, export the crystal kit, then update `ASSET_NOTES.md` with source/export paths and known issues.

@@ -156,3 +156,75 @@ On `BP_AbyssalExplorerCharacter` defaults, assign every `UInputAction*` property
 - Virtual textures enabled.
 - Motion blur disabled by default for clearer exploration.
 - Auto exposure enabled, but clamp per-volume in the cavern to avoid losing emissive detail.
+
+## Core Reference Implementation
+
+The Luminous Rift map is now anchored to `Content/ArtDirection/References/luminous_rift_core_reference.png`. The first playable map should prioritize the concept-art route documented in `LUMINOUS_RIFT_BLOCKOUT.md`: Descent Elevator -> First Overlook -> Abyssal Approach -> Crystal Galleries -> Collector Array -> Ancient Gate -> Second Sky Overlook.
+
+### BP_RiftEnergyOrb
+
+Create this as the central landmark actor for the Collector Array.
+
+Suggested components:
+
+- `USceneComponent` root at orb center.
+- `UStaticMeshComponent` `OrbSphere` using a sphere/proxy mesh and `M_Rift_EnergyOrb_Master`.
+- `UStaticMeshComponent` `OrbFrame` using `SM_Rift_OrbFrame_A`.
+- `UStaticMeshComponent` `OrbHub` using `SM_Rift_OrbHub_A`.
+- 1-3 point lights or rect lights for cool blue-white GI contribution.
+- Niagara component for slow blue motes around the orb.
+- Optional child scene components named `BeamAnchor_01`...`BeamAnchor_N` for beam spline attachment.
+
+Behavior:
+
+- Expose `OrbGlowStrength`, `PulseSpeed`, and `bOrbActive`.
+- Drive material scalar parameters from Blueprint for slow pulse.
+- Do not put gameplay collision on the orb in the first pass.
+- Pair with a `BP_DiscoveryActor_Base` configured as `D_Anomaly_RiftEnergyOrb`.
+
+### BP_RiftGoldBeamSpline
+
+Create a reusable Blueprint actor for the warm beam lines visible in the reference.
+
+Suggested components:
+
+- `USplineComponent` for beam path.
+- Spline mesh or Niagara beam renderer using `M_Rift_GoldEnergy_Master`.
+- Small endpoint point lights with warm gold color.
+- Optional endpoint static mesh using `SM_Rift_BeamEmitterNode_A`.
+
+Behavior:
+
+- Expose `BeamIntensity`, `BeamWidth`, `EndpointGlowStrength`, and `bBeamActive`.
+- Support direct placement between orb/hub anchors and hex collector cluster centers.
+- Beam should be visible in volumetric fog but thin enough not to obscure the orb.
+
+### BP_HexCollectorCluster
+
+Optional wrapper for imported collector clusters.
+
+Suggested components:
+
+- Static mesh cluster using `SM_Rift_HexCollector_Cluster_A` or broken variant.
+- Scene component `BeamTarget` at cluster center.
+- Optional point light for center node.
+- Optional material parameter controls for pane glow.
+
+Behavior:
+
+- Expose `CollectorGlowStrength` and `bCollectorActive`.
+- Broken/dark variants should remain placeable without active light.
+
+### Revised Objective IDs
+
+`UObjectiveSubsystem::BuildDefaultRoute` now uses the concept-art route:
+
+- `OBJ_DescentElevator`
+- `OBJ_FirstOverlook`
+- `OBJ_AbyssalApproach`
+- `OBJ_CrystalGalleries`
+- `OBJ_CollectorArray`
+- `OBJ_AncientGate`
+- `OBJ_SecondSkyOverlook`
+
+If older prototype saves contain previous route ids, reset route state in non-shipping builds with `AbyssalDebugResetDiscoveries`.

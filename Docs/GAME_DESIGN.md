@@ -39,16 +39,56 @@ The player is a field explorer sent below Earth's crust after impossible sensor 
 
 ## First Biome: The Luminous Rift
 
-A vast split cavern where black basalt walls open into a glowing alien valley. The floor is covered in shallow reflective water. Giant translucent fungi grow from mineral ribs. Blue-white crystal veins pulse through the ceiling like frozen lightning. Warm orange geothermal vents provide contrast and movement.
+The Luminous Rift is now anchored to the core concept reference at `Content/ArtDirection/References/luminous_rift_core_reference.png`.
 
-Primary objective: cross from the descent elevator to the far-side survey station by navigating three landmarks:
+A vast vertical cavern opens around an ancient machine complex buried inside Earth. Black basalt, blue crystals, suspended platforms, and monumental carved structures surround a radiant blue-white energy sphere. Warm gold beams connect the sphere to hexagonal collector panels, implying that the cavern is not only geologic but also part of an enormous dormant mechanism.
 
-- The Mirror Marsh: shallow water, glowing spores, reflections.
-- The Crystal Spine: climbable mineral ridge with scanner-reactive veins.
-- The Ember Vents: hot fog, orange light, and timed safe paths.
+Primary objective: cross from the descent elevator to the far-side Second Sky overlook by navigating six landmarks:
 
-Final beat: reach an overlook showing an even larger cavern beyond, establishing the scale of the full game.
+- First Overlook: the initial concept-art reveal from a dark foreground ledge.
+- Abyssal Approach: broken rock ledges and ancient bridge spans descending into the rift.
+- Crystal Galleries: blue crystals growing through carved wall panels.
+- Collector Array: central orb, gold beams, radial hub, and hex collector clusters.
+- Ancient Gate: a monumental wall with circular blue-lit mechanisms.
+- Second Sky Overlook: final view into an even deeper lower cavern.
+
+Final beat: scan the Second Sky vista and realize the visible machine is only one layer of a much larger underworld.
+
+Earlier marsh, fungus, and geothermal ideas are preserved as future biome candidates, but they should not define the first map's visual identity.
 
 ## Tone
 
 Quiet wonder with moments of danger. More `Subnautica`, `Journey`, `Outer Wilds`, and `Avatar` bioluminescence than shooter or horror. Darkness should frame beauty rather than swallow it.
+
+## World Roadmap
+
+The first map proves the core loop, but Abyssal Earth should feel like a descent through multiple impossible layers. The broader world roadmap is documented in `Docs/WORLD_ATLAS.md` and supported by generated reference images under `Content/ArtDirection/WorldMaps/`.
+
+### Map Sequence Intent
+
+1. **Luminous Rift**: ancient machine + crystal abyss. Teaches the base game.
+2. **Glassroot Forest**: living mineral ecosystem. Teaches biological scanning and softer route reading.
+3. **Inner Sea**: underground ocean. Expands route scale, navigation, and beacon value.
+4. **Fossil Sky**: deep-time fossil archive. Shifts awe upward and emphasizes scientific reconstruction.
+5. **Gravity Well**: local physics anomaly. Introduces altered traversal and orientation risk.
+6. **Mantle Garden**: geothermal edge. Pushes environmental hazards without turning the game into combat.
+
+### Long-Term Mechanical Arc
+
+- **Luminous Rift**: scanner, journal, beacons, objective route, first environmental hazards.
+- **Glassroot Forest**: scanner timing, biological responses, spore interference, living gates.
+- **Inner Sea**: route marking over water, floating beacons/buoys, possible skiff traversal.
+- **Fossil Sky**: scanner reconstruction, brittle walkways, fossil pattern matching.
+- **Gravity Well**: reorientation volumes, tether anchors, spatial route planning.
+- **Mantle Garden**: heat management, timed safe windows, low-visibility steam, pressure vents.
+
+### Discovery Philosophy
+
+Discoveries should not be collectible trivia. Each discovery should do at least one of these:
+
+- Explain how the map works.
+- Reveal a safe route or hazard rule.
+- Deepen the ancient-machine mystery.
+- Show how human survey teams are adapting.
+- Give the journal a meaningful field-science tone.
+- Foreshadow a later map.
