@@ -1,4 +1,5 @@
 #include "AbyssalGameplayLibrary.h"
+#include "AbyssalAudioCueSubsystem.h"
 #include "BeaconSubsystem.h"
 #include "DiscoverySubsystem.h"
 #include "ObjectiveSubsystem.h"
@@ -36,4 +37,10 @@ UBeaconSubsystem* UAbyssalGameplayLibrary::GetBeaconSubsystem(const UObject* Wor
 {
     UGameInstance* GameInstance = ResolveGameInstance(WorldContextObject);
     return GameInstance ? GameInstance->GetSubsystem<UBeaconSubsystem>() : nullptr;
+}
+
+UAbyssalAudioCueSubsystem* UAbyssalGameplayLibrary::GetAudioCueSubsystem(const UObject* WorldContextObject)
+{
+    UGameInstance* GameInstance = ResolveGameInstance(WorldContextObject);
+    return GameInstance ? GameInstance->GetSubsystem<UAbyssalAudioCueSubsystem>() : nullptr;
 }

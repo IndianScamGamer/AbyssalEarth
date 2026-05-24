@@ -112,9 +112,8 @@ Not a current production priority. Keep this design available for later, after t
   - `SM_Rift_HexCollector_Cluster_A/B_Broken`
   - `SM_Rift_OrbFrame_A`, `SM_Rift_OrbHub_A`, `SM_Rift_BeamEmitterNode_A`
   - `SM_Rift_AncientWall_Gate_A`
-- Add `Content/Design/DT_LuminousRiftAmbience.csv` with ambience cue rows for each zone.
 - Extend `Docs/BLUEPRINT_IMPLEMENTATION_NOTES.md` after Windows-side testing with any actual Blueprint names, screenshots, and deviations from the planned setup.
-- Sketch `UAbyssalAudioCueSubsystem` that listens to scanner/discovery/objective delegates and forwards to Blueprint events.
+- In Unreal, create `BP_AudioCueRouter` from the `UAbyssalAudioCueSubsystem` notes and bind temporary SoundCue/MetaSound assets to the emitted cue ids.
 - Design `UAbyssalHealthComponent` with max/current HP, damage, death, and Blueprint delegates.
 - Review `AEmberVentHazard` and plan how it becomes the base for future Mantle Garden pressure vents.
 - Add automated CSV validation script or documentation for design CSV formats.

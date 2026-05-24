@@ -7,6 +7,7 @@
 class UDiscoverySubsystem;
 class UObjectiveSubsystem;
 class UBeaconSubsystem;
+class UAbyssalAudioCueSubsystem;
 
 UCLASS()
 class ABYSSALEARTH_API UAbyssalGameplayLibrary : public UBlueprintFunctionLibrary
@@ -22,4 +23,7 @@ public:
 
     UFUNCTION(BlueprintPure, Category = "Abyssal Earth|Subsystems", meta = (WorldContext = "WorldContextObject"))
     static UBeaconSubsystem* GetBeaconSubsystem(const UObject* WorldContextObject);
+
+    UFUNCTION(BlueprintPure, Category = "Abyssal Earth|Subsystems", meta = (WorldContext = "WorldContextObject"))
+    static UAbyssalAudioCueSubsystem* GetAudioCueSubsystem(const UObject* WorldContextObject);
 };

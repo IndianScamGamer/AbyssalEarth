@@ -39,6 +39,7 @@ The current C++ exposes the subsystem accessors through `UAbyssalGameplayLibrary
 - `GetDiscoverySubsystem(WorldContextObject)`
 - `GetObjectiveSubsystem(WorldContextObject)`
 - `GetBeaconSubsystem(WorldContextObject)`
+- `GetAudioCueSubsystem(WorldContextObject)`
 
 Use those from widgets rather than manually walking through Game Instance nodes each time.
 
@@ -350,6 +351,44 @@ PIE checks:
 - Completing a trigger or debug command updates the HUD immediately.
 - Route completion produces a distinct quiet state rather than stale objective text.
 
+## BP_AudioCueRouter
+
+Goal: keep first-pass audio implementation data-driven and Blueprint-owned while C++ forwards gameplay events into one central place.
+
+Recommended Blueprint:
+
+- Class: `Actor` placed once in the active map, or a widget/HUD-owned object if preferred.
+- On Begin Play, call `GetAudioCueSubsystem(WorldContextObject)` from `UAbyssalGameplayLibrary`.
+- Bind to `OnAudioCueRequested`.
+- Switch on `FAbyssalAudioCueEvent.CueId` and play temporary SoundCues, MetaSounds, or Niagara/audio feedback.
+
+Events currently emitted by C++:
+
+| CueId | Source | First-pass use |
+|---|---|---|
+| `SFX_Scanner_Pulse` | player scanner | short scanner ping. |
+| `SFX_Scanner_Found_New` | player scanner | brighter scan success plus discovery toast accent. |
+| `SFX_Scanner_Found_Known` | player scanner | quieter repeat-scan confirmation. |
+| `SFX_Scanner_Miss` | player scanner | soft failed scan tick. |
+| `SFX_Discovery_New` | discovery subsystem | journal/discovery stinger. |
+| `SFX_Objective_New` | objective subsystem | new objective accent. |
+| `SFX_Objective_Complete` | objective subsystem | completion accent. |
+| `MX_Route_Complete` | objective subsystem | route-complete music/stinger hook. |
+
+Ambience data:
+
+- Use `Content/Design/DT_LuminousRiftAmbience.csv` as the first map ambience table.
+- Create one ambience trigger or zone manager per route zone.
+- On zone enter, call `RequestAmbienceCue(CueId, Location, Intensity)` on `UAbyssalAudioCueSubsystem`, then let `BP_AudioCueRouter` fade loops according to the CSV row.
+- The CSV uses placeholder cue asset names for now; replace them with real SoundCue/MetaSound asset paths after audio assets exist.
+
+PIE checks:
+
+- Scanner pulse/found/miss produce distinct temporary sounds.
+- `AbyssalDebugDiscoverAll` fires discovery cue requests.
+- `AbyssalDebugAdvanceObjective` fires objective cue requests.
+- Moving between hand-placed ambience triggers requests the expected `AMB_LR_*` cue ids.
+
 ## Discovery And Objective Placement Rules
 
 Use `Content/Design/LuminousRiftBlockoutChecklist.csv` as the placement tracker.
@@ -373,7 +412,8 @@ Keep `ScanFocusOffset` pointed toward visible geometry, not buried actor origins
 4. Create `BP_RiftEnergyOrb` and place it at the Collector Array.
 5. Create `BP_RiftGoldBeamSpline` and connect at least three beams to provisional targets.
 6. Create `BP_HexCollectorCluster` and place three collector clusters around the orb.
-7. Add or update checklist statuses in `Content/Design/LuminousRiftBlockoutChecklist.csv`.
+7. Add `BP_AudioCueRouter`, bind it to `UAbyssalAudioCueSubsystem`, and test scanner/discovery/objective cue requests with temporary sounds.
+8. Add or update checklist statuses in `Content/Design/LuminousRiftBlockoutChecklist.csv`.
 
 ## Screenshot Acceptance For This Pass
 
@@ -385,4 +425,3 @@ Before calling the pass good, capture or inspect from First Overlook:
 - Blue crystals remain secondary accents.
 - The right-side gate area still has room for `SM_Rift_AncientWall_Gate_A`.
 - HUD elements do not cover the orb or the player route.
-

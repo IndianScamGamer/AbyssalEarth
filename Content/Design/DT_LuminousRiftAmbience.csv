@@ -1,0 +1,8 @@
+CueId,Zone,Priority,LoopCue,StingerCue,Intensity,FadeInSeconds,FadeOutSeconds,ReverbProfile,Notes
+AMB_LR_DescentElevator,Descent Elevator,P0,AMB_MachineShaft_Loop,SFX_ElevatorCableStress,0.75,3.0,4.0,MetalShaft,"Human-made shaft ambience: distant servos, cable tension, air pressure, restrained mechanical hum."
+AMB_LR_FirstOverlook,First Overlook,P0,AMB_RiftVoid_Loop,SFX_RiftReveal_LowBoom,1.00,6.0,8.0,ColossalCavern,"First concept-art reveal: huge low air movement, distant crystal tones, barely audible machinery under the orb."
+AMB_LR_AbyssalApproach,Abyssal Approach,P0,AMB_BridgeAbyss_Loop,SFX_StoneShift_Distant,0.85,4.0,6.0,OpenCavern,"Suspended route ambience: void wind, bridge groans, loose basalt falling into depth."
+AMB_LR_CrystalGalleries,Crystal Galleries,P0,AMB_CrystalGalleries_Loop,SFX_CrystalPing_Soft,0.90,4.0,5.0,CrystalChamber,"Blue crystal route language: glassy resonances, small electrical ticks, cooler and more intimate than the overlook."
+AMB_LR_CollectorArray,Collector Array,P0,AMB_CollectorOrb_Loop,SFX_GoldBeamSurge,1.00,5.0,7.0,EnergyCore,"Central orb and gold beam network: stable bass energy, warm beam crackle, large but not combat-music intense."
+AMB_LR_AncientGate,Ancient Gate,P0,AMB_AncientGate_Loop,SFX_GateMechanism_Distant,0.95,5.0,7.0,StoneMachineHall,"Monumental wall/gate ambience: deep stone resonance, dormant locks, faint blue circular mechanism tones."
+AMB_LR_SecondSkyOverlook,Second Sky Overlook,P0,AMB_LowerAbyssReveal_Loop,SFX_LowerWorld_Reveal,1.00,6.0,10.0,ColossalCavern,"Final route payoff: widened abyss layer, more distant machine choir, hint of the next impossible inner-Earth space."

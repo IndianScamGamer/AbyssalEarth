@@ -1,4 +1,5 @@
 #include "AbyssalExplorerCharacter.h"
+#include "AbyssalAudioCueSubsystem.h"
 #include "BeaconActor.h"
 #include "BeaconSubsystem.h"
 #include "DiscoveryActor.h"
@@ -67,7 +68,28 @@ void AAbyssalExplorerCharacter::BeginPlay()
         }
     }
 
+    if (GetGameInstance())
+    {
+        if (UAbyssalAudioCueSubsystem* AudioCueSubsystem = GetGameInstance()->GetSubsystem<UAbyssalAudioCueSubsystem>())
+        {
+            AudioCueSubsystem->RegisterScannerComponent(ScannerComponent);
+        }
+    }
+
     OnTakeAnyDamage.AddDynamic(this, &AAbyssalExplorerCharacter::HandleTakeAnyDamage);
+}
+
+void AAbyssalExplorerCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+    if (GetGameInstance())
+    {
+        if (UAbyssalAudioCueSubsystem* AudioCueSubsystem = GetGameInstance()->GetSubsystem<UAbyssalAudioCueSubsystem>())
+        {
+            AudioCueSubsystem->UnregisterScannerComponent(ScannerComponent);
+        }
+    }
+
+    Super::EndPlay(EndPlayReason);
 }
 
 void AAbyssalExplorerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

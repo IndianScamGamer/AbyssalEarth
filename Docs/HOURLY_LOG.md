@@ -173,3 +173,12 @@
 - Updated `Docs/NEXT_TASKS.md` to mark the initial Blueprint implementation notes as done and leave a follow-up for Windows-side tested deviations/screenshots.
 - Verification: checked the new doc for references to required Blueprint classes, C++ classes, and default objective ids; Unreal compile was not run on this Linux side.
 - Next: on Windows, create the listed Blueprint assets, verify scanner/journal/objective HUD in PIE with `AbyssalDebugDiscoverAll`, `AbyssalDebugResetDiscoveries`, and `AbyssalDebugAdvanceObjective`, then place the orb/beam/collector actors in `MAP_LuminousRift_Blockout`.
+
+## 2026-05-24 11:47 EDT
+
+- Added `UAbyssalAudioCueSubsystem`, a Blueprint-facing game instance subsystem that binds discovery/objective delegates and registered scanner components, then emits `FAbyssalAudioCueEvent` requests for scanner pulse/found/miss, new discoveries, objective changes/completions, and route completion.
+- Registered the player scanner with the audio cue subsystem from `AAbyssalExplorerCharacter` begin/end play, and exposed `GetAudioCueSubsystem` through `UAbyssalGameplayLibrary` for Blueprint routing.
+- Added `Content/Design/DT_LuminousRiftAmbience.csv` with P0 ambience rows for Descent Elevator, First Overlook, Abyssal Approach, Crystal Galleries, Collector Array, Ancient Gate, and Second Sky Overlook.
+- Extended `Docs/BLUEPRINT_IMPLEMENTATION_NOTES.md` with `BP_AudioCueRouter` setup, emitted cue ids, ambience-table usage, and PIE checks; updated `Docs/NEXT_TASKS.md` to point the next editor pass at binding temporary audio assets.
+- Verification: parsed the new ambience CSV, inspected C++ references with `rg`, and checked changed files with `git diff`; Unreal compile was not run on this Linux side.
+- Next: in Unreal, create `BP_AudioCueRouter`, bind temporary SoundCue/MetaSound assets to the emitted cue ids, add ambience trigger volumes per Luminous Rift zone, and PIE-test scanner/discovery/objective audio with the debug commands.
