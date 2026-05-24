@@ -127,7 +127,7 @@ Generated concept art now lives under `Content/ArtDirection/Concepts/` and is or
 - `Environments/`: descent shaft, crashed elevator, bridge/platform kit, and machinery-detail references.
 - `Intro/`: submarine exterior/interior and expedition-wall visual references for the opening sequence.
 - `Items/`: blue crystal harvestable, ancient terminal/fabricator, expedition props, and item model toolkit references.
-- `Concept Art Generation/`: sorted comprehensive concept dump with production buckets, archived first passes, and regenerated tablet-journal/beacon references.
+- Additional sorted folders at this level include `Luminous_Rift/`, future-map studies, material studies, composition studies, narrative beats, panoramas, regenerated tablet-journal/beacon references, and archived first passes.
 
 Key documents:
 

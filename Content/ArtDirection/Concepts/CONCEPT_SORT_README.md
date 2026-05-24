@@ -1,6 +1,6 @@
 # Concept Art Generation Sort
 
-This folder is the sorted version of the generated concept art dump.
+This folder is the sorted version of the generated concept art dump. The old `Concept Art Generation/` holding folder was removed; its contents now live directly under `Content/ArtDirection/Concepts/`.
 
 ## Production Buckets
 
@@ -23,20 +23,30 @@ This folder is the sorted version of the generated concept art dump.
 
 The paper-journal images were archived because the field journal direction is now a rugged modern tablet rather than a physical notebook:
 
-- `_Archived_Replaced/Journal_Paper_FirstPass/HE-006.png`
-- `_Archived_Replaced/Journal_Paper_FirstPass/NR-006.png`
+- `Archived_Replaced/Journal_Paper_FirstPass/HE-006.png`
+- `Archived_Replaced/Journal_Paper_FirstPass/NR-006.png`
 
 The first-pass beacon images were archived because the beacon should feel like compact grounded expedition equipment, not a generic light pillar or unclear prop:
 
-- `_Archived_Replaced/Beacon_FirstPass/HE-003.png`
-- `_Archived_Replaced/Beacon_FirstPass/AD-007.png`
-- `_Archived_Replaced/Beacon_FirstPass/AD-008.png`
+- `Archived_Replaced/Beacon_FirstPass/HE-003.png`
+- `Archived_Replaced/Beacon_FirstPass/AD-007.png`
+- `Archived_Replaced/Beacon_FirstPass/AD-008.png`
 
 ## Regenerated References
 
-- `_Regenerated/Journal_Tablet/journal_tablet_close_concept.png`
-- `_Regenerated/Journal_Tablet/journal_tablet_overlook_concept.png`
-- `_Regenerated/Beacon/deployable_beacon_prop_concept.png`
-- `_Regenerated/Beacon/beacon_route_subtle_concept.png`
+- `Regenerated/Journal_Tablet/journal_tablet_close_concept.png`
+- `Regenerated/Journal_Tablet/journal_tablet_overlook_concept.png`
+- `Regenerated/Beacon/deployable_beacon_prop_concept.png`
+- `Regenerated/Beacon/beacon_route_subtle_concept.png`
+
+The first-pass humanoid robot concepts were archived because Helios robots should follow the Figure 03 reference direction: slim service-robot proportions, smooth white shell, glossy black oval faceplate, black joints/hands/hips, and no bulky mech or alien silhouette.
+
+- `Archived_Replaced/Humanoid_Robot_FirstPass/ai_humanoid_close_concept.png`
+- `Archived_Replaced/Humanoid_Robot_FirstPass/ai_humanoids_lineup_concept.png`
+
+Current Helios robot references:
+
+- `Characters/helios_figure03_style_fullbody_concept.png`
+- `Characters/helios_figure03_style_lineup_concept.png`
 
 Keep the regenerated tablet direction as the canonical journal direction unless the equipment design changes later.

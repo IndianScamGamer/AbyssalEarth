@@ -27,7 +27,7 @@ The game is about awe, survival, curiosity, and practical scientific discovery. 
 
 ## Player Fantasy
 
-The player is a verification diver/explorer sent to inspect Helios robot construction in the abyssal plains. After the elevator crash, they become a stranded survivor. They carry a scanner, diving/exploration suit, deployable beacons, field journal, and whatever alien technology they learn to repair or fabricate. Their strength is observation, persistence, experimentation, and careful route-finding.
+The player is a verification diver/explorer sent to inspect Helios robot construction in the abyssal plains. After the elevator crash, they become a stranded survivor. They carry a scanner, diving/exploration suit, deployable beacons, rugged digital tablet journal, and whatever alien technology they learn to repair or fabricate. Their strength is observation, persistence, experimentation, and careful route-finding.
 
 ## Initial Mechanics
 

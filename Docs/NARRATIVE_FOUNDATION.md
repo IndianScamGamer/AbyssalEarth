@@ -82,7 +82,7 @@ The player exits the submarine into a short straight passage leading to the elev
 
 ### Shot 05 - Helios Robots
 
-The passage contains several humanoid Helios robots. Their silhouette should be close to practical humanoid construction robots: not cute, not military, not overly human, but familiar enough that the player trusts the expedition at first.
+The passage contains several humanoid Helios robots. Their silhouette should follow the Figure 03 reference direction: slim modern service robots with smooth white shells, glossy black oval faceplates, black joints/hands/hips, and calm human-scale proportions. They should feel familiar and trustworthy at first, not cute, not military, not alien, and not bulky construction mechs.
 
 A short interaction can happen here. This is the final normal dialogue/text-bubble moment before the real game begins.
 
