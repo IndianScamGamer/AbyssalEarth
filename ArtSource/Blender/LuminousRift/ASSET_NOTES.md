@@ -13,6 +13,7 @@ Detailed Claude/Blender prompts for the first Luminous Rift asset pass live unde
 - Docs/AssetPrompts/LuminousRift/05_OrbApparatus.md
 - Docs/AssetPrompts/LuminousRift/06_AncientGateWall.md
 - Docs/AssetPrompts/LuminousRift/07_BackgroundDepthKit.md
+- Docs/AssetPrompts/LuminousRift/08_HumanSurveyKit.md
 
 Workers should use these prompts with Docs/CORE_REFERENCE_LUMINOUS_RIFT.md, Docs/BLENDER_ASSET_PIPELINE.md, and Docs/MATERIAL_SPECS.md. After creating any mesh, replace the relevant status below with source/export paths and production notes.
 
@@ -134,3 +135,47 @@ Each asset entry should include:
 - Collision: none.
 - Material slots: `mat_wet_basalt`, optional `mat_ancient_machine_dark`, optional `mat_blue_emissive`.
 - Nanite/LOD: Nanite recommended for hero-distance pieces; simple LODs acceptable for very distant copies.
+
+## Human Survey Kit Targets
+
+Use Docs/AssetPrompts/LuminousRift/08_HumanSurveyKit.md for this first human-scale prop pass.
+
+### SM_Human_SurveyCrate_A
+
+- Status: needed.
+- Intended use: recent field-expedition crate for Descent Elevator, First Overlook, and temporary camp dressing.
+- Approximate dimensions: 0.8-1.2 m wide x 0.5-0.9 m tall.
+- Pivot/origin: base center at floor contact.
+- Collision: simple box collision or none if decorative.
+- Material slots: `mat_human_equipment`, optional `mat_blue_emissive` for tiny status LEDs.
+- Nanite/LOD: standard static mesh LODs; Nanite not required.
+
+### SM_Human_PortableLamp_A
+
+- Status: needed.
+- Intended use: small human work light for route readability, first-overlook scale, and descent elevator dressing.
+- Approximate dimensions: 0.6-1.4 m tall.
+- Pivot/origin: base center at floor contact.
+- Collision: simple convex or none if tucked out of player path.
+- Material slots: `mat_human_equipment`, `mat_blue_emissive`.
+- Nanite/LOD: standard static mesh LODs; pair with a small Unreal light only for nearby placed instances.
+
+### SM_Human_CableCoil_A
+
+- Status: needed.
+- Intended use: temporary survey dressing near elevator, lamps, consoles, bridge nodes, and small camps.
+- Approximate dimensions: 0.8-1.5 m diameter.
+- Pivot/origin: base center at floor contact; document if modeled vertical instead of flat.
+- Collision: no collision or simple low convex collision.
+- Material slots: `mat_human_equipment`, optional `mat_blue_emissive` for connector status light.
+- Nanite/LOD: standard static mesh LODs.
+
+### SM_Human_FieldConsole_A
+
+- Status: needed.
+- Intended use: small rugged expedition readout/terminal prop for the elevator area and optional overlook camp.
+- Approximate dimensions: 1.2-2.0 m wide, waist-high.
+- Pivot/origin: base center at floor contact.
+- Collision: simple box collision if placed near player path.
+- Material slots: `mat_human_equipment`, `mat_blue_emissive`.
+- Nanite/LOD: standard static mesh LODs; keep screen/status glow small.

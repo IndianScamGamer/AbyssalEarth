@@ -1,5 +1,14 @@
 # Hourly Work Log
 
+## 2026-05-24 14:41 EDT
+
+- Added `Docs/AssetPrompts/LuminousRift/08_HumanSurveyKit.md` with a Claude/Blender-ready brief for `SM_Human_SurveyCrate_A`, `SM_Human_PortableLamp_A`, `SM_Human_CableCoil_A`, and `SM_Human_FieldConsole_A`.
+- Updated `Content/Design/LuminousRiftAssetManifest.csv` so the human survey kit rows are `PromptReady` and point to the new prompt.
+- Updated `ArtSource/Blender/LuminousRift/ASSET_NOTES.md` with human survey kit placeholder entries covering dimensions, pivots, collision, material slots, and LOD guidance.
+- Updated `Docs/NEXT_TASKS.md` so the human kit prompt is visible alongside the current asset-production starting order.
+- Verification: CSV parsed cleanly and manifest prompt paths were checked locally.
+- Next: Windows/Claude can run the human survey kit prompt after the core P0 cavern assets, then replace the placeholder asset notes with source/export paths and known issues.
+
 ## 2026-05-24 13:41 EDT
 
 - Added `Docs/AssetPrompts/LuminousRift/07_BackgroundDepthKit.md` for the Luminous Rift background depth kit: cavern wall modules, ancient tower segments, hanging slabs, and distant lower-abyss spires.

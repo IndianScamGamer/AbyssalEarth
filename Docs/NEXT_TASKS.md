@@ -70,6 +70,7 @@ Start here. These are the assets Vivek and Claude should build first because the
    - `SM_Human_CableCoil_A`
    - `SM_Human_FieldConsole_A`
    - Why next: scale and prologue dressing.
+   - Prompt: `Docs/AssetPrompts/LuminousRift/08_HumanSurveyKit.md`.
 
 ## P1 - Story And Prologue Work
 
@@ -112,6 +113,7 @@ Not a current production priority. Keep this design available for later, after t
   - `SM_Rift_HexCollector_Cluster_A/B_Broken`
   - `SM_Rift_OrbFrame_A`, `SM_Rift_OrbHub_A`, `SM_Rift_BeamEmitterNode_A`
   - `SM_Rift_AncientWall_Gate_A`
+  - `SM_Human_SurveyCrate_A`, `SM_Human_PortableLamp_A`, `SM_Human_CableCoil_A`, `SM_Human_FieldConsole_A`
 - Extend `Docs/BLUEPRINT_IMPLEMENTATION_NOTES.md` after Windows-side testing with any actual Blueprint names, screenshots, and deviations from the planned setup.
 - In Unreal, create `BP_AudioCueRouter` from the `UAbyssalAudioCueSubsystem` notes and bind temporary SoundCue/MetaSound assets to the emitted cue ids.
 - Compile and PIE-test `UAbyssalHealthComponent`, then create `WBP_SurvivalHUD` and bind it to the component's health/damage/death delegates.
