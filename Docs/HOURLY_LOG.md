@@ -121,6 +121,7 @@
 - Verification: still no UnrealBuildTool on PATH; signatures match standard UE 5.4 patterns (`OnTakeAnyDamage` is `FTakeAnyDamageSignature` on `AActor`, and `GEngine->GetWorldFromContextObject` is the canonical world-context resolver).
 - Next: write the ambience CSV draft and audio subsystem stub when continuing without the editor; otherwise compile and create the Blueprint children listed above.
 
+<<<<<<< Updated upstream
 ## 2026-05-23 18:40 EDT
 
 - Pulled the latest remote changes from `origin/main` (fast-forward to `790adcc`) after Vivek confirmed the project opens in Unreal.
@@ -207,3 +208,16 @@
 - Updated the technical and Blueprint notes with `WBP_SurvivalHUD` binding instructions and Ember Vent PIE verification steps; updated `NEXT_TASKS.md` to move health work from design to compile/HUD testing.
 - Verification: source inspected with `rg`; UnrealBuildTool is still unavailable on this Linux side, so compile must happen on Windows/UE 5.4+.
 - Next: compile in Unreal, create `WBP_SurvivalHUD`, bind it to `UAbyssalHealthComponent`, and verify `BP_EmberVentHazard` radial damage visibly reduces HP and fires death feedback.
+=======
+## 2026-05-22 EDT (bug fixes / UE 5.7 compatibility)
+
+**Automated fixes applied (code only, no editor required):**
+
+- `AbyssalEarth.Target.cs` and `AbyssalEarthEditor.Target.cs` — bumped `BuildSettingsVersion` to `V6` and `IncludeOrderVersion` to `Latest` for UE 5.7 compatibility. These values had drifted behind the engine version and caused build warnings.
+- `AbyssalExplorerCharacter.cpp` — reverted camera attachment point from the `head` socket on `GetMesh()` to the capsule root component. The mesh component is `nullptr` at construction time, so attaching to a socket that doesn't exist yet caused a crash before the Blueprint-assigned mesh was loaded. Root attachment is correct until a mesh is assigned in the Blueprint editor and a `head` socket is confirmed to exist.
+- `AbyssalExplorerCharacter.cpp` — wrapped all three debug exec functions (`AbyssalDebugDiscoverAll`, `AbyssalDebugResetDiscoveries`, `AbyssalDebugAdvanceObjective`) in `#if !UE_BUILD_SHIPPING` / `#endif` guards in the .cpp, matching the intent already documented in `TECHNICAL_PLAN.md`.
+
+**Pending manual Unreal Editor task (blocks Blueprint editor from crashing):**
+
+- Open `BP_AbyssalExplorerCharacter` → select the **Mesh** component → assign the correct skeletal mesh in the Details panel. The Blueprint editor crashes on open until a valid mesh is assigned because the camera attachment logic runs during construction script evaluation. This is the top-priority editor task — all other Blueprint work is blocked behind it.
+>>>>>>> Stashed changes
