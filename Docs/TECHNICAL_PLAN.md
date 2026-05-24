@@ -90,7 +90,7 @@ Available only in non-shipping builds. Type into the in-game console while a `BP
 
 ## Blueprint Plan
 
-- `BP_AbyssalExplorerCharacter`: assign input actions and camera tuning.
+- `BP_AbyssalExplorerCharacter`: assign the skeletal mesh first (required — Blueprint editor crashes without it). Then assign input actions and tune camera. `FirstPersonCamera` currently attaches to the capsule root component; once a mesh with a `head` socket is assigned, re-parent the camera to that socket for animation-driven head bob and crouch dip.
 - `BP_DiscoveryActor_Base`: mesh, outline, scan pulse response, scan focus offsets.
 - `BP_BeaconActor`: mesh, light, color variants.
 - `BP_LuminousRift_GameMode`: vertical slice rules.
