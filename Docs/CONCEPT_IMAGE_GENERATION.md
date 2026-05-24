@@ -1,5 +1,36 @@
 # Concept Image Generation Log
 
+## 2026-05-24 Concept Dump Sort And Regeneration
+
+Sorted the comprehensive generated concept dump under:
+
+`Content/ArtDirection/Concepts/Concept Art Generation/`
+
+The elevator/descent-shaft images were preserved in `00_Elevator_Shaft_User_Made_Do_Not_Modify/`.
+
+Archived first-pass paper-journal references because the journal should be a rugged modern digital tablet:
+
+- `_Archived_Replaced/Journal_Paper_FirstPass/HE-006.png`
+- `_Archived_Replaced/Journal_Paper_FirstPass/NR-006.png`
+
+Archived first-pass beacon references because the beacon should read as compact grounded expedition equipment:
+
+- `_Archived_Replaced/Beacon_FirstPass/HE-003.png`
+- `_Archived_Replaced/Beacon_FirstPass/AD-007.png`
+- `_Archived_Replaced/Beacon_FirstPass/AD-008.png`
+
+Generated replacements with OpenClaw image generation using `openai/gpt-image-2`, 16:9 PNG, high quality:
+
+- `_Regenerated/Journal_Tablet/journal_tablet_close_concept.png`
+- `_Regenerated/Journal_Tablet/journal_tablet_overlook_concept.png`
+- `_Regenerated/Beacon/deployable_beacon_prop_concept.png`
+- `_Regenerated/Beacon/beacon_route_subtle_concept.png`
+
+Regeneration direction:
+
+- Journal: latest-generation iPad-like black glass tablet in a rugged graphite expedition case, clean dark-mode discovery UI, cyan/gold accents, no paper notebook, no pencil, no brand logo.
+- Beacon: 30-45 cm tripod/stake hybrid expedition prop with graphite body, folding stabilizer legs, small colored lens core, subtle ground halo, no traffic-cone silhouette, no tall magical light pillar.
+
 ## 2026-05-23 World Atlas Pass
 
 Generated with OpenClaw image generation using openai/gpt-image-2, 16:9 PNG, high quality. Final project images were saved under Content/ArtDirection/WorldMaps/.
