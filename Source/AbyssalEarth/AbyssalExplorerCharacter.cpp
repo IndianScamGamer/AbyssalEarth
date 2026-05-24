@@ -21,7 +21,10 @@ AAbyssalExplorerCharacter::AAbyssalExplorerCharacter()
     PrimaryActorTick.bCanEverTick = false;
 
     FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
-    FirstPersonCamera->SetupAttachment(GetMesh(), TEXT("head"));
+    // Attach to the capsule root rather than the skeletal mesh socket.
+    // The character mesh is assigned per-Blueprint; attaching to "head" here
+    // fires GetSocketInfoByName warnings when no SkeletalMesh is set.
+    FirstPersonCamera->SetupAttachment(GetRootComponent());
     FirstPersonCamera->SetRelativeLocation(FVector(0.0f, 0.0f, 64.0f));
     FirstPersonCamera->bUsePawnControlRotation = true;
 
@@ -169,6 +172,7 @@ void AAbyssalExplorerCharacter::HandleTakeAnyDamage(AActor* DamagedActor, float 
 
 void AAbyssalExplorerCharacter::AbyssalDebugDiscoverAll()
 {
+#if !UE_BUILD_SHIPPING
     UWorld* World = GetWorld();
     UGameInstance* GameInstance = GetGameInstance();
     UDiscoverySubsystem* DiscoverySubsystem = GameInstance ? GameInstance->GetSubsystem<UDiscoverySubsystem>() : nullptr;
@@ -198,10 +202,12 @@ void AAbyssalExplorerCharacter::AbyssalDebugDiscoverAll()
     }
 
     UE_LOG(LogTemp, Display, TEXT("[AbyssalDebug] Registered %d new discoveries."), Registered);
+#endif // !UE_BUILD_SHIPPING
 }
 
 void AAbyssalExplorerCharacter::AbyssalDebugResetDiscoveries()
 {
+#if !UE_BUILD_SHIPPING
     UGameInstance* GameInstance = GetGameInstance();
     if (!GameInstance)
     {
@@ -219,10 +225,12 @@ void AAbyssalExplorerCharacter::AbyssalDebugResetDiscoveries()
     }
 
     UE_LOG(LogTemp, Display, TEXT("[AbyssalDebug] Discoveries cleared from save, objective route reset."));
+#endif // !UE_BUILD_SHIPPING
 }
 
 void AAbyssalExplorerCharacter::AbyssalDebugAdvanceObjective()
 {
+#if !UE_BUILD_SHIPPING
     UGameInstance* GameInstance = GetGameInstance();
     if (!GameInstance)
     {
@@ -234,6 +242,7 @@ void AAbyssalExplorerCharacter::AbyssalDebugAdvanceObjective()
         const bool bAdvanced = ObjectiveSubsystem->CompleteCurrentObjective();
         UE_LOG(LogTemp, Display, TEXT("[AbyssalDebug] AdvanceObjective -> %s"), bAdvanced ? TEXT("advanced") : TEXT("no-op (route complete?)"));
     }
+#endif // !UE_BUILD_SHIPPING
 }
 
 void AAbyssalExplorerCharacter::PlaceBeacon()
