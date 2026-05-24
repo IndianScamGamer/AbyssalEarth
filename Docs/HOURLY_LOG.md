@@ -1,5 +1,13 @@
 # Hourly Work Log
 
+## 2026-05-24 19:49 EDT
+
+- Added `Content/Design/LuminousRiftAssetImportChecklist.csv`, a Windows/Unreal handoff checklist for every current Luminous Rift asset row covering expected export path, source prompt, required material slots, pivot check, collision check, Nanite/LOD guidance, placement zone, acceptance test, and status.
+- Updated `Scripts/validate_design_data.py` so the new import checklist is parsed and checked against `LuminousRiftAssetManifest.csv`, source prompt paths, status values, export folder conventions, interchange extensions, and material-slot presence.
+- Updated `Docs/BLENDER_ASSET_PIPELINE.md` and `ArtSource/Blender/LuminousRift/ASSET_NOTES.md` to direct Blender/Claude workers to use the import checklist when assets move from prompt-ready to exported/imported/placed.
+- Verification: ran `python3 Scripts/validate_design_data.py`; it passed across 10 CSV files, 193 rows, and the JSON schema.
+- Next: when Windows/Claude exports the first crystal and ledge assets, update both `ASSET_NOTES.md` and the matching import-checklist rows from `PromptReady` to `Exported`, then to `Imported` or `Placed` after Unreal verification.
+
 ## 2026-05-24 14:41 EDT
 
 - Added `Docs/AssetPrompts/LuminousRift/08_HumanSurveyKit.md` with a Claude/Blender-ready brief for `SM_Human_SurveyCrate_A`, `SM_Human_PortableLamp_A`, `SM_Human_CableCoil_A`, and `SM_Human_FieldConsole_A`.

@@ -17,6 +17,8 @@ Detailed Claude/Blender prompts for the first Luminous Rift asset pass live unde
 
 Workers should use these prompts with Docs/CORE_REFERENCE_LUMINOUS_RIFT.md, Docs/BLENDER_ASSET_PIPELINE.md, and Docs/MATERIAL_SPECS.md. After creating any mesh, replace the relevant status below with source/export paths and production notes.
 
+Use `Content/Design/LuminousRiftAssetImportChecklist.csv` as the export/import handoff tracker. When an asset is exported from Blender, update its checklist row with the current status and any pivot, collision, material-slot, or import issues found in Unreal.
+
 ## Required Note Format
 
 Each asset entry should include:

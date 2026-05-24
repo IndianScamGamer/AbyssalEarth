@@ -69,6 +69,14 @@ Each entry should include:
 - LOD/Nanite recommendation.
 - Any known issues.
 
+### Import Checklist
+
+After export, use the editor handoff checklist at:
+
+`Content/Design/LuminousRiftAssetImportChecklist.csv`
+
+For each exported mesh, update the matching row from `PromptReady` to `Exported`, then to `Imported` or `Placed` after Windows/Unreal verification. The checklist captures the expected export path, source prompt, material slots, pivot check, collision check, Nanite/LOD choice, placement zone, and first-pass acceptance test. Keep this file in sync with `Content/Design/LuminousRiftAssetManifest.csv` whenever asset names or prompt ownership change.
+
 ## Scale And Units
 
 Unreal units are centimeters. Blender should use metric units.

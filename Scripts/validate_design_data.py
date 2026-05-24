@@ -40,6 +40,14 @@ CSV_SPECS = {
         ],
         "id": "AssetName",
     },
+    "LuminousRiftAssetImportChecklist.csv": {
+        "columns": [
+            "AssetName", "Priority", "ImportTargetPath", "SourcePrompt",
+            "RequiredMaterialSlots", "PivotCheck", "CollisionCheck",
+            "NaniteOrLOD", "PlacementZone", "AcceptanceCheck", "Status", "Notes",
+        ],
+        "id": "AssetName",
+    },
     "LuminousRiftBlockoutChecklist.csv": {
         "columns": [
             "ChecklistId", "Zone", "ObjectType", "TargetName", "Priority",
@@ -172,6 +180,35 @@ def validate_asset_manifest(path: Path, rows: list[dict[str, str]], errors: list
                 add_error(errors, f"{path.relative_to(ROOT)} line {index}: missing prompt file {prompt}")
 
 
+def validate_luminous_rift_import_checklist(rows: list[dict[str, str]], errors: list[str]) -> None:
+    manifest_rows = read_csv(
+        DESIGN_DIR / "LuminousRiftAssetManifest.csv",
+        CSV_SPECS["LuminousRiftAssetManifest.csv"]["columns"],
+        errors,
+    )
+    manifest_assets = {row["AssetName"].strip() for row in manifest_rows}
+
+    for index, row in enumerate(rows, start=2):
+        asset_name = row["AssetName"].strip()
+        status = row["Status"].strip()
+        import_target = row["ImportTargetPath"].strip()
+        source_prompt = row["SourcePrompt"].strip()
+        material_slots = [slot.strip() for slot in row["RequiredMaterialSlots"].split(";") if slot.strip()]
+
+        if asset_name not in manifest_assets:
+            add_error(errors, f"Content/Design/LuminousRiftAssetImportChecklist.csv line {index}: {asset_name} is not listed in LuminousRiftAssetManifest.csv")
+        if status not in VALID_ASSET_STATUSES:
+            add_error(errors, f"Content/Design/LuminousRiftAssetImportChecklist.csv line {index}: unknown Status {status}")
+        if not import_target.startswith("Content/ArtSourceExports/LuminousRift/"):
+            add_error(errors, f"Content/Design/LuminousRiftAssetImportChecklist.csv line {index}: import target should live under Content/ArtSourceExports/LuminousRift/")
+        if not import_target.endswith((".fbx", ".glb")):
+            add_error(errors, f"Content/Design/LuminousRiftAssetImportChecklist.csv line {index}: import target should be .fbx or .glb")
+        if source_prompt and not (ROOT / source_prompt).exists():
+            add_error(errors, f"Content/Design/LuminousRiftAssetImportChecklist.csv line {index}: missing source prompt {source_prompt}")
+        if not material_slots:
+            add_error(errors, f"Content/Design/LuminousRiftAssetImportChecklist.csv line {index}: no required material slots listed")
+
+
 def validate_world_maps(rows: list[dict[str, str]], errors: list[str]) -> set[str]:
     map_ids = set()
     for index, row in enumerate(rows, start=2):
@@ -231,6 +268,7 @@ def main() -> int:
 
     validate_asset_manifest(DESIGN_DIR / "LuminousRiftAssetManifest.csv", csv_rows["LuminousRiftAssetManifest.csv"], errors)
     validate_asset_manifest(DESIGN_DIR / "WorldAssetManifest.csv", csv_rows["WorldAssetManifest.csv"], errors)
+    validate_luminous_rift_import_checklist(csv_rows["LuminousRiftAssetImportChecklist.csv"], errors)
     map_ids = validate_world_maps(csv_rows["WorldMapManifest.csv"], errors)
     validate_world_assets(csv_rows["WorldAssetManifest.csv"], map_ids, errors)
     validate_objective_ids(errors)
