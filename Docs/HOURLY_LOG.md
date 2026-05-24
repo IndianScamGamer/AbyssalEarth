@@ -138,3 +138,11 @@
 - Updated `ArtSource/Blender/LuminousRift/ASSET_NOTES.md` with the prompt package index so Blender workers can start from the correct briefs and replace placeholder notes after export.
 - Verification: parsed `Content/Design/LuminousRiftAssetManifest.csv` with Python CSV reader and checked that every prompt path referenced by the manifest exists.
 - Next: Windows/Claude should start with `Docs/AssetPrompts/LuminousRift/01_BlueCrystalClusters.md`, export the crystal kit, then update `ASSET_NOTES.md` with source/export paths and known issues.
+
+## 2026-05-23 23:27 EDT
+
+- Fast-forwarded `main` to `origin/main` before starting work, preserving the latest Windows/Unreal updates.
+- Added `Content/Design/LuminousRiftBlockoutChecklist.csv`, a status-trackable CSV version of the Luminous Rift placement checklist with per-zone rows for landmarks, meshes, discoveries, objective triggers, lighting, collision, atmosphere, and acceptance criteria.
+- Updated `Docs/LUMINOUS_RIFT_BLOCKOUT.md` and `README.md` to point editor workers at the new checklist, and removed the completed checklist item from `Docs/NEXT_TASKS.md`.
+- Verification: parsed the new CSV with Python's `csv.DictReader`, checked required columns and unique checklist IDs, and verified key objective/discovery ids exist in project source/design data.
+- Next: create `Docs/BLUEPRINT_IMPLEMENTATION_NOTES.md` for `BP_RiftEnergyOrb`, `BP_RiftGoldBeamSpline`, `BP_HexCollectorCluster`, scanner/journal widgets, and the objective HUD.

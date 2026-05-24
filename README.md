@@ -114,6 +114,7 @@ Key documents:
 - `Docs/WORLD_ATLAS.md`: long-term map roadmap with generated concept references.
 - `Docs/CONCEPT_IMAGE_GENERATION.md`: prompt log for generated world-map concepts.
 - `Content/Design/LuminousRiftAssetManifest.csv`: prioritized asset manifest.
+- `Content/Design/LuminousRiftBlockoutChecklist.csv`: editor-trackable placement checklist for the first map.
 - `Content/Design/WorldMapManifest.csv`: planned map manifest.
 - `Content/Design/WorldAssetManifest.csv`: first-pass future-map asset manifest.
 - `ArtSource/Blender/LuminousRift/ASSET_NOTES.md`: notes file for Blender-created assets.

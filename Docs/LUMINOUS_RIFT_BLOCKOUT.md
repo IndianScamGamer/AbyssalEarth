@@ -94,6 +94,10 @@ Purpose: final reveal and route completion.
 
 Coordinates assume map origin at the elevator platform center, +X is the forward route direction, +Z is up. These are blockout anchors, not rigid final layout. Composition from the first overlook matters more than exact coordinates.
 
+For editor tracking, the same work is also broken into status rows in:
+
+`Content/Design/LuminousRiftBlockoutChecklist.csv`
+
 ### Zone 1 - Descent Elevator (X 0 to 3000)
 
 Footprint: 30 m access tunnel plus 10-14 m elevator platform. Ceiling 8-12 m. Black basalt surrounds everything.

@@ -34,7 +34,6 @@ Do not let worldbuilding distract from P0 implementation, but use the atlas to m
   - `SM_Rift_OrbFrame_A`, `SM_Rift_OrbHub_A`, `SM_Rift_BeamEmitterNode_A`
   - `SM_Rift_AncientWall_Gate_A`
 - Add `Content/Design/DT_LuminousRiftAmbience.csv` with ambience cue rows for each zone.
-- Add `Content/Design/LuminousRiftBlockoutChecklist.csv` so Unreal placement work can be tracked outside markdown.
 - Add `Docs/BLUEPRINT_IMPLEMENTATION_NOTES.md` with step-by-step instructions for:
   - `BP_RiftEnergyOrb`
   - `BP_RiftGoldBeamSpline`
