@@ -13,7 +13,7 @@ The game is about awe, survival, curiosity, and practical scientific discovery. 
 3. Discovery becomes technology: scanning, naming, sketching, mapping, and revisiting discoveries should unlock understanding, fabrication, and escape tools.
 4. Human smallness: the player should feel competent but tiny against the cavern worlds.
 5. Natural mystery: alien landscapes should still feel geologic, ancient, and physically grounded.
-6. Story becomes environment: after the Luminous Rift reveal, normal storytelling stops and the player learns through survival, scanning, building, and the optional Abyssal Interface.
+6. Story becomes environment: after the Luminous Rift reveal, normal storytelling stops and the player learns through survival, scanning, building, and environmental discovery.
 
 ## Core Loop
 
@@ -36,7 +36,7 @@ The player is a verification diver/explorer sent to inspect Helios robot constru
 - Discovery log with entries for biomes, minerals, lifeforms, structures, alien tech, fabrication clues, and survival rules.
 - Deployable navigation beacons with colored light.
 - Environmental hazards: heat, toxic spores, unstable crystal growth, flooding, darkness, monsters, pressure, gravity anomalies, and alien climates.
-- Abyssal Interface terminal: a diegetic LLM-powered ancient/alien interface for short cryptic hints, lore fragments, warnings, and fabrication guidance.
+- Later add-on: Abyssal Interface terminal, a diegetic LLM-powered ancient/alien interface for short cryptic hints, lore fragments, warnings, and fabrication guidance once the core game is mature.
 - Alien tech fabrication arc: discoveries eventually let the player build devices and a return rift.
 - Photo mode or observation mode as an early priority because visuals are central.
 
@@ -78,6 +78,8 @@ The ending is the player-created rift back to the surface. End credits show stil
 
 Full details live in Docs/ABYSSAL_INTERFACE_AI_SYSTEM.md.
 
+Priority note: this is a later add-on, not an immediate production priority. Current work should focus on assets, maps, survival, discovery, fabrication, and playable game development.
+
 The Abyssal Interface is an in-game LLM-powered system presented through ancient terminals, alien devices, or a mysterious interface presence. Unreal owns UI, input, world state, objectives, inventory, discoveries, scanned artifacts, and visuals. A backend/agent system generates short responses from relevant context.
 
 It should feel:
@@ -117,7 +119,7 @@ Initial post-crash route:
 - First Overlook: see the Luminous Rift and understand the scale of the survival problem.
 - Abyssal Approach: find a safe path through broken ledges and ancient machine spans.
 - Crystal Galleries: discover scanner-reactive crystals and first alien tech principles.
-- Collector Array: discover the central orb, hex collectors, and first interface terminal.
+- Collector Array: discover the central orb, hex collectors, and first alien-tech operating principles.
 - Ancient Gate: learn the machine can be operated.
 - Second Sky Overlook: realize the visible structure is only one layer of a much larger underworld.
 
@@ -142,7 +144,7 @@ The first map proves the core loop, but Abyssal Earth should feel like a descent
 
 ### Long-Term Mechanical Arc
 
-- Luminous Rift: scanner, journal, beacons, Abyssal Interface, alien tech discovery, first survival hazards.
+- Luminous Rift: scanner, journal, beacons, alien tech discovery, first survival hazards, and later optional Abyssal Interface terminal.
 - Glassroot Forest: scanner timing, biological responses, spore interference, living gates.
 - Inner Sea: route marking over water, floating beacons/buoys, possible skiff traversal.
 - Fossil Sky: scanner reconstruction, brittle walkways, fossil pattern matching.

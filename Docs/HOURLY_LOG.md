@@ -143,6 +143,13 @@
 - Verification: design CSV files and the Abyssal Interface JSON schema were parsed locally; Unreal compile was not run on this Linux side.
 - Next: implement the prologue maps/sequence on Windows, then prototype `WBP_AbyssalInterfaceTerminal` and the backend endpoint contract.
 
+## 2026-05-23 23:45 EDT
+
+- Vivek clarified that the Abyssal Interface is not a current priority; it should be treated as a later add-on to keep in mind after the game is much further along.
+- Updated `Docs/NEXT_TASKS.md` so the immediate priority is asset production and playable game development, with a concrete Luminous Rift asset starting order: blue crystals, foreground ledge/rock frame, bridge/platform kit, hex collectors, orb apparatus, ancient gate wall, background depth kit, and human survey kit.
+- Updated `Docs/MILESTONES.md`, `Docs/GAME_DESIGN.md`, and `README.md` to mark the Abyssal Interface as a later add-on and shift near-term milestones toward assets, map blockout, and core gameplay.
+- Next: Vivek/Claude should start with the blue crystal cluster kit and foreground reveal ledge assets, then pull them into the Unreal blockout for first-overlook screenshots.
+
 ## 2026-05-23 19:32 EDT
 
 - Added six detailed Claude/Blender prompt files under `Docs/AssetPrompts/LuminousRift/` for the P0 concept-art-critical asset families: blue crystal clusters, foreground ledge/rock frame, bridge spans, hex collector panels, central orb apparatus, and ancient gate wall.

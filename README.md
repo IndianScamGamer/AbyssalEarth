@@ -95,7 +95,7 @@ A dangerous geothermal garden of black obsidian ridges, white steam columns, ora
 - Environmental hazard foundations, currently including an Ember Vent actor prototype for future hazard zones.
 - Monster and alien-climate survival pressure without turning the game into a shooter-first design.
 - Alien technology discovery and fabrication path that eventually leads to a return rift.
-- Abyssal Interface: a diegetic LLM-powered ancient terminal/interface for cryptic hints, lore fragments, warnings, and fabrication guidance.
+- Later add-on: Abyssal Interface, a diegetic LLM-powered ancient terminal/interface for cryptic hints, lore fragments, warnings, and fabrication guidance once the core game is further along.
 - Blueprint-ready UI hooks for scanner readouts, journal views, objective HUD, damage feedback, and discovery toasts.
 
 ## Current Technical Foundation
@@ -128,7 +128,7 @@ Key documents:
 - `Docs/LUMINOUS_RIFT_BLOCKOUT.md`: route, scale, zones, placement checklist, and screenshot targets.
 - `Docs/MATERIAL_SPECS.md`: master material targets and material instances.
 - `Docs/NARRATIVE_FOUNDATION.md`: opening sequence, post-cavern story rules, main objective arc, and ending.
-- `Docs/ABYSSAL_INTERFACE_AI_SYSTEM.md`: LLM-backed in-game terminal/interface design and backend contract.
+- `Docs/ABYSSAL_INTERFACE_AI_SYSTEM.md`: later add-on design for an LLM-backed in-game terminal/interface and backend contract.
 - `Docs/WORLD_ATLAS.md`: long-term map roadmap with generated concept references.
 - `Docs/CONCEPT_IMAGE_GENERATION.md`: prompt log for generated world-map concepts.
 - `Content/Design/LuminousRiftAssetManifest.csv`: prioritized asset manifest.
@@ -201,4 +201,4 @@ Never overwrite or revert unrelated work from the Windows side, Claude, or anoth
 
 ## Development Status
 
-The project is early but active. The immediate push is to turn the Luminous Rift reference into a playable, editor-built vertical slice with a coherent custom asset kit. The current foundation is strong enough to support map blockout, Blueprint wiring, scanner/discovery flow, objective progression, beacons, and first-pass visual development.
+The project is early but active. The immediate push is asset production and playable game development: turn the Luminous Rift reference into an editor-built vertical slice with a coherent custom asset kit. The current foundation is strong enough to support map blockout, Blueprint wiring, scanner/discovery flow, objective progression, beacons, and first-pass visual development. The Abyssal Interface is documented as a future add-on, not an immediate priority.

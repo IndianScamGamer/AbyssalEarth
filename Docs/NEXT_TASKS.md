@@ -16,13 +16,62 @@ The hourly continuation worker should always pick the highest-impact available t
 The project now has two planning layers:
 
 1. **P0 vertical slice**: make `MAP_LuminousRift` match `Content/ArtDirection/References/luminous_rift_core_reference.png`.
-2. **P0 story/AI foundation**: implement the submarine-to-crash prologue, then stop normal story delivery and shift to survival/discovery/alien-tech fabrication.
-3. **P0 Abyssal Interface**: build the first text terminal for LLM-backed cryptic hints/lore/fabrication guidance.
-4. **World atlas**: define the broader Abyssal Earth map sequence using `Docs/WORLD_ATLAS.md` and the generated concept images in `Content/ArtDirection/WorldMaps/`.
+2. **P0 asset production**: generate, import, and place the first usable Luminous Rift art kit.
+3. **P0 game development**: movement, scanner, beacons, objectives, HUD/journal, survival pressure, and blockout playability.
+4. **P1 prologue**: implement the submarine-to-crash opening after the core cavern loop is playable.
+5. **Later add-on**: keep the Abyssal Interface design in mind, but do not prioritize it until the game is much further along.
+6. **World atlas**: define the broader Abyssal Earth map sequence using `Docs/WORLD_ATLAS.md` and the generated concept images in `Content/ArtDirection/WorldMaps/`.
 
-Do not let worldbuilding distract from P0 implementation, but use the atlas to make asset, material, audio, and code decisions extensible.
+Do not let worldbuilding, story polish, or the Abyssal Interface distract from P0 implementation. The immediate push is assets plus playable game development.
 
-## P0 - Story And Prologue Work
+## P0 - Asset Production Starting Order
+
+Start here. These are the assets Vivek and Claude should build first because they make the map look like the concept fastest and unblock Unreal placement.
+
+1. **Blue crystal clusters**
+   - `SM_Rift_CrystalCluster_S_A/B/C`
+   - `SM_Rift_CrystalCluster_M_A/B/C`
+   - `SM_Rift_CrystalCluster_L_A/B`
+   - `SM_Rift_CrystalCluster_Hero_A`
+   - Why first: fast to make, instantly improves lighting/route language, reusable everywhere.
+2. **Foreground reveal ledge and rock frame**
+   - `SM_Rift_ForegroundLedge_A`
+   - `SM_Rift_RockArch_A/B`
+   - `SM_Rift_Overhang_A/B`
+   - Why next: required for the first screenshot and the Luminous Rift reveal.
+3. **Ancient bridge/platform kit**
+   - `SM_Rift_BridgeSpan_A`
+   - `SM_Rift_BridgeSpan_B_Broken`
+   - `SM_Rift_PlatformNode_A`
+   - Why next: turns the cavern into a playable route.
+4. **Hex collector panels**
+   - `SM_Rift_HexCollector_Tile_A`
+   - `SM_Rift_HexCollector_Cluster_A`
+   - `SM_Rift_HexCollector_Cluster_B_Broken`
+   - Why next: essential visual identity from the core reference.
+5. **Orb apparatus**
+   - `SM_Rift_OrbFrame_A`
+   - `SM_Rift_OrbHub_A`
+   - `SM_Rift_BeamEmitterNode_A`
+   - `BP_RiftEnergyOrb`
+   - `BP_RiftGoldBeamSpline`
+   - Why next: central focal landmark and lighting source.
+6. **Ancient gate wall**
+   - `SM_Rift_AncientWall_Gate_A`
+   - Why next: major right-side landmark, sells scale.
+7. **Background depth kit**
+   - `SM_Rift_TowerSegment_A/B/C`
+   - `SM_Rift_HangingSlab_A/B/C`
+   - `SM_Rift_DistantSpire_A/B`
+   - Why next: makes the abyss feel huge.
+8. **Human survey kit**
+   - `SM_Human_SurveyCrate_A`
+   - `SM_Human_PortableLamp_A`
+   - `SM_Human_CableCoil_A`
+   - `SM_Human_FieldConsole_A`
+   - Why next: scale and prologue dressing.
+
+## P1 - Story And Prologue Work
 
 - Build the opening sequence described in `Docs/NARRATIVE_FOUNDATION.md`: ocean surface, submarine room, briefing display, Helios shaft dock, robot passage, elevator descent, elevator failure, crushed elevator, Luminous Rift reveal.
 - Create `MAP_Prologue_Submarine` or a prototype room/map for the submarine intro.
@@ -34,7 +83,9 @@ Do not let worldbuilding distract from P0 implementation, but use the atlas to m
 - Ensure all normal story/dialogue stops after the Luminous Rift reveal.
 - Add end-credit image/vignette planning for player return, public discovery, and future scientific progress.
 
-## P0 - Abyssal Interface AI Work
+## Later Add-On - Abyssal Interface AI Work
+
+Not a current production priority. Keep this design available for later, after the core game loop, assets, maps, survival, discovery, and fabrication systems are much further along.
 
 - Implement the first text-only `WBP_AbyssalInterfaceTerminal` UI.
 - Add `AAbyssalInterfaceTerminal` interactable actor or Blueprint equivalent.
@@ -48,7 +99,7 @@ Do not let worldbuilding distract from P0 implementation, but use the atlas to m
 - Draft the Interface tone prompt: eerie, ancient, concise, lore-aware, useful but incomplete.
 - Add a first terminal placement to the Collector Array or Ancient Gate route.
 
-## P0 - Luminous Rift Immediate Work
+## P0 - Luminous Rift Game Development Work
 
 ### No Unreal Editor Required
 

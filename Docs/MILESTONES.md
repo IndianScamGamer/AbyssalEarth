@@ -11,7 +11,38 @@ Status: in progress.
 - Create hourly continuation workflow.
 - Establish Git fetch-before-work and push-after-completion workflow.
 
-## Milestone 1 - Prologue And Crash
+## Milestone 1 - Asset Kit And First Map Blockout
+
+Goal: build enough Luminous Rift assets and map structure that the game visually starts to resemble the core reference.
+
+Deliverables:
+
+- Blue crystal cluster kit in small, medium, large, and hero sizes.
+- Foreground reveal ledge, rock arches, and overhangs.
+- Ancient bridge/platform kit for playable traversal.
+- Hex collector panel kit.
+- Central orb apparatus proxy and gold beam spline.
+- Ancient gate wall landmark.
+- Distant tower/hanging slab/spire kit.
+- First pass of `MAP_LuminousRift_Blockout` using these assets.
+- Screenshots from First Overlook, Collector Array, Ancient Gate, and Second Sky Overlook.
+
+## Milestone 2 - Core Gameplay Slice
+
+Goal: make the first Luminous Rift route playable and testable.
+
+Deliverables:
+
+- Player can move, sprint, crouch, and look around.
+- Scanner pulse highlights placeholder discoveries.
+- Three or more scan discoveries can be logged.
+- Beacon actor can be placed as a navigation marker.
+- Objective chain guides player from crash survival into alien-tech discovery.
+- HUD/journal/scanner feedback has first Blueprint pass.
+- One environmental hazard or monster/survival pressure prototype exists.
+- Map has readable landmark composition even with placeholder meshes: first overlook, abyssal approach, crystal galleries, collector array, ancient gate, and second sky overlook.
+
+## Milestone 3 - Prologue And Crash
 
 Goal: playable opening sequence from submarine to Luminous Rift reveal.
 
@@ -27,22 +58,11 @@ Deliverables:
 - Luminous Rift reveal and objective change to SURVIVE.
 - No normal story/dialogue after the reveal.
 
-## Milestone 2 - First Playable Traversal Slice
-
-Goal: playable first-person exploration loop in a blockout Luminous Rift map matching the core concept reference.
-
-Deliverables:
-
-- Player can move, sprint, crouch, and look around.
-- Scanner pulse highlights placeholder discoveries.
-- Three or more scan discoveries can be logged.
-- Beacon actor can be placed as a navigation marker.
-- Objective chain guides player from crash survival into alien-tech discovery.
-- Map has readable landmark composition even with placeholder meshes: first overlook, abyssal approach, crystal galleries, collector array, ancient gate, and second sky overlook.
-
-## Milestone 3 - Abyssal Interface V0
+## Later Milestone - Abyssal Interface V0
 
 Goal: first text-based LLM-backed ancient terminal.
+
+Priority note: later add-on, not part of the immediate production push.
 
 Deliverables:
 
@@ -91,7 +111,7 @@ Deliverables:
 
 - Prologue-to-crash opening.
 - Complete route through Abyssal Approach, Crystal Galleries, Collector Array, Ancient Gate, and Second Sky Overlook.
-- Abyssal Interface V0 terminal.
+- Optional Abyssal Interface V0 terminal only if core game work is already solid.
 - Environmental hazard prototype.
 - Discovery-to-technology progression hook.
 - Finished soundscape pass.
