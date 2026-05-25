@@ -17,6 +17,12 @@ Detailed Claude/Blender prompts for the first Luminous Rift asset pass live unde
 
 Workers should use these prompts with Docs/CORE_REFERENCE_LUMINOUS_RIFT.md, Docs/BLENDER_ASSET_PIPELINE.md, and Docs/MATERIAL_SPECS.md. After creating any mesh, replace the relevant status below with source/export paths and production notes.
 
+## Active Work Orders
+
+Use work orders when starting an export batch. They turn the broader prompts into a concrete production sequence and handoff checklist.
+
+- Docs/AssetWorkOrders/LuminousRift/01_CrystalExportBatch.md - create and export the nine blue crystal cluster variants first.
+
 Use `Content/Design/LuminousRiftAssetImportChecklist.csv` as the export/import handoff tracker. When an asset is exported from Blender, update its checklist row with the current status and any pivot, collision, material-slot, or import issues found in Unreal.
 
 ## Required Note Format
@@ -67,6 +73,7 @@ Each asset entry should include:
 - Material slots: `mat_crystal_blue`, `mat_blue_emissive`, optional `mat_wet_basalt` base.
 - Nanite/LOD: Nanite acceptable for large/hero meshes; simple LODs acceptable for small clusters.
 - Variant intent: A = clean route-readable silhouette, B = broken/asymmetric wall or ledge silhouette, C = low dense scatter/breadcrumb silhouette.
+- Active work order: Docs/AssetWorkOrders/LuminousRift/01_CrystalExportBatch.md.
 
 ### SM_Rift_BridgeSpan_A / SM_Rift_BridgeSpan_B_Broken
 

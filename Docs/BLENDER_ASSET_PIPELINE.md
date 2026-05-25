@@ -77,6 +77,16 @@ After export, use the editor handoff checklist at:
 
 For each exported mesh, update the matching row from `PromptReady` to `Exported`, then to `Imported` or `Placed` after Windows/Unreal verification. The checklist captures the expected export path, source prompt, material slots, pivot check, collision check, Nanite/LOD choice, placement zone, and first-pass acceptance test. Keep this file in sync with `Content/Design/LuminousRiftAssetManifest.csv` whenever asset names or prompt ownership change.
 
+### Work Orders
+
+Asset prompts define the target asset family. Work orders define the production batch sequence and export handoff for a specific session.
+
+Current work orders:
+
+- `Docs/AssetWorkOrders/LuminousRift/01_CrystalExportBatch.md` - first export batch for all blue crystal cluster variants.
+
+When a manifest row references a work order in its notes, keep that path valid and update the matching import-checklist row after export. Run `python3 Scripts/validate_design_data.py` before committing manifest, checklist, or work-order path changes.
+
 ## Scale And Units
 
 Unreal units are centimeters. Blender should use metric units.

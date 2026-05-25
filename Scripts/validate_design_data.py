@@ -85,6 +85,7 @@ CSV_SPECS = {
 VALID_PRIORITIES = {"P0", "P1", "P2", "P3", "Later"}
 VALID_ASSET_STATUSES = {"Needed", "PromptReady", "InProgress", "Exported", "Imported", "Placed", "Done"}
 PROMPT_RE = re.compile(r"Docs/AssetPrompts/[^\s.,)]+\.md")
+WORK_ORDER_RE = re.compile(r"Docs/AssetWorkOrders/[^\s.,)]+\.md")
 
 
 def add_error(errors: list[str], message: str) -> None:
@@ -178,6 +179,10 @@ def validate_asset_manifest(path: Path, rows: list[dict[str, str]], errors: list
         for prompt in prompt_matches:
             if not (ROOT / prompt).exists():
                 add_error(errors, f"{path.relative_to(ROOT)} line {index}: missing prompt file {prompt}")
+
+        for work_order in WORK_ORDER_RE.findall(notes):
+            if not (ROOT / work_order).exists():
+                add_error(errors, f"{path.relative_to(ROOT)} line {index}: missing work order file {work_order}")
 
 
 def validate_luminous_rift_import_checklist(rows: list[dict[str, str]], errors: list[str]) -> None:

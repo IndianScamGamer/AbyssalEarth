@@ -244,3 +244,11 @@
 - Updated `ArtSource/Blender/LuminousRift/ASSET_NOTES.md` with variant intent for crystals, rock arches/overhangs, tower segments, and hanging slabs so Blender workers can fill in source/export paths after creation.
 - Verification: ran `python3 Scripts/validate_design_data.py`; it passed across 9 CSV files, 156 rows, and the JSON schema.
 - Next: Windows/Claude should start exporting `SM_Rift_CrystalCluster_S_A/B/C`, `SM_Rift_CrystalCluster_M_A/B/C`, `SM_Rift_CrystalCluster_L_A/B`, and `SM_Rift_CrystalCluster_Hero_A`, then update the asset notes with actual source/export paths and known issues.
+
+## 2026-05-24 23:49 EDT
+
+- Added `Docs/AssetWorkOrders/LuminousRift/01_CrystalExportBatch.md`, a concrete Blender/Claude production handoff for the nine blue crystal cluster variants, including build order, variant intent, material slots, pivot/collision rules, export targets, and Unreal acceptance checks.
+- Linked the crystal work order from `Content/Design/LuminousRiftAssetManifest.csv`, `Docs/BLENDER_ASSET_PIPELINE.md`, `Docs/NEXT_TASKS.md`, and `ArtSource/Blender/LuminousRift/ASSET_NOTES.md` so Windows/Claude can start the first asset batch without reinterpreting the broader prompt.
+- Updated `Scripts/validate_design_data.py` to validate `Docs/AssetWorkOrders/...md` paths referenced from asset manifest notes.
+- Verification: ran `python3 Scripts/validate_design_data.py`; it passed across the design CSV set and JSON schema.
+- Next: Windows/Claude should use `01_CrystalExportBatch.md` to create/export the crystal kit, then change the matching import-checklist rows to `Exported` and fill in real source/export details in `ASSET_NOTES.md`.

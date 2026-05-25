@@ -34,6 +34,7 @@ Start here. These are the assets Vivek and Claude should build first because the
    - `SM_Rift_CrystalCluster_L_A/B`
    - `SM_Rift_CrystalCluster_Hero_A`
    - Why first: fast to make, instantly improves lighting/route language, reusable everywhere.
+   - Work order: `Docs/AssetWorkOrders/LuminousRift/01_CrystalExportBatch.md`.
 2. **Foreground reveal ledge and rock frame**
    - `SM_Rift_ForegroundLedge_A`
    - `SM_Rift_RockArch_A/B`
