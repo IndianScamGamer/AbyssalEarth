@@ -84,6 +84,7 @@ Asset prompts define the target asset family. Work orders define the production 
 Current work orders:
 
 - `Docs/AssetWorkOrders/LuminousRift/01_CrystalExportBatch.md` - first export batch for all blue crystal cluster variants.
+- `Docs/AssetWorkOrders/LuminousRift/02_ForegroundRevealKit.md` - second export batch for the first-overlook ledge, rock arches, and overhang variants.
 
 When a manifest row references a work order in its notes, keep that path valid and update the matching import-checklist row after export. Run `python3 Scripts/validate_design_data.py` before committing manifest, checklist, or work-order path changes.
 

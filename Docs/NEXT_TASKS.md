@@ -40,6 +40,7 @@ Start here. These are the assets Vivek and Claude should build first because the
    - `SM_Rift_RockArch_A/B`
    - `SM_Rift_Overhang_A/B`
    - Why next: required for the first screenshot and the Luminous Rift reveal.
+   - Work order: `Docs/AssetWorkOrders/LuminousRift/02_ForegroundRevealKit.md`.
 3. **Ancient bridge/platform kit**
    - `SM_Rift_BridgeSpan_A`
    - `SM_Rift_BridgeSpan_B_Broken`

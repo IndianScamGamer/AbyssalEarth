@@ -252,3 +252,11 @@
 - Updated `Scripts/validate_design_data.py` to validate `Docs/AssetWorkOrders/...md` paths referenced from asset manifest notes.
 - Verification: ran `python3 Scripts/validate_design_data.py`; it passed across the design CSV set and JSON schema.
 - Next: Windows/Claude should use `01_CrystalExportBatch.md` to create/export the crystal kit, then change the matching import-checklist rows to `Exported` and fill in real source/export details in `ASSET_NOTES.md`.
+
+## 2026-05-27 00:49 EDT
+
+- Added `Docs/AssetWorkOrders/LuminousRift/02_ForegroundRevealKit.md`, a concrete Blender/Claude production handoff for `SM_Rift_ForegroundLedge_A`, `SM_Rift_RockArch_A/B`, and `SM_Rift_Overhang_A/B`.
+- Updated the foreground ledge/rock-frame prompt so it explicitly covers the B arch and overhang variants already tracked in the manifest.
+- Linked the foreground work order from `Content/Design/LuminousRiftAssetManifest.csv`, `Docs/BLENDER_ASSET_PIPELINE.md`, `Docs/NEXT_TASKS.md`, and `ArtSource/Blender/LuminousRift/ASSET_NOTES.md`.
+- Verification: ran `python3 Scripts/validate_design_data.py`; it passed across the design CSV set and JSON schema.
+- Next: Windows/Claude can use `02_ForegroundRevealKit.md` after the crystal batch to export the first-overlook reveal ledge and frame pieces, then update the matching import-checklist rows to `Exported`.

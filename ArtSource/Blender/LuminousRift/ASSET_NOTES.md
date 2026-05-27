@@ -22,6 +22,7 @@ Workers should use these prompts with Docs/CORE_REFERENCE_LUMINOUS_RIFT.md, Docs
 Use work orders when starting an export batch. They turn the broader prompts into a concrete production sequence and handoff checklist.
 
 - Docs/AssetWorkOrders/LuminousRift/01_CrystalExportBatch.md - create and export the nine blue crystal cluster variants first.
+- Docs/AssetWorkOrders/LuminousRift/02_ForegroundRevealKit.md - create and export the first-overlook ledge, rock arches, and overhang variants next.
 
 Use `Content/Design/LuminousRiftAssetImportChecklist.csv` as the export/import handoff tracker. When an asset is exported from Blender, update its checklist row with the current status and any pivot, collision, material-slot, or import issues found in Unreal.
 
@@ -51,6 +52,7 @@ Each asset entry should include:
 - Collision: simple walkable collision on central top surface; decorative overhangs can be no collision.
 - Material slots: `mat_wet_basalt`, `mat_crystal_blue`, `mat_blue_emissive`.
 - Nanite/LOD: Nanite recommended.
+- Active work order: Docs/AssetWorkOrders/LuminousRift/02_ForegroundRevealKit.md.
 
 ### SM_Rift_RockArch_A/B and SM_Rift_Overhang_A/B
 
@@ -62,6 +64,7 @@ Each asset entry should include:
 - Material slots: `mat_wet_basalt`, optional `mat_crystal_blue`, optional `mat_blue_emissive` if crystals are embedded.
 - Nanite/LOD: Nanite recommended.
 - Variant intent: A = strong primary reveal frame, B = broken/asymmetric alternate for repeated vista use.
+- Active work order: Docs/AssetWorkOrders/LuminousRift/02_ForegroundRevealKit.md.
 
 ### SM_Rift_CrystalCluster_S_A/B/C, M_A/B/C, L_A/B, Hero_A
 
