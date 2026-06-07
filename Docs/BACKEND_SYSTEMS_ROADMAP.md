@@ -235,7 +235,7 @@ Update as systems land. `[ ]` not started · `[~]` in progress · `[x]` done.
 - [~] A3 Interaction / use system — `IAbyssalInteractable` interface + `UInteractionComponent` added (C++ authored on Linux, **Windows compile/PIE pending**); character + `IA_Interact` input wiring is the next step
 - [ ] B1 Inventory / resources
 - [ ] B2 Fabrication / recipe unlocks
-- [ ] B3 Survival vitals
+- [~] B3 Survival vitals — `UTemperatureComponent` (heat exposure → overheat damage via engine damage path) added (C++, **Windows compile/PIE pending**); oxygen/pressure + stamina pending; heat zone volumes that call `SetInHeatZone` pending
 - [ ] C1 World flow / level transitions
 - [~] C2 Hazard framework (one concrete hazard exists; not yet generalized)
 - [ ] C3 Traversal modifiers

@@ -1,5 +1,18 @@
 # Hourly Work Log
 
+## 2026-06-07 14:07 EDT
+
+- Loop tick (roadmap item B3, survival vitals) — second gameplay C++ system, weighting the stretch toward code. Added `Source/AbyssalEarth/TemperatureComponent.h/.cpp`: `UTemperatureComponent`, a heat-exposure survival vital.
+  - Exposure (0..1) rises in heat zones, falls in cool areas; `Insulation` scales incoming heat (foreshadows suit upgrades); at/above `OverheatThreshold` it deals `OverheatDamagePerSecond`.
+  - Crucially, it applies damage via `UGameplayStatics::ApplyDamage` — the same engine-damage path `AEmberVentHazard` uses (verified by reading `EmberVentHazard.cpp`) — which routes into `UAbyssalHealthComponent::HandleOwnerTakeAnyDamage`. No coupling to the health component's API.
+  - API: `SetInHeatZone`, `AddHeatExposure`, `ResetTemperature`, `GetHeatExposure/Percent`, `IsOverheating/IsInHeatZone`; delegates `OnTemperatureChanged`, `OnOverheatBegan`, `OnOverheatEnded` for HUD/VFX.
+  - Directly serves Mantle Garden (heat fields) and general survival; additive (no existing files modified).
+- **Verification status:** authored on Linux, pattern-matched to `UAbyssalHealthComponent`/`AEmberVentHazard`; **not yet compiled/PIE-tested** (Windows/Unreal side). Not yet persisted (pending save rework A1).
+- Updated roadmap checklist (B3 in progress). Built ahead of A1/A2 for the same reason as A3: additive and self-contained.
+- PR #1 re-checked: no CI pipeline, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design data changed).
+- Next: heat-zone volume actor that calls `SetInHeatZone` (pairs with this component), or the generalized hazard base (C2), or remaining map blockouts.
+
 ## 2026-06-07 13:40 EDT
 
 - Loop tick. Completed the world-map concept review: viewed the Fossil Sky, Gravity Well, and Mantle Garden plates and appended grounded notes to `Docs/CONCEPT_ART_REVIEW.md` (all six map plates now reviewed).
