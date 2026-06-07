@@ -1,5 +1,15 @@
 # Hourly Work Log
 
+## 2026-06-07 11:18 EDT
+
+- Scope of the continuation loop expanded (owner request) from narrow backend scaffolding to overall game development: docs, story, beginning-to-end plans, backend for all maps, and understanding the existing concept art.
+- Did a full understanding pass: read `NARRATIVE_FOUNDATION.md` (9-beat prologue + 5-act arc + post-cavern systemic-story rule) and `WORLD_ATLAS.md` (six biomes), and inventoried the entire C++ backend (18 classes) and the design/doc/concept-art set (120 concept images catalogued by area; 11 design CSV/JSON).
+- Conclusion: the backend is a solid **Luminous Rift slice** but is **not** sufficient for the full design. Missing systems: save/persistence rework, data-driven+persisted objectives, interaction/use, inventory, fabrication, survival vitals (oxygen/heat/stamina), world flow/level transitions, traversal modifiers (gravity/swim/climb), a generalized hazard framework, narrative triggers + prologue dialogue, HELIOS NPCs, creatures, photo mode, and the (deferred) Abyssal Interface.
+- Added `Docs/BACKEND_SYSTEMS_ROADMAP.md`: gap analysis mapping each missing system to the story acts/biomes that need it, a dependency-ordered build plan (Phases A–D) with proposed C++ classes/APIs/data/verification per system, cross-cutting concerns, and a status checklist. This is now the loop's persistent backlog.
+- Subscribed this session to PR #1 activity. Checked PR #1: no CI pipeline runs on the repo (only a dynamic Copilot workflow; a UE5 project can't compile on stock Actions), status `pending` with 0 checks, and no review comments/threads — nothing actionable. Periodic PR re-checks are folded into the hourly heartbeat since no `send_later` scheduler exists here.
+- Verification: `python3 Scripts/validate_design_data.py` still passes (no design data changed this tick).
+- Next: begin implementing the roadmap in dependency order — start with A1 (save/persistence rework) or a Linux-fully-verifiable item like A2 data-driven objectives / C4 per-biome content scaffolding. Also schedule a dedicated tick to view the 120 concept images and write per-area acceptance notes.
+
 ## 2026-06-07 10:31 EDT
 
 - Fixed a code/data drift in the discovery system: `Content/Design/DiscoveryCatalog.csv` used the categories `Structure` and `AlienTech`, but the `EDiscoveryCategory` enum in `Source/AbyssalEarth/DiscoveryActor.h` only defined `Geology`, `Biology`, `Anomaly`, and `HumanMade`. Authoring those catalog rows into DiscoveryActor Blueprints would have silently fallen back to the default category.
