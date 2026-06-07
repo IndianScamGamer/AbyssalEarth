@@ -1,5 +1,15 @@
 # Hourly Work Log
 
+## 2026-06-07 11:52 EDT
+
+- Loop tick (roadmap item C4, per-biome content scaffolding). Started the next map after the Luminous Rift: created `Docs/Maps/GLASSROOT_FOREST.md`, the Map 02 blockout plan, mirroring the structure/depth of `LUMINOUS_RIFT_BLOCKOUT.md` and grounded in the `WORLD_ATLAS.md` Glassroot section + the GR-001..GR-006 concept studies.
+- Contents: goal, scale targets, a 7-zone route (Basalt Seam → First Overlook → Pearl Terraces → Reflective Pools → Sap Veins → Spore Hollows & Root Gates → Deep Grove Overlook), room-by-room placement anchors with discovery actors and `CHK_GR_*` checkpoints, landmark layout, beacon guidance, P0/P1 mesh list, proposed discovery-catalog rows (categories validated against `EDiscoveryCategory`), hazards, ambience direction, and a screenshot acceptance checklist.
+- Flagged the map-specific backend (spore scanner-distortion, timed root gates, sinkhole reveal) against roadmap items C2/C3, and seeded `D_Bio_RedMineralSap` as a conductive material for later fabrication.
+- Created the `Docs/Maps/` directory (did not exist before). Updated the roadmap checklist: C4 now in progress.
+- PR #1 re-checked: still no CI pipeline on the repo, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design CSV changed this tick; new discovery rows are documented for a future world catalog, not yet added to a validated CSV).
+- Next: continue C4 with the Inner Sea blockout, or pick up a Linux-authorable C++ system from Phase A (interaction interface is the lowest-risk additive one) with a Windows-side verification note.
+
 ## 2026-06-07 11:18 EDT
 
 - Scope of the continuation loop expanded (owner request) from narrow backend scaffolding to overall game development: docs, story, beginning-to-end plans, backend for all maps, and understanding the existing concept art.
