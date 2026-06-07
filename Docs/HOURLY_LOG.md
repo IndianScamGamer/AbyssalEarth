@@ -1,5 +1,15 @@
 # Hourly Work Log
 
+## 2026-06-07 13:12 EDT
+
+- Loop tick (roadmap item C4). Wrote `Docs/Maps/INNER_SEA.md`, the Map 03 blockout, grounded in `WORLD_ATLAS.md` Map 03 and the fresh concept-art review notes.
+- Contents mirror the Glassroot/Luminous Rift blockout depth: goal, scale (largest horizontal map), an explicit traversal decision (P0 = dock/stepping-stone walking with a scripted skiff crossing; free skiff + buoys staged later), a 7-zone route (Shore Threshold → Wet Basalt Dock overlook → Pier Walk → Plankton Channels → Drowned Ruins → Forward Dock → Far Shore Overlook), placement anchors with discovery actors and `CHK_IS_*` checkpoints, landmark layout, beacon guidance (emphasised — water spaces look alike), P0/P1 mesh list, proposed discovery-catalog rows (categories validated against `EDiscoveryCategory`, incl. `Structure`/`HumanMade`), hazards, ambience, and screenshot acceptance.
+- Tied the map-specific backend to the roadmap: scanner-reactive `BP_InnerSea_PlanktonTrailSpline` route trails and skiff/buoy traversal → C3; timed electrical-discharge and flooding hazards → C2. Final overlook seeds the Fossil Sky hand-off.
+- Updated the roadmap checklist (C4: Glassroot + Inner Sea done; Fossil Sky / Gravity Well / Mantle Garden pending).
+- PR #1 re-checked: no CI pipeline, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design data changed).
+- Next: continue concept-art review (Fossil Sky / Gravity Well / Mantle Garden plates) then their blockouts, or pick up a roadmap C++ system (A1 save rework or A2 data-driven objectives) with a Windows-verify note.
+
 ## 2026-06-07 12:45 EDT
 
 - Loop tick (addressing the owner's explicit "thoroughly understand the existing pics/concept art" goal, deferred for two prior ticks). Actually viewed three canonical plates and wrote grounded notes in `Docs/CONCEPT_ART_REVIEW.md`:

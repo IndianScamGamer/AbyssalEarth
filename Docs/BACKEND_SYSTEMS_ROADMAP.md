@@ -239,7 +239,7 @@ Update as systems land. `[ ]` not started · `[~]` in progress · `[x]` done.
 - [ ] C1 World flow / level transitions
 - [~] C2 Hazard framework (one concrete hazard exists; not yet generalized)
 - [ ] C3 Traversal modifiers
-- [~] C4 Per-biome content scaffolding — Glassroot Forest blockout done (`Docs/Maps/GLASSROOT_FOREST.md`); Inner Sea / Fossil Sky / Gravity Well / Mantle Garden pending
+- [~] C4 Per-biome content scaffolding — Glassroot Forest + Inner Sea blockouts done (`Docs/Maps/`); Fossil Sky / Gravity Well / Mantle Garden pending
 - [ ] D1 Narrative triggers + prologue dialogue
 - [ ] D2 HELIOS robot NPCs
 - [ ] D3 Creatures / survival AI
