@@ -14,9 +14,9 @@ notes vs. `Docs/WORLD_ATLAS.md` and the map blockout docs.
 - [x] Luminous Rift core reference
 - [x] Glassroot Forest (Map 02)
 - [x] Inner Sea (Map 03)
-- [ ] Fossil Sky (Map 04)
-- [ ] Gravity Well (Map 05)
-- [ ] Mantle Garden (Map 06)
+- [x] Fossil Sky (Map 04)
+- [x] Gravity Well (Map 05)
+- [x] Mantle Garden (Map 06)
 - [ ] Detailed concept studies under `Content/ArtDirection/Concepts/` (≈120 images, by folder)
 
 ---
@@ -106,9 +106,74 @@ eventual `Docs/Maps/INNER_SEA.md`.
 
 ---
 
+## Fossil Sky — `Content/ArtDirection/WorldMaps/fossil_sky_concept.png`
+
+Map 04. Cross-ref: `WORLD_ATLAS.md` Map 04. (Blockout doc not yet written.)
+
+**Canonical elements:**
+- A **ceiling-dominant** composition: a colossal fossil **skeleton** (vertebrae +
+  rib arches) embedded across the ceiling like a second firmament. The player looks
+  **up**, not down.
+- **Bone-white / amber limestone** cavern with **amber dust shafts** of light.
+- Suspended ancient **observation walkways/bridges** crossing the space, with a tiny
+  diver on a walkway for scale.
+- **Black chasms** below the walkways; small **cyan fossil-vein** scanner-reactive
+  accents.
+
+**Colour triad:** bone-white/amber limestone · warm amber dust light · cyan
+fossil-vein accents (against black chasms).
+
+**Traversal/backend implications:** narrow brittle observation walkways over chasms
+(brittle-walkway hazard, roadmap C2); scanner reconstructs fossil outlines / hidden
+route clues (a scan-reveal mechanic). Composition rule: stage the first overlook so
+the player looks up at the ceiling leviathan.
+
+## Gravity Well — `Content/ArtDirection/WorldMaps/gravity_well_concept.png`
+
+Map 05. Cross-ref: `WORLD_ATLAS.md` Map 05. (Blockout doc not yet written.)
+
+**Canonical elements:**
+- A **spherical/vortex** cavern: rock platforms, debris, and arcs spiral **around a
+  central blue-white anomaly**, with the path visibly continuing sideways and upward
+  around the void.
+- **Floating basalt platforms** and curved **stabilizer** arcs with **amber machine
+  accents**; suspended **water ribbons**; bent light / lensing toward the core.
+- Foreground diver on a ledge with a **tether/line** for scale (matches
+  `D_Human_TetherAnchor` and the tether traversal idea).
+
+**Colour triad:** blue-white anomaly core · dark blue-grey floating basalt · amber
+stabilizer accents.
+
+**Traversal/backend implications:** the headline system — **gravity reorientation
+volumes** and floating-platform traversal with tether safety (roadmap C3). This is
+the highest-risk traversal map; the World Atlas itself calls for a technical risk
+note before implementation. Keep route orientation readable by beacon colour and
+scanner vectors.
+
+## Mantle Garden — `Content/ArtDirection/WorldMaps/mantle_garden_concept.png`
+
+Map 06. Cross-ref: `WORLD_ATLAS.md` Map 06. (Blockout doc not yet written.)
+
+**Canonical elements:**
+- **Black obsidian** terraces/ridges forming a thin walkable path through the danger.
+- **Orange molten** glow in cracks and below; tall **white steam columns** rising from
+  vents in the background.
+- **Magenta mineral flowers** clustered along the (cooler, safe) foreground ridges.
+- A tiny diver on the obsidian ridge for scale; a large heat-resistant **machinery**
+  structure reads upper-left.
+
+**Colour triad:** black obsidian · orange heat bloom · magenta mineral flowers (with
+white steam).
+
+**Traversal/backend implications:** read heat cycles and move during safe windows;
+the magenta blooms literally mark cool/safe ridges (a readability affordance). Needs
+the **temperature/heat-exposure vital** (roadmap B3) and a generalized cyclic
+**pressure/steam vent hazard** derived from `AEmberVentHazard` (roadmap C2). The route
+is "a thin black path through lethal heat" — keep safe footing visually distinct.
+
 ## Next review pass
 
-View and add notes for Fossil Sky, Gravity Well, and Mantle Garden world-map plates,
-then sample the per-area study folders under `Content/ArtDirection/Concepts/`
-(Characters, Items, Intro, Narrative_Beats, and the per-biome study sets) to derive
-exact palettes and confirm asset silhouettes before those maps' blockouts.
+World-map plates are all reviewed. Next, sample the per-area study folders under
+`Content/ArtDirection/Concepts/` (Characters, Items, Intro, Narrative_Beats, and the
+per-biome study sets) to derive exact palettes and confirm asset silhouettes before
+each map's blockout and asset manifest. Do this in small batches to manage context.

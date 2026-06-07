@@ -1,5 +1,15 @@
 # Hourly Work Log
 
+## 2026-06-07 13:40 EDT
+
+- Loop tick. Completed the world-map concept review: viewed the Fossil Sky, Gravity Well, and Mantle Garden plates and appended grounded notes to `Docs/CONCEPT_ART_REVIEW.md` (all six map plates now reviewed).
+- Confirmed each matches `WORLD_ATLAS.md` and pulled out backend implications: Fossil Sky = ceiling-dominant fossil composition + brittle observation walkways over chasms + scanner fossil-reconstruction (C2 hazard); Gravity Well = vortex of floating platforms around a blue-white core, tether traversal + gravity-reorientation volumes (C3, flagged highest-risk); Mantle Garden = thin black obsidian path with magenta safe-ridge blooms, white steam vents and molten cracks needing the heat vital (B3) and a generalized vent hazard derived from `AEmberVentHazard` (C2).
+- Recorded each map's colour triad and first-overlook composition rule to keep future blockouts faithful.
+- Remaining concept-art work: sample the ~120 per-area study images under `Content/ArtDirection/Concepts/` in small batches (tracked in the review doc).
+- PR #1 re-checked: no CI pipeline, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design data changed).
+- Next: write the remaining map blockouts (Fossil Sky, Gravity Well, Mantle Garden) now that all are grounded, or pick up a roadmap C++ system (A1 save rework / A2 data-driven objectives) with a Windows-verify note.
+
 ## 2026-06-07 13:12 EDT
 
 - Loop tick (roadmap item C4). Wrote `Docs/Maps/INNER_SEA.md`, the Map 03 blockout, grounded in `WORLD_ATLAS.md` Map 03 and the fresh concept-art review notes.
