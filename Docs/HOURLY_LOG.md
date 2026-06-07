@@ -1,5 +1,13 @@
 # Hourly Work Log
 
+## 2026-06-07 10:31 EDT
+
+- Fixed a code/data drift in the discovery system: `Content/Design/DiscoveryCatalog.csv` used the categories `Structure` and `AlienTech`, but the `EDiscoveryCategory` enum in `Source/AbyssalEarth/DiscoveryActor.h` only defined `Geology`, `Biology`, `Anomaly`, and `HumanMade`. Authoring those catalog rows into DiscoveryActor Blueprints would have silently fallen back to the default category.
+- Appended `Structure` and `AlienTech` to `EDiscoveryCategory` (added after `HumanMade` so existing serialized enum indices stay stable; no exhaustive `switch` statements reference the enum, so nothing else needed updating). This matches the canonical scanning category set in `Docs/MILESTONES.md` ("geology, biology, anomaly, human-made, structure, alien tech"), which the enum had lagged behind.
+- Added a durable guard in `Scripts/validate_design_data.py` (`parse_discovery_categories` + `validate_discovery_categories`) that parses the C++ enum and fails validation if any `DiscoveryCatalog.csv` Category value is not a defined enum member — mirroring the existing `validate_objective_ids` C++/CSV cross-check. The enum may still hold categories not yet used by the CSV (e.g. `Biology`).
+- Verification: `python3 Scripts/validate_design_data.py` passes (10 CSV files, 193 rows, JSON schema). Added a negative test confirming the new guard would have flagged `Structure` and `AlienTech` against the pre-fix enum.
+- Next: when the discovery actors are authored on the Windows side, assign each `DiscoveryCatalog.csv` row's category via the now-complete enum; consider a parallel `Zone` consistency guard between the catalog and the blockout/ambience CSVs.
+
 ## 2026-05-24 19:49 EDT
 
 - Added `Content/Design/LuminousRiftAssetImportChecklist.csv`, a Windows/Unreal handoff checklist for every current Luminous Rift asset row covering expected export path, source prompt, required material slots, pivot check, collision check, Nanite/LOD guidance, placement zone, acceptance test, and status.
