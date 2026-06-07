@@ -1,5 +1,17 @@
 # Hourly Work Log
 
+## 2026-06-07 12:18 EDT
+
+- Loop tick (roadmap item A3, interaction system) — first gameplay C++ added in the expanded-scope loop. Created an isolated, additive interaction layer (no existing files modified, so zero risk to working systems):
+  - `Source/AbyssalEarth/AbyssalInteractable.h/.cpp`: `IAbyssalInteractable` UINTERFACE with BlueprintNativeEvent methods `CanInteract`, `GetInteractionPrompt`, `GetInteractionHoldDuration`, `OnInteract`, `OnBeginFocus`, `OnEndFocus`, with C++ defaults Blueprint children can override.
+  - `Source/AbyssalEarth/InteractionComponent.h/.cpp`: `UInteractionComponent` that line-traces from the owner's eye viewpoint each tick, tracks the focused interactable, supports instant and hold interactions, and exposes `BeginInteract`/`EndInteract`/`GetFocusedActor`/`GetFocusPrompt`/`GetHoldProgress` plus `OnFocusChanged`/`OnInteractionStarted`/`OnInteractionCompleted`/`OnInteractionCanceled` delegates. Follows the conventions of the existing `UScannerComponent` (eye-viewpoint trace, `SCENE_QUERY_STAT`, `Abyssal Earth|` categories, `TObjectPtr`).
+  - This unblocks the prologue door-pry (hold interaction), Act 3 "operate ancient systems", terminals, harvest nodes, fabricators, and level-transition actors.
+- **Verification status:** authored on the Linux side and pattern-matched to existing classes; **not yet compiled/PIE-tested** — that must happen on the Windows/Unreal side (generate project files + build). The interface UINTERFACE boilerplate and `Execute_*` calls are the things to confirm there.
+- Updated the roadmap checklist (A3 in progress). Chose A3 before A1/A2 because it has no dependency on them and is purely additive/low-risk, while the save rework (A1) is invasive.
+- PR #1 re-checked: no CI pipeline, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design data changed).
+- Next: wire `UInteractionComponent` + an `IA_Interact` input into `AAbyssalExplorerCharacter` (Windows-side input asset needed), or continue C4 with the Inner Sea blockout.
+
 ## 2026-06-07 11:52 EDT
 
 - Loop tick (roadmap item C4, per-biome content scaffolding). Started the next map after the Luminous Rift: created `Docs/Maps/GLASSROOT_FOREST.md`, the Map 02 blockout plan, mirroring the structure/depth of `LUMINOUS_RIFT_BLOCKOUT.md` and grounded in the `WORLD_ATLAS.md` Glassroot section + the GR-001..GR-006 concept studies.

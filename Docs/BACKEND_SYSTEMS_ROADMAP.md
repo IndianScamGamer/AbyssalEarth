@@ -232,7 +232,7 @@ Update as systems land. `[ ]` not started · `[~]` in progress · `[x]` done.
 
 - [ ] A1 Save/persistence rework
 - [~] A2 Data-driven objectives (hardcoded route + CSV mirror exist; not yet data-driven or persisted)
-- [ ] A3 Interaction / use system
+- [~] A3 Interaction / use system — `IAbyssalInteractable` interface + `UInteractionComponent` added (C++ authored on Linux, **Windows compile/PIE pending**); character + `IA_Interact` input wiring is the next step
 - [ ] B1 Inventory / resources
 - [ ] B2 Fabrication / recipe unlocks
 - [ ] B3 Survival vitals
