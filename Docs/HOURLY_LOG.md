@@ -1,5 +1,17 @@
 # Hourly Work Log
 
+## 2026-06-07 14:34 EDT
+
+- Loop tick (roadmap B3 continued, C++). Added `Source/AbyssalEarth/HeatZoneVolume.h/.cpp`: `AHeatZoneVolume`, the actor that drives `UTemperatureComponent`, completing the heat-survival loop.
+  - A box trigger that, on pawn overlap, calls `SetInHeatZone(true)` on the overlapping actor's `UTemperatureComponent` (and `false` on end overlap). Mirrors `AObjectiveTriggerActor` exactly (box root, `Trigger` collision profile, `OnComponentBeginOverlap`/`OnComponentEndOverlap` dynamic bindings with the correct delegate signatures) — verified by reading `ObjectiveTriggerActor.cpp`.
+  - Documented the v1 limitation (in/out toggle is not reference-counted, so keep heat volumes non-overlapping) and noted per-zone intensity as a later addition.
+  - Additive (no existing files modified). Drop one in a Mantle Garden heat field with a player carrying a `UTemperatureComponent` to get the full enter→heat→overheat-damage→leave→cool cycle.
+- **Verification status:** authored on Linux, pattern-matched to `AObjectiveTriggerActor`; **not yet compiled/PIE-tested** (Windows/Unreal side).
+- Updated roadmap checklist (B3: component + volume done; oxygen/stamina pending).
+- PR #1 re-checked: no CI pipeline, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design data changed).
+- Next: continue C2 (generalize `AEmberVentHazard` into a hazard base, then derive biome hazards), or A1 save rework, or a remaining map blockout — keeping the C++/docs mix even.
+
 ## 2026-06-07 14:07 EDT
 
 - Loop tick (roadmap item B3, survival vitals) — second gameplay C++ system, weighting the stretch toward code. Added `Source/AbyssalEarth/TemperatureComponent.h/.cpp`: `UTemperatureComponent`, a heat-exposure survival vital.
