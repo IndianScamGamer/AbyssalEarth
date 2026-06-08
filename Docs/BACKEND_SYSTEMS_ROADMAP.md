@@ -31,10 +31,11 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | Health | `UAbyssalHealthComponent` |
 | Audio | `UAbyssalAudioCueSubsystem` |
 | Hazards | `AEmberVentHazard`, `AAbyssalHazardBase` |
-| Save/load | `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`; providers: discovery, beacon, inventory, world-flow, objectives |
+| Save/load | `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`; providers: discovery, beacon, inventory, world-flow, objectives, fabrication |
 | Interaction | `IAbyssalInteractable`, `UInteractionComponent` |
 | Survival vitals | `UTemperatureComponent`, `AHeatZoneVolume` |
 | Inventory | `UAbyssalItemDefinition` (DataAsset), `UInventorySubsystem`, `AHarvestableNode` |
+| Fabrication | `UAbyssalRecipeDefinition` (DataAsset), `UFabricationSubsystem`, `AFabricatorStation` |
 | World flow | `UWorldFlowSubsystem` |
 | Utility | `UAbyssalGameplayLibrary` |
 
@@ -48,7 +49,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | 2 | Data-driven objectives + persistence | **Done** (Windows compile pending) |
 | 3 | Interaction / use system | **In progress** (C++ authored; character wiring pending) |
 | 4 | Inventory / resources | **Done** (Windows compile pending) |
-| 5 | Fabrication / crafting | Missing |
+| 5 | Fabrication / crafting | **Done** (Windows compile pending) |
 | 6 | Survival vitals | **In progress** (temperature done; oxygen/stamina pending) |
 | 7 | World flow / level transitions | **Done** (Windows compile pending) |
 | 8 | Traversal modifiers | Missing |
@@ -68,7 +69,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 **A1.** `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` + `IAbyssalSaveProvider`. Discovery + beacon providers migrated.
 
-**A2.** `UObjectiveSubsystem` loads its route from a `FAbyssalObjectiveTableRow` `UDataTable` (`BuildRouteFromTable`) and persists `CurrentObjectiveIndex` + `CompletedObjectiveIds` via A1. Hardcoded default route retained as fallback.
+**A2.** `UObjectiveSubsystem` loads its route from a `FAbyssalObjectiveTableRow` `UDataTable` and persists progress via A1.
 
 **A3.** `IAbyssalInteractable` + `UInteractionComponent` (authored). Wire into
 `AAbyssalExplorerCharacter` + `IA_Interact` input asset (Windows-side).
@@ -77,7 +78,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 **B1.** `UAbyssalItemDefinition` (DataAsset) + `UInventorySubsystem` + `AHarvestableNode`. Done.
 
-**B2.** `UFabricationSubsystem` + recipe DataAssets + fabricator interactable.
+**B2.** `UFabricationSubsystem` + `UAbyssalRecipeDefinition` DataAssets + `AFabricatorStation`. Done. Unlocked recipes persist via A1.
 
 **B3.** `UTemperatureComponent` + `AHeatZoneVolume` (done). Oxygen/pressure + stamina pending.
 
@@ -111,10 +112,10 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 `[ ]` not started · `[~]` in progress · `[x]` done
 
 - [x] A1 Save/persistence — subsystem + profile save + domain providers migrated; Windows compile pending
-- [x] A2 Data-driven objectives — `BuildRouteFromTable` + `IAbyssalSaveProvider` progress persistence; Windows compile pending
+- [x] A2 Data-driven objectives — `BuildRouteFromTable` + progress persistence; Windows compile pending
 - [~] A3 Interaction — authored; character wiring + Windows compile pending
 - [x] B1 Inventory — `UAbyssalItemDefinition` + `UInventorySubsystem` + `AHarvestableNode`; Windows compile pending
-- [ ] B2 Fabrication / recipe unlocks
+- [x] B2 Fabrication — `UAbyssalRecipeDefinition` + `UFabricationSubsystem` + `AFabricatorStation`; Windows compile pending
 - [~] B3 Survival vitals — temperature done; oxygen/stamina pending
 - [x] C1 World flow — `UWorldFlowSubsystem::TravelToMap` + entry-tag save/restore; Windows-side `APlayerStart` wiring pending
 - [~] C2 Hazard framework — base class done; biome derivations documented
