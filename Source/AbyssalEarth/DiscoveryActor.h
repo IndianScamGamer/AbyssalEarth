@@ -10,7 +10,10 @@ enum class EDiscoveryCategory : uint8
     Geology,
     Biology,
     Anomaly,
-    HumanMade
+    HumanMade,
+    // Appended after HumanMade so existing serialized values keep their indices.
+    Structure,
+    AlienTech
 };
 
 UCLASS()

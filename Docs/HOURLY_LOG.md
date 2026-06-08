@@ -1,5 +1,101 @@
 # Hourly Work Log
 
+## 2026-06-07 14:34 EDT
+
+- Loop tick (roadmap B3 continued, C++). Added `Source/AbyssalEarth/HeatZoneVolume.h/.cpp`: `AHeatZoneVolume`, the actor that drives `UTemperatureComponent`, completing the heat-survival loop.
+  - A box trigger that, on pawn overlap, calls `SetInHeatZone(true)` on the overlapping actor's `UTemperatureComponent` (and `false` on end overlap). Mirrors `AObjectiveTriggerActor` exactly (box root, `Trigger` collision profile, `OnComponentBeginOverlap`/`OnComponentEndOverlap` dynamic bindings with the correct delegate signatures) — verified by reading `ObjectiveTriggerActor.cpp`.
+  - Documented the v1 limitation (in/out toggle is not reference-counted, so keep heat volumes non-overlapping) and noted per-zone intensity as a later addition.
+  - Additive (no existing files modified). Drop one in a Mantle Garden heat field with a player carrying a `UTemperatureComponent` to get the full enter→heat→overheat-damage→leave→cool cycle.
+- **Verification status:** authored on Linux, pattern-matched to `AObjectiveTriggerActor`; **not yet compiled/PIE-tested** (Windows/Unreal side).
+- Updated roadmap checklist (B3: component + volume done; oxygen/stamina pending).
+- PR #1 re-checked: no CI pipeline, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design data changed).
+- Next: continue C2 (generalize `AEmberVentHazard` into a hazard base, then derive biome hazards), or A1 save rework, or a remaining map blockout — keeping the C++/docs mix even.
+
+## 2026-06-07 14:07 EDT
+
+- Loop tick (roadmap item B3, survival vitals) — second gameplay C++ system, weighting the stretch toward code. Added `Source/AbyssalEarth/TemperatureComponent.h/.cpp`: `UTemperatureComponent`, a heat-exposure survival vital.
+  - Exposure (0..1) rises in heat zones, falls in cool areas; `Insulation` scales incoming heat (foreshadows suit upgrades); at/above `OverheatThreshold` it deals `OverheatDamagePerSecond`.
+  - Crucially, it applies damage via `UGameplayStatics::ApplyDamage` — the same engine-damage path `AEmberVentHazard` uses (verified by reading `EmberVentHazard.cpp`) — which routes into `UAbyssalHealthComponent::HandleOwnerTakeAnyDamage`. No coupling to the health component's API.
+  - API: `SetInHeatZone`, `AddHeatExposure`, `ResetTemperature`, `GetHeatExposure/Percent`, `IsOverheating/IsInHeatZone`; delegates `OnTemperatureChanged`, `OnOverheatBegan`, `OnOverheatEnded` for HUD/VFX.
+  - Directly serves Mantle Garden (heat fields) and general survival; additive (no existing files modified).
+- **Verification status:** authored on Linux, pattern-matched to `UAbyssalHealthComponent`/`AEmberVentHazard`; **not yet compiled/PIE-tested** (Windows/Unreal side). Not yet persisted (pending save rework A1).
+- Updated roadmap checklist (B3 in progress). Built ahead of A1/A2 for the same reason as A3: additive and self-contained.
+- PR #1 re-checked: no CI pipeline, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design data changed).
+- Next: heat-zone volume actor that calls `SetInHeatZone` (pairs with this component), or the generalized hazard base (C2), or remaining map blockouts.
+
+## 2026-06-07 13:40 EDT
+
+- Loop tick. Completed the world-map concept review: viewed the Fossil Sky, Gravity Well, and Mantle Garden plates and appended grounded notes to `Docs/CONCEPT_ART_REVIEW.md` (all six map plates now reviewed).
+- Confirmed each matches `WORLD_ATLAS.md` and pulled out backend implications: Fossil Sky = ceiling-dominant fossil composition + brittle observation walkways over chasms + scanner fossil-reconstruction (C2 hazard); Gravity Well = vortex of floating platforms around a blue-white core, tether traversal + gravity-reorientation volumes (C3, flagged highest-risk); Mantle Garden = thin black obsidian path with magenta safe-ridge blooms, white steam vents and molten cracks needing the heat vital (B3) and a generalized vent hazard derived from `AEmberVentHazard` (C2).
+- Recorded each map's colour triad and first-overlook composition rule to keep future blockouts faithful.
+- Remaining concept-art work: sample the ~120 per-area study images under `Content/ArtDirection/Concepts/` in small batches (tracked in the review doc).
+- PR #1 re-checked: no CI pipeline, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design data changed).
+- Next: write the remaining map blockouts (Fossil Sky, Gravity Well, Mantle Garden) now that all are grounded, or pick up a roadmap C++ system (A1 save rework / A2 data-driven objectives) with a Windows-verify note.
+
+## 2026-06-07 13:12 EDT
+
+- Loop tick (roadmap item C4). Wrote `Docs/Maps/INNER_SEA.md`, the Map 03 blockout, grounded in `WORLD_ATLAS.md` Map 03 and the fresh concept-art review notes.
+- Contents mirror the Glassroot/Luminous Rift blockout depth: goal, scale (largest horizontal map), an explicit traversal decision (P0 = dock/stepping-stone walking with a scripted skiff crossing; free skiff + buoys staged later), a 7-zone route (Shore Threshold → Wet Basalt Dock overlook → Pier Walk → Plankton Channels → Drowned Ruins → Forward Dock → Far Shore Overlook), placement anchors with discovery actors and `CHK_IS_*` checkpoints, landmark layout, beacon guidance (emphasised — water spaces look alike), P0/P1 mesh list, proposed discovery-catalog rows (categories validated against `EDiscoveryCategory`, incl. `Structure`/`HumanMade`), hazards, ambience, and screenshot acceptance.
+- Tied the map-specific backend to the roadmap: scanner-reactive `BP_InnerSea_PlanktonTrailSpline` route trails and skiff/buoy traversal → C3; timed electrical-discharge and flooding hazards → C2. Final overlook seeds the Fossil Sky hand-off.
+- Updated the roadmap checklist (C4: Glassroot + Inner Sea done; Fossil Sky / Gravity Well / Mantle Garden pending).
+- PR #1 re-checked: no CI pipeline, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design data changed).
+- Next: continue concept-art review (Fossil Sky / Gravity Well / Mantle Garden plates) then their blockouts, or pick up a roadmap C++ system (A1 save rework or A2 data-driven objectives) with a Windows-verify note.
+
+## 2026-06-07 12:45 EDT
+
+- Loop tick (addressing the owner's explicit "thoroughly understand the existing pics/concept art" goal, deferred for two prior ticks). Actually viewed three canonical plates and wrote grounded notes in `Docs/CONCEPT_ART_REVIEW.md`:
+  - `References/luminous_rift_core_reference.png`, `WorldMaps/glassroot_forest_concept.png`, `WorldMaps/inner_sea_concept.png`.
+  - Per image: canonical (must-have) elements, optional flavour, colour triad, human-scale cue, and traversal/backend implications, plus consistency notes vs. `WORLD_ATLAS.md` and the blockouts.
+- Findings: (a) the Glassroot concept matches the blockout's shadowed-ledge overlook, hero root grove, red sap veins, and reflective pools — good validation; flagged that the inter-pool banks read as pale muddy terraces, not the crisp "pearl-white" the docs specify (art call). (b) The Luminous Rift plate has reflective water with a small boat at the base not noted in the blockout — recommended adding an optional low mirror pool. (c) The Inner Sea plate confirms dock-overlook framing, gold plankton route-trails (→ `BP_InnerSea_PlanktonTrailSpline`), moored skiffs (possible boat traversal), and blue-lit ruins — this directly informs the upcoming Inner Sea blockout.
+- The review doc tracks reviewed vs. pending images (Fossil Sky / Gravity Well / Mantle Garden world plates and the ~120 study images still to do in later ticks).
+- PR #1 re-checked: no CI pipeline, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design data changed).
+- Next: write the Inner Sea blockout (now grounded in its concept), or continue the concept-art review with the remaining three world plates.
+
+## 2026-06-07 12:18 EDT
+
+- Loop tick (roadmap item A3, interaction system) — first gameplay C++ added in the expanded-scope loop. Created an isolated, additive interaction layer (no existing files modified, so zero risk to working systems):
+  - `Source/AbyssalEarth/AbyssalInteractable.h/.cpp`: `IAbyssalInteractable` UINTERFACE with BlueprintNativeEvent methods `CanInteract`, `GetInteractionPrompt`, `GetInteractionHoldDuration`, `OnInteract`, `OnBeginFocus`, `OnEndFocus`, with C++ defaults Blueprint children can override.
+  - `Source/AbyssalEarth/InteractionComponent.h/.cpp`: `UInteractionComponent` that line-traces from the owner's eye viewpoint each tick, tracks the focused interactable, supports instant and hold interactions, and exposes `BeginInteract`/`EndInteract`/`GetFocusedActor`/`GetFocusPrompt`/`GetHoldProgress` plus `OnFocusChanged`/`OnInteractionStarted`/`OnInteractionCompleted`/`OnInteractionCanceled` delegates. Follows the conventions of the existing `UScannerComponent` (eye-viewpoint trace, `SCENE_QUERY_STAT`, `Abyssal Earth|` categories, `TObjectPtr`).
+  - This unblocks the prologue door-pry (hold interaction), Act 3 "operate ancient systems", terminals, harvest nodes, fabricators, and level-transition actors.
+- **Verification status:** authored on the Linux side and pattern-matched to existing classes; **not yet compiled/PIE-tested** — that must happen on the Windows/Unreal side (generate project files + build). The interface UINTERFACE boilerplate and `Execute_*` calls are the things to confirm there.
+- Updated the roadmap checklist (A3 in progress). Chose A3 before A1/A2 because it has no dependency on them and is purely additive/low-risk, while the save rework (A1) is invasive.
+- PR #1 re-checked: no CI pipeline, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design data changed).
+- Next: wire `UInteractionComponent` + an `IA_Interact` input into `AAbyssalExplorerCharacter` (Windows-side input asset needed), or continue C4 with the Inner Sea blockout.
+
+## 2026-06-07 11:52 EDT
+
+- Loop tick (roadmap item C4, per-biome content scaffolding). Started the next map after the Luminous Rift: created `Docs/Maps/GLASSROOT_FOREST.md`, the Map 02 blockout plan, mirroring the structure/depth of `LUMINOUS_RIFT_BLOCKOUT.md` and grounded in the `WORLD_ATLAS.md` Glassroot section + the GR-001..GR-006 concept studies.
+- Contents: goal, scale targets, a 7-zone route (Basalt Seam → First Overlook → Pearl Terraces → Reflective Pools → Sap Veins → Spore Hollows & Root Gates → Deep Grove Overlook), room-by-room placement anchors with discovery actors and `CHK_GR_*` checkpoints, landmark layout, beacon guidance, P0/P1 mesh list, proposed discovery-catalog rows (categories validated against `EDiscoveryCategory`), hazards, ambience direction, and a screenshot acceptance checklist.
+- Flagged the map-specific backend (spore scanner-distortion, timed root gates, sinkhole reveal) against roadmap items C2/C3, and seeded `D_Bio_RedMineralSap` as a conductive material for later fabrication.
+- Created the `Docs/Maps/` directory (did not exist before). Updated the roadmap checklist: C4 now in progress.
+- PR #1 re-checked: still no CI pipeline on the repo, 0 checks, no review comments — nothing actionable.
+- Verification: `python3 Scripts/validate_design_data.py` passes (no design CSV changed this tick; new discovery rows are documented for a future world catalog, not yet added to a validated CSV).
+- Next: continue C4 with the Inner Sea blockout, or pick up a Linux-authorable C++ system from Phase A (interaction interface is the lowest-risk additive one) with a Windows-side verification note.
+
+## 2026-06-07 11:18 EDT
+
+- Scope of the continuation loop expanded (owner request) from narrow backend scaffolding to overall game development: docs, story, beginning-to-end plans, backend for all maps, and understanding the existing concept art.
+- Did a full understanding pass: read `NARRATIVE_FOUNDATION.md` (9-beat prologue + 5-act arc + post-cavern systemic-story rule) and `WORLD_ATLAS.md` (six biomes), and inventoried the entire C++ backend (18 classes) and the design/doc/concept-art set (120 concept images catalogued by area; 11 design CSV/JSON).
+- Conclusion: the backend is a solid **Luminous Rift slice** but is **not** sufficient for the full design. Missing systems: save/persistence rework, data-driven+persisted objectives, interaction/use, inventory, fabrication, survival vitals (oxygen/heat/stamina), world flow/level transitions, traversal modifiers (gravity/swim/climb), a generalized hazard framework, narrative triggers + prologue dialogue, HELIOS NPCs, creatures, photo mode, and the (deferred) Abyssal Interface.
+- Added `Docs/BACKEND_SYSTEMS_ROADMAP.md`: gap analysis mapping each missing system to the story acts/biomes that need it, a dependency-ordered build plan (Phases A–D) with proposed C++ classes/APIs/data/verification per system, cross-cutting concerns, and a status checklist. This is now the loop's persistent backlog.
+- Subscribed this session to PR #1 activity. Checked PR #1: no CI pipeline runs on the repo (only a dynamic Copilot workflow; a UE5 project can't compile on stock Actions), status `pending` with 0 checks, and no review comments/threads — nothing actionable. Periodic PR re-checks are folded into the hourly heartbeat since no `send_later` scheduler exists here.
+- Verification: `python3 Scripts/validate_design_data.py` still passes (no design data changed this tick).
+- Next: begin implementing the roadmap in dependency order — start with A1 (save/persistence rework) or a Linux-fully-verifiable item like A2 data-driven objectives / C4 per-biome content scaffolding. Also schedule a dedicated tick to view the 120 concept images and write per-area acceptance notes.
+
+## 2026-06-07 10:31 EDT
+
+- Fixed a code/data drift in the discovery system: `Content/Design/DiscoveryCatalog.csv` used the categories `Structure` and `AlienTech`, but the `EDiscoveryCategory` enum in `Source/AbyssalEarth/DiscoveryActor.h` only defined `Geology`, `Biology`, `Anomaly`, and `HumanMade`. Authoring those catalog rows into DiscoveryActor Blueprints would have silently fallen back to the default category.
+- Appended `Structure` and `AlienTech` to `EDiscoveryCategory` (added after `HumanMade` so existing serialized enum indices stay stable; no exhaustive `switch` statements reference the enum, so nothing else needed updating). This matches the canonical scanning category set in `Docs/MILESTONES.md` ("geology, biology, anomaly, human-made, structure, alien tech"), which the enum had lagged behind.
+- Added a durable guard in `Scripts/validate_design_data.py` (`parse_discovery_categories` + `validate_discovery_categories`) that parses the C++ enum and fails validation if any `DiscoveryCatalog.csv` Category value is not a defined enum member — mirroring the existing `validate_objective_ids` C++/CSV cross-check. The enum may still hold categories not yet used by the CSV (e.g. `Biology`).
+- Verification: `python3 Scripts/validate_design_data.py` passes (10 CSV files, 193 rows, JSON schema). Added a negative test confirming the new guard would have flagged `Structure` and `AlienTech` against the pre-fix enum.
+- Next: when the discovery actors are authored on the Windows side, assign each `DiscoveryCatalog.csv` row's category via the now-complete enum; consider a parallel `Zone` consistency guard between the catalog and the blockout/ambience CSVs.
+
 ## 2026-05-24 19:49 EDT
 
 - Added `Content/Design/LuminousRiftAssetImportChecklist.csv`, a Windows/Unreal handoff checklist for every current Luminous Rift asset row covering expected export path, source prompt, required material slots, pivot check, collision check, Nanite/LOD guidance, placement zone, acceptance test, and status.

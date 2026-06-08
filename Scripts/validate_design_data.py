@@ -248,6 +248,47 @@ def validate_objective_ids(errors: list[str]) -> None:
         add_error(errors, f"MainObjectiveArc.csv lists {objective_id}, but ObjectiveSubsystem.cpp does not use it")
 
 
+def parse_discovery_categories(header_text: str) -> list[str] | None:
+    match = re.search(
+        r"enum\s+class\s+EDiscoveryCategory\s*:\s*\w+\s*\{(.*?)\}",
+        header_text,
+        re.DOTALL,
+    )
+    if not match:
+        return None
+
+    names: list[str] = []
+    for raw in match.group(1).split(","):
+        raw = re.sub(r"//.*", "", raw).strip()
+        if not raw:
+            continue
+        name_match = re.match(r"([A-Za-z_]\w*)", raw)
+        if name_match:
+            names.append(name_match.group(1))
+    return names
+
+
+def validate_discovery_categories(rows: list[dict[str, str]], errors: list[str]) -> None:
+    header_path = ROOT / "Source" / "AbyssalEarth" / "DiscoveryActor.h"
+    if not header_path.exists():
+        return
+
+    enum_values = parse_discovery_categories(header_path.read_text(encoding="utf-8"))
+    if enum_values is None:
+        add_error(errors, "DiscoveryActor.h: could not parse EDiscoveryCategory enum")
+        return
+
+    enum_set = set(enum_values)
+    for index, row in enumerate(rows, start=2):
+        category = row.get("Category", "").strip()
+        if category and category not in enum_set:
+            add_error(
+                errors,
+                f"Content/Design/DiscoveryCatalog.csv line {index}: Category {category} "
+                f"is not a value in EDiscoveryCategory (DiscoveryActor.h)",
+            )
+
+
 def validate_json(errors: list[str]) -> None:
     path = DESIGN_DIR / "AbyssalInterfaceContextSchema.json"
     if not path.exists():
@@ -277,6 +318,7 @@ def main() -> int:
     map_ids = validate_world_maps(csv_rows["WorldMapManifest.csv"], errors)
     validate_world_assets(csv_rows["WorldAssetManifest.csv"], map_ids, errors)
     validate_objective_ids(errors)
+    validate_discovery_categories(csv_rows["DiscoveryCatalog.csv"], errors)
     validate_json(errors)
 
     if errors:
