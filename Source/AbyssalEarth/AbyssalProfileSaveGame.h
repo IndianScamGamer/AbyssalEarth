@@ -68,6 +68,15 @@ struct FAbyssalFabricationSaveBlob
     TArray<FName> UnlockedRecipeIds;
 };
 
+USTRUCT()
+struct FAbyssalNarrativeSaveBlob
+{
+    GENERATED_BODY()
+
+    UPROPERTY()
+    TArray<FName> PlayedBeatIds;
+};
+
 /**
  * Root save-game object owned by UAbyssalSaveSubsystem.
  * Each gameplay domain owns a nested blob struct; domain subsystems access
@@ -97,6 +106,9 @@ public:
 
     UPROPERTY()
     FAbyssalFabricationSaveBlob Fabrication;
+
+    UPROPERTY()
+    FAbyssalNarrativeSaveBlob Narrative;
 
     UPROPERTY()
     int32 SaveVersion = 1;

@@ -1,59 +1,52 @@
 # Hourly Work Log
 
+## 2026-06-08 (tick 9)
+
+- **D1 — Narrative triggers + captions** (`Source/AbyssalEarth/NarrativeSubsystem.h/.cpp`, `NarrativeTriggerComponent.h/.cpp`, `AbyssalCaptionWidget.h/.cpp`, `AbyssalProfileSaveGame.h`, `Content/Design/PrologueNarrativeBeats.csv`):
+  - `FAbyssalNarrativeBeat : FTableRowBase` (Speaker, Caption, Duration, optional `VoiceOver` `TSoftObjectPtr<USoundBase>`, `bPlayOnce`).
+  - `UNarrativeSubsystem` (`IAbyssalSaveProvider`): `SetBeatTable`, `PlayBeat` (queues if busy, skips already-played one-shots), `StopAll`, `HasPlayed`. Timer-driven beat duration; `OnBeatStarted`/`OnBeatFinished`. Played one-shot IDs persist via new `Narrative` save blob.
+  - `UNarrativeTriggerComponent`: auto-fires a beat on owner primitive overlap (`bPawnOnly`) or via `Trigger()`; relies on subsystem one-shot enforcement.
+  - `UAbyssalCaptionWidget`: `UUserWidget` base; binds to subsystem, forwards to `ShowCaption`/`HideCaption` BP events for UMG layout.
+  - `AbyssalProfileSaveGame.h`: added `FAbyssalNarrativeSaveBlob` (`PlayedBeatIds`).
+  - `PrologueNarrativeBeats.csv`: 9 caption beats mirroring `PrologueSequence.csv` (briefing → HELIOS warning → descent → crash → wake → pry doors → reveal → SURVIVE).
+- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending (import beats DataTable, `SetBeatTable` in GameMode, add caption widget to HUD).
+- Roadmap checklist updated: D1 `[x]`. **Begins Phase D.**
+- Next priority: **D2** (`AHeliosRobot`: A3 interaction + D1 dialogue) or C2 biome-derived hazard C++ classes (`ASteamVentHazard` etc.).
+
 ## 2026-06-08 (tick 8)
 
-- **C3 — Traversal modifiers** (`Source/AbyssalEarth/AbyssalTraversalComponent.h/.cpp`, `ReorientationVolume.h/.cpp`):
-  - `UAbyssalTraversalComponent`: traversal state machine `EAbyssalTraversalState` (Grounded/Climbing/Swimming/Tethered).
-    - Climb: `BeginClimb(SurfaceNormal)` / `EndClimb()` — switches `UCharacterMovementComponent` to `MOVE_Flying` (Glassroot roots, Fossil Sky walls).
-    - Swim: `SetSwimming(bool)` — `MOVE_Swimming` (Inner Sea).
-    - Tether: `FireTether(Anchor)` / `ReleaseTether()`; `GetTetherCorrection()` returns the pull-back vector when the owner drifts past `TetherLength` (Gravity Well low-g). Constraint application delegated to movement/BP code (engine-safe).
-    - Gravity reorientation: `RequestGravityReorientation(Dir, Duration)` re-broadcasts `OnGravityReorientRequested` so the character/Blueprint applies the lerp (kept out of C++ for engine-version safety).
-    - Delegates: `OnTraversalStateChanged`, `OnGravityReorientRequested`, `OnTetherChanged`.
-  - `AReorientationVolume`: box trigger; on overlap finds the entering pawn's `UAbyssalTraversalComponent` and calls `RequestGravityReorientation(GravityDirection, ReorientDuration)`; `BP_OnReoriented` hook. Place in series for the Gravity Well 90°-per-room rotation passage.
-- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending (apply gravity lerp + tether correction in character movement; drive climb/swim from surface/water detection). **This unblocks the Gravity Well (Map 05) traversal that was flagged as the highest-risk dependency.**
+- **C3 — Traversal modifiers** (`AbyssalTraversalComponent.h/.cpp`, `ReorientationVolume.h/.cpp`):
+  - `UAbyssalTraversalComponent`: state machine (Grounded/Climbing/Swimming/Tethered); climb/swim via `UCharacterMovementComponent` modes; tether anchor + `GetTetherCorrection()`; gravity-reorientation request delegate.
+  - `AReorientationVolume`: box trigger requesting gravity-direction lerp on entering pawn's traversal component. **Unblocks Gravity Well.**
 - Roadmap checklist updated: C3 `[x]`.
-- Next priority: **D1** (narrative triggers + prologue dialogue) — begins Phase D. Remaining: D1–D4, C2 biome-derived hazard C++ classes, A3 character wiring.
 
 ## 2026-06-08 (tick 7)
 
-- **B3 — Oxygen + stamina vitals** (`OxygenComponent.h/.cpp`, `StaminaComponent.h/.cpp`):
-  - `UOxygenComponent`: drains while submerged, refills breathing, suffocation damage at zero (engine damage path). `AirCapacityBonus` for rebreather upgrades. Inner Sea.
-  - `UStaminaComponent`: drains exerting, regenerates after `RegenDelay`, exhaustion gate via `CanExert()`, `TryConsumeStamina` for discrete actions.
-- Roadmap checklist updated: B3 `[x]`.
+- **B3 — Oxygen + stamina vitals**: `UOxygenComponent` (suffocation), `UStaminaComponent` (exhaustion gate). Roadmap B3 `[x]`.
 
 ## 2026-06-08 (tick 6)
 
-- **B2 — Fabrication system**: `UAbyssalRecipeDefinition` (PrimaryDataAsset), `UFabricationSubsystem` (`IAbyssalSaveProvider`, `Craft`/`CanCraft`), `AFabricatorStation` (`IAbyssalInteractable`). New `Fabrication` save blob. 5 design recipes.
-- Roadmap checklist updated: B2 `[x]`.
+- **B2 — Fabrication system**: `UAbyssalRecipeDefinition`, `UFabricationSubsystem`, `AFabricatorStation`. New `Fabrication` save blob. Roadmap B2 `[x]`.
 
 ## 2026-06-08 (tick 5)
 
-- **A2 — Data-driven objectives + persistence**: `FAbyssalObjectiveTableRow` + `BuildRouteFromTable`; `UObjectiveSubsystem` implements `IAbyssalSaveProvider`. Hardcoded default retained as fallback.
-- Roadmap checklist updated: A2 `[x]`.
+- **A2 — Data-driven objectives + persistence**: `BuildRouteFromTable` + `IAbyssalSaveProvider`. Roadmap A2 `[x]`.
 
 ## 2026-06-08 (tick 4)
 
-- **B1 — Inventory system**: `UAbyssalItemDefinition`, `UInventorySubsystem` (`IAbyssalSaveProvider`), `AHarvestableNode`.
-- **C1 — World flow**: `UWorldFlowSubsystem` (`IAbyssalSaveProvider`, `TravelToMap`).
-- Roadmap checklist updated: B1 `[x]`, C1 `[x]`.
+- **B1 — Inventory**; **C1 — World flow**. Roadmap B1 `[x]`, C1 `[x]`.
 
 ## 2026-06-08 (tick 3)
 
-- **A1 — Provider migration**: `UDiscoverySubsystem` + `UBeaconSubsystem` implement `IAbyssalSaveProvider`.
-- **C4 — Mantle Garden blockout**: final map (Map 06, Act 4).
-- Roadmap: A1 `[x]`, C4 `[x]`.
+- **A1 — Provider migration**; **C4 — Mantle Garden blockout**. Roadmap A1 `[x]`, C4 `[x]`.
 
 ## 2026-06-08 (tick 2)
 
-- **C4 — Gravity Well blockout**: Map 05 (Act 3).
-- **A1 — `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`**: interface + slot management + domain blobs.
-- Roadmap: A1 `[~]`, C4 `[~]`.
+- **C4 — Gravity Well blockout**; **A1 — save subsystem skeleton**. Roadmap A1 `[~]`, C4 `[~]`.
 
 ## 2026-06-08 (tick 1 / session resumed)
 
-- PR #1 merged to main (squash `383ce0c`).
-- **C2 — `AAbyssalHazardBase`**: phase machine + damage modes, BP hooks.
-- **C4 — Fossil Sky blockout**: Map 04 (Act 2).
+- PR #1 merged. **C2 — `AAbyssalHazardBase`**; **C4 — Fossil Sky blockout**.
 
 ## 2026-06-07 14:34 EDT
 
