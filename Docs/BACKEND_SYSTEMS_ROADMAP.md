@@ -237,9 +237,9 @@ Update as systems land. `[ ]` not started · `[~]` in progress · `[x]` done.
 - [ ] B2 Fabrication / recipe unlocks
 - [~] B3 Survival vitals — `UTemperatureComponent` + `AHeatZoneVolume` (heat exposure → overheat damage via engine damage path) added (C++, **Windows compile/PIE pending**); oxygen/pressure + stamina pending
 - [ ] C1 World flow / level transitions
-- [~] C2 Hazard framework (one concrete hazard exists; not yet generalized)
+- [~] C2 Hazard framework — `AAbyssalHazardBase` authored (phase machine + Radial/Overlap/None damage modes, BP hooks, overlap tracking); `AEmberVentHazard` untouched; biome derivations (`ABrittleWalkwaySection`, `ACeilingFragmentHazard`) documented in Fossil Sky blockout; **Windows compile/PIE pending**
 - [ ] C3 Traversal modifiers
-- [~] C4 Per-biome content scaffolding — Glassroot Forest + Inner Sea blockouts done (`Docs/Maps/`); Fossil Sky / Gravity Well / Mantle Garden pending
+- [~] C4 Per-biome content scaffolding — Glassroot Forest + Inner Sea + Fossil Sky blockouts done (`Docs/Maps/`); Gravity Well + Mantle Garden pending
 - [ ] D1 Narrative triggers + prologue dialogue
 - [ ] D2 HELIOS robot NPCs
 - [ ] D3 Creatures / survival AI

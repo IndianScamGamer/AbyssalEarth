@@ -1,5 +1,25 @@
 # Hourly Work Log
 
+## 2026-06-08 (session resumed)
+
+- PR #1 merged to main (squash commit `383ce0c`). Dev branch reset to main HEAD and pushed.
+- Loop tick (roadmap C2 + C4). Two deliverables this tick:
+  1. **C2 — `AAbyssalHazardBase`** (`Source/AbyssalEarth/AbyssalHazardBase.h/.cpp`): generalized phase-state-machine + damage base class for all Abyssal Earth environmental hazards.
+     - Implements `Idle → Warning → Active → Cooldown` timer loop with `SetHazardActive`, staggered-start randomization, and configurable phase durations matching `AEmberVentHazard`'s pattern.
+     - `EHazardDamageMode`: `Radial` (ApplyRadialDamage centred on actor), `Overlap` (per-actor ApplyDamage via registered primitives + overlap tracking), or `None` (derived class/Blueprint handles damage).
+     - Blueprint hooks: `OnHazardIdle/Warning/Active/Cooldown` (implementable events), `OnHazardPhaseChanged` / `OnHazardActivated` / `OnHazardDeactivated` (multicast delegates).
+     - `RegisterDamagePrimitive` / `UnregisterDamagePrimitive` for overlap-mode setup; `OverlappingActors` TSet tracks live occupants.
+     - `virtual void OnActiveDamageTick(float DeltaDamage)` for C++ derived-class damage extensions.
+     - `AEmberVentHazard` remains untouched (additive). New biome hazards (`ABrittleWalkwaySection`, `ACeilingFragmentHazard`, etc.) derive from this base.
+  2. **C4 — Fossil Sky map blockout** (`Docs/Maps/FOSSIL_SKY.md`): full 7-zone blockout for Map 04.
+     - Zones 0–6: Ossuary Passage → Underpalate → Rib Corridor → Dating Chamber (Act 2 narrative anchor) → Collapse Gallery → Bone Orchard → Ascending Fissure.
+     - 11 discovery catalog rows (`D_Geo_*`, `D_Anomaly_*`, `D_Structure_*`, `D_Bio_*`), 4 objective rows for `MainObjectiveArc.csv`, 7 checkpoint locations.
+     - `ABrittleWalkwaySection` and `ACeilingFragmentHazard` documented as `AAbyssalHazardBase` derivations with tuning values.
+     - Asset manifest stub for the Blender/UE5 side.
+- **Verification:** authored on Linux, patterns cross-checked against `AEmberVentHazard` and `AObjectiveTriggerActor`; **not yet compiled/PIE-tested** (Windows/Unreal side). `python3 Scripts/validate_design_data.py` passes (no CSV rows added yet — Fossil Sky CSV rows to be added when data-table work begins).
+- Roadmap checklist updated: C2 `[~]` (base class done; biome derivations pending Windows compile), C4 `[~]` (Fossil Sky added; Gravity Well + Mantle Garden pending).
+- Next: Gravity Well blockout doc (C4 Map 05) + A1 save subsystem start, or B1 inventory system start — maintaining the C++/docs cadence.
+
 ## 2026-06-07 14:34 EDT
 
 - Loop tick (roadmap B3 continued, C++). Added `Source/AbyssalEarth/HeatZoneVolume.h/.cpp`: `AHeatZoneVolume`, the actor that drives `UTemperatureComponent`, completing the heat-survival loop.
