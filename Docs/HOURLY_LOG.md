@@ -1,5 +1,17 @@
 # Hourly Work Log
 
+## 2026-06-08 (tick 4)
+
+- **B1 — Inventory system** (`Source/AbyssalEarth/AbyssalItemDefinition.h`, `InventorySubsystem.h/.cpp`, `HarvestableNode.h/.cpp`):
+  - `UAbyssalItemDefinition`: `UPrimaryDataAsset` subclass with `ItemId`, `DisplayName`, `Description`, `EAbyssalItemCategory`, `MaxStackSize`, `Icon`, `bIsConsumable`. `GetPrimaryAssetId()` returns `("AbyssalItem", ItemId)` for AssetManager lookup.
+  - `UInventorySubsystem`: `GameInstanceSubsystem` + `IAbyssalSaveProvider`. `AddItem` / `RemoveItem` / `HasItem` / `GetItemCount`; stack-cap enforced via `UAssetManager` synchronous definition lookup (falls back to `DefaultMaxStackSize=99`). `OnItemAdded` / `OnItemRemoved` delegates. `OnSaveRequested` / `OnLoadCompleted` round-trip through `UAbyssalProfileSaveGame::Inventory.ItemStacks`.
+  - `AHarvestableNode`: Blueprintable actor implementing `IAbyssalInteractable`. Set `ItemDefinition` + `HarvestCount` per-instance. On interact: calls `UInventorySubsystem::AddItem`, sets `bHarvested=true`, fires optional `RespawnTime` timer. Blueprint event hooks: `BP_OnHarvestBegin`, `BP_OnHarvestRespawn`, `BP_OnFocusBegin`, `BP_OnFocusEnd`.
+- **C1 — World flow** (`Source/AbyssalEarth/WorldFlowSubsystem.h/.cpp`):
+  - `UWorldFlowSubsystem`: `GameInstanceSubsystem` + `IAbyssalSaveProvider`. `TravelToMap(WorldContext, MapId, EntryTag)` — writes `LastMapId`/`LastEntryTag`, fires `OnPreTravel`, flushes `UAbyssalSaveSubsystem::SaveActiveSlot()`, then calls `UGameplayStatics::OpenLevel`. `OnLoadCompleted` restores both names from `WorldFlow` blob so the destination level can call `GetLastEntryTag()` to pick the correct `APlayerStart`.
+- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending.
+- Roadmap checklist updated: B1 `[x]`, C1 `[x]`.
+- Next priority: **A2** (data-driven objectives via `UDataTable`) or **B2** (fabrication system) or **D1** (narrative triggers).
+
 ## 2026-06-08 (tick 3)
 
 - **A1 — Provider migration** (`Source/AbyssalEarth/DiscoverySubsystem.h/.cpp`, `BeaconSubsystem.h/.cpp`, `AbyssalProfileSaveGame.h`):
@@ -14,12 +26,9 @@
 - **C4 — Mantle Garden blockout** (`Docs/Maps/MANTLE_GARDEN.md`): final map (Map 06, Act 4 "Touch the Root").
   - 7 zones: Descent Corridor (steam vents, gravity restore) → Obsidian Shelf (magma geysers, magma lake reveal) → Thermal Garden (bioluminescent bloom heat-tolerance mechanic) → Magma Crossing (3-bridge lava river, 15 s pulse cycle, 5 s stagger) → Root Vestibule (colonist thermal equipment, MERIDIAN exposition) → Garden Core (dense blooms + ceiling fragments) → Root Conduit (second relay activation, MERIDIAN climax).
   - MERIDIAN climax: *"The colonists did not create the Rift. They found the Gate, already open, and tried to seal it. The relay is a lock. You are holding the key. And the Gate... the Gate is listening."*
-  - 11 discovery rows (Flora ×4, Geology ×2, Artifact ×3, Enigma ×2), 5 objective rows, 7 checkpoints.
-  - `AMagmaGeyserHazard`, `ASteamVentHazard`, `AMagmaPulseHazard` documented as `AAbyssalHazardBase` derivations; `InitialPhaseOffset` staggering specified for bridge crossing pacing.
-  - C3 risk flags: `UHeatMeterComponent` (new vital UI), `AMantleBloomActor` (passive buff zone proximity actor).
+  - 11 discovery rows, 5 objective rows, 7 checkpoints. `AMagmaGeyserHazard`, `ASteamVentHazard`, `AMagmaPulseHazard` documented with `InitialPhaseOffset` staggering.
 - **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending.
 - Roadmap checklist updated: A1 `[x]`, C4 `[x]`.
-- Next priority: **B1** (Inventory — `UAbyssalItemDefinition` DataAsset + `UInventoryComponent`) or **C1** (World flow — `UWorldFlowSubsystem` + map travel).
 
 ## 2026-06-08 (tick 2)
 
@@ -29,43 +38,43 @@
   - `AGravityShearHazard` documented as `AAbyssalHazardBase` derivation. C3 dependencies flagged (highest-risk traversal system).
 - **A1 — `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`** (`Source/AbyssalEarth/AbyssalSaveSubsystem.h/.cpp`, `AbyssalProfileSaveGame.h`):
   - `IAbyssalSaveProvider` interface: `OnSaveRequested` / `OnLoadCompleted`.
-  - `UAbyssalSaveSubsystem`: `LoadSlot`, `SaveActiveSlot`, `DeleteSlot`, `DoesSaveExist`, `GetActiveSaveGame`; `OnSaveCompleted`/`OnLoadCompleted` delegates. Slot name `AbyssalProfile_<N>`.
-  - `UAbyssalProfileSaveGame`: 5 domain blobs (Discoveries, Beacons, Objectives, WorldFlow, Inventory stub). `SaveVersion=1`.
+  - `UAbyssalSaveSubsystem`: `LoadSlot`, `SaveActiveSlot`, `DeleteSlot`, `DoesSaveExist`, `GetActiveSaveGame`; delegates. Slot name `AbyssalProfile_<N>`.
+  - `UAbyssalProfileSaveGame`: 5 domain blobs. `SaveVersion=1`.
 - **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending.
 - Roadmap checklist updated: A1 `[~]`, C4 `[~]` (Mantle Garden remaining).
 
 ## 2026-06-08 (tick 1 / session resumed)
 
 - PR #1 merged to main (squash `383ce0c`). Dev branch rebased.
-- **C2 — `AAbyssalHazardBase`**: phase machine + Radial/Overlap/None damage modes, BP hooks, overlap tracking. `AEmberVentHazard` untouched.
-- **C4 — Fossil Sky blockout** (`Docs/Maps/FOSSIL_SKY.md`): 7-zone Map 04 (Act 2 strata dating). Brittle walkways, Dating Chamber narrative anchor, 11 discovery actors, `ABrittleWalkwaySection` + `ACeilingFragmentHazard` specs.
+- **C2 — `AAbyssalHazardBase`**: phase machine + Radial/Overlap/None damage modes, BP hooks, overlap tracking.
+- **C4 — Fossil Sky blockout** (`Docs/Maps/FOSSIL_SKY.md`): 7-zone Map 04 (Act 2 strata dating). Brittle walkways, Dating Chamber narrative anchor, 11 discovery actors, hazard specs.
 - Roadmap checklist updated: C2 `[~]`, C4 Fossil Sky added.
 
 ## 2026-06-07 14:34 EDT
 
-- Loop tick (B3 continued). Added `AHeatZoneVolume` — box trigger calling `SetInHeatZone` on `UTemperatureComponent`. Mirrors `AObjectiveTriggerActor` pattern exactly.
+- Loop tick (B3 continued). Added `AHeatZoneVolume` — box trigger calling `SetInHeatZone` on `UTemperatureComponent`.
 - Verification: `python3 Scripts/validate_design_data.py` passes.
 
 ## 2026-06-07 14:07 EDT
 
-- Loop tick (B3). Added `UTemperatureComponent`: heat-exposure vital, `Insulation` scaling, overheat damage via `UGameplayStatics::ApplyDamage` (same path as `AEmberVentHazard`).
+- Loop tick (B3). Added `UTemperatureComponent`: heat-exposure vital, `Insulation` scaling, overheat damage via `UGameplayStatics::ApplyDamage`.
 - Verification: passes.
 
 ## 2026-06-07 13:40 EDT
 
-- Completed world-map concept review: Fossil Sky, Gravity Well, Mantle Garden plates reviewed and appended to `Docs/CONCEPT_ART_REVIEW.md`. All six world plates now reviewed.
+- Completed world-map concept review: Fossil Sky, Gravity Well, Mantle Garden plates reviewed. All six world plates now reviewed.
 
 ## 2026-06-07 13:12 EDT
 
-- Wrote `Docs/Maps/INNER_SEA.md` (Map 03 blockout): 7-zone route, dock/stepping-stone P0 traversal, 5 discovery rows, electrical/flood hazard hooks.
+- Wrote `Docs/Maps/INNER_SEA.md` (Map 03 blockout): 7-zone route, dock/stepping-stone traversal, 5 discovery rows, electrical/flood hazard hooks.
 
 ## 2026-06-07 12:45 EDT
 
-- Concept art review: viewed 3 canonical plates (Luminous Rift, Glassroot Forest, Inner Sea). Wrote grounded notes in `Docs/CONCEPT_ART_REVIEW.md`.
+- Concept art review: viewed 3 canonical plates. Wrote grounded notes in `Docs/CONCEPT_ART_REVIEW.md`.
 
 ## 2026-06-07 12:18 EDT
 
-- Added `IAbyssalInteractable` UINTERFACE + `UInteractionComponent` (A3): line-trace focus, instant/hold interactions, `OnFocusChanged`/`OnInteractionCompleted` delegates.
+- Added `IAbyssalInteractable` UINTERFACE + `UInteractionComponent` (A3): line-trace focus, instant/hold interactions, delegates.
 
 ## 2026-06-07 11:52 EDT
 
