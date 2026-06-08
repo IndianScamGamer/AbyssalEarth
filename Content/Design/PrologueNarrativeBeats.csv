@@ -1,0 +1,10 @@
+Name,Speaker,Caption,Duration,bPlayOnce
+NAR_PRO_BRIEFING,Mission Control,"First major exploration expedition of Earth's abyssal plains. Telemetry is green. Good luck down there.",5.0,true
+NAR_PRO_HELIOS_WARN,HELIOS Unit 4,"Advisory: an unresolved anomaly persists below the shaft. We recommend delaying descent.",5.0,true
+NAR_PRO_PLAYER_DOUBT,You,"Sounds like those bastards were lying.",3.5,true
+NAR_PRO_DESCENT_HUM,,"The cable hums. The dark gets thicker.",4.0,true
+NAR_PRO_CRASH,,"WARNING — CABLE TENSION CRITICAL",2.5,true
+NAR_PRO_WAKE,You,"...still alive. Barely.",3.5,true
+NAR_PRO_PRY_DOORS,You,"Come on — open, you piece of junk.",3.0,true
+NAR_PRO_REVEAL,You,"Oh... shit.",3.0,true
+NAR_PRO_SURVIVE,,"OBJECTIVE: SURVIVE",4.0,true
