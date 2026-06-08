@@ -2,10 +2,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
+#include "DiscoverySaveGame.h"
 #include "AbyssalProfileSaveGame.generated.h"
-
-USTRUCT()
-struct FAbyssalDiscoveryEntry;  // forward; defined in DiscoverySubsystem.h
 
 USTRUCT()
 struct FAbyssalDiscoverySaveBlob
@@ -18,9 +16,6 @@ struct FAbyssalDiscoverySaveBlob
     UPROPERTY()
     TArray<FName> DiscoveredIds_Legacy;
 };
-
-USTRUCT()
-struct FAbyssalBeaconSaveData;  // forward; defined in BeaconActor.h
 
 USTRUCT()
 struct FAbyssalBeaconSaveBlob

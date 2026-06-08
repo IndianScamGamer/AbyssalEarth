@@ -1,5 +1,26 @@
 # Hourly Work Log
 
+## 2026-06-08 (tick 3)
+
+- **A1 — Provider migration** (`Source/AbyssalEarth/DiscoverySubsystem.h/.cpp`, `BeaconSubsystem.h/.cpp`, `AbyssalProfileSaveGame.h`):
+  - `UDiscoverySubsystem` and `UBeaconSubsystem` now implement `IAbyssalSaveProvider`.
+  - `Initialize`: `Collection.InitializeDependency(UAbyssalSaveSubsystem::StaticClass())` + register; no auto-load on startup.
+  - `Deinitialize`: unregister from `UAbyssalSaveSubsystem`.
+  - `OnSaveRequested`: writes domain data into `UAbyssalProfileSaveGame` blobs (`Discoveries`, `Beacons`).
+  - `OnLoadCompleted`: restores domain state from blobs; legacy discovery-ID migration preserved.
+  - `SaveDiscoveries()` / `SaveBeacons()`: now delegate to `UAbyssalSaveSubsystem::SaveActiveSlot()` — no direct `UGameplayStatics` calls.
+  - `RegisterDiscoveryEntry`: removed per-discovery disk flush (saves deferred to checkpoint/SaveActiveSlot).
+  - `AbyssalProfileSaveGame.h`: fixed broken forward declarations → `#include "DiscoverySaveGame.h"` so `TMap<FName, FAbyssalDiscoveryEntry>` compiles.
+- **C4 — Mantle Garden blockout** (`Docs/Maps/MANTLE_GARDEN.md`): final map (Map 06, Act 4 "Touch the Root").
+  - 7 zones: Descent Corridor (steam vents, gravity restore) → Obsidian Shelf (magma geysers, magma lake reveal) → Thermal Garden (bioluminescent bloom heat-tolerance mechanic) → Magma Crossing (3-bridge lava river, 15 s pulse cycle, 5 s stagger) → Root Vestibule (colonist thermal equipment, MERIDIAN exposition) → Garden Core (dense blooms + ceiling fragments) → Root Conduit (second relay activation, MERIDIAN climax).
+  - MERIDIAN climax: *"The colonists did not create the Rift. They found the Gate, already open, and tried to seal it. The relay is a lock. You are holding the key. And the Gate... the Gate is listening."*
+  - 11 discovery rows (Flora ×4, Geology ×2, Artifact ×3, Enigma ×2), 5 objective rows, 7 checkpoints.
+  - `AMagmaGeyserHazard`, `ASteamVentHazard`, `AMagmaPulseHazard` documented as `AAbyssalHazardBase` derivations; `InitialPhaseOffset` staggering specified for bridge crossing pacing.
+  - C3 risk flags: `UHeatMeterComponent` (new vital UI), `AMantleBloomActor` (passive buff zone proximity actor).
+- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending.
+- Roadmap checklist updated: A1 `[x]`, C4 `[x]`.
+- Next priority: **B1** (Inventory — `UAbyssalItemDefinition` DataAsset + `UInventoryComponent`) or **C1** (World flow — `UWorldFlowSubsystem` + map travel).
+
 ## 2026-06-08 (tick 2)
 
 - **C4 — Gravity Well map blockout** (`Docs/Maps/GRAVITY_WELL.md`): full 7-zone blockout for Map 05 (Act 3 "Make the Machine Answer").
@@ -10,10 +31,8 @@
   - `IAbyssalSaveProvider` interface: `OnSaveRequested` / `OnLoadCompleted`.
   - `UAbyssalSaveSubsystem`: `LoadSlot`, `SaveActiveSlot`, `DeleteSlot`, `DoesSaveExist`, `GetActiveSaveGame`; `OnSaveCompleted`/`OnLoadCompleted` delegates. Slot name `AbyssalProfile_<N>`.
   - `UAbyssalProfileSaveGame`: 5 domain blobs (Discoveries, Beacons, Objectives, WorldFlow, Inventory stub). `SaveVersion=1`.
-  - Next sub-step: register `UDiscoverySubsystem` and `UBeaconSubsystem` as providers (removing their direct `UGameplayStatics` save calls).
 - **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending.
 - Roadmap checklist updated: A1 `[~]`, C4 `[~]` (Mantle Garden remaining).
-- Next: Mantle Garden blockout (C4 Map 06, final map) + A1 provider migration.
 
 ## 2026-06-08 (tick 1 / session resumed)
 
