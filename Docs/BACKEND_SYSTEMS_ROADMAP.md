@@ -24,7 +24,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 | Domain | Class(es) |
 | --- | --- |
-| Player / movement | `AAbyssalExplorerCharacter`, `AAbyssalEarthGameMode` |
+| Player / movement | `AAbyssalExplorerCharacter`, `AAbyssalEarthGameMode`, `UAbyssalTraversalComponent` |
 | Scanning / discovery / journal | `UScannerComponent`, `ADiscoveryActor`, `UDiscoverySubsystem`, `UAbyssalScannerReadoutWidget`, `UAbyssalJournalWidget` |
 | Objectives | `UObjectiveSubsystem` (data-driven + persisted), `AObjectiveTriggerActor` |
 | Navigation beacons | `ABeaconActor`, `UBeaconSubsystem` |
@@ -36,6 +36,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | Survival vitals | `UTemperatureComponent`, `AHeatZoneVolume`, `UOxygenComponent`, `UStaminaComponent` |
 | Inventory | `UAbyssalItemDefinition` (DataAsset), `UInventorySubsystem`, `AHarvestableNode` |
 | Fabrication | `UAbyssalRecipeDefinition` (DataAsset), `UFabricationSubsystem`, `AFabricatorStation` |
+| Traversal | `UAbyssalTraversalComponent`, `AReorientationVolume` |
 | World flow | `UWorldFlowSubsystem` |
 | Utility | `UAbyssalGameplayLibrary` |
 
@@ -52,7 +53,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | 5 | Fabrication / crafting | **Done** (Windows compile pending) |
 | 6 | Survival vitals | **Done** (temperature + oxygen + stamina; Windows compile pending) |
 | 7 | World flow / level transitions | **Done** (Windows compile pending) |
-| 8 | Traversal modifiers | Missing |
+| 8 | Traversal modifiers | **Done** (Windows compile pending) |
 | 9 | Hazard framework | **In progress** (base class done; biome derivations documented) |
 | 10 | Narrative triggers + dialogue | Missing |
 | 11 | HELIOS robot NPCs | Missing |
@@ -80,16 +81,16 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 **B2.** `UFabricationSubsystem` + `UAbyssalRecipeDefinition` DataAssets + `AFabricatorStation`. Done.
 
-**B3.** Survival vitals: `UTemperatureComponent` + `AHeatZoneVolume`, `UOxygenComponent`, `UStaminaComponent`. Done. Windows-side: drive `SetSubmerged`/`SetExerting` from water volumes + character movement; wire HUD gauges.
+**B3.** Survival vitals: `UTemperatureComponent` + `AHeatZoneVolume`, `UOxygenComponent`, `UStaminaComponent`. Done.
 
 ### Phase C — Maps and world
 
-**C1.** `UWorldFlowSubsystem`: `TravelToMap` (save-on-exit, entry-tag persistence). Done. Windows-side: wire `APlayerStart` tag selection from `GetLastEntryTag()`.
+**C1.** `UWorldFlowSubsystem`: `TravelToMap` (save-on-exit, entry-tag persistence). Done.
 
 **C2.** `AAbyssalHazardBase` (done). Biome derivations: `ABrittleWalkwaySection`,
 `ACeilingFragmentHazard`, `AGravityShearHazard`, `ASteamVentHazard`, `AMagmaGeyserHazard`, `AMagmaPulseHazard`.
 
-**C3.** `AReorientationVolume`, climb/swim states, tether tool.
+**C3.** `UAbyssalTraversalComponent` (climb/swim/tether state machine + tether constraint) + `AReorientationVolume` (gravity reorientation). Done. Windows-side: apply gravity-direction lerp + tether correction in character movement.
 
 **C4.** Per-biome blockouts: all six complete.
 
@@ -119,7 +120,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 - [x] B3 Survival vitals — temperature + oxygen + stamina components; Windows compile pending
 - [x] C1 World flow — `UWorldFlowSubsystem::TravelToMap` + entry-tag save/restore; Windows-side `APlayerStart` wiring pending
 - [~] C2 Hazard framework — base class done; biome derivations documented
-- [ ] C3 Traversal modifiers
+- [x] C3 Traversal modifiers — `UAbyssalTraversalComponent` + `AReorientationVolume`; Windows-side movement integration pending
 - [x] C4 Per-biome scaffolding — all 6 biome blockouts complete
 - [ ] D1 Narrative triggers + prologue dialogue
 - [ ] D2 HELIOS robot NPCs
