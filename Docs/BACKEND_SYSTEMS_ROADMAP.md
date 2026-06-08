@@ -38,6 +38,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | Fabrication | `UAbyssalRecipeDefinition` (DataAsset), `UFabricationSubsystem`, `AFabricatorStation` |
 | Traversal | `UAbyssalTraversalComponent`, `AReorientationVolume` |
 | Narrative | `UNarrativeSubsystem`, `UNarrativeTriggerComponent`, `UAbyssalCaptionWidget` |
+| NPCs | `AHeliosRobot` |
 | World flow | `UWorldFlowSubsystem` |
 | Utility | `UAbyssalGameplayLibrary` |
 
@@ -57,7 +58,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | 8 | Traversal modifiers | **Done** (Windows compile pending) |
 | 9 | Hazard framework | **In progress** (base class done; biome derivations documented) |
 | 10 | Narrative triggers + dialogue | **Done** (caption beats; branching dialogue pending) |
-| 11 | HELIOS robot NPCs | Missing |
+| 11 | HELIOS robot NPCs | **Done** (Windows compile pending) |
 | 12 | Creatures / survival AI | Missing |
 | 13 | Equipment / upgrades | Missing |
 | 14 | Photo / observation mode | Missing |
@@ -69,27 +70,23 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 ### Phase A — Foundations
 
-**A1.** `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` + `IAbyssalSaveProvider`. Discovery + beacon providers migrated.
+**A1.** `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` + `IAbyssalSaveProvider`. Done.
 
-**A2.** `UObjectiveSubsystem` loads its route from a `FAbyssalObjectiveTableRow` `UDataTable` and persists progress via A1.
+**A2.** `UObjectiveSubsystem` data-driven route + persistence. Done.
 
 **A3.** `IAbyssalInteractable` + `UInteractionComponent` (authored). Wire into
 `AAbyssalExplorerCharacter` + `IA_Interact` input asset (Windows-side).
 
 ### Phase B — Survival / fabrication
 
-**B1.** `UAbyssalItemDefinition` + `UInventorySubsystem` + `AHarvestableNode`. Done.
-
-**B2.** `UFabricationSubsystem` + `UAbyssalRecipeDefinition` + `AFabricatorStation`. Done.
-
-**B3.** Survival vitals: temperature + oxygen + stamina. Done.
+**B1.** Inventory. Done. **B2.** Fabrication. Done. **B3.** Vitals (temp/oxygen/stamina). Done.
 
 ### Phase C — Maps and world
 
-**C1.** `UWorldFlowSubsystem`: `TravelToMap`. Done.
+**C1.** `UWorldFlowSubsystem`. Done.
 
 **C2.** `AAbyssalHazardBase` (done). Biome derivations: `ABrittleWalkwaySection`,
-`ACeilingFragmentHazard`, `AGravityShearHazard`, `ASteamVentHazard`, `AMagmaGeyserHazard`, `AMagmaPulseHazard`.
+`ACeilingFragmentHazard`, `AGravityShearHazard`, `ASteamVentHazard`, `AMagmaGeyserHazard`, `AMagmaPulseHazard` (C++ subclasses pending).
 
 **C3.** `UAbyssalTraversalComponent` + `AReorientationVolume`. Done.
 
@@ -99,7 +96,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 **D1.** `UNarrativeSubsystem` + `UNarrativeTriggerComponent` + `UAbyssalCaptionWidget`. Done. Branching dialogue trees pending.
 
-**D2.** `AHeliosRobot` with A3 interaction + D1 dialogue.
+**D2.** `AHeliosRobot` with A3 interaction + D1 dialogue. Done.
 
 **D3.** `AAbyssalCreature` + perception/avoidance.
 
@@ -124,7 +121,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 - [x] C3 Traversal modifiers — `UAbyssalTraversalComponent` + `AReorientationVolume`; Windows-side movement integration pending
 - [x] C4 Per-biome scaffolding — all 6 biome blockouts complete
 - [x] D1 Narrative triggers — `UNarrativeSubsystem` + `UNarrativeTriggerComponent` + `UAbyssalCaptionWidget`; branching dialogue pending
-- [ ] D2 HELIOS robot NPCs
+- [x] D2 HELIOS robot NPCs — `AHeliosRobot` interaction + sequential dialogue; Windows compile pending
 - [ ] D3 Creatures / survival AI
 - [ ] D4 Photo / observation mode
 - [ ] D5 Abyssal Interface (deferred)
