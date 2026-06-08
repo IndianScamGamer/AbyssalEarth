@@ -1,14 +1,45 @@
 #include "BeaconSubsystem.h"
+#include "AbyssalProfileSaveGame.h"
 #include "BeaconActor.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
-#include "Kismet/GameplayStatics.h"
 
 void UBeaconSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
     Super::Initialize(Collection);
-    LoadBeacons();
+    Collection.InitializeDependency(UAbyssalSaveSubsystem::StaticClass());
+    if (UAbyssalSaveSubsystem* SaveSub = GetGameInstance()->GetSubsystem<UAbyssalSaveSubsystem>())
+    {
+        SaveSub->RegisterSaveProvider(this);
+    }
+}
+
+void UBeaconSubsystem::Deinitialize()
+{
+    if (UAbyssalSaveSubsystem* SaveSub = GetGameInstance()->GetSubsystem<UAbyssalSaveSubsystem>())
+    {
+        SaveSub->UnregisterSaveProvider(this);
+    }
+    Super::Deinitialize();
+}
+
+void UBeaconSubsystem::OnSaveRequested(UAbyssalProfileSaveGame* SaveGame)
+{
+    SaveGame->Beacons.SavedBeacons = SavedBeacons;
+}
+
+void UBeaconSubsystem::OnLoadCompleted(UAbyssalProfileSaveGame* SaveGame)
+{
+    SavedBeacons.Reset();
+    RestoredBeaconIds.Reset();
+    for (const FAbyssalBeaconSaveData& BeaconData : SaveGame->Beacons.SavedBeacons)
+    {
+        if (BeaconData.BeaconId.IsValid())
+        {
+            SavedBeacons.Add(BeaconData);
+        }
+    }
 }
 
 void UBeaconSubsystem::RegisterBeacon(ABeaconActor* Beacon)
@@ -146,43 +177,15 @@ TArray<FAbyssalBeaconSaveData> UBeaconSubsystem::GetSavedBeacons() const
 
 void UBeaconSubsystem::SaveBeacons()
 {
-    UDiscoverySaveGame* SaveGame = Cast<UDiscoverySaveGame>(
-        UGameplayStatics::LoadGameFromSlot(SaveSlotName, SaveUserIndex));
-
-    if (!SaveGame)
+    if (UAbyssalSaveSubsystem* SaveSub = GetGameInstance()->GetSubsystem<UAbyssalSaveSubsystem>())
     {
-        SaveGame = Cast<UDiscoverySaveGame>(
-            UGameplayStatics::CreateSaveGameObject(UDiscoverySaveGame::StaticClass()));
+        SaveSub->SaveActiveSlot();
     }
-
-    if (!SaveGame)
-    {
-        return;
-    }
-
-    SaveGame->SavedBeacons = SavedBeacons;
-    UGameplayStatics::SaveGameToSlot(SaveGame, SaveSlotName, SaveUserIndex);
 }
 
 void UBeaconSubsystem::LoadBeacons()
 {
-    SavedBeacons.Reset();
-    RestoredBeaconIds.Reset();
-
-    USaveGame* LoadedObject = UGameplayStatics::LoadGameFromSlot(SaveSlotName, SaveUserIndex);
-    UDiscoverySaveGame* SaveGame = Cast<UDiscoverySaveGame>(LoadedObject);
-    if (!SaveGame)
-    {
-        return;
-    }
-
-    for (const FAbyssalBeaconSaveData& BeaconData : SaveGame->SavedBeacons)
-    {
-        if (BeaconData.BeaconId.IsValid())
-        {
-            SavedBeacons.Add(BeaconData);
-        }
-    }
+    // Load is now driven by UAbyssalSaveSubsystem::LoadSlot -> OnLoadCompleted.
 }
 
 int32 UBeaconSubsystem::FindBeaconIndex(FGuid BeaconId) const

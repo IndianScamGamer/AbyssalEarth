@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbyssalSaveSubsystem.h"
 #include "DiscoverySaveGame.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "BeaconSubsystem.generated.h"
@@ -8,12 +9,17 @@
 class ABeaconActor;
 
 UCLASS()
-class ABYSSALEARTH_API UBeaconSubsystem : public UGameInstanceSubsystem
+class ABYSSALEARTH_API UBeaconSubsystem : public UGameInstanceSubsystem, public IAbyssalSaveProvider
 {
     GENERATED_BODY()
 
 public:
     virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+    virtual void Deinitialize() override;
+
+    // IAbyssalSaveProvider
+    virtual void OnSaveRequested(UAbyssalProfileSaveGame* SaveGame) override;
+    virtual void OnLoadCompleted(UAbyssalProfileSaveGame* SaveGame) override;
 
     UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Beacon")
     void RegisterBeacon(ABeaconActor* Beacon);
@@ -30,9 +36,11 @@ public:
     UFUNCTION(BlueprintPure, Category = "Abyssal Earth|Beacon")
     TArray<FAbyssalBeaconSaveData> GetSavedBeacons() const;
 
+    /** Routes through UAbyssalSaveSubsystem::SaveActiveSlot. */
     UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Beacon")
     void SaveBeacons();
 
+    /** No-op: load is driven by UAbyssalSaveSubsystem::LoadSlot. */
     UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Beacon")
     void LoadBeacons();
 
@@ -42,12 +50,6 @@ private:
 
     UPROPERTY()
     TSet<FGuid> RestoredBeaconIds;
-
-    UPROPERTY()
-    FString SaveSlotName = TEXT("AbyssalEarth_Discoveries");
-
-    UPROPERTY()
-    int32 SaveUserIndex = 0;
 
     int32 FindBeaconIndex(FGuid BeaconId) const;
 };

@@ -1,11 +1,57 @@
 #include "DiscoverySubsystem.h"
-#include "DiscoverySaveGame.h"
-#include "Kismet/GameplayStatics.h"
+#include "AbyssalProfileSaveGame.h"
 
 void UDiscoverySubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
     Super::Initialize(Collection);
-    LoadDiscoveries();
+    Collection.InitializeDependency(UAbyssalSaveSubsystem::StaticClass());
+    if (UAbyssalSaveSubsystem* SaveSub = GetGameInstance()->GetSubsystem<UAbyssalSaveSubsystem>())
+    {
+        SaveSub->RegisterSaveProvider(this);
+    }
+}
+
+void UDiscoverySubsystem::Deinitialize()
+{
+    if (UAbyssalSaveSubsystem* SaveSub = GetGameInstance()->GetSubsystem<UAbyssalSaveSubsystem>())
+    {
+        SaveSub->UnregisterSaveProvider(this);
+    }
+    Super::Deinitialize();
+}
+
+void UDiscoverySubsystem::OnSaveRequested(UAbyssalProfileSaveGame* SaveGame)
+{
+    SaveGame->Discoveries.DiscoveredEntries.Reset();
+    SaveGame->Discoveries.DiscoveredIds_Legacy.Reset();
+    for (const TPair<FName, FAbyssalDiscoveryEntry>& Pair : Entries)
+    {
+        SaveGame->Discoveries.DiscoveredEntries.Add(Pair.Key, Pair.Value);
+    }
+}
+
+void UDiscoverySubsystem::OnLoadCompleted(UAbyssalProfileSaveGame* SaveGame)
+{
+    Entries.Reset();
+    for (const TPair<FName, FAbyssalDiscoveryEntry>& Pair : SaveGame->Discoveries.DiscoveredEntries)
+    {
+        if (!Pair.Key.IsNone())
+        {
+            Entries.Add(Pair.Key, Pair.Value);
+        }
+    }
+    for (const FName& LegacyId : SaveGame->Discoveries.DiscoveredIds_Legacy)
+    {
+        if (LegacyId.IsNone() || Entries.Contains(LegacyId))
+        {
+            continue;
+        }
+        FAbyssalDiscoveryEntry Entry;
+        Entry.DiscoveryId = LegacyId;
+        Entry.DisplayName = FText::FromName(LegacyId);
+        Entry.Category = EDiscoveryCategory::Geology;
+        Entries.Add(LegacyId, Entry);
+    }
 }
 
 bool UDiscoverySubsystem::RegisterDiscovery(FName DiscoveryId)
@@ -35,7 +81,7 @@ bool UDiscoverySubsystem::RegisterDiscoveryEntry(const FAbyssalDiscoveryEntry& E
     if (!bAlreadyKnown)
     {
         OnDiscoveryAdded.Broadcast(Entry);
-        SaveDiscoveries();
+        // Disk write deferred to next SaveActiveSlot call; no per-discovery flush.
     }
 
     return !bAlreadyKnown;
@@ -94,66 +140,19 @@ int32 UDiscoverySubsystem::GetDiscoveredCount() const
 
 void UDiscoverySubsystem::SaveDiscoveries()
 {
-    UDiscoverySaveGame* SaveGame = Cast<UDiscoverySaveGame>(
-        UGameplayStatics::LoadGameFromSlot(SaveSlotName, SaveUserIndex));
-
-    if (!SaveGame)
+    if (UAbyssalSaveSubsystem* SaveSub = GetGameInstance()->GetSubsystem<UAbyssalSaveSubsystem>())
     {
-        SaveGame = Cast<UDiscoverySaveGame>(
-            UGameplayStatics::CreateSaveGameObject(UDiscoverySaveGame::StaticClass()));
+        SaveSub->SaveActiveSlot();
     }
+}
 
-    if (!SaveGame)
-    {
-        return;
-    }
-
-    SaveGame->DiscoveredIds.Reset(Entries.Num());
-    SaveGame->DiscoveredEntries.Reset(Entries.Num());
-    for (const TPair<FName, FAbyssalDiscoveryEntry>& Pair : Entries)
-    {
-        SaveGame->DiscoveredIds.Add(Pair.Key);
-        SaveGame->DiscoveredEntries.Add(Pair.Value);
-    }
-    UGameplayStatics::SaveGameToSlot(SaveGame, SaveSlotName, SaveUserIndex);
+void UDiscoverySubsystem::LoadDiscoveries()
+{
+    // Load is now driven by UAbyssalSaveSubsystem::LoadSlot -> OnLoadCompleted.
 }
 
 void UDiscoverySubsystem::ClearAllDiscoveries()
 {
     Entries.Reset();
     SaveDiscoveries();
-}
-
-void UDiscoverySubsystem::LoadDiscoveries()
-{
-    Entries.Reset();
-
-    USaveGame* LoadedObject = UGameplayStatics::LoadGameFromSlot(SaveSlotName, SaveUserIndex);
-    UDiscoverySaveGame* SaveGame = Cast<UDiscoverySaveGame>(LoadedObject);
-    if (!SaveGame)
-    {
-        return;
-    }
-
-    for (const FAbyssalDiscoveryEntry& Entry : SaveGame->DiscoveredEntries)
-    {
-        if (!Entry.DiscoveryId.IsNone())
-        {
-            Entries.Add(Entry.DiscoveryId, Entry);
-        }
-    }
-
-    for (const FName& LegacyId : SaveGame->DiscoveredIds)
-    {
-        if (LegacyId.IsNone() || Entries.Contains(LegacyId))
-        {
-            continue;
-        }
-
-        FAbyssalDiscoveryEntry Entry;
-        Entry.DiscoveryId = LegacyId;
-        Entry.DisplayName = FText::FromName(LegacyId);
-        Entry.Category = EDiscoveryCategory::Geology;
-        Entries.Add(LegacyId, Entry);
-    }
 }

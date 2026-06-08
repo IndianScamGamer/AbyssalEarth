@@ -31,7 +31,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | Health | `UAbyssalHealthComponent` |
 | Audio | `UAbyssalAudioCueSubsystem` |
 | Hazards | `AEmberVentHazard`, `AAbyssalHazardBase` (new) |
-| Save/load | `UDiscoverySaveGame` (legacy), `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` (new) |
+| Save/load | `UDiscoverySaveGame` (legacy), `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` (new); `UDiscoverySubsystem` + `UBeaconSubsystem` migrated to `IAbyssalSaveProvider` |
 | Interaction | `IAbyssalInteractable`, `UInteractionComponent` (new) |
 | Survival vitals | `UTemperatureComponent`, `AHeatZoneVolume` (new) |
 | Utility | `UAbyssalGameplayLibrary` |
@@ -42,7 +42,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 | # | System | Status |
 | --- | --- | --- |
-| 1 | Save/persistence rework | **In progress** (subsystem authored; provider migration pending) |
+| 1 | Save/persistence rework | **Done** (Windows compile pending) |
 | 2 | Data-driven objectives + persistence | Partial (hardcoded; not yet persisted) |
 | 3 | Interaction / use system | **In progress** (C++ authored; character wiring pending) |
 | 4 | Inventory / resources | Missing |
@@ -64,9 +64,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 ### Phase A — Foundations
 
-**A1.** `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` + `IAbyssalSaveProvider`.
-Next sub-step: register `UDiscoverySubsystem` and `UBeaconSubsystem` as providers
-and remove their direct `UGameplayStatics::SaveGameToSlot` calls.
+**A1.** `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` + `IAbyssalSaveProvider`. `UDiscoverySubsystem` and `UBeaconSubsystem` migrated; direct `UGameplayStatics::SaveGameToSlot` calls removed.
 
 **A2.** Load objective route from `UDataTable`; persist `CurrentObjectiveIndex` via A1.
 
@@ -86,12 +84,12 @@ and remove their direct `UGameplayStatics::SaveGameToSlot` calls.
 **C1.** `UWorldFlowSubsystem`: `TravelToMap`, save-on-exit, entry-tag restore.
 
 **C2.** `AAbyssalHazardBase` (done). Biome derivations: `ABrittleWalkwaySection`,
-`ACeilingFragmentHazard`, `AGravityShearHazard`, spore cloud, steam vent.
+`ACeilingFragmentHazard`, `AGravityShearHazard`, `ASteamVentHazard`, `AMagmaGeyserHazard`, `AMagmaPulseHazard`.
 
 **C3.** `AReorientationVolume`, climb/swim states, tether tool.
 
-**C4.** Per-biome blockouts: Luminous Rift (done), Glassroot Forest (done),
-Inner Sea (done), Fossil Sky (done), Gravity Well (done), Mantle Garden (pending).
+**C4.** Per-biome blockouts: Luminous Rift ✓, Glassroot Forest ✓, Inner Sea ✓,
+Fossil Sky ✓, Gravity Well ✓, Mantle Garden ✓. All six biome blockouts complete.
 
 ### Phase D — Narrative, agents, meta
 
@@ -111,7 +109,7 @@ Inner Sea (done), Fossil Sky (done), Gravity Well (done), Mantle Garden (pending
 
 `[ ]` not started · `[~]` in progress · `[x]` done
 
-- [~] A1 Save/persistence — `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` authored; **provider migration + Windows compile pending**
+- [x] A1 Save/persistence — `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` authored; `UDiscoverySubsystem` + `UBeaconSubsystem` migrated to `IAbyssalSaveProvider`; Windows compile pending
 - [~] A2 Data-driven objectives (CSV mirror exists; not yet data-driven or persisted)
 - [~] A3 Interaction — `IAbyssalInteractable` + `UInteractionComponent` authored; **character wiring + Windows compile pending**
 - [ ] B1 Inventory / resources
@@ -120,7 +118,7 @@ Inner Sea (done), Fossil Sky (done), Gravity Well (done), Mantle Garden (pending
 - [ ] C1 World flow / level transitions
 - [~] C2 Hazard framework — `AAbyssalHazardBase` authored; biome derivations documented
 - [ ] C3 Traversal modifiers
-- [~] C4 Per-biome scaffolding — Glassroot + Inner Sea + Fossil Sky + Gravity Well done; **Mantle Garden pending**
+- [x] C4 Per-biome scaffolding — all 6 biome blockouts complete (Luminous Rift, Glassroot Forest, Inner Sea, Fossil Sky, Gravity Well, Mantle Garden)
 - [ ] D1 Narrative triggers + prologue dialogue
 - [ ] D2 HELIOS robot NPCs
 - [ ] D3 Creatures / survival AI
