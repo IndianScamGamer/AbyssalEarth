@@ -33,7 +33,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | Hazards | `AEmberVentHazard`, `AAbyssalHazardBase` |
 | Save/load | `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`; providers: discovery, beacon, inventory, world-flow, objectives, fabrication |
 | Interaction | `IAbyssalInteractable`, `UInteractionComponent` |
-| Survival vitals | `UTemperatureComponent`, `AHeatZoneVolume` |
+| Survival vitals | `UTemperatureComponent`, `AHeatZoneVolume`, `UOxygenComponent`, `UStaminaComponent` |
 | Inventory | `UAbyssalItemDefinition` (DataAsset), `UInventorySubsystem`, `AHarvestableNode` |
 | Fabrication | `UAbyssalRecipeDefinition` (DataAsset), `UFabricationSubsystem`, `AFabricatorStation` |
 | World flow | `UWorldFlowSubsystem` |
@@ -50,7 +50,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | 3 | Interaction / use system | **In progress** (C++ authored; character wiring pending) |
 | 4 | Inventory / resources | **Done** (Windows compile pending) |
 | 5 | Fabrication / crafting | **Done** (Windows compile pending) |
-| 6 | Survival vitals | **In progress** (temperature done; oxygen/stamina pending) |
+| 6 | Survival vitals | **Done** (temperature + oxygen + stamina; Windows compile pending) |
 | 7 | World flow / level transitions | **Done** (Windows compile pending) |
 | 8 | Traversal modifiers | Missing |
 | 9 | Hazard framework | **In progress** (base class done; biome derivations documented) |
@@ -78,9 +78,9 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 **B1.** `UAbyssalItemDefinition` (DataAsset) + `UInventorySubsystem` + `AHarvestableNode`. Done.
 
-**B2.** `UFabricationSubsystem` + `UAbyssalRecipeDefinition` DataAssets + `AFabricatorStation`. Done. Unlocked recipes persist via A1.
+**B2.** `UFabricationSubsystem` + `UAbyssalRecipeDefinition` DataAssets + `AFabricatorStation`. Done.
 
-**B3.** `UTemperatureComponent` + `AHeatZoneVolume` (done). Oxygen/pressure + stamina pending.
+**B3.** Survival vitals: `UTemperatureComponent` + `AHeatZoneVolume`, `UOxygenComponent`, `UStaminaComponent`. Done. Windows-side: drive `SetSubmerged`/`SetExerting` from water volumes + character movement; wire HUD gauges.
 
 ### Phase C — Maps and world
 
@@ -116,7 +116,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 - [~] A3 Interaction — authored; character wiring + Windows compile pending
 - [x] B1 Inventory — `UAbyssalItemDefinition` + `UInventorySubsystem` + `AHarvestableNode`; Windows compile pending
 - [x] B2 Fabrication — `UAbyssalRecipeDefinition` + `UFabricationSubsystem` + `AFabricatorStation`; Windows compile pending
-- [~] B3 Survival vitals — temperature done; oxygen/stamina pending
+- [x] B3 Survival vitals — temperature + oxygen + stamina components; Windows compile pending
 - [x] C1 World flow — `UWorldFlowSubsystem::TravelToMap` + entry-tag save/restore; Windows-side `APlayerStart` wiring pending
 - [~] C2 Hazard framework — base class done; biome derivations documented
 - [ ] C3 Traversal modifiers
