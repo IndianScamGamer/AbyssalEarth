@@ -26,17 +26,16 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | --- | --- |
 | Player / movement | `AAbyssalExplorerCharacter`, `AAbyssalEarthGameMode` |
 | Scanning / discovery / journal | `UScannerComponent`, `ADiscoveryActor`, `UDiscoverySubsystem`, `UAbyssalScannerReadoutWidget`, `UAbyssalJournalWidget` |
-| Objectives | `UObjectiveSubsystem`, `AObjectiveTriggerActor` |
+| Objectives | `UObjectiveSubsystem` (data-driven + persisted), `AObjectiveTriggerActor` |
 | Navigation beacons | `ABeaconActor`, `UBeaconSubsystem` |
 | Health | `UAbyssalHealthComponent` |
 | Audio | `UAbyssalAudioCueSubsystem` |
-| Hazards | `AEmberVentHazard`, `AAbyssalHazardBase` (new) |
-| Save/load | `UDiscoverySaveGame` (legacy), `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`; `UDiscoverySubsystem` + `UBeaconSubsystem` on `IAbyssalSaveProvider` |
+| Hazards | `AEmberVentHazard`, `AAbyssalHazardBase` |
+| Save/load | `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`; providers: discovery, beacon, inventory, world-flow, objectives |
 | Interaction | `IAbyssalInteractable`, `UInteractionComponent` |
 | Survival vitals | `UTemperatureComponent`, `AHeatZoneVolume` |
-| Inventory | `UAbyssalItemDefinition` (DataAsset), `UInventorySubsystem` (new) |
-| World flow | `UWorldFlowSubsystem` (new) |
-| Harvestables | `AHarvestableNode` (new) |
+| Inventory | `UAbyssalItemDefinition` (DataAsset), `UInventorySubsystem`, `AHarvestableNode` |
+| World flow | `UWorldFlowSubsystem` |
 | Utility | `UAbyssalGameplayLibrary` |
 
 ---
@@ -46,7 +45,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | # | System | Status |
 | --- | --- | --- |
 | 1 | Save/persistence rework | **Done** (Windows compile pending) |
-| 2 | Data-driven objectives + persistence | Partial (hardcoded; not yet persisted) |
+| 2 | Data-driven objectives + persistence | **Done** (Windows compile pending) |
 | 3 | Interaction / use system | **In progress** (C++ authored; character wiring pending) |
 | 4 | Inventory / resources | **Done** (Windows compile pending) |
 | 5 | Fabrication / crafting | Missing |
@@ -67,9 +66,9 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 ### Phase A — Foundations
 
-**A1.** `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` + `IAbyssalSaveProvider`. `UDiscoverySubsystem` and `UBeaconSubsystem` migrated; direct `UGameplayStatics::SaveGameToSlot` calls removed.
+**A1.** `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` + `IAbyssalSaveProvider`. Discovery + beacon providers migrated.
 
-**A2.** Load objective route from `UDataTable`; persist `CurrentObjectiveIndex` via A1.
+**A2.** `UObjectiveSubsystem` loads its route from a `FAbyssalObjectiveTableRow` `UDataTable` (`BuildRouteFromTable`) and persists `CurrentObjectiveIndex` + `CompletedObjectiveIds` via A1. Hardcoded default route retained as fallback.
 
 **A3.** `IAbyssalInteractable` + `UInteractionComponent` (authored). Wire into
 `AAbyssalExplorerCharacter` + `IA_Interact` input asset (Windows-side).
@@ -111,8 +110,8 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 `[ ]` not started · `[~]` in progress · `[x]` done
 
-- [x] A1 Save/persistence — subsystem + profile save + both domain providers migrated; Windows compile pending
-- [~] A2 Data-driven objectives (CSV mirror exists; not yet data-driven or persisted)
+- [x] A1 Save/persistence — subsystem + profile save + domain providers migrated; Windows compile pending
+- [x] A2 Data-driven objectives — `BuildRouteFromTable` + `IAbyssalSaveProvider` progress persistence; Windows compile pending
 - [~] A3 Interaction — authored; character wiring + Windows compile pending
 - [x] B1 Inventory — `UAbyssalItemDefinition` + `UInventorySubsystem` + `AHarvestableNode`; Windows compile pending
 - [ ] B2 Fabrication / recipe unlocks

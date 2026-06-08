@@ -1,10 +1,86 @@
 #include "ObjectiveSubsystem.h"
+#include "AbyssalProfileSaveGame.h"
 
 void UObjectiveSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
     Super::Initialize(Collection);
+    Collection.InitializeDependency(UAbyssalSaveSubsystem::StaticClass());
+    if (UAbyssalSaveSubsystem* SaveSub = GetGameInstance()->GetSubsystem<UAbyssalSaveSubsystem>())
+    {
+        SaveSub->RegisterSaveProvider(this);
+    }
+
     BuildDefaultRoute();
     ResetRoute();
+}
+
+void UObjectiveSubsystem::Deinitialize()
+{
+    if (UAbyssalSaveSubsystem* SaveSub = GetGameInstance()->GetSubsystem<UAbyssalSaveSubsystem>())
+    {
+        SaveSub->UnregisterSaveProvider(this);
+    }
+    Super::Deinitialize();
+}
+
+void UObjectiveSubsystem::OnSaveRequested(UAbyssalProfileSaveGame* SaveGame)
+{
+    SaveGame->Objectives.CurrentObjectiveIndex = CurrentObjectiveIndex;
+    SaveGame->Objectives.CompletedObjectiveIds = CompletedObjectiveIds.Array();
+}
+
+void UObjectiveSubsystem::OnLoadCompleted(UAbyssalProfileSaveGame* SaveGame)
+{
+    CompletedObjectiveIds.Reset();
+    for (const FName& Id : SaveGame->Objectives.CompletedObjectiveIds)
+    {
+        if (!Id.IsNone())
+        {
+            CompletedObjectiveIds.Add(Id);
+        }
+    }
+
+    const int32 SavedIndex = SaveGame->Objectives.CurrentObjectiveIndex;
+    if (SavedIndex == INDEX_NONE || RouteObjectives.IsValidIndex(SavedIndex))
+    {
+        CurrentObjectiveIndex = SavedIndex;
+    }
+    else
+    {
+        // Saved index outside the current route (route changed); clamp to end.
+        CurrentObjectiveIndex = RouteObjectives.Num() > 0 ? RouteObjectives.Num() - 1 : INDEX_NONE;
+    }
+
+    BroadcastCurrentObjective();
+}
+
+int32 UObjectiveSubsystem::BuildRouteFromTable(UDataTable* RouteTable)
+{
+    if (!RouteTable || RouteTable->GetRowStruct() != FAbyssalObjectiveTableRow::StaticStruct())
+    {
+        return 0;
+    }
+
+    RouteObjectives.Reset();
+
+    static const FString Context(TEXT("UObjectiveSubsystem::BuildRouteFromTable"));
+    for (const FName& RowName : RouteTable->GetRowNames())
+    {
+        const FAbyssalObjectiveTableRow* Row = RouteTable->FindRow<FAbyssalObjectiveTableRow>(RowName, Context);
+        if (!Row)
+        {
+            continue;
+        }
+
+        FAbyssalObjectiveStep Step;
+        Step.ObjectiveId = RowName;
+        Step.Title = Row->Title;
+        Step.Description = Row->Description;
+        RouteObjectives.Add(Step);
+    }
+
+    ResetRoute();
+    return RouteObjectives.Num();
 }
 
 void UObjectiveSubsystem::ResetRoute()
