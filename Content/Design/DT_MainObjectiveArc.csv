@@ -1,0 +1,7 @@
+Name,Title,Description
+OBJ_VERIFY_HELIOS,"Verify the AI Robot Fleet HELIOS's work","Descend into the elevator shaft and inspect the autonomous construction work."
+OBJ_SURVIVE,"SURVIVE","Recover from the elevator crash, escape the wreck, and find a stable path through the Luminous Rift."
+OBJ_DISCOVER_PLACE,"DISCOVER WHAT THIS PLACE IS","Scan alien structures, hostile environments, and impossible materials until the cavern begins to make sense."
+OBJ_MAKE_MACHINE_ANSWER,"MAKE THE MACHINE ANSWER","Learn how to operate ancient systems, route power, and communicate with the Abyssal Interface."
+OBJ_BUILD_WAY_OUT,"BUILD A WAY OUT","Use discovered alien technology to fabricate tools, stabilize energy, and construct a return mechanism."
+OBJ_OPEN_RIFT,"OPEN THE RIFT","Activate the constructed rift and return to the surface."
