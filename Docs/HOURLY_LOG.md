@@ -1,5 +1,22 @@
 # Hourly Work Log
 
+## 2026-06-08 (tick 2)
+
+- Loop tick (roadmap C4 Map 05 + A1 start).
+  1. **C4 — Gravity Well map blockout** (`Docs/Maps/GRAVITY_WELL.md`): full 7-zone blockout for Map 05 (Act 3 "Make the Machine Answer").
+     - Zones 0–6: Approach Shaft (gravity tutorial + tether intro) → Inner Ring (6 platforms, rune panel puzzle) → Reorientation Passage (3-room gravity-flip progression) → Mid-Ring Debris Field (moving platforms + staggered gravity shear hazards) → Core Antechamber (full core reveal + expedition gear storytelling) → Core Entry & Relay Activation (walk-inside-a-sphere centrifugal gravity, 6 relay nodes — Act 3 climax) → Descent Corridor (heat foreshadowing → Mantle Garden).
+     - 10 discovery catalog rows (AlienTech × 5, Anomaly × 2, Geology × 2, HumanMade × 1), 5 objective rows, 7 checkpoints.
+     - `AGravityShearHazard` documented as `AAbyssalHazardBase` derivation (DamageMode=None, impulse-launches un-tethered pawns).
+     - C3 traversal dependencies clearly flagged: `AReorientationVolume`, tether tool — highest-risk C3 items.
+  2. **A1 — `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`** (`Source/AbyssalEarth/AbyssalSaveSubsystem.h/.cpp`, `AbyssalProfileSaveGame.h`): central save/load authority replacing per-subsystem `UGameplayStatics` calls.
+     - `IAbyssalSaveProvider` interface: `OnSaveRequested(SaveGame)` / `OnLoadCompleted(SaveGame)` — domain subsystems implement and register themselves.
+     - `UAbyssalSaveSubsystem` (GameInstanceSubsystem): `LoadSlot(index)`, `SaveActiveSlot()`, `DeleteSlot(index)`, `DoesSaveExist(index)`, `GetActiveSaveGame()`; `OnSaveCompleted`/`OnLoadCompleted` delegates. Slot name format `AbyssalProfile_<N>` (0-based, UserIndex 0).
+     - `UAbyssalProfileSaveGame` (USaveGame): five domain blobs — `FAbyssalDiscoverySaveBlob` (migrated from `UDiscoverySaveGame`), `FAbyssalBeaconSaveBlob`, `FAbyssalObjectiveSaveBlob`, `FAbyssalWorldFlowSaveBlob`, `FAbyssalInventorySaveBlob` (stub). `SaveVersion=1` field for future migration.
+     - Existing `UDiscoverySubsystem` and `UBeaconSubsystem` still call `UGameplayStatics` directly — migration (registering as save providers and reading from the blobs) is the next A1 sub-step.
+- **Verification:** authored on Linux; `python3 Scripts/validate_design_data.py` passes; **Windows compile/PIE pending**.
+- Roadmap checklist updated: A1 `[~]` (subsystem + save game authored; provider migration pending), C4 `[~]` (Gravity Well added; Mantle Garden pending).
+- Next: Mantle Garden blockout (C4 Map 06 — final map, completes C4), then wire `UDiscoverySubsystem` and `UBeaconSubsystem` as `IAbyssalSaveProvider` providers (completes A1 migration).
+
 ## 2026-06-08 (session resumed)
 
 - PR #1 merged to main (squash commit `383ce0c`). Dev branch reset to main HEAD and pushed.

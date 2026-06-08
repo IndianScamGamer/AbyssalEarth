@@ -230,7 +230,7 @@ the core loop and several maps exist; design is in
 
 Update as systems land. `[ ]` not started · `[~]` in progress · `[x]` done.
 
-- [ ] A1 Save/persistence rework
+- [~] A1 Save/persistence rework — `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` authored (`IAbyssalSaveProvider` interface, 5 domain blobs, slot management); **`UDiscoverySubsystem`/`UBeaconSubsystem` provider migration pending**; **Windows compile/PIE pending**
 - [~] A2 Data-driven objectives (hardcoded route + CSV mirror exist; not yet data-driven or persisted)
 - [~] A3 Interaction / use system — `IAbyssalInteractable` interface + `UInteractionComponent` added (C++ authored on Linux, **Windows compile/PIE pending**); character + `IA_Interact` input wiring is the next step
 - [ ] B1 Inventory / resources
@@ -239,7 +239,7 @@ Update as systems land. `[ ]` not started · `[~]` in progress · `[x]` done.
 - [ ] C1 World flow / level transitions
 - [~] C2 Hazard framework — `AAbyssalHazardBase` authored (phase machine + Radial/Overlap/None damage modes, BP hooks, overlap tracking); `AEmberVentHazard` untouched; biome derivations (`ABrittleWalkwaySection`, `ACeilingFragmentHazard`) documented in Fossil Sky blockout; **Windows compile/PIE pending**
 - [ ] C3 Traversal modifiers
-- [~] C4 Per-biome content scaffolding — Glassroot Forest + Inner Sea + Fossil Sky blockouts done (`Docs/Maps/`); Gravity Well + Mantle Garden pending
+- [~] C4 Per-biome content scaffolding — Glassroot Forest + Inner Sea + Fossil Sky + Gravity Well blockouts done (`Docs/Maps/`); Mantle Garden pending (final map)
 - [ ] D1 Narrative triggers + prologue dialogue
 - [ ] D2 HELIOS robot NPCs
 - [ ] D3 Creatures / survival AI
