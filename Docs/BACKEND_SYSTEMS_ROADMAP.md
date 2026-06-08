@@ -31,9 +31,12 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | Health | `UAbyssalHealthComponent` |
 | Audio | `UAbyssalAudioCueSubsystem` |
 | Hazards | `AEmberVentHazard`, `AAbyssalHazardBase` (new) |
-| Save/load | `UDiscoverySaveGame` (legacy), `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` (new); `UDiscoverySubsystem` + `UBeaconSubsystem` migrated to `IAbyssalSaveProvider` |
-| Interaction | `IAbyssalInteractable`, `UInteractionComponent` (new) |
-| Survival vitals | `UTemperatureComponent`, `AHeatZoneVolume` (new) |
+| Save/load | `UDiscoverySaveGame` (legacy), `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`; `UDiscoverySubsystem` + `UBeaconSubsystem` on `IAbyssalSaveProvider` |
+| Interaction | `IAbyssalInteractable`, `UInteractionComponent` |
+| Survival vitals | `UTemperatureComponent`, `AHeatZoneVolume` |
+| Inventory | `UAbyssalItemDefinition` (DataAsset), `UInventorySubsystem` (new) |
+| World flow | `UWorldFlowSubsystem` (new) |
+| Harvestables | `AHarvestableNode` (new) |
 | Utility | `UAbyssalGameplayLibrary` |
 
 ---
@@ -45,12 +48,12 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 | 1 | Save/persistence rework | **Done** (Windows compile pending) |
 | 2 | Data-driven objectives + persistence | Partial (hardcoded; not yet persisted) |
 | 3 | Interaction / use system | **In progress** (C++ authored; character wiring pending) |
-| 4 | Inventory / resources | Missing |
+| 4 | Inventory / resources | **Done** (Windows compile pending) |
 | 5 | Fabrication / crafting | Missing |
 | 6 | Survival vitals | **In progress** (temperature done; oxygen/stamina pending) |
-| 7 | World flow / level transitions | Missing |
+| 7 | World flow / level transitions | **Done** (Windows compile pending) |
 | 8 | Traversal modifiers | Missing |
-| 9 | Hazard framework | **In progress** (base class done; biome derivations authored in docs) |
+| 9 | Hazard framework | **In progress** (base class done; biome derivations documented) |
 | 10 | Narrative triggers + dialogue | Missing |
 | 11 | HELIOS robot NPCs | Missing |
 | 12 | Creatures / survival AI | Missing |
@@ -73,7 +76,7 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 ### Phase B — Survival / fabrication
 
-**B1.** `UAbyssalItemDefinition` (DataAsset) + `UInventoryComponent` + harvestable node.
+**B1.** `UAbyssalItemDefinition` (DataAsset) + `UInventorySubsystem` + `AHarvestableNode`. Done.
 
 **B2.** `UFabricationSubsystem` + recipe DataAssets + fabricator interactable.
 
@@ -81,15 +84,14 @@ game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
 
 ### Phase C — Maps and world
 
-**C1.** `UWorldFlowSubsystem`: `TravelToMap`, save-on-exit, entry-tag restore.
+**C1.** `UWorldFlowSubsystem`: `TravelToMap` (save-on-exit, entry-tag persistence). Done. Windows-side: wire `APlayerStart` tag selection from `GetLastEntryTag()`.
 
 **C2.** `AAbyssalHazardBase` (done). Biome derivations: `ABrittleWalkwaySection`,
 `ACeilingFragmentHazard`, `AGravityShearHazard`, `ASteamVentHazard`, `AMagmaGeyserHazard`, `AMagmaPulseHazard`.
 
 **C3.** `AReorientationVolume`, climb/swim states, tether tool.
 
-**C4.** Per-biome blockouts: Luminous Rift ✓, Glassroot Forest ✓, Inner Sea ✓,
-Fossil Sky ✓, Gravity Well ✓, Mantle Garden ✓. All six biome blockouts complete.
+**C4.** Per-biome blockouts: all six complete.
 
 ### Phase D — Narrative, agents, meta
 
@@ -109,16 +111,16 @@ Fossil Sky ✓, Gravity Well ✓, Mantle Garden ✓. All six biome blockouts com
 
 `[ ]` not started · `[~]` in progress · `[x]` done
 
-- [x] A1 Save/persistence — `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` authored; `UDiscoverySubsystem` + `UBeaconSubsystem` migrated to `IAbyssalSaveProvider`; Windows compile pending
+- [x] A1 Save/persistence — subsystem + profile save + both domain providers migrated; Windows compile pending
 - [~] A2 Data-driven objectives (CSV mirror exists; not yet data-driven or persisted)
-- [~] A3 Interaction — `IAbyssalInteractable` + `UInteractionComponent` authored; **character wiring + Windows compile pending**
-- [ ] B1 Inventory / resources
+- [~] A3 Interaction — authored; character wiring + Windows compile pending
+- [x] B1 Inventory — `UAbyssalItemDefinition` + `UInventorySubsystem` + `AHarvestableNode`; Windows compile pending
 - [ ] B2 Fabrication / recipe unlocks
-- [~] B3 Survival vitals — `UTemperatureComponent` + `AHeatZoneVolume` authored; oxygen/stamina pending
-- [ ] C1 World flow / level transitions
-- [~] C2 Hazard framework — `AAbyssalHazardBase` authored; biome derivations documented
+- [~] B3 Survival vitals — temperature done; oxygen/stamina pending
+- [x] C1 World flow — `UWorldFlowSubsystem::TravelToMap` + entry-tag save/restore; Windows-side `APlayerStart` wiring pending
+- [~] C2 Hazard framework — base class done; biome derivations documented
 - [ ] C3 Traversal modifiers
-- [x] C4 Per-biome scaffolding — all 6 biome blockouts complete (Luminous Rift, Glassroot Forest, Inner Sea, Fossil Sky, Gravity Well, Mantle Garden)
+- [x] C4 Per-biome scaffolding — all 6 biome blockouts complete
 - [ ] D1 Narrative triggers + prologue dialogue
 - [ ] D2 HELIOS robot NPCs
 - [ ] D3 Creatures / survival AI
