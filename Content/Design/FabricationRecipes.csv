@@ -1,0 +1,6 @@
+RecipeId,DisplayName,Inputs,OutputItemId,OutputCount,RequiresUnlock,RequiredStationTier,Notes
+RCP_PATCH_KIT,Hull Patch Kit,"ITEM_SCRAP x3; ITEM_RESIN x1",ITEM_PATCH_KIT,1,false,1,"Early repair consumable; basic station"
+RCP_LUMEN_CELL,Lumen Power Cell,"ITEM_CRYSTAL_SHARD x2; ITEM_SCRAP x2",ITEM_POWER_CELL,1,false,1,"Powers terminals and beacons"
+RCP_THERMAL_WRAP,Thermal Wrap,"ITEM_FIBER x4; ITEM_RESIN x2",ITEM_THERMAL_WRAP,1,true,1,"Insulation for heat zones; unlock via Fossil Sky discovery"
+RCP_TETHER_TOOL,Grav Tether Tool,"ITEM_ALIEN_ALLOY x2; ITEM_POWER_CELL x1",ITEM_TETHER_TOOL,1,true,2,"C3 traversal tool; unlock in Gravity Well; tier-2 station"
+RCP_RELAY_KEY,Relay Key,"ITEM_ALIEN_ALLOY x3; ITEM_CRYSTAL_SHARD x4; ITEM_POWER_CELL x2",ITEM_RELAY_KEY,1,true,3,"Activates ancient relays; endgame; tier-3 station"

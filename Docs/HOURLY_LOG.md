@@ -1,38 +1,41 @@
 # Hourly Work Log
 
+## 2026-06-08 (tick 6)
+
+- **B2 — Fabrication system** (`Source/AbyssalEarth/AbyssalRecipeDefinition.h`, `FabricationSubsystem.h/.cpp`, `FabricatorStation.h/.cpp`, `AbyssalProfileSaveGame.h`, `Content/Design/FabricationRecipes.csv`):
+  - `UAbyssalRecipeDefinition`: `UPrimaryDataAsset` with `RecipeId`, `Inputs` (`TArray<FAbyssalRecipeIngredient>`), `OutputItemId`/`OutputCount`, `bRequiresUnlock`, `RequiredStationTier`. Primary asset type `AbyssalRecipe`.
+  - `UFabricationSubsystem`: `IAbyssalSaveProvider`. `RegisterRecipe` (auto-unlocks non-gated recipes), `UnlockRecipe`, `IsRecipeUnlocked`, `CanCraft` (returns `EAbyssalCraftResult`: Success / MissingIngredients / Locked / StationTierTooLow / InvalidRecipe), `Craft` (consumes inputs + adds output via `UInventorySubsystem`). Unlocked recipe IDs persist through new `Fabrication` save blob.
+  - `AFabricatorStation`: `IAbyssalInteractable` actor; `AvailableRecipes` + `StationTier`; on interact registers recipes with the subsystem and fires `BP_OnFabricatorActivated`; `CraftAtStation` convenience.
+  - `AbyssalProfileSaveGame.h`: added `FAbyssalFabricationSaveBlob` (`UnlockedRecipeIds`).
+  - `FabricationRecipes.csv`: 5 design recipes (patch kit, lumen cell, thermal wrap, grav tether tool, relay key) spanning station tiers 1–3 and unlock gating.
+- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending.
+- Roadmap checklist updated: B2 `[x]`.
+- Next priority: **B3** (oxygen/stamina vitals) or **C3** (traversal modifiers: `AReorientationVolume`, tether tool) or **D1** (narrative triggers).
+
 ## 2026-06-08 (tick 5)
 
 - **A2 — Data-driven objectives + persistence** (`Source/AbyssalEarth/ObjectiveSubsystem.h/.cpp`, `Content/Design/DT_MainObjectiveArc.csv`):
-  - `FAbyssalObjectiveTableRow : public FTableRowBase` (Title + Description; row name = ObjectiveId).
-  - `UObjectiveSubsystem::BuildRouteFromTable(UDataTable*)`: validates row struct, loads steps in table order, resets route. Returns step count.
-  - `UObjectiveSubsystem` now implements `IAbyssalSaveProvider`: `OnSaveRequested` writes `CurrentObjectiveIndex` + `CompletedObjectiveIds`; `OnLoadCompleted` restores them, clamping a stale index if the route changed between saves.
-  - Hardcoded `BuildDefaultRoute` retained as the fallback when no DataTable is supplied (keeps existing PIE behaviour intact).
-  - `DT_MainObjectiveArc.csv`: import-ready DataTable mirror (Name/Title/Description) of the 6-step main arc.
-- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending (import `DT_MainObjectiveArc.csv` as `FAbyssalObjectiveTableRow`, call `BuildRouteFromTable` from GameMode `BeginPlay`).
+  - `FAbyssalObjectiveTableRow : FTableRowBase`; `BuildRouteFromTable(UDataTable*)` loads steps in table order.
+  - `UObjectiveSubsystem` implements `IAbyssalSaveProvider`: persists `CurrentObjectiveIndex` + `CompletedObjectiveIds`, clamps stale index on route change.
+  - Hardcoded `BuildDefaultRoute` retained as fallback.
 - Roadmap checklist updated: A2 `[x]`.
-- Next priority: **B2** (fabrication — `UFabricationSubsystem` + recipe DataAssets) or **D1** (narrative triggers).
 
 ## 2026-06-08 (tick 4)
 
-- **B1 — Inventory system** (`Source/AbyssalEarth/AbyssalItemDefinition.h`, `InventorySubsystem.h/.cpp`, `HarvestableNode.h/.cpp`):
-  - `UAbyssalItemDefinition`: `UPrimaryDataAsset` with `ItemId`, `DisplayName`, `Description`, `EAbyssalItemCategory`, `MaxStackSize`, `Icon`, `bIsConsumable`. AssetManager type `AbyssalItem`.
-  - `UInventorySubsystem`: `IAbyssalSaveProvider`; `AddItem`/`RemoveItem`/`HasItem`/`GetItemCount`; stack-cap via `UAssetManager` lookup. Save round-trip through `Inventory.ItemStacks`.
-  - `AHarvestableNode`: `IAbyssalInteractable` actor; per-instance item + count + respawn timer; BP event hooks.
-- **C1 — World flow** (`Source/AbyssalEarth/WorldFlowSubsystem.h/.cpp`):
-  - `UWorldFlowSubsystem`: `IAbyssalSaveProvider`; `TravelToMap` saves slot + writes entry tag before `OpenLevel`; `GetLastEntryTag()` for `APlayerStart` selection.
-- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending.
+- **B1 — Inventory system**: `UAbyssalItemDefinition` (PrimaryDataAsset), `UInventorySubsystem` (`IAbyssalSaveProvider`, stack-capped), `AHarvestableNode` (`IAbyssalInteractable`).
+- **C1 — World flow**: `UWorldFlowSubsystem` (`IAbyssalSaveProvider`, `TravelToMap` save+entry-tag).
 - Roadmap checklist updated: B1 `[x]`, C1 `[x]`.
 
 ## 2026-06-08 (tick 3)
 
-- **A1 — Provider migration**: `UDiscoverySubsystem` + `UBeaconSubsystem` implement `IAbyssalSaveProvider`; direct `UGameplayStatics::SaveGameToSlot` calls removed. `AbyssalProfileSaveGame.h` forward-declaration fix.
-- **C4 — Mantle Garden blockout** (`Docs/Maps/MANTLE_GARDEN.md`): final map (Map 06, Act 4). 7 zones, 11 discoveries, 5 objectives, 7 checkpoints. `AMagmaGeyserHazard`/`ASteamVentHazard`/`AMagmaPulseHazard` specs.
+- **A1 — Provider migration**: `UDiscoverySubsystem` + `UBeaconSubsystem` implement `IAbyssalSaveProvider`; direct `UGameplayStatics::SaveGameToSlot` calls removed.
+- **C4 — Mantle Garden blockout** (`Docs/Maps/MANTLE_GARDEN.md`): final map (Map 06, Act 4). 7 zones, 11 discoveries, 5 objectives, 7 checkpoints.
 - Roadmap: A1 `[x]`, C4 `[x]`.
 
 ## 2026-06-08 (tick 2)
 
-- **C4 — Gravity Well blockout** (`Docs/Maps/GRAVITY_WELL.md`): Map 05 (Act 3). 7 zones, 10 discoveries, 5 objectives, 7 checkpoints. `AGravityShearHazard` spec; C3 deps flagged.
-- **A1 — `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`**: `IAbyssalSaveProvider` interface; slot management; 5 domain blobs.
+- **C4 — Gravity Well blockout** (`Docs/Maps/GRAVITY_WELL.md`): Map 05 (Act 3). 7 zones, 10 discoveries, 5 objectives, 7 checkpoints.
+- **A1 — `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`**: interface + slot management + 5 domain blobs.
 - Roadmap: A1 `[~]`, C4 `[~]`.
 
 ## 2026-06-08 (tick 1 / session resumed)
