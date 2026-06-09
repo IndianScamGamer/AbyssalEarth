@@ -18,6 +18,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | B1 | `UOxygenComponent` | [x] done | roadmap-tick-6 |
 | B2 | `UStaminaComponent` | [x] done | roadmap-tick-7 |
 | B3 | `UTemperatureComponent` | [x] done | roadmap-tick-9 |
+| B4 | `UPressureComponent` | [x] done | roadmap-tick-15 |
 
 ## Phase C — Hazards
 
@@ -31,29 +32,30 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | ID | System | Status | Branch |
 |----|--------|--------|--------|
 | D1 | `UNarrativeSubsystem` + `UNarrativeTriggerComponent` + `UAbyssalCaptionWidget` | [x] done | roadmap-tick-10 |
-| D2 | `AHeliosRobot` — HELIOS NPC interactable | [x] done | roadmap-tick-11 |
-| D3 | `AAbyssalCreature` — perception/avoidance AI base | [x] done | roadmap-tick-12 |
-| D4 | `UObservationModeComponent` (photo/scan mode) | [x] done | roadmap-tick-14 |
-| D5 | Abyssal Interface terminal | [ ] queued | — |
+| D2 | `AHeliosRobot` | [x] done | roadmap-tick-11 |
+| D3 | `AAbyssalCreature` | [x] done | roadmap-tick-12 |
+| D4 | `UObservationModeComponent` | [x] done | roadmap-tick-14 |
+| D5 | `AAbyssalInterfaceTerminal` | [x] done | roadmap-tick-15 |
 
 ## Phase E — World / Maps
 
 | ID | System | Status | Branch |
 |----|--------|--------|--------|
-| E1 | `UWorldFlowSubsystem` map travel | [x] done | roadmap-tick-5 |
+| E1 | `UWorldFlowSubsystem` | [x] done | roadmap-tick-5 |
 | E2 | Map doc: FOSSIL_SKY | [x] done | roadmap-tick-8 |
 | E3 | Map doc: GRAVITY_WELL | [x] done | roadmap-tick-9 |
 | E4 | Map doc: MANTLE_GARDEN | [x] done | roadmap-tick-10 |
 | E5 | Map doc: WRECKED_ELEVATOR | [x] done | roadmap-tick-12 |
 | E6 | Map doc: LUMINOUS_RIFT | [x] done | roadmap-tick-13 |
 | E7 | Map doc: SUBMARINE_INTERIOR | [x] done | roadmap-tick-14 |
-| E8 | Map doc: ACCESS_PASSAGE | [ ] queued | — |
+| E8 | Map doc: ACCESS_PASSAGE | [x] done | roadmap-tick-15 |
+| E9 | Map doc: DESCENT_ELEVATOR | [ ] queued | — |
 
 ## Phase F — Traversal
 
 | ID | System | Status | Branch |
 |----|--------|--------|--------|
-| F1 | `UAbyssalTraversalComponent` (climb/swim/tether/gravity) | [x] done | roadmap-tick-8 |
+| F1 | `UAbyssalTraversalComponent` | [x] done | roadmap-tick-8 |
 | F2 | `AReorientationVolume` | [x] done | roadmap-tick-8 |
 
 ## Phase G — Objectives / Narrative
@@ -73,7 +75,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 
 ---
 
-## Up Next (tick-15)
-- **D5** — `AAbyssalInterfaceTerminal` (alien terminal — power routing + data readout)
-- **E8** — Map doc: `ACCESS_PASSAGE.md` (HELIOS passage between sub dock and descent elevator)
-- **B4** — `UPressureComponent` (depth pressure vital — complements oxygen in dive zones)
+## Up Next (tick-16)
+- **E9** — Map doc: `DESCENT_ELEVATOR.md` (PRO_006/007 calm descent + failure)
+- **F3** — `UAbyssalInteractionComponent` — player-side interaction manager (focus detection, prompt display, distance gating)
+- **A3** — `UCheckpointSubsystem` — checkpoint-based mid-level save trigger
