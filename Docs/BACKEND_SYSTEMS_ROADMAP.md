@@ -1,127 +1,76 @@
-# Backend Systems Roadmap
+# AbyssalEarth Backend Systems Roadmap
 
-## Purpose
-
-This document is the gameplay-systems (C++ / backend) plan for taking Abyssal
-Earth from its current **Luminous Rift vertical slice** to the **full designed
-game**: a 9-beat prologue, a 5-act arc, and six biomes (`Docs/WORLD_ATLAS.md`).
-
-### How the continuation loop should use this file
-
-1. `git fetch --prune` and read this file plus `Docs/NEXT_TASKS.md`.
-2. Pick the **lowest-numbered unstarted system whose dependencies are met**.
-3. Implement following patterns of existing classes. Keep gameplay state in
-   `UGameInstanceSubsystem`s and expose `BlueprintCallable`/`BlueprintAssignable`.
-4. Update design data + `Scripts/validate_design_data.py` where relevant.
-5. Append a dated entry to `Docs/HOURLY_LOG.md`, commit, and push.
-
-> **Build note.** This (Linux) side authors C++, docs, and design data. Compile
-> and PIE-test on the Windows/Unreal side.
+Tracked here: every authored system, the branch it shipped on, and what's queued next.
 
 ---
 
-## Current State (what already exists)
+## Phase A — Save / Persistence
 
-| Domain | Class(es) |
-| --- | --- |
-| Player / movement | `AAbyssalExplorerCharacter`, `AAbyssalEarthGameMode`, `UAbyssalTraversalComponent` |
-| Scanning / discovery / journal | `UScannerComponent`, `ADiscoveryActor`, `UDiscoverySubsystem`, `UAbyssalScannerReadoutWidget`, `UAbyssalJournalWidget` |
-| Objectives | `UObjectiveSubsystem` (data-driven + persisted), `AObjectiveTriggerActor` |
-| Navigation beacons | `ABeaconActor`, `UBeaconSubsystem` |
-| Health | `UAbyssalHealthComponent` |
-| Audio | `UAbyssalAudioCueSubsystem` |
-| Hazards | `AEmberVentHazard`, `AAbyssalHazardBase` |
-| Save/load | `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`; providers: discovery, beacon, inventory, world-flow, objectives, fabrication, narrative |
-| Interaction | `IAbyssalInteractable`, `UInteractionComponent` |
-| Survival vitals | `UTemperatureComponent`, `AHeatZoneVolume`, `UOxygenComponent`, `UStaminaComponent` |
-| Inventory | `UAbyssalItemDefinition` (DataAsset), `UInventorySubsystem`, `AHarvestableNode` |
-| Fabrication | `UAbyssalRecipeDefinition` (DataAsset), `UFabricationSubsystem`, `AFabricatorStation` |
-| Traversal | `UAbyssalTraversalComponent`, `AReorientationVolume` |
-| Narrative | `UNarrativeSubsystem`, `UNarrativeTriggerComponent`, `UAbyssalCaptionWidget` |
-| NPCs | `AHeliosRobot` |
-| World flow | `UWorldFlowSubsystem` |
-| Utility | `UAbyssalGameplayLibrary` |
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| A1 | `UAbyssalSaveSubsystem` + `IAbyssalSaveProvider` | [x] done | roadmap-tick-1 |
+| A2 | `UAbyssalProfileSaveGame` domain blobs (7 blobs) | [x] done | roadmap-tick-2 |
 
----
+## Phase B — Survival Vitals
 
-## Gap Analysis
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| B1 | `UOxygenComponent` | [x] done | roadmap-tick-6 |
+| B2 | `UStaminaComponent` | [x] done | roadmap-tick-7 |
+| B3 | `UTemperatureComponent` | [x] done | roadmap-tick-9 |
 
-| # | System | Status |
-| --- | --- | --- |
-| 1 | Save/persistence rework | **Done** (Windows compile pending) |
-| 2 | Data-driven objectives + persistence | **Done** (Windows compile pending) |
-| 3 | Interaction / use system | **In progress** (C++ authored; character wiring pending) |
-| 4 | Inventory / resources | **Done** (Windows compile pending) |
-| 5 | Fabrication / crafting | **Done** (Windows compile pending) |
-| 6 | Survival vitals | **Done** (Windows compile pending) |
-| 7 | World flow / level transitions | **Done** (Windows compile pending) |
-| 8 | Traversal modifiers | **Done** (Windows compile pending) |
-| 9 | Hazard framework | **In progress** (base class done; biome derivations documented) |
-| 10 | Narrative triggers + dialogue | **Done** (caption beats; branching dialogue pending) |
-| 11 | HELIOS robot NPCs | **Done** (Windows compile pending) |
-| 12 | Creatures / survival AI | Missing |
-| 13 | Equipment / upgrades | Missing |
-| 14 | Photo / observation mode | Missing |
-| 15 | Abyssal Interface | Deferred |
+## Phase C — Hazards
 
----
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| C1 | `AAbyssalHazardBase` phase state machine | [x] done | roadmap-tick-3 |
+| C2 | Biome hazard subclasses (6 types) | [ ] queued | — |
 
-## Dependency-ordered build plan
+## Phase D — NPCs / Creatures
 
-### Phase A — Foundations
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| D1 | `UNarrativeSubsystem` + `UNarrativeTriggerComponent` + `UAbyssalCaptionWidget` | [x] done | roadmap-tick-10 |
+| D2 | `AHeliosRobot` — HELIOS NPC interactable | [x] done | roadmap-tick-11 |
+| D3 | `AAbyssalCreature` — perception/avoidance AI base | [x] done | roadmap-tick-12 |
+| D4 | `UObservationModeComponent` (photo mode) | [ ] queued | — |
+| D5 | Abyssal Interface terminal | [ ] queued | — |
 
-**A1.** `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame` + `IAbyssalSaveProvider`. Done.
+## Phase E — World / Maps
 
-**A2.** `UObjectiveSubsystem` data-driven route + persistence. Done.
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| E1 | `UWorldFlowSubsystem` map travel | [x] done | roadmap-tick-5 |
+| E2 | Map doc: FOSSIL_SKY | [x] done | roadmap-tick-8 |
+| E3 | Map doc: GRAVITY_WELL | [x] done | roadmap-tick-9 |
+| E4 | Map doc: MANTLE_GARDEN | [x] done | roadmap-tick-10 |
+| E5 | Map doc: WRECKED_ELEVATOR | [x] done | roadmap-tick-12 |
+| E6 | Map doc: LUMINOUS_RIFT | [ ] queued | — |
 
-**A3.** `IAbyssalInteractable` + `UInteractionComponent` (authored). Wire into
-`AAbyssalExplorerCharacter` + `IA_Interact` input asset (Windows-side).
+## Phase F — Traversal
 
-### Phase B — Survival / fabrication
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| F1 | `UAbyssalTraversalComponent` (climb/swim/tether/gravity) | [x] done | roadmap-tick-8 |
+| F2 | `AReorientationVolume` | [x] done | roadmap-tick-8 |
 
-**B1.** Inventory. Done. **B2.** Fabrication. Done. **B3.** Vitals (temp/oxygen/stamina). Done.
+## Phase G — Objectives / Narrative
 
-### Phase C — Maps and world
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| G1 | `UObjectiveSubsystem` + DataTable route | [x] done | roadmap-tick-4 |
+| G2 | `DT_MainObjectiveArc.csv` | [x] done | roadmap-tick-6 |
 
-**C1.** `UWorldFlowSubsystem`. Done.
+## Phase H — Inventory / Crafting
 
-**C2.** `AAbyssalHazardBase` (done). Biome derivations: `ABrittleWalkwaySection`,
-`ACeilingFragmentHazard`, `AGravityShearHazard`, `ASteamVentHazard`, `AMagmaGeyserHazard`, `AMagmaPulseHazard` (C++ subclasses pending).
-
-**C3.** `UAbyssalTraversalComponent` + `AReorientationVolume`. Done.
-
-**C4.** Per-biome blockouts: all six complete.
-
-### Phase D — Narrative, agents, meta
-
-**D1.** `UNarrativeSubsystem` + `UNarrativeTriggerComponent` + `UAbyssalCaptionWidget`. Done. Branching dialogue trees pending.
-
-**D2.** `AHeliosRobot` with A3 interaction + D1 dialogue. Done.
-
-**D3.** `AAbyssalCreature` + perception/avoidance.
-
-**D4.** `UObservationModeComponent` (photo mode).
-
-**D5.** Abyssal Interface (deferred).
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| H1 | `UInventorySubsystem` + `UAbyssalItemDefinition` | [x] done | roadmap-tick-5 |
+| H2 | `UFabricationSubsystem` + `UAbyssalRecipeDefinition` + `AFabricatorStation` | [x] done | roadmap-tick-7 |
+| H3 | `FabricationRecipes.csv` | [x] done | roadmap-tick-7 |
 
 ---
 
-## Status checklist
-
-`[ ]` not started · `[~]` in progress · `[x]` done
-
-- [x] A1 Save/persistence — subsystem + profile save + domain providers migrated; Windows compile pending
-- [x] A2 Data-driven objectives — `BuildRouteFromTable` + progress persistence; Windows compile pending
-- [~] A3 Interaction — authored; character wiring + Windows compile pending
-- [x] B1 Inventory — `UAbyssalItemDefinition` + `UInventorySubsystem` + `AHarvestableNode`; Windows compile pending
-- [x] B2 Fabrication — `UAbyssalRecipeDefinition` + `UFabricationSubsystem` + `AFabricatorStation`; Windows compile pending
-- [x] B3 Survival vitals — temperature + oxygen + stamina components; Windows compile pending
-- [x] C1 World flow — `UWorldFlowSubsystem::TravelToMap` + entry-tag save/restore; Windows-side `APlayerStart` wiring pending
-- [~] C2 Hazard framework — base class done; biome derivations documented (C++ derivations pending)
-- [x] C3 Traversal modifiers — `UAbyssalTraversalComponent` + `AReorientationVolume`; Windows-side movement integration pending
-- [x] C4 Per-biome scaffolding — all 6 biome blockouts complete
-- [x] D1 Narrative triggers — `UNarrativeSubsystem` + `UNarrativeTriggerComponent` + `UAbyssalCaptionWidget`; branching dialogue pending
-- [x] D2 HELIOS robot NPCs — `AHeliosRobot` interaction + sequential dialogue; Windows compile pending
-- [ ] D3 Creatures / survival AI
-- [ ] D4 Photo / observation mode
-- [ ] D5 Abyssal Interface (deferred)
+## Up Next (tick-13)
+- **C2** — Biome hazard subclasses: `ASteamVentHazard`, `AMagmaGeyserHazard`, `ABrittleWalkwaySection`, `ACeilingFragmentHazard`, `AGravityShearHazard`, `AMagmaPulseHazard`
+- **E6** — Map doc: `LUMINOUS_RIFT.md` (Act 1 start area)
