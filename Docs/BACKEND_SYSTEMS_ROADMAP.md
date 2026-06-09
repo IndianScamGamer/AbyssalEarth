@@ -10,6 +10,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 |----|--------|--------|--------|
 | A1 | `UAbyssalSaveSubsystem` + `IAbyssalSaveProvider` | [x] done | roadmap-tick-1 |
 | A2 | `UAbyssalProfileSaveGame` domain blobs (7 blobs) | [x] done | roadmap-tick-2 |
+| A3 | `UCheckpointSubsystem` | [x] done | roadmap-tick-16 |
 
 ## Phase B — Survival Vitals
 
@@ -49,14 +50,15 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | E6 | Map doc: LUMINOUS_RIFT | [x] done | roadmap-tick-13 |
 | E7 | Map doc: SUBMARINE_INTERIOR | [x] done | roadmap-tick-14 |
 | E8 | Map doc: ACCESS_PASSAGE | [x] done | roadmap-tick-15 |
-| E9 | Map doc: DESCENT_ELEVATOR | [ ] queued | — |
+| E9 | Map doc: DESCENT_ELEVATOR | [x] done | roadmap-tick-16 |
 
-## Phase F — Traversal
+## Phase F — Traversal / Interaction
 
 | ID | System | Status | Branch |
 |----|--------|--------|--------|
 | F1 | `UAbyssalTraversalComponent` | [x] done | roadmap-tick-8 |
 | F2 | `AReorientationVolume` | [x] done | roadmap-tick-8 |
+| F3 | `UAbyssalInteractionComponent` | [x] done | roadmap-tick-16 |
 
 ## Phase G — Objectives / Narrative
 
@@ -75,7 +77,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 
 ---
 
-## Up Next (tick-16)
-- **E9** — Map doc: `DESCENT_ELEVATOR.md` (PRO_006/007 calm descent + failure)
-- **F3** — `UAbyssalInteractionComponent` — player-side interaction manager (focus detection, prompt display, distance gating)
-- **A3** — `UCheckpointSubsystem` — checkpoint-based mid-level save trigger
+## Up Next (tick-17)
+- **I1** — `UAbyssalHealthComponent` — centralised health/death system (referenced by all damage paths)
+- **G3** — `ACheckpointActor` — world actor that calls `UCheckpointSubsystem::RegisterCheckpoint` on BeginPlay and activates on interact
+- **E10** — Map doc: `DEEP_CHANNEL.md` (transitional corridor between LUMINOUS_RIFT and FOSSIL_SKY)

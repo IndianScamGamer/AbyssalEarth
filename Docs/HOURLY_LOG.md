@@ -10,7 +10,7 @@ Each entry = one autonomous tick. Branch → push → squash-merge to main.
 
 ## Tick 02 — Save Blobs + Discovery/Beacon Migration
 **Branch**: roadmap-tick-3 | **Merged**: PR #3  
-7-blob `UAbyssalProfileSaveGame`; `UDiscoverySubsystem` + `UBeaconSubsystem` migrated.
+7-blob save game; `UDiscoverySubsystem` + `UBeaconSubsystem` migrated.
 
 ## Tick 03 — Hazard Base + Objective Subsystem
 **Branch**: roadmap-tick-4 | **Merged**: PR #4  
@@ -18,7 +18,7 @@ Each entry = one autonomous tick. Branch → push → squash-merge to main.
 
 ## Tick 04 — World Flow + Inventory
 **Branch**: roadmap-tick-5 | **Merged**: PR #5  
-`UWorldFlowSubsystem`; `UInventorySubsystem` + `UAbyssalItemDefinition`.
+`UWorldFlowSubsystem`; `UInventorySubsystem`.
 
 ## Tick 05 — Objectives DataTable + Oxygen Vital
 **Branch**: roadmap-tick-6 | **Merged**: PR #6  
@@ -26,7 +26,7 @@ Each entry = one autonomous tick. Branch → push → squash-merge to main.
 
 ## Tick 06 — Stamina + Fabrication
 **Branch**: roadmap-tick-7 | **Merged**: PR #7  
-`UStaminaComponent`; `UFabricationSubsystem` + `AFabricatorStation`; `FabricationRecipes.csv`.
+`UStaminaComponent`; `UFabricationSubsystem`.
 
 ## Tick 07 — Traversal + Fossil Sky Map
 **Branch**: roadmap-tick-8 | **Merged**: PR #8  
@@ -46,18 +46,22 @@ Each entry = one autonomous tick. Branch → push → squash-merge to main.
 
 ## Tick 11 — Creature AI Base + Wrecked Elevator Map
 **Branch**: roadmap-tick-12 | **Merged**: PR #12  
-`AAbyssalCreature` sight perception, five-state machine, RVO; `WRECKED_ELEVATOR.md`.
+`AAbyssalCreature`; `WRECKED_ELEVATOR.md`.
 
 ## Tick 12 — Six Biome Hazard Subclasses + Luminous Rift Map
 **Branch**: roadmap-tick-13 | **Merged**: PR #13  
-`ASteamVentHazard`, `AMagmaGeyserHazard`, `AMagmaPulseHazard`, `ABrittleWalkwaySection`, `ACeilingFragmentHazard`, `AGravityShearHazard`; `LUMINOUS_RIFT.md`.
+Six `AAbyssalHazardBase` subclasses; `LUMINOUS_RIFT.md`.
 
 ## Tick 13 — Observation Mode + Submarine Interior Map
 **Branch**: roadmap-tick-14 | **Merged**: PR #14  
-`UObservationModeComponent`; `SUBMARINE_INTERIOR.md`; `SubmarineNarrativeBeats.csv`.
+`UObservationModeComponent`; `SUBMARINE_INTERIOR.md`.
 
-## Tick 14 — Pressure Vital + Interface Terminal + Access Passage Map
-**Branch**: roadmap-tick-15 | **Merged**: PR #15 (pending)  
-`UPressureComponent` depth/overpressure damage with upgrade scaling; `AAbyssalInterfaceTerminal` power-gated alien terminal with sequential data beats; `TerminalDataBeats.csv` (6 beats including the player discovering they’re the “biological contaminant”); `ACCESS_PASSAGE.md` HELIOS corridor prologue layout.
+## Tick 14 — Pressure Vital + Interface Terminal + Access Passage
+**Branch**: roadmap-tick-15 | **Merged**: PR #15  
+`UPressureComponent`; `AAbyssalInterfaceTerminal`; `TerminalDataBeats.csv`; `ACCESS_PASSAGE.md`.
+
+## Tick 15 — Checkpoint Subsystem + Interaction Component + Descent Elevator
+**Branch**: roadmap-tick-16 | **Merged**: PR #16 (pending)  
+`UCheckpointSubsystem` IAbyssalSaveProvider with map-ID respawn; `UAbyssalInteractionComponent` forward line-trace focus manager with `TryInteract()` and prompt display; `DESCENT_ELEVATOR.md` PRO_006/007 timeline (30 s calm descent → cable cut → blackout).
 
 ---
