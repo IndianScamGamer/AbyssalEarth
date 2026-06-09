@@ -1,0 +1,6 @@
+BeatId,Speaker,Caption,Duration,bPlayOnce
+RIFT_ACTIVATE_01,Player,"Here goes nothing.",2.0,true
+RIFT_CHARGING_01,Terminal,"[RIFT PROTOCOL INITIATED] Stabiliser accepted. Calculating aperture dimensions. Stand clear.",5.0,true
+RIFT_OPEN_01,Player,"It's open. It's actually open.",3.0,true
+RIFT_OPEN_02,Player,"I can see the surface. I can see it.",3.5,true
+RIFT_ENTER_01,Player,"Whatever this place is — whatever you are — I'll be back. I have to be.",5.0,true
