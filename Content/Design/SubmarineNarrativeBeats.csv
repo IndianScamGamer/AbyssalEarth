@@ -1,0 +1,5 @@
+BeatId,Speaker,Caption,Duration,bPlayOnce
+SUB_BRIEF_01,Terminal,"[MISSION BRIEF] FIRST MAJOR EXPLORATION EXPEDITION OF EARTH'S ABYSSAL PLAINS — Objective: Verify HELIOS autonomous construction of deep access shaft. Secondary: Document any geological anomalies.",6.0,true
+SUB_BRIEF_02,Player,"All signed off. Let's see what's down there.",3.0,true
+SUB_WINDOW_01,Player,"Nothing but black.",2.5,true
+SUB_DEPTH_01,Terminal,"[CURRENT DEPTH: 6,200 m] [HULL INTEGRITY: 100%] [EXTERNAL PRESSURE: 621 atm]",4.0,true

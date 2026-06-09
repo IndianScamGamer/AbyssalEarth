@@ -24,7 +24,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | ID | System | Status | Branch |
 |----|--------|--------|--------|
 | C1 | `AAbyssalHazardBase` phase state machine | [x] done | roadmap-tick-3 |
-| C2 | `ASteamVentHazard`, `AMagmaGeyserHazard`, `AMagmaPulseHazard`, `ABrittleWalkwaySection`, `ACeilingFragmentHazard`, `AGravityShearHazard` | [x] done | roadmap-tick-13 |
+| C2 | Six biome hazard subclasses | [x] done | roadmap-tick-13 |
 
 ## Phase D — NPCs / Creatures
 
@@ -33,7 +33,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | D1 | `UNarrativeSubsystem` + `UNarrativeTriggerComponent` + `UAbyssalCaptionWidget` | [x] done | roadmap-tick-10 |
 | D2 | `AHeliosRobot` — HELIOS NPC interactable | [x] done | roadmap-tick-11 |
 | D3 | `AAbyssalCreature` — perception/avoidance AI base | [x] done | roadmap-tick-12 |
-| D4 | `UObservationModeComponent` (photo mode) | [ ] queued | — |
+| D4 | `UObservationModeComponent` (photo/scan mode) | [x] done | roadmap-tick-14 |
 | D5 | Abyssal Interface terminal | [ ] queued | — |
 
 ## Phase E — World / Maps
@@ -46,7 +46,8 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | E4 | Map doc: MANTLE_GARDEN | [x] done | roadmap-tick-10 |
 | E5 | Map doc: WRECKED_ELEVATOR | [x] done | roadmap-tick-12 |
 | E6 | Map doc: LUMINOUS_RIFT | [x] done | roadmap-tick-13 |
-| E7 | Map doc: SUBMARINE_INTERIOR | [ ] queued | — |
+| E7 | Map doc: SUBMARINE_INTERIOR | [x] done | roadmap-tick-14 |
+| E8 | Map doc: ACCESS_PASSAGE | [ ] queued | — |
 
 ## Phase F — Traversal
 
@@ -72,7 +73,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 
 ---
 
-## Up Next (tick-14)
-- **D4** — `UObservationModeComponent` (photo / observation mode)
-- **E7** — Map doc: `SUBMARINE_INTERIOR.md` (prologue start area)
-- **C3** — `AEmberVentHazard` concrete instance + content/design data table for hazard placement
+## Up Next (tick-15)
+- **D5** — `AAbyssalInterfaceTerminal` (alien terminal — power routing + data readout)
+- **E8** — Map doc: `ACCESS_PASSAGE.md` (HELIOS passage between sub dock and descent elevator)
+- **B4** — `UPressureComponent` (depth pressure vital — complements oxygen in dive zones)
