@@ -1,0 +1,7 @@
+BeatId,Speaker,Caption,Duration,bPlayOnce
+TERM_BOOT_01,Terminal,"[SYSTEM INITIALISING] Abyssal Interface v0.0.1 — Pre-Collapse Build. Warning: Index integrity 14%. Reconstructing...",5.0,true
+TERM_BOOT_02,Terminal,"[PARTIAL RECORD RESTORED] This installation predates recorded geological history. Current estimate: construction epoch unknown.",5.0,true
+TERM_QUERY_01,Terminal,"[QUERY ACCEPTED] Origin designation: The Confluence. Purpose: Transit node for entities of the third stratum. Current status: Unmaintained. Duration: indeterminate.",6.0,true
+TERM_QUERY_02,Terminal,"[ANOMALY LOG] 1 persistent anomaly detected. Classification: Biological contaminant. Origin: Surface stratum. Threat assessment: Negligible.",5.0,true
+TERM_QUERY_03,Player,"That's me. I'm the biological contaminant.",2.5,true
+TERM_QUERY_04,Terminal,"[ACKNOWLEDGED] Contaminant registered as Observer entity. Access tier upgraded: Limited. Rift protocol available upon sufficient energy routing.",6.0,true
