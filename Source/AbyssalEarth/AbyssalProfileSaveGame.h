@@ -48,6 +48,9 @@ struct FAbyssalWorldFlowSaveBlob
 
     UPROPERTY()
     FName LastEntryTag;
+
+    UPROPERTY()
+    FName ActiveCheckpointId;
 };
 
 USTRUCT()
@@ -57,6 +60,9 @@ struct FAbyssalInventorySaveBlob
 
     UPROPERTY()
     TMap<FName, int32> ItemStacks;
+
+    UPROPERTY()
+    TArray<FName> InstalledUpgradeIds;
 };
 
 USTRUCT()

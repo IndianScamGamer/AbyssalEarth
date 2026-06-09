@@ -1,5 +1,6 @@
 #include "CheckpointActor.h"
 #include "CheckpointSubsystem.h"
+#include "AbyssalSaveSubsystem.h"
 #include "Kismet/GameplayStatics.h"
 
 ACheckpointActor::ACheckpointActor()
@@ -33,7 +34,7 @@ void ACheckpointActor::BeginPlay()
     }
 }
 
-bool ACheckpointActor::CanInteract_Implementation(AActor* /*Interactor*/) const
+bool ACheckpointActor::CanInteract_Implementation(AActor* /*Interactor*/)
 {
     return CurrentState == ECheckpointState::Inactive;
 }
@@ -64,7 +65,7 @@ void ACheckpointActor::OnInteract_Implementation(AActor* /*Interactor*/)
     BP_OnActivated();
 }
 
-FText ACheckpointActor::GetInteractPrompt_Implementation() const
+FText ACheckpointActor::GetInteractionPrompt_Implementation()
 {
     if (CurrentState == ECheckpointState::Active)
     {
@@ -73,12 +74,12 @@ FText ACheckpointActor::GetInteractPrompt_Implementation() const
     return NSLOCTEXT("AbyssalEarth", "CheckpointActivate", "Activate Checkpoint");
 }
 
-void ACheckpointActor::OnFocusBegin_Implementation(AActor* /*Interactor*/)
+void ACheckpointActor::OnBeginFocus_Implementation(AActor* /*Interactor*/)
 {
     BP_OnFocusBegin();
 }
 
-void ACheckpointActor::OnFocusEnd_Implementation(AActor* /*Interactor*/)
+void ACheckpointActor::OnEndFocus_Implementation(AActor* /*Interactor*/)
 {
     BP_OnFocusEnd();
 }

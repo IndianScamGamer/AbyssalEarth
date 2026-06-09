@@ -15,8 +15,8 @@ void UAbyssalInventoryWidget::NativeConstruct()
 
     if (UInventorySubsystem* InvSub = GI->GetSubsystem<UInventorySubsystem>())
     {
-        AddedHandle   = InvSub->OnItemAdded.AddUObject(this,   &UAbyssalInventoryWidget::HandleItemAdded);
-        RemovedHandle = InvSub->OnItemRemoved.AddUObject(this, &UAbyssalInventoryWidget::HandleItemRemoved);
+        InvSub->OnItemAdded.AddDynamic(this, &UAbyssalInventoryWidget::HandleItemAdded);
+        InvSub->OnItemRemoved.AddDynamic(this, &UAbyssalInventoryWidget::HandleItemRemoved);
         RefreshInventory(BuildAllSlots());
     }
 }
@@ -27,8 +27,8 @@ void UAbyssalInventoryWidget::NativeDestruct()
     {
         if (UInventorySubsystem* InvSub = GI->GetSubsystem<UInventorySubsystem>())
         {
-            InvSub->OnItemAdded.Remove(AddedHandle);
-            InvSub->OnItemRemoved.Remove(RemovedHandle);
+            InvSub->OnItemAdded.RemoveDynamic(this, &UAbyssalInventoryWidget::HandleItemAdded);
+            InvSub->OnItemRemoved.RemoveDynamic(this, &UAbyssalInventoryWidget::HandleItemRemoved);
         }
     }
     Super::NativeDestruct();

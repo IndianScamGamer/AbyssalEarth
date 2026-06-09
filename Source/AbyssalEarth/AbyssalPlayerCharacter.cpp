@@ -127,7 +127,7 @@ void AAbyssalPlayerCharacter::RespawnAtCheckpoint()
     }
 
     HealthComponent->Respawn();
-    OxygenComponent->ResetOxygen();
+    OxygenComponent->RefillOxygen();
     TemperatureComponent->ResetTemperature();
     PressureComponent->ResetPressure();
     GetCharacterMovement()->SetMovementMode(MOVE_Walking);

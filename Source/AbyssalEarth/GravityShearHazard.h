@@ -5,11 +5,11 @@
 #include "GravityShearHazard.generated.h"
 
 /**
- * A gravity-inversion zone hazard (C2 — Gravity Well biome). While Active,
- * any character entering the overlap volume is redirected along GravityDirection
- * via UAbyssalTraversalComponent::RequestGravityReorientation. Deals no direct
- * damage but disorients and reorients the player into dangerous terrain.
- * Damage mode: None (environmental traversal effect only).
+ * A gravity-inversion zone hazard (C2 — Gravity Well biome). While in the
+ * Active phase, any actor with a UAbyssalTraversalComponent entering the
+ * overlap volume is redirected along GravityDirection via
+ * RequestGravityReorientation. Deals no direct damage but disorients and
+ * reorients the player. Damage mode: None.
  */
 UCLASS(Blueprintable)
 class ABYSSALEARTH_API AGravityShearHazard : public AAbyssalHazardBase
@@ -28,12 +28,13 @@ public:
     float ReorientDuration = 0.6f;
 
 protected:
-    virtual void BeginPlay() override;
-    virtual void OnActivePhaseBegin_Implementation() override;
-    virtual void OnCooldownPhaseBegin_Implementation() override;
+    virtual void OnPhaseChanged(EHazardPhase NewPhase) override;
 
 private:
-    UPROPERTY()
+    UPROPERTY(VisibleAnywhere, Category = "Abyssal Earth|Hazard|Gravity")
+    TObjectPtr<USceneComponent> SceneRoot;
+
+    UPROPERTY(VisibleAnywhere, Category = "Abyssal Earth|Hazard|Gravity")
     TObjectPtr<class UBoxComponent> ShearVolume;
 
     UFUNCTION()

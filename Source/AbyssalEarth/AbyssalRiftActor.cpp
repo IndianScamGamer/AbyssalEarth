@@ -28,7 +28,7 @@ float AAbyssalRiftActor::GetChargePercent() const
     return FMath::Clamp(ChargeElapsed / ChargeDuration, 0.0f, 1.0f);
 }
 
-bool AAbyssalRiftActor::CanInteract_Implementation(AActor* Interactor) const
+bool AAbyssalRiftActor::CanInteract_Implementation(AActor* Interactor)
 {
     if (CurrentState != EAbyssalRiftState::Dormant)
     {
@@ -66,7 +66,7 @@ void AAbyssalRiftActor::OnInteract_Implementation(AActor* Interactor)
     GetWorldTimerManager().SetTimer(ChargeTimer, this, &AAbyssalRiftActor::OnChargeComplete, ChargeDuration, false);
 }
 
-FText AAbyssalRiftActor::GetInteractPrompt_Implementation() const
+FText AAbyssalRiftActor::GetInteractionPrompt_Implementation()
 {
     switch (CurrentState)
     {
@@ -85,8 +85,8 @@ FText AAbyssalRiftActor::GetInteractPrompt_Implementation() const
     return FText::GetEmpty();
 }
 
-void AAbyssalRiftActor::OnFocusBegin_Implementation(AActor* /*Interactor*/) { BP_OnFocusBegin(); }
-void AAbyssalRiftActor::OnFocusEnd_Implementation(AActor* /*Interactor*/)   { BP_OnFocusEnd();   }
+void AAbyssalRiftActor::OnBeginFocus_Implementation(AActor* /*Interactor*/) { BP_OnFocusBegin(); }
+void AAbyssalRiftActor::OnEndFocus_Implementation(AActor* /*Interactor*/)   { BP_OnFocusEnd();   }
 
 void AAbyssalRiftActor::SetRiftState(EAbyssalRiftState NewState)
 {

@@ -6,11 +6,6 @@
 #include "PressureComponent.h"
 #include "GameFramework/Pawn.h"
 
-void UAbyssalHUDSubsystem::Initialize(FSubsystemCollectionBase& Collection)
-{
-    Super::Initialize(Collection);
-}
-
 void UAbyssalHUDSubsystem::Deinitialize()
 {
     UnbindVitalDelegates();
@@ -73,44 +68,73 @@ void UAbyssalHUDSubsystem::BindVitalDelegates()
 {
     if (HealthComp.IsValid())
     {
-        HealthHandle = HealthComp->OnHealthChanged.AddLambda(
-            [this](UAbyssalHealthComponent*, float, float) { BroadcastReadout(); });
+        HealthComp->OnHealthChanged.AddDynamic(this, &UAbyssalHUDSubsystem::HandleHealthChanged);
     }
     if (OxygenComp.IsValid())
     {
-        OxygenHandle = OxygenComp->OnOxygenChanged.AddLambda(
-            [this](float, bool) { BroadcastReadout(); });
+        OxygenComp->OnOxygenChanged.AddDynamic(this, &UAbyssalHUDSubsystem::HandleOxygenChanged);
     }
     if (StaminaComp.IsValid())
     {
-        StaminaHandle = StaminaComp->OnStaminaChanged.AddLambda(
-            [this](float, bool) { BroadcastReadout(); });
+        StaminaComp->OnStaminaChanged.AddDynamic(this, &UAbyssalHUDSubsystem::HandleStaminaChanged);
     }
     if (TempComp.IsValid())
     {
-        TempHandle = TempComp->OnTemperatureChanged.AddLambda(
-            [this](float, bool) { BroadcastReadout(); });
+        TempComp->OnTemperatureChanged.AddDynamic(this, &UAbyssalHUDSubsystem::HandleTemperatureChanged);
     }
     if (PressComp.IsValid())
     {
-        PressHandle = PressComp->OnPressureChanged.AddLambda(
-            [this](float, bool) { BroadcastReadout(); });
+        PressComp->OnPressureChanged.AddDynamic(this, &UAbyssalHUDSubsystem::HandlePressureChanged);
     }
 }
 
 void UAbyssalHUDSubsystem::UnbindVitalDelegates()
 {
-    if (HealthComp.IsValid()  && HealthHandle.IsValid())  { HealthComp->OnHealthChanged.Remove(HealthHandle); }
-    if (OxygenComp.IsValid()  && OxygenHandle.IsValid())  { OxygenComp->OnOxygenChanged.Remove(OxygenHandle); }
-    if (StaminaComp.IsValid() && StaminaHandle.IsValid()) { StaminaComp->OnStaminaChanged.Remove(StaminaHandle); }
-    if (TempComp.IsValid()    && TempHandle.IsValid())    { TempComp->OnTemperatureChanged.Remove(TempHandle); }
-    if (PressComp.IsValid()   && PressHandle.IsValid())   { PressComp->OnPressureChanged.Remove(PressHandle); }
+    if (HealthComp.IsValid())
+    {
+        HealthComp->OnHealthChanged.RemoveDynamic(this, &UAbyssalHUDSubsystem::HandleHealthChanged);
+    }
+    if (OxygenComp.IsValid())
+    {
+        OxygenComp->OnOxygenChanged.RemoveDynamic(this, &UAbyssalHUDSubsystem::HandleOxygenChanged);
+    }
+    if (StaminaComp.IsValid())
+    {
+        StaminaComp->OnStaminaChanged.RemoveDynamic(this, &UAbyssalHUDSubsystem::HandleStaminaChanged);
+    }
+    if (TempComp.IsValid())
+    {
+        TempComp->OnTemperatureChanged.RemoveDynamic(this, &UAbyssalHUDSubsystem::HandleTemperatureChanged);
+    }
+    if (PressComp.IsValid())
+    {
+        PressComp->OnPressureChanged.RemoveDynamic(this, &UAbyssalHUDSubsystem::HandlePressureChanged);
+    }
+}
 
-    HealthHandle  = FDelegateHandle();
-    OxygenHandle  = FDelegateHandle();
-    StaminaHandle = FDelegateHandle();
-    TempHandle    = FDelegateHandle();
-    PressHandle   = FDelegateHandle();
+void UAbyssalHUDSubsystem::HandleHealthChanged(UAbyssalHealthComponent* /*HealthComponent*/, float /*NewHealth*/, float /*Delta*/)
+{
+    BroadcastReadout();
+}
+
+void UAbyssalHUDSubsystem::HandleOxygenChanged(float /*OxygenPercent*/, bool /*bSubmerged*/)
+{
+    BroadcastReadout();
+}
+
+void UAbyssalHUDSubsystem::HandleStaminaChanged(float /*StaminaPercent*/)
+{
+    BroadcastReadout();
+}
+
+void UAbyssalHUDSubsystem::HandleTemperatureChanged(float /*HeatPercent*/, bool /*bInHeatZone*/)
+{
+    BroadcastReadout();
+}
+
+void UAbyssalHUDSubsystem::HandlePressureChanged(float /*PressurePercent*/, bool /*bAboveRating*/)
+{
+    BroadcastReadout();
 }
 
 void UAbyssalHUDSubsystem::BroadcastReadout()

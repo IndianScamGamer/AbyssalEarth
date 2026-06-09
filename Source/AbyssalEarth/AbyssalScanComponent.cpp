@@ -1,6 +1,7 @@
 #include "AbyssalScanComponent.h"
 #include "AbyssalScannable.h"
 #include "DiscoverySubsystem.h"
+#include "DiscoverySaveGame.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/OverlapResult.h"
 
@@ -81,7 +82,10 @@ bool UAbyssalScanComponent::ScanPulse()
 
         if (DiscoverySub)
         {
-            DiscoverySub->RegisterDiscovery(ScanId, DisplayName);
+            FAbyssalDiscoveryEntry Entry;
+            Entry.DiscoveryId = ScanId;
+            Entry.DisplayName = DisplayName;
+            DiscoverySub->RegisterDiscoveryEntry(Entry);
         }
 
         IAbyssalScannable::Execute_OnScanned(Actor, GetOwner());

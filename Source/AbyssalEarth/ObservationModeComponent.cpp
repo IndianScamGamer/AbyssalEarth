@@ -207,7 +207,7 @@ void UObservationModeComponent::ScanForward()
     {
         if (UDiscoverySubsystem* Discovery = GI->GetSubsystem<UDiscoverySubsystem>())
         {
-            Discovery->RegisterDiscovery(DiscoveryId, FText::FromName(DiscoveryId));
+            Discovery->RegisterDiscovery(DiscoveryId);
         }
     }
 

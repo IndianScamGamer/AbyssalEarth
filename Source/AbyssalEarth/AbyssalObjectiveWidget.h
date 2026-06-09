@@ -32,13 +32,10 @@ protected:
 
 private:
     UFUNCTION()
-    void HandleObjectiveChanged(FAbyssalObjectiveStep Step);
+    void HandleObjectiveChanged(const FAbyssalObjectiveStep& Objective);
 
     UFUNCTION()
     void HandleRouteCompleted();
-
-    FDelegateHandle ObjectiveChangedHandle;
-    FDelegateHandle RouteCompletedHandle;
 
     // Track last-known title so we can pass it to OnObjectiveComplete
     UPROPERTY()

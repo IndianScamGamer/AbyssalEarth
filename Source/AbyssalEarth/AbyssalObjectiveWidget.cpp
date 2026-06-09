@@ -1,5 +1,4 @@
 #include "AbyssalObjectiveWidget.h"
-#include "Kismet/GameplayStatics.h"
 
 void UAbyssalObjectiveWidget::NativeConstruct()
 {
@@ -13,10 +12,8 @@ void UAbyssalObjectiveWidget::NativeConstruct()
 
     if (UObjectiveSubsystem* ObjSub = GI->GetSubsystem<UObjectiveSubsystem>())
     {
-        ObjectiveChangedHandle = ObjSub->OnObjectiveChanged.AddUObject(
-            this, &UAbyssalObjectiveWidget::HandleObjectiveChanged);
-        RouteCompletedHandle = ObjSub->OnRouteCompleted.AddUObject(
-            this, &UAbyssalObjectiveWidget::HandleRouteCompleted);
+        ObjSub->OnObjectiveChanged.AddDynamic(this, &UAbyssalObjectiveWidget::HandleObjectiveChanged);
+        ObjSub->OnRouteCompleted.AddDynamic(this, &UAbyssalObjectiveWidget::HandleRouteCompleted);
 
         // Initialise with current objective if one is active
         const FAbyssalObjectiveStep Current = ObjSub->GetCurrentObjective();
@@ -34,22 +31,22 @@ void UAbyssalObjectiveWidget::NativeDestruct()
     {
         if (UObjectiveSubsystem* ObjSub = GI->GetSubsystem<UObjectiveSubsystem>())
         {
-            ObjSub->OnObjectiveChanged.Remove(ObjectiveChangedHandle);
-            ObjSub->OnRouteCompleted.Remove(RouteCompletedHandle);
+            ObjSub->OnObjectiveChanged.RemoveDynamic(this, &UAbyssalObjectiveWidget::HandleObjectiveChanged);
+            ObjSub->OnRouteCompleted.RemoveDynamic(this, &UAbyssalObjectiveWidget::HandleRouteCompleted);
         }
     }
     Super::NativeDestruct();
 }
 
-void UAbyssalObjectiveWidget::HandleObjectiveChanged(FAbyssalObjectiveStep Step)
+void UAbyssalObjectiveWidget::HandleObjectiveChanged(const FAbyssalObjectiveStep& Objective)
 {
     // Fire completion notification for the previous objective first
-    if (!LastObjectiveTitle.IsEmpty())
+    if (!LastObjectiveTitle.IsEmpty() && !LastObjectiveTitle.EqualTo(Objective.Title))
     {
         OnObjectiveComplete(LastObjectiveTitle);
     }
-    LastObjectiveTitle = Step.Title;
-    ShowObjective(Step.Title, Step.Description);
+    LastObjectiveTitle = Objective.Title;
+    ShowObjective(Objective.Title, Objective.Description);
 }
 
 void UAbyssalObjectiveWidget::HandleRouteCompleted()

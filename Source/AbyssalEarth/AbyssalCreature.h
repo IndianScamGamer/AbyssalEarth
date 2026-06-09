@@ -5,9 +5,6 @@
 #include "Perception/AIPerceptionComponent.h"
 #include "AbyssalCreature.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAbyssalCreatureStateChangedSignature, class AAbyssalCreature*, Creature, EAbyssalCreatureState, NewState);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAbyssalCreaturePerceivedSignature, class AAbyssalCreature*, Creature, AActor*, PerceivedActor);
-
 UENUM(BlueprintType)
 enum class EAbyssalCreatureState : uint8
 {
@@ -17,6 +14,9 @@ enum class EAbyssalCreatureState : uint8
     Aggressive  UMETA(DisplayName = "Aggressive"),
     Dead        UMETA(DisplayName = "Dead"),
 };
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAbyssalCreatureStateChangedSignature, class AAbyssalCreature*, Creature, EAbyssalCreatureState, NewState);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAbyssalCreaturePerceivedSignature, class AAbyssalCreature*, Creature, AActor*, PerceivedActor);
 
 /**
  * Base creature actor for AbyssalEarth fauna (roadmap D3).
