@@ -52,6 +52,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | E8 | Map doc: ACCESS_PASSAGE | [x] done | roadmap-tick-15 |
 | E9 | Map doc: DESCENT_ELEVATOR | [x] done | roadmap-tick-16 |
 | E10 | Map doc: DEEP_CHANNEL | [x] done | roadmap-tick-17 |
+| E11 | Map doc: FOSSIL_SKY_UPPER | [x] done | roadmap-tick-18 |
 
 ## Phase F — Traversal / Interaction
 
@@ -76,6 +77,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | H1 | `UInventorySubsystem` + `UAbyssalItemDefinition` | [x] done | roadmap-tick-5 |
 | H2 | `UFabricationSubsystem` + `UAbyssalRecipeDefinition` + `AFabricatorStation` | [x] done | roadmap-tick-7 |
 | H3 | `FabricationRecipes.csv` | [x] done | roadmap-tick-7 |
+| H4 | `FAbyssalItemTableRow` + `UAbyssalItemDatabase` + `DT_ItemDatabase.csv` | [x] done | roadmap-tick-18 |
 
 ## Phase I — Health / Death
 
@@ -83,9 +85,15 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 |----|--------|--------|--------|
 | I1 | `UAbyssalHealthComponent` | [x] done | roadmap-tick-17 |
 
+## Phase J — HUD / UI
+
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| J1 | `UAbyssalHUDSubsystem` + `FAbyssalVitalReadout` | [x] done | roadmap-tick-18 |
+
 ---
 
-## Up Next (tick-18)
-- **J1** — `UAbyssalHUDSubsystem` — game-instance subsystem that exposes current vital readouts (health, oxygen, temperature, pressure, stamina) as a single polling API for UMG HUD widgets
-- **E11** — Map doc: `FOSSIL_SKY_UPPER.md` (approach zone before the main FOSSIL_SKY map)
-- **H4** — `UAbyssalItemDatabase` — data-driven item registry with `FAbyssalItemData` row type for use in the fabrication UI
+## Up Next (tick-19)
+- **K1** — `UAbyssalPowerComponent` — power-node actor + routing graph for the terminal puzzle system
+- **E12** — Map doc: `GRAVITY_WELL_LOWER.md` (Act 3 depth area)
+- **J2** — `UAbyssalObjectiveWidget` — UUserWidget base that binds `UObjectiveSubsystem::OnObjectiveChanged` and renders the current objective HUD entry
