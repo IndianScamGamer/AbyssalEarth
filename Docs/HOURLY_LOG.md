@@ -4,12 +4,12 @@ Each entry = one autonomous tick. Branch → push → squash-merge to main.
 
 ---
 
-## Tick 01–20 — (see prior entries)
+## Tick 01–21 — (see prior entries)
 
-## Tick 21 — Player Character + Audio Subsystem + Recipe Completion
-**Branch**: roadmap-tick-22 | **Merged**: PR #22 (pending)  
-`AAbyssalPlayerCharacter` — wires all 9 gameplay components (5 vitals + interaction + scan + traversal + observation) into one pawn; registers with HUD + Upgrade subsystems on BeginPlay; depth-to-pressure tracking each tick; sprint gated by stamina; `RespawnAtCheckpoint()` full restore flow; `UAbyssalAudioSubsystem` — asset-agnostic 4-layer mix state manager (BiomeAmbient/Tension/VitalWarning/Narrative) with narrative ducking; `FabricationRecipes.csv` completed — 8 recipes including `RECIPE_RIFT_STABILISER` (tier 3) and `RECIPE_ARMOR_PLATING`.
+## Tick 22 — STORY FINISH LINE
+**Branch**: roadmap-tick-23 | **Merged**: PR #23 (pending)  
+`Docs/Story/STORY_BIBLE.md` — complete world truth: the Confluence as pre-geological transit node, the third stratum (never shown, by rule), the HELIOS anomaly explained (the station breathing), the contaminant→Observer arc, act-by-act narrative spine, themes, and canon rules for all future content. Five act-beat CSVs (`Act1`–`Act5NarrativeBeats.csv`, 41 total beats) completing the Engineer's full monologue arc — talkative in Act 1, nearly silent by Act 4, per the voice rules. `Docs/Story/EPILOGUE.md` — 5-beat ending sequence (rift threshold under player control, fade to white, surface dawn scene, one-line epilogue, post-credits double-pulse sensor hook). `EpilogueNarrativeBeats.csv`. Root `README.md` — project overview, status, journey table, architecture summary.
 
-**Backend is now feature-complete.** Final tick: story bible + full narrative script + epilogue.
+**PROJECT STATUS: Backend feature-complete + story complete.** Every system from submarine to surface return is coded, every map designed, every line written. Remaining work is editor-side (Blueprints, UMG, level art, audio assets).
 
 ---

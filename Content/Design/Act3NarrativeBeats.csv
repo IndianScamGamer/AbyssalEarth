@@ -1,0 +1,10 @@
+BeatId,Speaker,Caption,Duration,bPlayOnce
+ACT3_WELL_01,Player,"My inner ear would like to file a complaint.",3.0,true
+ACT3_WELL_02,Player,"Down is a suggestion here.",2.5,true
+ACT3_SEAM_01,Player,"Two gravity fields. Meeting at a seam. Like — tile edges. It's *engineered*.",4.5,true
+ACT3_NODE_01,Player,"This is a switch. An honest-to-god switch. Let's see what it does.",4.0,true
+ACT3_POWER_01,Player,"Power's flowing. Something down here still works after all this time.",4.0,true
+ACT3_TERMINAL_FIRST,Player,"It's booting. It's actually booting. Talk to me.",3.5,true
+ACT3_CONTAMINANT,Player,"That's me. I'm the biological contaminant.",2.5,true
+ACT3_OBSERVER_01,Player,"'Observer.' Better than contaminant. I'll take it.",3.0,true
+ACT3_MACHINE_DONE,Player,"It answered. The machine answered. And it says there's a way out — if I can build it.",5.0,true
