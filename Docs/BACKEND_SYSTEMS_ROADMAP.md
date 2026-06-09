@@ -1,6 +1,6 @@
 # AbyssalEarth Backend Systems Roadmap
 
-Tracked here: every authored system, the branch it shipped on, and what's queued next.
+Tracked here: every authored system, the branch it shipped on, and what’s queued next.
 
 ---
 
@@ -24,7 +24,7 @@ Tracked here: every authored system, the branch it shipped on, and what's queued
 | ID | System | Status | Branch |
 |----|--------|--------|--------|
 | C1 | `AAbyssalHazardBase` phase state machine | [x] done | roadmap-tick-3 |
-| C2 | Biome hazard subclasses (6 types) | [ ] queued | — |
+| C2 | `ASteamVentHazard`, `AMagmaGeyserHazard`, `AMagmaPulseHazard`, `ABrittleWalkwaySection`, `ACeilingFragmentHazard`, `AGravityShearHazard` | [x] done | roadmap-tick-13 |
 
 ## Phase D — NPCs / Creatures
 
@@ -45,7 +45,8 @@ Tracked here: every authored system, the branch it shipped on, and what's queued
 | E3 | Map doc: GRAVITY_WELL | [x] done | roadmap-tick-9 |
 | E4 | Map doc: MANTLE_GARDEN | [x] done | roadmap-tick-10 |
 | E5 | Map doc: WRECKED_ELEVATOR | [x] done | roadmap-tick-12 |
-| E6 | Map doc: LUMINOUS_RIFT | [ ] queued | — |
+| E6 | Map doc: LUMINOUS_RIFT | [x] done | roadmap-tick-13 |
+| E7 | Map doc: SUBMARINE_INTERIOR | [ ] queued | — |
 
 ## Phase F — Traversal
 
@@ -71,6 +72,7 @@ Tracked here: every authored system, the branch it shipped on, and what's queued
 
 ---
 
-## Up Next (tick-13)
-- **C2** — Biome hazard subclasses: `ASteamVentHazard`, `AMagmaGeyserHazard`, `ABrittleWalkwaySection`, `ACeilingFragmentHazard`, `AGravityShearHazard`, `AMagmaPulseHazard`
-- **E6** — Map doc: `LUMINOUS_RIFT.md` (Act 1 start area)
+## Up Next (tick-14)
+- **D4** — `UObservationModeComponent` (photo / observation mode)
+- **E7** — Map doc: `SUBMARINE_INTERIOR.md` (prologue start area)
+- **C3** — `AEmberVentHazard` concrete instance + content/design data table for hazard placement

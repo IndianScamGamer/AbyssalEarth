@@ -76,7 +76,14 @@ Each entry = one autonomous tick. Branch → push → squash-merge to main.
 
 ## Tick 11 — Creature AI Base + Wrecked Elevator Map
 **Branch**: roadmap-tick-12  
-**Merged**: PR #12 (pending)  
-`AAbyssalCreature` with `UAIPerceptionComponent` sight sense, five-state machine (Passive/Curious/Fleeing/Aggressive/Dead), RVO avoidance, per-state movement speeds, health/damage handling; `WRECKED_ELEVATOR.md` Act 0 prologue exit layout.
+**Merged**: PR #12  
+`AAbyssalCreature` with `UAIPerceptionComponent` sight sense, five-state machine, RVO avoidance, health/damage handling; `WRECKED_ELEVATOR.md`.
+
+---
+
+## Tick 12 — Six Biome Hazard Subclasses + Luminous Rift Map
+**Branch**: roadmap-tick-13  
+**Merged**: PR #13 (pending)  
+`ASteamVentHazard` (column + launch impulse); `AMagmaGeyserHazard` (apex radial + knockback); `AMagmaPulseHazard` (instant radial burst); `ABrittleWalkwaySection` (integrity countdown + collapse); `ACeilingFragmentHazard` (physics fall + impact damage); `AGravityShearHazard` (traversal reorientation zone); `LUMINOUS_RIFT.md` Act 1 start area layout.
 
 ---
