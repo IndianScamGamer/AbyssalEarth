@@ -1,0 +1,5 @@
+Name,Speaker,Caption,Duration,bPlayOnce
+NAR_HELIOS_GREET,HELIOS Unit 4,"Welcome, operator. Shaft assembly is complete to specification.",4.5,false
+NAR_HELIOS_ANOMALY,HELIOS Unit 4,"One caveat: an anomaly below the terminus remains unresolved. Its energy signature does not match any catalogued source.",6.0,false
+NAR_HELIOS_RECOMMEND,HELIOS Unit 7,"Recommendation: postpone descent until the anomaly is classified. Risk assessment is incomplete.",5.5,false
+NAR_HELIOS_OVERRIDE,HELIOS Unit 4,"Acknowledged. Operator override logged. We cannot guarantee your safety beyond this point.",5.0,false

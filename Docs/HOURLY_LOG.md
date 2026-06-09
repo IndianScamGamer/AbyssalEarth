@@ -1,36 +1,35 @@
 # Hourly Work Log
 
+## 2026-06-08 (tick 10)
+
+- **D2 — HELIOS robot NPC** (`Source/AbyssalEarth/HeliosRobot.h/.cpp`, `Content/Design/HeliosDialogueBeats.csv`):
+  - `AHeliosRobot`: `IAbyssalInteractable` actor (skeletal-mesh root). State machine `EHeliosState` (Idle/Working/Warning/Disabled) with `OnHeliosStateChanged` + `BP_OnStateChanged`.
+  - Interaction plays the next line in `DialogueBeatIds` through `UNarrativeSubsystem::PlayBeat` (D1 integration); advances `DialogueIndex`, optional `bLoopDialogue`, `ResetDialogue()`. `GetInteractionPrompt` = "Talk to {UnitName}". `CanInteract` false when Disabled.
+  - BP hooks: `BP_OnDialogueLine`, `BP_OnStateChanged`, `BP_OnFocusBegin/End` for animation/VFX.
+  - `HeliosDialogueBeats.csv`: 4 prologue HELIOS lines (greeting → anomaly warning → recommend delay → override acknowledged), matching PRO_005. `bPlayOnce=false` so they can be re-heard on repeat interaction.
+- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending (place robots in prologue access passage, assign mesh + dialogue ids, import HELIOS beats into the narrative DataTable).
+- Roadmap checklist updated: D2 `[x]`.
+- Next priority: **D3** (`AAbyssalCreature` + perception/avoidance) or **D4** (photo/observation mode) or C2 biome-derived hazard C++ classes.
+
 ## 2026-06-08 (tick 9)
 
-- **D1 — Narrative triggers + captions** (`Source/AbyssalEarth/NarrativeSubsystem.h/.cpp`, `NarrativeTriggerComponent.h/.cpp`, `AbyssalCaptionWidget.h/.cpp`, `AbyssalProfileSaveGame.h`, `Content/Design/PrologueNarrativeBeats.csv`):
-  - `FAbyssalNarrativeBeat : FTableRowBase` (Speaker, Caption, Duration, optional `VoiceOver` `TSoftObjectPtr<USoundBase>`, `bPlayOnce`).
-  - `UNarrativeSubsystem` (`IAbyssalSaveProvider`): `SetBeatTable`, `PlayBeat` (queues if busy, skips already-played one-shots), `StopAll`, `HasPlayed`. Timer-driven beat duration; `OnBeatStarted`/`OnBeatFinished`. Played one-shot IDs persist via new `Narrative` save blob.
-  - `UNarrativeTriggerComponent`: auto-fires a beat on owner primitive overlap (`bPawnOnly`) or via `Trigger()`; relies on subsystem one-shot enforcement.
-  - `UAbyssalCaptionWidget`: `UUserWidget` base; binds to subsystem, forwards to `ShowCaption`/`HideCaption` BP events for UMG layout.
-  - `AbyssalProfileSaveGame.h`: added `FAbyssalNarrativeSaveBlob` (`PlayedBeatIds`).
-  - `PrologueNarrativeBeats.csv`: 9 caption beats mirroring `PrologueSequence.csv` (briefing → HELIOS warning → descent → crash → wake → pry doors → reveal → SURVIVE).
-- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending (import beats DataTable, `SetBeatTable` in GameMode, add caption widget to HUD).
-- Roadmap checklist updated: D1 `[x]`. **Begins Phase D.**
-- Next priority: **D2** (`AHeliosRobot`: A3 interaction + D1 dialogue) or C2 biome-derived hazard C++ classes (`ASteamVentHazard` etc.).
+- **D1 — Narrative triggers + captions**: `UNarrativeSubsystem` (`IAbyssalSaveProvider`, queued one-shot beats), `UNarrativeTriggerComponent`, `UAbyssalCaptionWidget`. New `Narrative` save blob. 9 prologue caption beats. Roadmap D1 `[x]`.
 
 ## 2026-06-08 (tick 8)
 
-- **C3 — Traversal modifiers** (`AbyssalTraversalComponent.h/.cpp`, `ReorientationVolume.h/.cpp`):
-  - `UAbyssalTraversalComponent`: state machine (Grounded/Climbing/Swimming/Tethered); climb/swim via `UCharacterMovementComponent` modes; tether anchor + `GetTetherCorrection()`; gravity-reorientation request delegate.
-  - `AReorientationVolume`: box trigger requesting gravity-direction lerp on entering pawn's traversal component. **Unblocks Gravity Well.**
-- Roadmap checklist updated: C3 `[x]`.
+- **C3 — Traversal modifiers**: `UAbyssalTraversalComponent` (climb/swim/tether) + `AReorientationVolume`. **Unblocks Gravity Well.** Roadmap C3 `[x]`.
 
 ## 2026-06-08 (tick 7)
 
-- **B3 — Oxygen + stamina vitals**: `UOxygenComponent` (suffocation), `UStaminaComponent` (exhaustion gate). Roadmap B3 `[x]`.
+- **B3 — Oxygen + stamina vitals**: `UOxygenComponent`, `UStaminaComponent`. Roadmap B3 `[x]`.
 
 ## 2026-06-08 (tick 6)
 
-- **B2 — Fabrication system**: `UAbyssalRecipeDefinition`, `UFabricationSubsystem`, `AFabricatorStation`. New `Fabrication` save blob. Roadmap B2 `[x]`.
+- **B2 — Fabrication system**: `UAbyssalRecipeDefinition`, `UFabricationSubsystem`, `AFabricatorStation`. Roadmap B2 `[x]`.
 
 ## 2026-06-08 (tick 5)
 
-- **A2 — Data-driven objectives + persistence**: `BuildRouteFromTable` + `IAbyssalSaveProvider`. Roadmap A2 `[x]`.
+- **A2 — Data-driven objectives + persistence**. Roadmap A2 `[x]`.
 
 ## 2026-06-08 (tick 4)
 
