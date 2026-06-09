@@ -1,0 +1,9 @@
+BeatId,Speaker,Caption,Duration,bPlayOnce
+ACT2_BONES_01,Player,"What the hell are those?",2.5,true
+ACT2_BONES_02,Player,"Nothing grows that big. Nothing *grew* that big. Ever.",3.5,true
+ACT2_KILLSITE_01,Player,"Two of them. Locked together. They died fighting — a hundred million years ago? More?",5.0,true
+ACT2_EDGE_01,Player,"I need to stop saying 'impossible'.",3.0,true
+ACT2_FLOATERS_01,Player,"The fossils are *floating*. Suspended. Like something pressed pause.",4.0,true
+ACT2_PATTERN_01,Player,"That carving. I've seen it before — the monoliths, the channel walls. Same pattern. Same *maker*.",5.0,true
+ACT2_REALISE_01,Player,"This isn't a cave. Caves don't have architecture.",3.5,true
+ACT2_DISCOVER_DONE,Player,"It's a structure. All of it. The whole cavern is one built thing. And if it was built... it works somehow.",5.5,true

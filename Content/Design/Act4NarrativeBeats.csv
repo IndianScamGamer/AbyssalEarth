@@ -1,0 +1,7 @@
+BeatId,Speaker,Caption,Duration,bPlayOnce
+ACT4_HEAT_01,Player,"This is the hottest place I've ever been. That's saying something.",3.0,true
+ACT4_GARDEN_01,Player,"Things are *growing* down here. In magma-light. Of course they are.",4.0,true
+ACT4_CRYSTAL_01,Player,"Gravity crystals. Same material as the Well. The station is made of this stuff.",4.5,true
+ACT4_FORGE_01,Player,"Okay. I know what this needs to be.",2.5,true
+ACT4_CRAFTING_01,Player,"Twenty years inspecting other people's builds. Time to do my own.",4.0,true
+ACT4_STABILISER_DONE,Player,"That's it. That's the stabiliser. Now I just need to get it up there.",3.5,true
