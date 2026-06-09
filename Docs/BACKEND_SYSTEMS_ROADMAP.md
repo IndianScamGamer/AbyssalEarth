@@ -4,136 +4,101 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 
 ---
 
-## Phase A — Save / Persistence
+## Phase A — Save / Persistence — COMPLETE
+| ID | System | Branch |
+|----|--------|--------|
+| A1 | `UAbyssalSaveSubsystem` + `IAbyssalSaveProvider` | roadmap-tick-1 |
+| A2 | `UAbyssalProfileSaveGame` (7 blobs) | roadmap-tick-2 |
+| A3 | `UCheckpointSubsystem` | roadmap-tick-16 |
 
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| A1 | `UAbyssalSaveSubsystem` + `IAbyssalSaveProvider` | [x] done | roadmap-tick-1 |
-| A2 | `UAbyssalProfileSaveGame` domain blobs (7 blobs) | [x] done | roadmap-tick-2 |
-| A3 | `UCheckpointSubsystem` | [x] done | roadmap-tick-16 |
+## Phase B — Survival Vitals — COMPLETE
+| ID | System | Branch |
+|----|--------|--------|
+| B1 | `UOxygenComponent` | roadmap-tick-6 |
+| B2 | `UStaminaComponent` | roadmap-tick-7 |
+| B3 | `UTemperatureComponent` | roadmap-tick-9 |
+| B4 | `UPressureComponent` | roadmap-tick-15 |
 
-## Phase B — Survival Vitals
+## Phase C — Hazards — COMPLETE
+| ID | System | Branch |
+|----|--------|--------|
+| C1 | `AAbyssalHazardBase` | roadmap-tick-3 |
+| C2 | Six biome hazard subclasses | roadmap-tick-13 |
 
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| B1 | `UOxygenComponent` | [x] done | roadmap-tick-6 |
-| B2 | `UStaminaComponent` | [x] done | roadmap-tick-7 |
-| B3 | `UTemperatureComponent` | [x] done | roadmap-tick-9 |
-| B4 | `UPressureComponent` | [x] done | roadmap-tick-15 |
+## Phase D — NPCs / Creatures — COMPLETE
+| ID | System | Branch |
+|----|--------|--------|
+| D1 | Narrative system (subsystem + trigger + caption widget) | roadmap-tick-10 |
+| D2 | `AHeliosRobot` | roadmap-tick-11 |
+| D3 | `AAbyssalCreature` | roadmap-tick-12 |
+| D4 | `UObservationModeComponent` | roadmap-tick-14 |
+| D5 | `AAbyssalInterfaceTerminal` | roadmap-tick-15 |
 
-## Phase C — Hazards
+## Phase E — World / Maps — COMPLETE (14 map docs)
+| ID | Map | Branch |
+|----|-----|--------|
+| E1 | `UWorldFlowSubsystem` | roadmap-tick-5 |
+| E2–E14 | FOSSIL_SKY, GRAVITY_WELL, MANTLE_GARDEN, WRECKED_ELEVATOR, LUMINOUS_RIFT, SUBMARINE_INTERIOR, ACCESS_PASSAGE, DESCENT_ELEVATOR, DEEP_CHANNEL, FOSSIL_SKY_UPPER, GRAVITY_WELL_LOWER, MANTLE_GARDEN_DEEP, RIFT_CHAMBER | ticks 8–21 |
 
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| C1 | `AAbyssalHazardBase` phase state machine | [x] done | roadmap-tick-3 |
-| C2 | Six biome hazard subclasses | [x] done | roadmap-tick-13 |
+## Phase F — Traversal / Interaction — COMPLETE
+| ID | System | Branch |
+|----|--------|--------|
+| F1 | `UAbyssalTraversalComponent` | roadmap-tick-8 |
+| F2 | `AReorientationVolume` | roadmap-tick-8 |
+| F3 | `UAbyssalInteractionComponent` | roadmap-tick-16 |
 
-## Phase D — NPCs / Creatures
+## Phase G — Objectives / Narrative — COMPLETE
+| ID | System | Branch |
+|----|--------|--------|
+| G1 | `UObjectiveSubsystem` | roadmap-tick-4 |
+| G2 | `DT_MainObjectiveArc.csv` | roadmap-tick-6 |
+| G3 | `ACheckpointActor` | roadmap-tick-17 |
 
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| D1 | `UNarrativeSubsystem` + `UNarrativeTriggerComponent` + `UAbyssalCaptionWidget` | [x] done | roadmap-tick-10 |
-| D2 | `AHeliosRobot` | [x] done | roadmap-tick-11 |
-| D3 | `AAbyssalCreature` | [x] done | roadmap-tick-12 |
-| D4 | `UObservationModeComponent` | [x] done | roadmap-tick-14 |
-| D5 | `AAbyssalInterfaceTerminal` | [x] done | roadmap-tick-15 |
+## Phase H — Inventory / Crafting — COMPLETE
+| ID | System | Branch |
+|----|--------|--------|
+| H1 | `UInventorySubsystem` + `UAbyssalItemDefinition` | roadmap-tick-5 |
+| H2 | `UFabricationSubsystem` + `AFabricatorStation` | roadmap-tick-7 |
+| H3 | `FabricationRecipes.csv` (8 recipes incl. Rift Stabiliser) | tick-7, updated tick-22 |
+| H4 | `UAbyssalItemDatabase` + `DT_ItemDatabase.csv` | roadmap-tick-18 |
 
-## Phase E — World / Maps
+## Phase I — Health / Death — COMPLETE
+| I1 | `UAbyssalHealthComponent` | roadmap-tick-17 |
 
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| E1 | `UWorldFlowSubsystem` | [x] done | roadmap-tick-5 |
-| E2 | Map doc: FOSSIL_SKY | [x] done | roadmap-tick-8 |
-| E3 | Map doc: GRAVITY_WELL | [x] done | roadmap-tick-9 |
-| E4 | Map doc: MANTLE_GARDEN | [x] done | roadmap-tick-10 |
-| E5 | Map doc: WRECKED_ELEVATOR | [x] done | roadmap-tick-12 |
-| E6 | Map doc: LUMINOUS_RIFT | [x] done | roadmap-tick-13 |
-| E7 | Map doc: SUBMARINE_INTERIOR | [x] done | roadmap-tick-14 |
-| E8 | Map doc: ACCESS_PASSAGE | [x] done | roadmap-tick-15 |
-| E9 | Map doc: DESCENT_ELEVATOR | [x] done | roadmap-tick-16 |
-| E10 | Map doc: DEEP_CHANNEL | [x] done | roadmap-tick-17 |
-| E11 | Map doc: FOSSIL_SKY_UPPER | [x] done | roadmap-tick-18 |
-| E12 | Map doc: GRAVITY_WELL_LOWER | [x] done | roadmap-tick-19 |
-| E13 | Map doc: MANTLE_GARDEN_DEEP | [x] done | roadmap-tick-20 |
-| E14 | Map doc: RIFT_CHAMBER | [x] done | roadmap-tick-21 |
+## Phase J — HUD / UI — COMPLETE
+| ID | System | Branch |
+|----|--------|--------|
+| J1 | `UAbyssalHUDSubsystem` | roadmap-tick-18 |
+| J2 | `UAbyssalObjectiveWidget` | roadmap-tick-19 |
+| J3 | `UAbyssalInventoryWidget` | roadmap-tick-20 |
 
-## Phase F — Traversal / Interaction
+## Phase K — Power Routing — COMPLETE
+| K1 | `AAbyssalPowerNode` | roadmap-tick-19 |
 
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| F1 | `UAbyssalTraversalComponent` | [x] done | roadmap-tick-8 |
-| F2 | `AReorientationVolume` | [x] done | roadmap-tick-8 |
-| F3 | `UAbyssalInteractionComponent` | [x] done | roadmap-tick-16 |
+## Phase L — Scanning — COMPLETE
+| L1 | `IAbyssalScannable` + `UAbyssalScanComponent` | roadmap-tick-20 |
 
-## Phase G — Objectives / Narrative
+## Phase M — Endgame — COMPLETE
+| M1 | `AAbyssalRiftActor` | roadmap-tick-21 |
 
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| G1 | `UObjectiveSubsystem` + DataTable route | [x] done | roadmap-tick-4 |
-| G2 | `DT_MainObjectiveArc.csv` | [x] done | roadmap-tick-6 |
-| G3 | `ACheckpointActor` | [x] done | roadmap-tick-17 |
+## Phase N — Upgrades — COMPLETE
+| N1 | `UAbyssalUpgradeSubsystem` | roadmap-tick-21 |
 
-## Phase H — Inventory / Crafting
+## Phase O — Audio — COMPLETE
+| O1 | `UAbyssalAudioSubsystem` (4-layer mix state manager) | roadmap-tick-22 |
 
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| H1 | `UInventorySubsystem` + `UAbyssalItemDefinition` | [x] done | roadmap-tick-5 |
-| H2 | `UFabricationSubsystem` + `UAbyssalRecipeDefinition` + `AFabricatorStation` | [x] done | roadmap-tick-7 |
-| H3 | `FabricationRecipes.csv` | [x] done | roadmap-tick-7 |
-| H4 | `FAbyssalItemTableRow` + `UAbyssalItemDatabase` + `DT_ItemDatabase.csv` | [x] done | roadmap-tick-18 |
-
-## Phase I — Health / Death
-
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| I1 | `UAbyssalHealthComponent` | [x] done | roadmap-tick-17 |
-
-## Phase J — HUD / UI
-
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| J1 | `UAbyssalHUDSubsystem` + `FAbyssalVitalReadout` | [x] done | roadmap-tick-18 |
-| J2 | `UAbyssalObjectiveWidget` | [x] done | roadmap-tick-19 |
-| J3 | `UAbyssalInventoryWidget` | [x] done | roadmap-tick-20 |
-
-## Phase K — Power Routing
-
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| K1 | `AAbyssalPowerNode` (Source/Relay/Sink) | [x] done | roadmap-tick-19 |
-
-## Phase L — Scanning
-
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| L1 | `IAbyssalScannable` + `UAbyssalScanComponent` | [x] done | roadmap-tick-20 |
-
-## Phase M — Endgame
-
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| M1 | `AAbyssalRiftActor` | [x] done | roadmap-tick-21 |
-
-## Phase N — Upgrades
-
-| ID | System | Status | Branch |
-|----|--------|--------|--------|
-| N1 | `UAbyssalUpgradeSubsystem` | [x] done | roadmap-tick-21 |
+## Phase P — Player — COMPLETE
+| P1 | `AAbyssalPlayerCharacter` (full component wiring) | roadmap-tick-22 |
 
 ---
 
-## Status: Core Gameplay Loop Complete
+# BACKEND STATUS: ALL PHASES COMPLETE ✅
 
-All primary backend systems are authored. The full player journey from submarine to rift is now designed and coded:
+Every planned C++ system is authored. Remaining work is editor-side:
+Blueprint subclasses, UMG widget layouts, level blockouts, audio assets,
+art, and animation — none of which can be authored in code.
 
-**Prologue** (SUBMARINE_INTERIOR → ACCESS_PASSAGE → DESCENT_ELEVATOR → WRECKED_ELEVATOR)  
-**Act 1** (LUMINOUS_RIFT → DEEP_CHANNEL)  
-**Act 2** (FOSSIL_SKY_UPPER → FOSSIL_SKY)  
-**Act 3** (GRAVITY_WELL → GRAVITY_WELL_LOWER)  
-**Act 4** (MANTLE_GARDEN → MANTLE_GARDEN_DEEP)  
-**Act 5** (RIFT_CHAMBER)  
-
-## Up Next (tick-22)
-- **O1** — `UAbyssalAudioSubsystem` — ambient layer manager (biome music + vital-state audio reactivity)
-- **P1** — `AAbyssalPlayerCharacter` scaffold — base character class wiring all components together
-- **Design** — Full `FabricationRecipes.csv` update with Rift Stabiliser recipe and tier-3 entries
+## Final tick (tick-23): Story finish line
+- Full narrative script: Act 1–5 beat CSVs (player monologue arc)
+- `STORY_BIBLE.md` — complete story reference (world truth, the Confluence, HELIOS anomaly explanation, the Observer ending)
+- `EPILOGUE.md` — ending sequence design + post-credits hook
