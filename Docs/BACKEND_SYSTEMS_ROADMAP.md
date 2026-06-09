@@ -55,6 +55,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | E11 | Map doc: FOSSIL_SKY_UPPER | [x] done | roadmap-tick-18 |
 | E12 | Map doc: GRAVITY_WELL_LOWER | [x] done | roadmap-tick-19 |
 | E13 | Map doc: MANTLE_GARDEN_DEEP | [x] done | roadmap-tick-20 |
+| E14 | Map doc: RIFT_CHAMBER | [x] done | roadmap-tick-21 |
 
 ## Phase F — Traversal / Interaction
 
@@ -107,9 +108,32 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 |----|--------|--------|--------|
 | L1 | `IAbyssalScannable` + `UAbyssalScanComponent` | [x] done | roadmap-tick-20 |
 
+## Phase M — Endgame
+
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| M1 | `AAbyssalRiftActor` | [x] done | roadmap-tick-21 |
+
+## Phase N — Upgrades
+
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| N1 | `UAbyssalUpgradeSubsystem` | [x] done | roadmap-tick-21 |
+
 ---
 
-## Up Next (tick-21)
-- **M1** — `AAbyssalRiftActor` — the endgame rift portal actor (Act 5 OBJ_OPEN_RIFT)
-- **E14** — Map doc: `RIFT_CHAMBER.md` (Act 5 endgame area)
-- **N1** — `UAbyssalUpgradeSubsystem` — manage installed suit upgrades (HealthComponent ArmorRating, TempComponent Insulation, PressureComponent Rating, OxygenComponent AirCapacityBonus)
+## Status: Core Gameplay Loop Complete
+
+All primary backend systems are authored. The full player journey from submarine to rift is now designed and coded:
+
+**Prologue** (SUBMARINE_INTERIOR → ACCESS_PASSAGE → DESCENT_ELEVATOR → WRECKED_ELEVATOR)  
+**Act 1** (LUMINOUS_RIFT → DEEP_CHANNEL)  
+**Act 2** (FOSSIL_SKY_UPPER → FOSSIL_SKY)  
+**Act 3** (GRAVITY_WELL → GRAVITY_WELL_LOWER)  
+**Act 4** (MANTLE_GARDEN → MANTLE_GARDEN_DEEP)  
+**Act 5** (RIFT_CHAMBER)  
+
+## Up Next (tick-22)
+- **O1** — `UAbyssalAudioSubsystem` — ambient layer manager (biome music + vital-state audio reactivity)
+- **P1** — `AAbyssalPlayerCharacter` scaffold — base character class wiring all components together
+- **Design** — Full `FabricationRecipes.csv` update with Rift Stabiliser recipe and tier-3 entries
