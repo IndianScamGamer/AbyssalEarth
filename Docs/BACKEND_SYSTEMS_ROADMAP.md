@@ -54,6 +54,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | E10 | Map doc: DEEP_CHANNEL | [x] done | roadmap-tick-17 |
 | E11 | Map doc: FOSSIL_SKY_UPPER | [x] done | roadmap-tick-18 |
 | E12 | Map doc: GRAVITY_WELL_LOWER | [x] done | roadmap-tick-19 |
+| E13 | Map doc: MANTLE_GARDEN_DEEP | [x] done | roadmap-tick-20 |
 
 ## Phase F — Traversal / Interaction
 
@@ -92,16 +93,23 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 |----|--------|--------|--------|
 | J1 | `UAbyssalHUDSubsystem` + `FAbyssalVitalReadout` | [x] done | roadmap-tick-18 |
 | J2 | `UAbyssalObjectiveWidget` | [x] done | roadmap-tick-19 |
+| J3 | `UAbyssalInventoryWidget` | [x] done | roadmap-tick-20 |
 
 ## Phase K — Power Routing
 
 | ID | System | Status | Branch |
 |----|--------|--------|--------|
-| K1 | `AAbyssalPowerNode` (Source/Relay/Sink) + propagation graph | [x] done | roadmap-tick-19 |
+| K1 | `AAbyssalPowerNode` (Source/Relay/Sink) | [x] done | roadmap-tick-19 |
+
+## Phase L — Scanning
+
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| L1 | `IAbyssalScannable` + `UAbyssalScanComponent` | [x] done | roadmap-tick-20 |
 
 ---
 
-## Up Next (tick-20)
-- **L1** — `UAbyssalScanComponent` — player-held scanner tool component; emits scan pulses, detects `IAbyssalScannable`, feeds `UDiscoverySubsystem`
-- **E13** — Map doc: `MANTLE_GARDEN_DEEP.md` (Act 4 fabrication zone)
-- **J3** — `UAbyssalInventoryWidget` — UUserWidget base for inventory grid display
+## Up Next (tick-21)
+- **M1** — `AAbyssalRiftActor` — the endgame rift portal actor (Act 5 OBJ_OPEN_RIFT)
+- **E14** — Map doc: `RIFT_CHAMBER.md` (Act 5 endgame area)
+- **N1** — `UAbyssalUpgradeSubsystem` — manage installed suit upgrades (HealthComponent ArmorRating, TempComponent Insulation, PressureComponent Rating, OxygenComponent AirCapacityBonus)
