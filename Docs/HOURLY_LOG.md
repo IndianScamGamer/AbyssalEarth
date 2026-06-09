@@ -1,88 +1,82 @@
-# Hourly Work Log
+# AbyssalEarth Hourly Dev Log
 
-## 2026-06-08 (tick 10)
+Each entry = one autonomous tick. Branch → push → squash-merge to main.
 
-- **D2 — HELIOS robot NPC** (`Source/AbyssalEarth/HeliosRobot.h/.cpp`, `Content/Design/HeliosDialogueBeats.csv`):
-  - `AHeliosRobot`: `IAbyssalInteractable` actor (skeletal-mesh root). State machine `EHeliosState` (Idle/Working/Warning/Disabled) with `OnHeliosStateChanged` + `BP_OnStateChanged`.
-  - Interaction plays the next line in `DialogueBeatIds` through `UNarrativeSubsystem::PlayBeat` (D1 integration); advances `DialogueIndex`, optional `bLoopDialogue`, `ResetDialogue()`. `GetInteractionPrompt` = "Talk to {UnitName}". `CanInteract` false when Disabled.
-  - BP hooks: `BP_OnDialogueLine`, `BP_OnStateChanged`, `BP_OnFocusBegin/End` for animation/VFX.
-  - `HeliosDialogueBeats.csv`: 4 prologue HELIOS lines (greeting → anomaly warning → recommend delay → override acknowledged), matching PRO_005. `bPlayOnce=false` so they can be re-heard on repeat interaction.
-- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending (place robots in prologue access passage, assign mesh + dialogue ids, import HELIOS beats into the narrative DataTable).
-- Roadmap checklist updated: D2 `[x]`.
-- Next priority: **D3** (`AAbyssalCreature` + perception/avoidance) or **D4** (photo/observation mode) or C2 biome-derived hazard C++ classes.
+---
 
-## 2026-06-08 (tick 9)
+## Tick 01 — Save Subsystem Foundation
+**Branch**: roadmap-tick-1  
+**Merged**: PR #2  
+`UAbyssalSaveSubsystem`, `IAbyssalSaveProvider`, slot management (3 slots), `UAbyssalProfileSaveGame` scaffold.
 
-- **D1 — Narrative triggers + captions**: `UNarrativeSubsystem` (`IAbyssalSaveProvider`, queued one-shot beats), `UNarrativeTriggerComponent`, `UAbyssalCaptionWidget`. New `Narrative` save blob. 9 prologue caption beats. Roadmap D1 `[x]`.
+---
 
-## 2026-06-08 (tick 8)
+## Tick 02 — Save Blobs + Discovery/Beacon Migration
+**Branch**: roadmap-tick-3 (clean re-branch after PR #2 conflict)  
+**Merged**: PR #3  
+7-blob `UAbyssalProfileSaveGame`; `UDiscoverySubsystem` + `UBeaconSubsystem` migrated to `IAbyssalSaveProvider`.
 
-- **C3 — Traversal modifiers**: `UAbyssalTraversalComponent` (climb/swim/tether) + `AReorientationVolume`. **Unblocks Gravity Well.** Roadmap C3 `[x]`.
+---
 
-## 2026-06-08 (tick 7)
+## Tick 03 — Hazard Base + Objective Subsystem
+**Branch**: roadmap-tick-4  
+**Merged**: PR #4  
+`AAbyssalHazardBase` phase state machine (Idle/Warning/Active/Cooldown); `UObjectiveSubsystem` with DataTable route support.
 
-- **B3 — Oxygen + stamina vitals**: `UOxygenComponent`, `UStaminaComponent`. Roadmap B3 `[x]`.
+---
 
-## 2026-06-08 (tick 6)
+## Tick 04 — World Flow + Inventory
+**Branch**: roadmap-tick-5  
+**Merged**: PR #5  
+`UWorldFlowSubsystem` map travel; `UInventorySubsystem` + `UAbyssalItemDefinition` PrimaryDataAsset.
 
-- **B2 — Fabrication system**: `UAbyssalRecipeDefinition`, `UFabricationSubsystem`, `AFabricatorStation`. Roadmap B2 `[x]`.
+---
 
-## 2026-06-08 (tick 5)
+## Tick 05 — Objectives DataTable + Oxygen Vital
+**Branch**: roadmap-tick-6  
+**Merged**: PR #6  
+`DT_MainObjectiveArc.csv`; `UOxygenComponent` drain/refill/suffocation.
 
-- **A2 — Data-driven objectives + persistence**. Roadmap A2 `[x]`.
+---
 
-## 2026-06-08 (tick 4)
+## Tick 06 — Stamina + Fabrication
+**Branch**: roadmap-tick-7  
+**Merged**: PR #7  
+`UStaminaComponent` exhaustion gate; `UFabricationSubsystem` + `UAbyssalRecipeDefinition` + `AFabricatorStation`; `FabricationRecipes.csv`.
 
-- **B1 — Inventory**; **C1 — World flow**. Roadmap B1 `[x]`, C1 `[x]`.
+---
 
-## 2026-06-08 (tick 3)
+## Tick 07 — Traversal + Fossil Sky Map
+**Branch**: roadmap-tick-8  
+**Merged**: PR #8  
+`UAbyssalTraversalComponent` (climb/swim/tether/gravity reorientation); `AReorientationVolume`; `FOSSIL_SKY.md`.
 
-- **A1 — Provider migration**; **C4 — Mantle Garden blockout**. Roadmap A1 `[x]`, C4 `[x]`.
+---
 
-## 2026-06-08 (tick 2)
+## Tick 08 — Temperature Vital + Gravity Well Map
+**Branch**: roadmap-tick-9  
+**Merged**: PR #9  
+`UTemperatureComponent` heat/insulation/overheat damage; `GRAVITY_WELL.md`.
 
-- **C4 — Gravity Well blockout**; **A1 — save subsystem skeleton**. Roadmap A1 `[~]`, C4 `[~]`.
+---
 
-## 2026-06-08 (tick 1 / session resumed)
+## Tick 09 — Narrative System + Mantle Garden Map
+**Branch**: roadmap-tick-10  
+**Merged**: PR #10  
+`UNarrativeSubsystem` queued beats + `IAbyssalSaveProvider`; `UNarrativeTriggerComponent`; `UAbyssalCaptionWidget`; `PrologueNarrativeBeats.csv`; `MANTLE_GARDEN.md`.
 
-- PR #1 merged. **C2 — `AAbyssalHazardBase`**; **C4 — Fossil Sky blockout**.
+---
 
-## 2026-06-07 14:34 EDT
+## Tick 10 — HELIOS Robot NPC
+**Branch**: roadmap-tick-11  
+**Merged**: PR #11  
+`AHeliosRobot` actor with `EHeliosState` state machine; `IAbyssalInteractable` sequential dialogue via `UNarrativeSubsystem`; `HeliosDialogueBeats.csv`.
 
-- Added `AHeatZoneVolume` — box trigger calling `SetInHeatZone` on `UTemperatureComponent`.
+---
 
-## 2026-06-07 14:07 EDT
+## Tick 11 — Creature AI Base + Wrecked Elevator Map
+**Branch**: roadmap-tick-12  
+**Merged**: PR #12 (pending)  
+`AAbyssalCreature` with `UAIPerceptionComponent` sight sense, five-state machine (Passive/Curious/Fleeing/Aggressive/Dead), RVO avoidance, per-state movement speeds, health/damage handling; `WRECKED_ELEVATOR.md` Act 0 prologue exit layout.
 
-- Added `UTemperatureComponent`: heat-exposure vital, overheat damage.
-
-## 2026-06-07 13:40 EDT
-
-- Completed world-map concept review: all six world plates reviewed.
-
-## 2026-06-07 13:12 EDT
-
-- Wrote `Docs/Maps/INNER_SEA.md` (Map 03 blockout).
-
-## 2026-06-07 12:45 EDT
-
-- Concept art review: 3 canonical plates.
-
-## 2026-06-07 12:18 EDT
-
-- Added `IAbyssalInteractable` UINTERFACE + `UInteractionComponent` (A3).
-
-## 2026-06-07 11:52 EDT
-
-- Wrote `Docs/Maps/GLASSROOT_FOREST.md` (Map 02 blockout).
-
-## 2026-06-07 11:18 EDT
-
-- Scope expanded. Full backend gap analysis. Added `Docs/BACKEND_SYSTEMS_ROADMAP.md`.
-
-## 2026-06-07 10:31 EDT
-
-- Fixed `EDiscoveryCategory` drift: added `Structure` + `AlienTech`.
-
-## Earlier entries (2026-05-18 — 2026-05-27)
-
-See git log for full history of initial project setup, Luminous Rift slice, asset pipeline, save/health/audio systems, and design data validation.
+---
