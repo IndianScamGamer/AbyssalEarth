@@ -53,6 +53,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | E9 | Map doc: DESCENT_ELEVATOR | [x] done | roadmap-tick-16 |
 | E10 | Map doc: DEEP_CHANNEL | [x] done | roadmap-tick-17 |
 | E11 | Map doc: FOSSIL_SKY_UPPER | [x] done | roadmap-tick-18 |
+| E12 | Map doc: GRAVITY_WELL_LOWER | [x] done | roadmap-tick-19 |
 
 ## Phase F — Traversal / Interaction
 
@@ -90,10 +91,17 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | ID | System | Status | Branch |
 |----|--------|--------|--------|
 | J1 | `UAbyssalHUDSubsystem` + `FAbyssalVitalReadout` | [x] done | roadmap-tick-18 |
+| J2 | `UAbyssalObjectiveWidget` | [x] done | roadmap-tick-19 |
+
+## Phase K — Power Routing
+
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| K1 | `AAbyssalPowerNode` (Source/Relay/Sink) + propagation graph | [x] done | roadmap-tick-19 |
 
 ---
 
-## Up Next (tick-19)
-- **K1** — `UAbyssalPowerComponent` — power-node actor + routing graph for the terminal puzzle system
-- **E12** — Map doc: `GRAVITY_WELL_LOWER.md` (Act 3 depth area)
-- **J2** — `UAbyssalObjectiveWidget` — UUserWidget base that binds `UObjectiveSubsystem::OnObjectiveChanged` and renders the current objective HUD entry
+## Up Next (tick-20)
+- **L1** — `UAbyssalScanComponent` — player-held scanner tool component; emits scan pulses, detects `IAbyssalScannable`, feeds `UDiscoverySubsystem`
+- **E13** — Map doc: `MANTLE_GARDEN_DEEP.md` (Act 4 fabrication zone)
+- **J3** — `UAbyssalInventoryWidget` — UUserWidget base for inventory grid display
