@@ -30,7 +30,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAbyssalVitalsUpdatedSignature, cons
 /**
  * HUD data aggregator (roadmap J1). UMG widgets poll this subsystem via
  * GetVitalReadout() instead of finding individual components themselves.
- * The subsystem caches weak pointers to the local player pawn’s vital
+ * The subsystem caches weak pointers to the local player pawn's vital
  * components and refreshes them when the pawn changes. OnVitalsUpdated
  * fires whenever any vital delegate fires — widgets can bind once and
  * receive a consolidated snapshot on each change.
@@ -43,7 +43,6 @@ class ABYSSALEARTH_API UAbyssalHUDSubsystem : public UGameInstanceSubsystem
     GENERATED_BODY()
 
 public:
-    virtual void Initialize(FSubsystemCollectionBase& Collection) override;
     virtual void Deinitialize() override;
 
     /**
@@ -59,7 +58,7 @@ public:
 
     /**
      * Fires each time any registered vital changes. Carries the full snapshot
-     * so widgets don’t need to call GetVitalReadout separately.
+     * so widgets don't need to call GetVitalReadout separately.
      */
     UPROPERTY(BlueprintAssignable, Category = "Abyssal Earth|HUD")
     FAbyssalVitalsUpdatedSignature OnVitalsUpdated;
@@ -69,17 +68,26 @@ private:
     void UnbindVitalDelegates();
     void BroadcastReadout();
 
+    // Dynamic-delegate handlers (signatures match each vital's delegate exactly)
+    UFUNCTION()
+    void HandleHealthChanged(class UAbyssalHealthComponent* HealthComponent, float NewHealth, float Delta);
+
+    UFUNCTION()
+    void HandleOxygenChanged(float OxygenPercent, bool bSubmerged);
+
+    UFUNCTION()
+    void HandleStaminaChanged(float StaminaPercent);
+
+    UFUNCTION()
+    void HandleTemperatureChanged(float HeatPercent, bool bInHeatZone);
+
+    UFUNCTION()
+    void HandlePressureChanged(float PressurePercent, bool bAboveRating);
+
     // Vital component weak refs (refreshed on RegisterPlayerPawn)
     UPROPERTY() TWeakObjectPtr<class UAbyssalHealthComponent> HealthComp;
     UPROPERTY() TWeakObjectPtr<class UOxygenComponent>        OxygenComp;
     UPROPERTY() TWeakObjectPtr<class UStaminaComponent>       StaminaComp;
     UPROPERTY() TWeakObjectPtr<class UTemperatureComponent>   TempComp;
     UPROPERTY() TWeakObjectPtr<class UPressureComponent>      PressComp;
-
-    // Delegate handles for cleanup
-    FDelegateHandle HealthHandle;
-    FDelegateHandle OxygenHandle;
-    FDelegateHandle StaminaHandle;
-    FDelegateHandle TempHandle;
-    FDelegateHandle PressHandle;
 };

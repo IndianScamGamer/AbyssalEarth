@@ -134,6 +134,9 @@ public:
 protected:
     virtual void OnActiveDamageTick(float DeltaDamage) {}
 
+    /** Native hook fired whenever the hazard enters a new phase. C++ subclasses override this. */
+    virtual void OnPhaseChanged(EHazardPhase NewPhase) {}
+
 private:
     EHazardPhase CurrentPhase = EHazardPhase::Idle;
     bool bHazardActive = false;

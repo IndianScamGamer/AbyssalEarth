@@ -5,7 +5,7 @@
 #include "AbyssalInteractable.h"
 #include "AbyssalInteractionComponent.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAbyssalFocusChangedSignature, AActor*, FocusedActor);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAbyssalInteractionFocusSignature, AActor*, FocusedActor);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAbyssalInteractSignature, AActor*, Interactor, AActor*, Target);
 
 /**
@@ -57,10 +57,10 @@ public:
     float TraceInterval = 0.1f;
 
     UPROPERTY(BlueprintAssignable, Category = "Abyssal Earth|Interaction")
-    FAbyssalFocusChangedSignature OnFocusBegin;
+    FAbyssalInteractionFocusSignature OnFocusBegin;
 
     UPROPERTY(BlueprintAssignable, Category = "Abyssal Earth|Interaction")
-    FAbyssalFocusChangedSignature OnFocusEnd;
+    FAbyssalInteractionFocusSignature OnFocusEnd;
 
     UPROPERTY(BlueprintAssignable, Category = "Abyssal Earth|Interaction")
     FAbyssalInteractSignature OnInteracted;

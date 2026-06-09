@@ -5,9 +5,10 @@
 #include "MagmaHazards.generated.h"
 
 /**
- * Geyser that erupts on a timed cycle. Warning phase: low-pressure bubble and
- * ground glow. Active phase: radial blast at the apex that damages and knocks
- * back nearby actors. Damage mode: Radial (AAbyssalHazardBase handles ApplyRadialDamage).
+ * Geyser that erupts on the base phase cycle. Warning phase: low-pressure
+ * bubble and ground glow (Blueprint visuals via OnHazardWarning). Active
+ * phase: one radial blast at the apex that damages and knocks back nearby
+ * characters, plus the base radial damage tick for anyone who stays.
  * Biome: Mantle Garden.
  */
 UCLASS(Blueprintable)
@@ -31,15 +32,15 @@ public:
     float KnockbackImpulse = 900.0f;
 
 protected:
-    virtual void OnActivePhaseBegin_Implementation() override;
+    virtual void OnPhaseChanged(EHazardPhase NewPhase) override;
 };
 
 // ---------------------------------------------------------------------------
 
 /**
- * Periodic radial magma pulse. No warning phase: Idle → Active (radial damage
- * burst) → Cooldown loop. Tighter radius than the geyser; high frequency.
- * Biome: Mantle Garden deep channels.
+ * Periodic radial magma pulse. Minimal warning: Idle → very short Warning →
+ * Active (radial damage burst) → Cooldown loop. Tighter radius than the
+ * geyser; high frequency. Biome: Mantle Garden deep channels.
  */
 UCLASS(Blueprintable)
 class ABYSSALEARTH_API AMagmaPulseHazard : public AAbyssalHazardBase
@@ -54,5 +55,5 @@ public:
     float PulseRadius = 180.0f;
 
 protected:
-    virtual void OnActivePhaseBegin_Implementation() override;
+    virtual void OnPhaseChanged(EHazardPhase NewPhase) override;
 };

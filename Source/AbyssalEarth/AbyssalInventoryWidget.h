@@ -35,7 +35,7 @@ protected:
 
     /** Incremental update when an item stack changes. */
     UFUNCTION(BlueprintImplementableEvent, Category = "Abyssal Earth|HUD")
-    void OnInventoryItemAdded(const FAbyssalInventorySlot& Slot);
+    void OnInventoryItemAdded(const FAbyssalInventorySlot& InventorySlot);
 
     UFUNCTION(BlueprintImplementableEvent, Category = "Abyssal Earth|HUD")
     void OnInventoryItemRemoved(FName ItemId, int32 RemainingCount);
@@ -45,11 +45,11 @@ protected:
     FAbyssalInventorySlot ResolveSlot(FName ItemId, int32 Count) const;
 
 private:
-    UFUNCTION() void HandleItemAdded(FName ItemId, int32 NewCount);
-    UFUNCTION() void HandleItemRemoved(FName ItemId, int32 RemainingCount);
+    UFUNCTION()
+    void HandleItemAdded(FName ItemId, int32 NewCount);
+
+    UFUNCTION()
+    void HandleItemRemoved(FName ItemId, int32 RemainingCount);
 
     TArray<FAbyssalInventorySlot> BuildAllSlots() const;
-
-    FDelegateHandle AddedHandle;
-    FDelegateHandle RemovedHandle;
 };

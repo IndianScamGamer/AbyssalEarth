@@ -13,7 +13,11 @@ public class AbyssalEarth : ModuleRules
             "Engine",
             "InputCore",
             "EnhancedInput",
-            "UMG"
+            "UMG",
+            "Slate",
+            "SlateCore",
+            "AIModule",
+            "GameplayTasks"
         });
     }
 }

@@ -5,9 +5,6 @@
 #include "AbyssalInteractable.h"
 #include "AbyssalRiftActor.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAbyssalRiftStateChangedSignature, EAbyssalRiftState, NewState);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FAbyssalRiftOpenedSignature);
-
 UENUM(BlueprintType)
 enum class EAbyssalRiftState : uint8
 {
@@ -16,6 +13,9 @@ enum class EAbyssalRiftState : uint8
     Open      UMETA(DisplayName = "Open"),
     Stable    UMETA(DisplayName = "Stable"),
 };
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAbyssalRiftStateChangedSignature, EAbyssalRiftState, NewState);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FAbyssalRiftOpenedSignature);
 
 /**
  * Endgame rift portal actor (roadmap M1 — Act 5 OBJ_OPEN_RIFT).
@@ -52,11 +52,11 @@ public:
     float GetChargePercent() const;
 
     // IAbyssalInteractable
-    virtual bool CanInteract_Implementation(AActor* Interactor) const override;
+    virtual bool CanInteract_Implementation(AActor* Interactor) override;
     virtual void OnInteract_Implementation(AActor* Interactor) override;
-    virtual FText GetInteractPrompt_Implementation() const override;
-    virtual void OnFocusBegin_Implementation(AActor* Interactor) override;
-    virtual void OnFocusEnd_Implementation(AActor* Interactor) override;
+    virtual FText GetInteractionPrompt_Implementation() override;
+    virtual void OnBeginFocus_Implementation(AActor* Interactor) override;
+    virtual void OnEndFocus_Implementation(AActor* Interactor) override;
 
     UPROPERTY(BlueprintAssignable, Category = "Abyssal Earth|Rift")
     FAbyssalRiftStateChangedSignature OnRiftStateChanged;

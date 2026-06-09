@@ -6,9 +6,12 @@
 
 /**
  * Vertical steam column hazard (C2 — Gravity Well / shaft biomes).
- * Fires on a fixed interval: Warning (visual steam build-up) → Active (full column,
- * overlap damage) → Cooldown (dissipation). Damage mode: Overlap.
- * Blueprint subclass adds particle system and audio; this class owns timing and damage.
+ * Cycles through the base phase loop: Idle (vent quiet) → Warning (steam
+ * build-up) → Active (full column, overlap damage via the base damage tick)
+ * → Cooldown (dissipation). Damage mode: Overlap; the column capsule is
+ * registered as a damage primitive so the base class handles per-tick damage.
+ * Blueprint subclass adds particle system and audio; this class owns timing,
+ * collision, and the entry launch impulse.
  */
 UCLASS(Blueprintable)
 class ABYSSALEARTH_API ASteamVentHazard : public AAbyssalHazardBase
@@ -26,17 +29,19 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Abyssal Earth|Hazard|Steam", meta=(ClampMin="10.0"))
     float ColumnRadius = 60.0f;
 
-    /** Upward impulse applied to actors caught in the active column. */
+    /** Upward impulse applied to characters entering the active column. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Abyssal Earth|Hazard|Steam", meta=(ClampMin="0.0"))
     float LaunchImpulse = 600.0f;
 
 protected:
     virtual void BeginPlay() override;
-    virtual void OnActivePhaseBegin_Implementation() override;
-    virtual void OnCooldownPhaseBegin_Implementation() override;
+    virtual void OnPhaseChanged(EHazardPhase NewPhase) override;
 
 private:
-    UPROPERTY()
+    UPROPERTY(VisibleAnywhere, Category = "Abyssal Earth|Hazard|Steam")
+    TObjectPtr<USceneComponent> SceneRoot;
+
+    UPROPERTY(VisibleAnywhere, Category = "Abyssal Earth|Hazard|Steam")
     TObjectPtr<class UCapsuleComponent> SteamColumn;
 
     UFUNCTION()

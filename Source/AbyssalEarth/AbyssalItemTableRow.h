@@ -27,7 +27,7 @@ struct ABYSSALEARTH_API FAbyssalItemTableRow : public FTableRowBase
     FText Description;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    EAbyssalItemCategory Category = EAbyssalItemCategory::Material;
+    EAbyssalItemCategory Category = EAbyssalItemCategory::Resource;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin="1"))
     int32 MaxStackSize = 99;

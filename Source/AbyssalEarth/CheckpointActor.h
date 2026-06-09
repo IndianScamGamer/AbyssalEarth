@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "AbyssalInteractable.h"
+#include "CheckpointSubsystem.h"
 #include "CheckpointActor.generated.h"
 
 UENUM(BlueprintType)
@@ -35,11 +36,11 @@ public:
     bool IsActive() const { return CurrentState == ECheckpointState::Active; }
 
     // IAbyssalInteractable
-    virtual bool CanInteract_Implementation(AActor* Interactor) const override;
+    virtual bool CanInteract_Implementation(AActor* Interactor) override;
     virtual void OnInteract_Implementation(AActor* Interactor) override;
-    virtual FText GetInteractPrompt_Implementation() const override;
-    virtual void OnFocusBegin_Implementation(AActor* Interactor) override;
-    virtual void OnFocusEnd_Implementation(AActor* Interactor) override;
+    virtual FText GetInteractionPrompt_Implementation() override;
+    virtual void OnBeginFocus_Implementation(AActor* Interactor) override;
+    virtual void OnEndFocus_Implementation(AActor* Interactor) override;
 
     /** Unique ID used to identify this checkpoint in UCheckpointSubsystem. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Abyssal Earth|Checkpoint")

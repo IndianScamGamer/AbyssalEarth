@@ -75,7 +75,7 @@ FText UAbyssalInteractionComponent::GetInteractPrompt() const
         return FText::GetEmpty();
     }
 
-    return IAbyssalInteractable::Execute_GetInteractPrompt(Target);
+    return IAbyssalInteractable::Execute_GetInteractionPrompt(Target);
 }
 
 void UAbyssalInteractionComponent::RunTrace()
@@ -116,7 +116,7 @@ void UAbyssalInteractionComponent::SetFocus(AActor* NewFocus)
 
     if (OldFocus && OldFocus->Implements<UAbyssalInteractable>())
     {
-        IAbyssalInteractable::Execute_OnFocusEnd(OldFocus, GetOwner());
+        IAbyssalInteractable::Execute_OnEndFocus(OldFocus, GetOwner());
         OnFocusEnd.Broadcast(OldFocus);
     }
 
@@ -124,7 +124,7 @@ void UAbyssalInteractionComponent::SetFocus(AActor* NewFocus)
 
     if (NewFocus && NewFocus->Implements<UAbyssalInteractable>())
     {
-        IAbyssalInteractable::Execute_OnFocusBegin(NewFocus, GetOwner());
+        IAbyssalInteractable::Execute_OnBeginFocus(NewFocus, GetOwner());
         OnFocusBegin.Broadcast(NewFocus);
     }
 }

@@ -72,7 +72,7 @@ bool AAbyssalInterfaceTerminal::IsDataExhausted() const
     return DataBeatIds.Num() > 0 && DataBeatIndex >= DataBeatIds.Num();
 }
 
-bool AAbyssalInterfaceTerminal::CanInteract_Implementation(AActor* /*Interactor*/) const
+bool AAbyssalInterfaceTerminal::CanInteract_Implementation(AActor* /*Interactor*/)
 {
     return CurrentState == EAbyssalTerminalState::Active && !IsDataExhausted();
 }
@@ -105,7 +105,7 @@ void AAbyssalInterfaceTerminal::OnInteract_Implementation(AActor* /*Interactor*/
     }
 }
 
-FText AAbyssalInterfaceTerminal::GetInteractPrompt_Implementation() const
+FText AAbyssalInterfaceTerminal::GetInteractionPrompt_Implementation()
 {
     if (CurrentState == EAbyssalTerminalState::Locked)
     {
@@ -122,12 +122,12 @@ FText AAbyssalInterfaceTerminal::GetInteractPrompt_Implementation() const
         TerminalLabel);
 }
 
-void AAbyssalInterfaceTerminal::OnFocusBegin_Implementation(AActor* /*Interactor*/)
+void AAbyssalInterfaceTerminal::OnBeginFocus_Implementation(AActor* /*Interactor*/)
 {
     BP_OnFocusBegin();
 }
 
-void AAbyssalInterfaceTerminal::OnFocusEnd_Implementation(AActor* /*Interactor*/)
+void AAbyssalInterfaceTerminal::OnEndFocus_Implementation(AActor* /*Interactor*/)
 {
     BP_OnFocusEnd();
 }

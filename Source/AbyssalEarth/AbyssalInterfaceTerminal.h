@@ -58,11 +58,11 @@ public:
     bool IsDataExhausted() const;
 
     // IAbyssalInteractable
-    virtual bool CanInteract_Implementation(AActor* Interactor) const override;
+    virtual bool CanInteract_Implementation(AActor* Interactor) override;
     virtual void OnInteract_Implementation(AActor* Interactor) override;
-    virtual FText GetInteractPrompt_Implementation() const override;
-    virtual void OnFocusBegin_Implementation(AActor* Interactor) override;
-    virtual void OnFocusEnd_Implementation(AActor* Interactor) override;
+    virtual FText GetInteractionPrompt_Implementation() override;
+    virtual void OnBeginFocus_Implementation(AActor* Interactor) override;
+    virtual void OnEndFocus_Implementation(AActor* Interactor) override;
 
     UPROPERTY(BlueprintAssignable, Category = "Abyssal Earth|Terminal")
     FAbyssalTerminalActivatedSignature OnTerminalActivated;

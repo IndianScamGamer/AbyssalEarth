@@ -5,10 +5,14 @@
 AGravityShearHazard::AGravityShearHazard()
 {
     DamageMode = EHazardDamageMode::None;
+    IdleDuration = 3.0f;
     WarningDuration = 1.0f;
     ActiveDuration = 5.0f;
-    CooldownDuration = 3.0f;
-    bAutoActivate = true;
+    CooldownDuration = 0.0f;
+    bStartActive = true;
+
+    SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
+    SetRootComponent(SceneRoot);
 
     ShearVolume = CreateDefaultSubobject<UBoxComponent>(TEXT("ShearVolume"));
     ShearVolume->SetupAttachment(RootComponent);
@@ -18,21 +22,11 @@ AGravityShearHazard::AGravityShearHazard()
     ShearVolume->OnComponentBeginOverlap.AddDynamic(this, &AGravityShearHazard::OnShearOverlapBegin);
 }
 
-void AGravityShearHazard::BeginPlay()
+void AGravityShearHazard::OnPhaseChanged(EHazardPhase NewPhase)
 {
-    Super::BeginPlay();
-}
-
-void AGravityShearHazard::OnActivePhaseBegin_Implementation()
-{
-    Super::OnActivePhaseBegin_Implementation();
-    ShearVolume->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-}
-
-void AGravityShearHazard::OnCooldownPhaseBegin_Implementation()
-{
-    Super::OnCooldownPhaseBegin_Implementation();
-    ShearVolume->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    Super::OnPhaseChanged(NewPhase);
+    ShearVolume->SetCollisionEnabled(
+        NewPhase == EHazardPhase::Active ? ECollisionEnabled::QueryOnly : ECollisionEnabled::NoCollision);
 }
 
 void AGravityShearHazard::OnShearOverlapBegin(UPrimitiveComponent* /*OverlappedComp*/, AActor* OtherActor,

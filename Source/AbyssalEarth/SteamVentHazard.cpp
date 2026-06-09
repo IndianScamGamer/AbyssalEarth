@@ -2,16 +2,19 @@
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Kismet/GameplayStatics.h"
 
 ASteamVentHazard::ASteamVentHazard()
 {
     DamageMode = EHazardDamageMode::Overlap;
     DamagePerSecond = 8.0f;
+    IdleDuration = 5.0f;
     WarningDuration = 1.5f;
     ActiveDuration = 3.0f;
-    CooldownDuration = 5.0f;
-    bAutoActivate = true;
+    CooldownDuration = 2.0f;
+    bStartActive = true;
+
+    SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
+    SetRootComponent(SceneRoot);
 
     SteamColumn = CreateDefaultSubobject<UCapsuleComponent>(TEXT("SteamColumn"));
     SteamColumn->SetupAttachment(RootComponent);
@@ -22,22 +25,21 @@ ASteamVentHazard::ASteamVentHazard()
 
 void ASteamVentHazard::BeginPlay()
 {
-    Super::BeginPlay();
     SteamColumn->SetCapsuleSize(ColumnRadius, ColumnHeight * 0.5f);
     // Centre the capsule so its base sits at the vent mouth
     SteamColumn->SetRelativeLocation(FVector(0.0f, 0.0f, ColumnHeight * 0.5f));
+    // Base class applies overlap damage to actors inside registered primitives
+    RegisterDamagePrimitive(SteamColumn);
+
+    Super::BeginPlay();
 }
 
-void ASteamVentHazard::OnActivePhaseBegin_Implementation()
+void ASteamVentHazard::OnPhaseChanged(EHazardPhase NewPhase)
 {
-    Super::OnActivePhaseBegin_Implementation();
-    SteamColumn->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-}
-
-void ASteamVentHazard::OnCooldownPhaseBegin_Implementation()
-{
-    Super::OnCooldownPhaseBegin_Implementation();
-    SteamColumn->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    Super::OnPhaseChanged(NewPhase);
+    // Column only collides while erupting
+    SteamColumn->SetCollisionEnabled(
+        NewPhase == EHazardPhase::Active ? ECollisionEnabled::QueryOnly : ECollisionEnabled::NoCollision);
 }
 
 void ASteamVentHazard::OnSteamOverlapBegin(UPrimitiveComponent* /*OverlappedComp*/, AActor* OtherActor,

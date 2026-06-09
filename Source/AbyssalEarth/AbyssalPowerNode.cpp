@@ -45,7 +45,7 @@ void AAbyssalPowerNode::Deactivate()
     SetPowerLevel(0.0f);
 }
 
-bool AAbyssalPowerNode::CanInteract_Implementation(AActor* /*Interactor*/) const
+bool AAbyssalPowerNode::CanInteract_Implementation(AActor* /*Interactor*/)
 {
     return NodeType == EAbyssalPowerNodeType::Source && !bIsActive;
 }
@@ -62,7 +62,7 @@ void AAbyssalPowerNode::OnInteract_Implementation(AActor* /*Interactor*/)
     }
 }
 
-FText AAbyssalPowerNode::GetInteractPrompt_Implementation() const
+FText AAbyssalPowerNode::GetInteractionPrompt_Implementation()
 {
     if (NodeType != EAbyssalPowerNodeType::Source)
     {
@@ -73,8 +73,8 @@ FText AAbyssalPowerNode::GetInteractPrompt_Implementation() const
         : FText::Format(NSLOCTEXT("AbyssalEarth", "PowerNodeActivate",   "Activate {0}"),   NodeLabel);
 }
 
-void AAbyssalPowerNode::OnFocusBegin_Implementation(AActor* /*Interactor*/) { BP_OnFocusBegin(); }
-void AAbyssalPowerNode::OnFocusEnd_Implementation(AActor* /*Interactor*/)   { BP_OnFocusEnd();   }
+void AAbyssalPowerNode::OnBeginFocus_Implementation(AActor* /*Interactor*/) { BP_OnFocusBegin(); }
+void AAbyssalPowerNode::OnEndFocus_Implementation(AActor* /*Interactor*/)   { BP_OnFocusEnd();   }
 
 void AAbyssalPowerNode::PropagatePower(float Power, int32 Depth)
 {
