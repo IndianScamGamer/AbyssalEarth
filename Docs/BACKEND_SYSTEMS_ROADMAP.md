@@ -51,6 +51,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | E7 | Map doc: SUBMARINE_INTERIOR | [x] done | roadmap-tick-14 |
 | E8 | Map doc: ACCESS_PASSAGE | [x] done | roadmap-tick-15 |
 | E9 | Map doc: DESCENT_ELEVATOR | [x] done | roadmap-tick-16 |
+| E10 | Map doc: DEEP_CHANNEL | [x] done | roadmap-tick-17 |
 
 ## Phase F — Traversal / Interaction
 
@@ -66,6 +67,7 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 |----|--------|--------|--------|
 | G1 | `UObjectiveSubsystem` + DataTable route | [x] done | roadmap-tick-4 |
 | G2 | `DT_MainObjectiveArc.csv` | [x] done | roadmap-tick-6 |
+| G3 | `ACheckpointActor` | [x] done | roadmap-tick-17 |
 
 ## Phase H — Inventory / Crafting
 
@@ -75,9 +77,15 @@ Tracked here: every authored system, the branch it shipped on, and what’s queu
 | H2 | `UFabricationSubsystem` + `UAbyssalRecipeDefinition` + `AFabricatorStation` | [x] done | roadmap-tick-7 |
 | H3 | `FabricationRecipes.csv` | [x] done | roadmap-tick-7 |
 
+## Phase I — Health / Death
+
+| ID | System | Status | Branch |
+|----|--------|--------|--------|
+| I1 | `UAbyssalHealthComponent` | [x] done | roadmap-tick-17 |
+
 ---
 
-## Up Next (tick-17)
-- **I1** — `UAbyssalHealthComponent` — centralised health/death system (referenced by all damage paths)
-- **G3** — `ACheckpointActor` — world actor that calls `UCheckpointSubsystem::RegisterCheckpoint` on BeginPlay and activates on interact
-- **E10** — Map doc: `DEEP_CHANNEL.md` (transitional corridor between LUMINOUS_RIFT and FOSSIL_SKY)
+## Up Next (tick-18)
+- **J1** — `UAbyssalHUDSubsystem` — game-instance subsystem that exposes current vital readouts (health, oxygen, temperature, pressure, stamina) as a single polling API for UMG HUD widgets
+- **E11** — Map doc: `FOSSIL_SKY_UPPER.md` (approach zone before the main FOSSIL_SKY map)
+- **H4** — `UAbyssalItemDatabase` — data-driven item registry with `FAbyssalItemData` row type for use in the fabrication UI
