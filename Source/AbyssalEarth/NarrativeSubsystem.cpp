@@ -72,6 +72,12 @@ bool UNarrativeSubsystem::PlayBeat(FName BeatId)
 
     if (IsPlaying())
     {
+        // Don't queue a play-once beat twice (it's only added to PlayedBeatIds
+        // when it actually starts, so the set alone can't catch this).
+        if (Beat->bPlayOnce && Queue.Contains(BeatId))
+        {
+            return false;
+        }
         Queue.Add(BeatId);
         return true;
     }

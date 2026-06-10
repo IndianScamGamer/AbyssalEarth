@@ -123,9 +123,6 @@ def check_narrative_beat_ids():
     cpp_beat_refs = grep_cpp(r'PlayBeat\s*\(\s*FName\s*\(\s*TEXT\s*\(\s*"([^"]+)"')
 
     for beat_id in cpp_beat_refs:
-        if beat_id == "POSTCREDITS_DOUBLE_PULSE":
-            # post-credits beat is triggered at runtime; DataTable populated by designer
-            continue
         if beat_id not in all_beat_ids:
             errors.append(
                 f"C++ PlayBeat call references beat '{beat_id}' "
