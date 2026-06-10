@@ -57,7 +57,7 @@ bool UAbyssalInteractionComponent::TryInteract()
     return true;
 }
 
-FText UAbyssalInteractionComponent::GetInteractPrompt() const
+FText UAbyssalInteractionComponent::GetInteractionPrompt() const
 {
     AActor* Target = FocusedActor.Get();
     if (!Target)
@@ -117,7 +117,7 @@ void UAbyssalInteractionComponent::SetFocus(AActor* NewFocus)
     if (OldFocus && OldFocus->Implements<UAbyssalInteractable>())
     {
         IAbyssalInteractable::Execute_OnEndFocus(OldFocus, GetOwner());
-        OnFocusEnd.Broadcast(OldFocus);
+        OnFocusLost.Broadcast(OldFocus);
     }
 
     FocusedActor = NewFocus;
@@ -125,7 +125,7 @@ void UAbyssalInteractionComponent::SetFocus(AActor* NewFocus)
     if (NewFocus && NewFocus->Implements<UAbyssalInteractable>())
     {
         IAbyssalInteractable::Execute_OnBeginFocus(NewFocus, GetOwner());
-        OnFocusBegin.Broadcast(NewFocus);
+        OnFocusGained.Broadcast(NewFocus);
     }
 }
 

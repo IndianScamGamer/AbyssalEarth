@@ -21,38 +21,19 @@ jobs:
       - name: Run data validator
         run: python Tools/validate_data.py
 
-  header-check:
-    name: C++ Header Format Check
+  cpp-guard:
+    name: C++ Banned-API Guard
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          fetch-depth: 0
+          python-version: "3.11"
 
-      - name: Install clang-format
-        run: sudo apt-get install -y clang-format
-
-      - name: Check format on changed .h/.cpp files
-        run: |
-          # Get changed C++ files vs. main (or all files on push to main)
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- '*.h' '*.cpp' | head -200)
-          else
-            FILES=$(git diff --name-only HEAD~1 HEAD -- '*.h' '*.cpp' | head -200)
-          fi
-
-          if [ -z "$FILES" ]; then
-            echo "No C++ files changed — skipping format check."
-            exit 0
-          fi
-
-          FAIL=0
-          for f in $FILES; do
-            if [ -f "$f" ]; then
-              clang-format --dry-run --Werror "$f" || FAIL=1
-            fi
-          done
-          exit $FAIL
+      - name: Check for banned API patterns
+        run: python Tools/check_cpp_patterns.py
 
   doc-check:
     name: Documentation Lint

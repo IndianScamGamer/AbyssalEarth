@@ -12,7 +12,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAbyssalInteractSignature, AActor*,
  * Player-side interaction manager (roadmap F3). Runs a per-tick forward line
  * trace from the owning camera (or actor forward vector as fallback) to find
  * the nearest IAbyssalInteractable within InteractDistance. Manages focus
- * (calling OnFocusBegin/End on candidates) and exposes TryInteract() which
+ * (broadcasting OnFocusGained/OnFocusLost) and exposes TryInteract() which
  * calls OnInteract on the current target.
  *
  * Attach to the player Character. Driven by PlayerController input.
@@ -42,7 +42,7 @@ public:
 
     /** Returns the interact prompt from the focused actor, or empty text if none. */
     UFUNCTION(BlueprintPure, Category = "Abyssal Earth|Interaction")
-    FText GetInteractPrompt() const;
+    FText GetInteractionPrompt() const;
 
     /** Maximum distance for interaction line trace (cm). */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Abyssal Earth|Interaction", meta=(ClampMin="10.0"))
@@ -57,10 +57,10 @@ public:
     float TraceInterval = 0.1f;
 
     UPROPERTY(BlueprintAssignable, Category = "Abyssal Earth|Interaction")
-    FAbyssalInteractionFocusSignature OnFocusBegin;
+    FAbyssalInteractionFocusSignature OnFocusGained;
 
     UPROPERTY(BlueprintAssignable, Category = "Abyssal Earth|Interaction")
-    FAbyssalInteractionFocusSignature OnFocusEnd;
+    FAbyssalInteractionFocusSignature OnFocusLost;
 
     UPROPERTY(BlueprintAssignable, Category = "Abyssal Earth|Interaction")
     FAbyssalInteractSignature OnInteracted;
