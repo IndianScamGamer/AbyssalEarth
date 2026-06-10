@@ -56,7 +56,11 @@ Place `BP_MagmaGeyserHazard` actors across the Vent Field. Stagger their timings
 | Geyser_05 | `(9000, -1000, 0)` | `9.0` | `2.0` | `4.0` | `3.0` |
 | Geyser_06 | `(10000, 1500, 0)` | `5.0` | `2.0` | `4.0` | `3.0` |
 
-Set `bStartActive = false` on all. The staggered idle durations create a natural rhythm.
+Keep `bStartActive = true` (the default) on all — with it false a hazard sits
+in Idle forever until something calls `SetHazardActive(true)`. Leave
+`bRandomizeInitialPhaseOffset = true` (also the default): combined with the
+distinct Idle Durations above it desynchronises the eruptions into a natural
+rhythm.
 
 ## 5. Hazards: Gravity Shear Zones (×2)
 

@@ -55,4 +55,6 @@ In `BP_AbyssalPlayerController` BeginPlay (alongside WBP_VitalsHUD):
 
 ## 5. Verify
 
-PIE → start a level that has a DataTable objective route loaded in `BP_AbyssalGameMode`. Confirm the objective text slides in from the right. Trigger `ObjectiveSubsystem::CompleteCurrentObjective()` via the console exec `AbyssalDebugAdvanceObjective` — confirm the completion animation fires.
+PIE → start a level that has a DataTable objective route loaded in `BP_AbyssalGameMode`. Confirm the objective text slides in from the right. Open the console (~) and run `AbyssalCompleteObjective` (debug exec on `AAbyssalPlayerController`) — confirm the completion animation fires and the next objective slides in.
+
+Other debug commands available while testing: `AbyssalGiveItem <ItemId> [Count]`, `AbyssalKill` (exercises death→respawn), `AbyssalSave`, `AbyssalLoad`.

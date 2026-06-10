@@ -1,5 +1,9 @@
 #include "AbyssalPlayerController.h"
 #include "AbyssalPlayerCharacter.h"
+#include "AbyssalHealthComponent.h"
+#include "AbyssalSaveSubsystem.h"
+#include "InventorySubsystem.h"
+#include "ObjectiveSubsystem.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
@@ -59,6 +63,58 @@ void AAbyssalPlayerController::SetupInputComponent()
     if (ObservationModeAction)
     {
         EIC->BindAction(ObservationModeAction, ETriggerEvent::Started, this, &AAbyssalPlayerController::HandleObservationMode);
+    }
+}
+
+void AAbyssalPlayerController::AbyssalCompleteObjective()
+{
+    if (UObjectiveSubsystem* Obj = GetGameInstance()->GetSubsystem<UObjectiveSubsystem>())
+    {
+        const bool bCompleted = Obj->CompleteCurrentObjective();
+        UE_LOG(LogTemp, Log, TEXT("AbyssalCompleteObjective: %s"), bCompleted ? TEXT("completed") : TEXT("nothing to complete"));
+    }
+}
+
+void AAbyssalPlayerController::AbyssalGiveItem(FName ItemId, int32 Count)
+{
+    if (ItemId.IsNone() || Count <= 0)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("AbyssalGiveItem: usage AbyssalGiveItem <ItemId> [Count]"));
+        return;
+    }
+    if (UInventorySubsystem* Inv = GetGameInstance()->GetSubsystem<UInventorySubsystem>())
+    {
+        const int32 Added = Inv->AddItem(ItemId, Count);
+        UE_LOG(LogTemp, Log, TEXT("AbyssalGiveItem: added %d x %s (now %d)"), Added, *ItemId.ToString(), Inv->GetItemCount(ItemId));
+    }
+}
+
+void AAbyssalPlayerController::AbyssalKill()
+{
+    if (AAbyssalPlayerCharacter* Char = GetAbyssalCharacter())
+    {
+        if (UAbyssalHealthComponent* Health = Char->FindComponentByClass<UAbyssalHealthComponent>())
+        {
+            Health->Kill();
+        }
+    }
+}
+
+void AAbyssalPlayerController::AbyssalSave()
+{
+    if (UAbyssalSaveSubsystem* SaveSub = GetGameInstance()->GetSubsystem<UAbyssalSaveSubsystem>())
+    {
+        SaveSub->SaveActiveSlot();
+        UE_LOG(LogTemp, Log, TEXT("AbyssalSave: flushed slot %d"), SaveSub->GetActiveSlotIndex());
+    }
+}
+
+void AAbyssalPlayerController::AbyssalLoad()
+{
+    if (UAbyssalSaveSubsystem* SaveSub = GetGameInstance()->GetSubsystem<UAbyssalSaveSubsystem>())
+    {
+        SaveSub->LoadSlot(SaveSub->GetActiveSlotIndex());
+        UE_LOG(LogTemp, Log, TEXT("AbyssalLoad: reloaded slot %d"), SaveSub->GetActiveSlotIndex());
     }
 }
 
