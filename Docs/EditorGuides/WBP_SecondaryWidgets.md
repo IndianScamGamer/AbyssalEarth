@@ -53,11 +53,17 @@ The C++ base subscribes to the narrative subsystem — beats with caption text
 arrive automatically once the widget is on screen. Add to viewport in
 `BP_AbyssalPlayerController::BeginPlay` (Z-Order 2, above the vitals HUD).
 
-## WBP_ScannerReadout — SKIP for the slice
+## WBP_ScannerReadout — optional for the slice
 
-`UAbyssalScannerReadoutWidget` binds the **legacy** `UScannerComponent`, which
-the new `AAbyssalPlayerCharacter` does not carry (it uses
-`UAbyssalScanComponent`). Do not add this widget to the slice HUD; scan
-feedback already reaches the HUD through `UAbyssalScanComponent::OnScanHit`
-and the discovery toast in WBP_Journal. The widget will either be ported to
-`UAbyssalScanComponent` or deleted with the rest of the legacy pawn stack.
+`UAbyssalScannerReadoutWidget` auto-binds the owning pawn's
+`UAbyssalScanComponent` in NativeConstruct. Create a Blueprint child and
+implement the four events:
+
+- **Scanner Pulse Started** — play a radar-sweep animation
+- **Scanner Hit** (`ScannedActor`, `DiscoveryId`) — flash the readout
+- **Scanner Missed** — show "No signal" state
+- **Scanner Readout Changed** (`FAbyssalScanReadout`) — update the label;
+  `GetCurrentReadoutText` returns a ready-made "Name | 12 m" string
+
+Add to viewport in `BP_AbyssalPlayerController::BeginPlay` (Z-Order 1).
+Optional because discovery toasts in WBP_Journal already give scan feedback.

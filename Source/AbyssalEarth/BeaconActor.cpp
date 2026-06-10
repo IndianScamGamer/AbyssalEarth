@@ -53,13 +53,15 @@ void ABeaconActor::SetBeaconLightColor(FLinearColor NewLightColor)
     BeaconLightColor = NewLightColor;
     ApplyBeaconVisuals();
 
+    // Only persist the color if this beacon is already registered —
+    // RegisterBeacon here would add preview/unplaced beacons to the save.
     if (UWorld* World = GetWorld())
     {
         if (UGameInstance* GameInstance = World->GetGameInstance())
         {
             if (UBeaconSubsystem* BeaconSubsystem = GameInstance->GetSubsystem<UBeaconSubsystem>())
             {
-                BeaconSubsystem->RegisterBeacon(this);
+                BeaconSubsystem->UpdateBeaconColor(this);
             }
         }
     }
