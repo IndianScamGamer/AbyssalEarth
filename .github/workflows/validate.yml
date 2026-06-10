@@ -1,8 +1,10 @@
 name: AbyssalEarth Data Validation
 
+# Push trigger covers main only; feature branches are validated through their
+# PRs. Running both previously doubled every run (and any failure email).
 on:
   push:
-    branches: ["**"]
+    branches: [main]
   pull_request:
     branches: [main]
 
