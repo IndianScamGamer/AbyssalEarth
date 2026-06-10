@@ -96,6 +96,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Abyssal Earth|Player", meta=(ClampMin="1.0"))
     float SprintSpeedMultiplier = 1.6f;
 
+    /** Seconds after death before RespawnPlayer() is called. Allows death animation to play. */
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Abyssal Earth|Player", meta=(ClampMin="0.0"))
+    float RespawnDelay = 2.0f;
+
 protected:
     virtual void BeginPlay() override;
     virtual void EndPlay(EEndPlayReason::Type EndPlayReason) override;
@@ -145,6 +149,9 @@ private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta=(AllowPrivateAccess="true"))
     TObjectPtr<class UObservationModeComponent> ObservationComponent;
 
+    void TriggerRespawnFromGameMode();
+
     float BaseWalkSpeed = 0.0f;
     bool bWantsSprint = false;
+    FTimerHandle RespawnTimerHandle;
 };

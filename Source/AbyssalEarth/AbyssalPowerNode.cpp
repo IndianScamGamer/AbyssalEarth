@@ -95,7 +95,7 @@ void AAbyssalPowerNode::PropagatePower(float Power, int32 Depth)
     {
         if (Node)
         {
-            Node->SetPowerLevel(Forwarded);
+            Node->ReceivePower(this, Forwarded);
         }
     }
 
@@ -108,4 +108,29 @@ void AAbyssalPowerNode::PropagatePower(float Power, int32 Depth)
     }
 
     bPropagating = false;
+}
+
+void AAbyssalPowerNode::ReceivePower(AAbyssalPowerNode* FromNode, float Power)
+{
+    // Source nodes generate their own power and ignore incoming propagation
+    if (NodeType == EAbyssalPowerNodeType::Source)
+    {
+        return;
+    }
+
+    if (FMath::IsNearlyZero(Power))
+    {
+        InputContributions.Remove(FromNode);
+    }
+    else
+    {
+        InputContributions.Add(FromNode, Power);
+    }
+
+    float Total = 0.0f;
+    for (const auto& Pair : InputContributions)
+    {
+        Total += Pair.Value;
+    }
+    SetPowerLevel(FMath::Min(Total, 1.0f));
 }

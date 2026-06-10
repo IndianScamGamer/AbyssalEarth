@@ -160,3 +160,8 @@ void UNarrativeSubsystem::StopAll()
         OnBeatFinished.Broadcast(Finished);
     }
 }
+
+void UNarrativeSubsystem::TriggerPostCreditsHook()
+{
+    PlayBeat(FName(TEXT("POSTCREDITS_DOUBLE_PULSE")));
+}

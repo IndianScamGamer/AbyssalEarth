@@ -138,6 +138,7 @@ void AAbyssalRiftActor::OnChargeComplete()
         if (UNarrativeSubsystem* NarSub = GI->GetSubsystem<UNarrativeSubsystem>())
         {
             NarSub->PlayBeat(FName(TEXT("RIFT_OPEN_01")));
+            NarSub->TriggerPostCreditsHook();
         }
     }
 }
