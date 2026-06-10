@@ -19,13 +19,13 @@ Very small — 2.5 m × 2.5 m elevator cab interior. The illusion of space comes
 - Post-process: slowly dims exterior light through grated floor as depth increases.
 
 ### T+0:08 — Player Line
-- Narrative beat `PRO_006_LINE` fires automatically (no trigger required):
+- Narrative beat `NAR_PRO_PLAYER_DOUBT` fires automatically (no trigger required):
   > *"Sounds like those bastards were lying."*
 - Reference: PRO_005 — HELIOS warned of an anomaly. The player is acknowledging they probably should have listened.
 
 ### T+0:22 — Warning State Begins
 - Three HUD warning indicators flash: CABLE TENSION • SHAFT ANOMALY • EMERGENCY PROTOCOL.
-- Narrative beat `PRO_007_WARNING` (terminal voice):
+- Narrative beat `NAR_PRO_CRASH` (terminal voice):
   > *"[ALERT] Structural anomaly detected in shaft sector 7. Emergency brake activation—"*
 - Beat cuts off mid-sentence.
 
@@ -44,8 +44,8 @@ Very small — 2.5 m × 2.5 m elevator cab interior. The illusion of space comes
 ## Key Narrative Beats
 | Beat ID | Time | Trigger | Line |
 |---------|------|---------|------|
-| PRO_006_LINE | T+0:08 | Auto timer | "Sounds like those bastards were lying." |
-| PRO_007_WARNING | T+0:22 | Auto timer | "[ALERT] Structural anomaly detected…" |
+| NAR_PRO_PLAYER_DOUBT | T+0:08 | Auto timer | "Sounds like those bastards were lying." |
+| NAR_PRO_CRASH | T+0:22 | Auto timer | "[ALERT] Structural anomaly detected…" |
 
 ## Notes
 - The emergency stop button interaction (`IAbyssalInteractable`) should return a custom `CanInteract = false` with prompt text: *"[INOPERATIVE]"* — the player’s attempt to do something feels right; the futility is the point.

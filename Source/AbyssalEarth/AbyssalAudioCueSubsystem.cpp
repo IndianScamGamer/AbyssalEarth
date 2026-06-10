@@ -1,14 +1,9 @@
 #include "AbyssalAudioCueSubsystem.h"
-#include "DiscoveryActor.h"
+#include "AbyssalScanComponent.h"
 #include "DiscoverySubsystem.h"
 #include "Engine/GameInstance.h"
+#include "GameFramework/Actor.h"
 #include "ObjectiveSubsystem.h"
-#include "ScannerComponent.h"
-
-namespace
-{
-    constexpr float ScannerPulseReferenceRadius = 1800.0f;
-}
 
 void UAbyssalAudioCueSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -20,52 +15,52 @@ void UAbyssalAudioCueSubsystem::Deinitialize()
 {
     UnbindCoreSubsystems();
 
-    for (UScannerComponent* ScannerComponent : RegisteredScanners)
+    for (UAbyssalScanComponent* ScanComponent : RegisteredScanners)
     {
-        if (!ScannerComponent)
+        if (!ScanComponent)
         {
             continue;
         }
 
-        ScannerComponent->OnScanPulseStartedEvent.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScannerPulseStarted);
-        ScannerComponent->OnScanDiscoveryFoundEvent.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScannerDiscoveryFound);
-        ScannerComponent->OnScanMissedEvent.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScannerMissed);
+        ScanComponent->OnScanPulseFired.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScanPulseFired);
+        ScanComponent->OnScanHit.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScanHit);
+        ScanComponent->OnScanMissed.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScanMissed);
     }
 
     RegisteredScanners.Reset();
     Super::Deinitialize();
 }
 
-void UAbyssalAudioCueSubsystem::RegisterScannerComponent(UScannerComponent* ScannerComponent)
+void UAbyssalAudioCueSubsystem::RegisterScanComponent(UAbyssalScanComponent* ScanComponent)
 {
-    if (!ScannerComponent)
+    if (!ScanComponent)
     {
         return;
     }
 
     CleanRegisteredScanners();
-    if (RegisteredScanners.Contains(ScannerComponent))
+    if (RegisteredScanners.Contains(ScanComponent))
     {
         return;
     }
 
-    RegisteredScanners.Add(ScannerComponent);
-    ScannerComponent->OnScanPulseStartedEvent.AddDynamic(this, &UAbyssalAudioCueSubsystem::HandleScannerPulseStarted);
-    ScannerComponent->OnScanDiscoveryFoundEvent.AddDynamic(this, &UAbyssalAudioCueSubsystem::HandleScannerDiscoveryFound);
-    ScannerComponent->OnScanMissedEvent.AddDynamic(this, &UAbyssalAudioCueSubsystem::HandleScannerMissed);
+    RegisteredScanners.Add(ScanComponent);
+    ScanComponent->OnScanPulseFired.AddDynamic(this, &UAbyssalAudioCueSubsystem::HandleScanPulseFired);
+    ScanComponent->OnScanHit.AddDynamic(this, &UAbyssalAudioCueSubsystem::HandleScanHit);
+    ScanComponent->OnScanMissed.AddDynamic(this, &UAbyssalAudioCueSubsystem::HandleScanMissed);
 }
 
-void UAbyssalAudioCueSubsystem::UnregisterScannerComponent(UScannerComponent* ScannerComponent)
+void UAbyssalAudioCueSubsystem::UnregisterScanComponent(UAbyssalScanComponent* ScanComponent)
 {
-    if (!ScannerComponent)
+    if (!ScanComponent)
     {
         return;
     }
 
-    ScannerComponent->OnScanPulseStartedEvent.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScannerPulseStarted);
-    ScannerComponent->OnScanDiscoveryFoundEvent.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScannerDiscoveryFound);
-    ScannerComponent->OnScanMissedEvent.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScannerMissed);
-    RegisteredScanners.Remove(ScannerComponent);
+    ScanComponent->OnScanPulseFired.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScanPulseFired);
+    ScanComponent->OnScanHit.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScanHit);
+    ScanComponent->OnScanMissed.RemoveDynamic(this, &UAbyssalAudioCueSubsystem::HandleScanMissed);
+    RegisteredScanners.Remove(ScanComponent);
 }
 
 void UAbyssalAudioCueSubsystem::RequestAmbienceCue(FName CueId, FVector WorldLocation, float Intensity)
@@ -123,34 +118,31 @@ void UAbyssalAudioCueSubsystem::HandleRouteCompleted()
     RequestAudioCue(CueEvent);
 }
 
-void UAbyssalAudioCueSubsystem::HandleScannerPulseStarted(FVector ScanOrigin, float EffectiveRadius)
+void UAbyssalAudioCueSubsystem::HandleScanPulseFired()
 {
     FAbyssalAudioCueEvent CueEvent;
     CueEvent.CueType = EAbyssalAudioCueType::Scanner;
     CueEvent.CueId = FName(TEXT("SFX_Scanner_Pulse"));
-    CueEvent.WorldLocation = ScanOrigin;
-    CueEvent.Intensity = FMath::Max(0.25f, EffectiveRadius / ScannerPulseReferenceRadius);
     RequestAudioCue(CueEvent);
 }
 
-void UAbyssalAudioCueSubsystem::HandleScannerDiscoveryFound(ADiscoveryActor* Discovery, bool bNewDiscovery)
+void UAbyssalAudioCueSubsystem::HandleScanHit(AActor* ScannedActor, FName DiscoveryId)
 {
     FAbyssalAudioCueEvent CueEvent;
     CueEvent.CueType = EAbyssalAudioCueType::Scanner;
-    CueEvent.CueId = bNewDiscovery ? FName(TEXT("SFX_Scanner_Found_New")) : FName(TEXT("SFX_Scanner_Found_Known"));
-    CueEvent.SourceObject = Discovery;
+    CueEvent.CueId = FName(TEXT("SFX_Scanner_Found_New"));
+    CueEvent.RelatedId = DiscoveryId;
+    CueEvent.SourceObject = ScannedActor;
 
-    if (Discovery)
+    if (ScannedActor)
     {
-        CueEvent.RelatedId = Discovery->DiscoveryId;
-        CueEvent.WorldLocation = Discovery->GetScanFocusLocation();
-        CueEvent.DisplayText = Discovery->DisplayName;
+        CueEvent.WorldLocation = ScannedActor->GetActorLocation();
     }
 
     RequestAudioCue(CueEvent);
 }
 
-void UAbyssalAudioCueSubsystem::HandleScannerMissed()
+void UAbyssalAudioCueSubsystem::HandleScanMissed()
 {
     FAbyssalAudioCueEvent CueEvent;
     CueEvent.CueType = EAbyssalAudioCueType::Scanner;
@@ -206,8 +198,8 @@ void UAbyssalAudioCueSubsystem::UnbindCoreSubsystems()
 
 void UAbyssalAudioCueSubsystem::CleanRegisteredScanners()
 {
-    RegisteredScanners.RemoveAll([](const UScannerComponent* ScannerComponent)
+    RegisteredScanners.RemoveAll([](const UAbyssalScanComponent* ScanComponent)
     {
-        return ScannerComponent == nullptr;
+        return ScanComponent == nullptr;
     });
 }

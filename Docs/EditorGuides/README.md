@@ -16,6 +16,15 @@ the ones above it are done.
 | 8 | [PrologueLevel_Blockout.md](PrologueLevel_Blockout.md) | PRO_001 submarine interior level | 9 |
 | 9 | [Act1Level_Blockout.md](Act1Level_Blockout.md) | A1_001 thermal vent field level | — |
 
+## Map asset naming
+
+`UWorldFlowSubsystem::TravelToMap(MapId, …)` calls `OpenLevel(MapId)` directly,
+so **each .umap asset must be named exactly after its MapId** — e.g. the
+Prologue submarine map is `PRO_001.umap`, the Act 1 vent field is
+`A1_001.umap`. Checkpoints also store these IDs (`RegisterCheckpoint`'s MapId
+parameter), so renaming a map after checkpoints ship would break respawn-map
+resolution in old saves.
+
 ## Debug commands
 
 Available in PIE via the `~` console (exec functions on

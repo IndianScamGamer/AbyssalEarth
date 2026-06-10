@@ -13,7 +13,7 @@ Large open-plan — roughly 300 m × 180 m floor, 60–90 m ceiling. Vertical pl
 ### Z1 — Crash Scatter
 Immediate area after the shaft exit. Elevator debris, HELIOS robot wreckage, cracked floor tiles. Low creature density (passive gliders only). Tutorial-density interaction nodes: one harvestable crystal, one HELIOS log fragment.
 
-**Key beats**: PRO_009 already fired in WRECKED_ELEVATOR. No new narration here — let the visuals breathe.
+**Key beats**: NAR_PRO_REVEAL already fired in WRECKED_ELEVATOR. No new narration here — let the visuals breathe.
 
 ### Z2 — The Veil
 Curtains of bioluminescent organisms hang from the ceiling in slow pulses. Walking through them triggers a low-vibration audio cue. First encounter with `AAbyssalCreature` (passive Veil Drifter species). Scanning the organisms populates discovery `DIS_VEIL_ORGANISM`.

@@ -34,7 +34,7 @@ For Act 1 levels create a child BP (`BP_AbyssalGameMode_Act1`) and set **Narrati
 ## 4. Verify
 
 Press **Play In Editor (PIE)**. In the **Details** panel of the spawned pawn, confirm:
-- Pawn class shows `BP_PlayerCharacter` (not `AbyssalExplorerCharacter`)
+- Pawn class shows `BP_PlayerCharacter`
 - All 9 components (HealthComponent, OxygenComponent, etc.) appear in the components list
 
-If the pawn is still the legacy character, confirm the level's World Settings override is set (it takes priority over the project default).
+If the pawn class is wrong, confirm the level's World Settings override is set (it takes priority over the project default).

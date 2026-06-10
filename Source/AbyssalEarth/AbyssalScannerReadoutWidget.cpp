@@ -1,16 +1,18 @@
 #include "AbyssalScannerReadoutWidget.h"
 
+#include "AbyssalScanComponent.h"
+#include "AbyssalScannable.h"
 #include "GameFramework/Pawn.h"
 
 void UAbyssalScannerReadoutWidget::NativeConstruct()
 {
     Super::NativeConstruct();
 
-    if (!BoundScannerComponent)
+    if (!BoundScanComponent)
     {
         if (APawn* OwningPawn = GetOwningPlayerPawn())
         {
-            BindToScanner(OwningPawn->FindComponentByClass<UScannerComponent>());
+            BindToScanner(OwningPawn->FindComponentByClass<UAbyssalScanComponent>());
         }
     }
 }
@@ -22,99 +24,104 @@ void UAbyssalScannerReadoutWidget::NativeDestruct()
     Super::NativeDestruct();
 }
 
-void UAbyssalScannerReadoutWidget::SetScannerComponent(UScannerComponent* InScannerComponent)
+void UAbyssalScannerReadoutWidget::SetScanComponent(UAbyssalScanComponent* InScanComponent)
 {
-    BindToScanner(InScannerComponent);
+    BindToScanner(InScanComponent);
 }
 
-UScannerComponent* UAbyssalScannerReadoutWidget::GetBoundScannerComponent() const
+UAbyssalScanComponent* UAbyssalScannerReadoutWidget::GetBoundScanComponent() const
 {
-    return BoundScannerComponent;
+    return BoundScanComponent;
 }
 
-FAbyssalScanResult UAbyssalScannerReadoutWidget::GetCurrentScanResult() const
+FAbyssalScanReadout UAbyssalScannerReadoutWidget::GetCurrentScanReadout() const
 {
-    return CurrentScanResult;
+    return CurrentReadout;
 }
 
 FText UAbyssalScannerReadoutWidget::GetCurrentReadoutText() const
 {
-    if (!CurrentScanResult.bHasDiscovery)
+    if (!CurrentReadout.bHasSignal)
     {
         return FText::FromString(TEXT("No signal"));
     }
 
-    const FText DiscoveryName = CurrentScanResult.DisplayName.IsEmpty()
-        ? FText::FromName(CurrentScanResult.DiscoveryId)
-        : CurrentScanResult.DisplayName;
-
-    const FText StatusText = CurrentScanResult.bNewDiscovery
-        ? FText::FromString(TEXT("New discovery"))
-        : FText::FromString(TEXT("Logged discovery"));
+    const FText DiscoveryName = CurrentReadout.DisplayName.IsEmpty()
+        ? FText::FromName(CurrentReadout.DiscoveryId)
+        : CurrentReadout.DisplayName;
 
     return FText::Format(
-        FText::FromString(TEXT("{0} | {1} | {2} m")),
+        FText::FromString(TEXT("{0} | {1} m")),
         DiscoveryName,
-        StatusText,
-        FText::AsNumber(FMath::RoundToInt(CurrentScanResult.Distance / 100.0f)));
+        FText::AsNumber(FMath::RoundToInt(CurrentReadout.Distance / 100.0f)));
 }
 
-void UAbyssalScannerReadoutWidget::HandleScannerResultChanged(const FAbyssalScanResult& ScanResult)
+void UAbyssalScannerReadoutWidget::HandleScanPulseFired()
 {
-    CurrentScanResult = ScanResult;
-    BP_OnScannerResultChanged(CurrentScanResult);
+    BP_OnScannerPulseStarted();
 }
 
-void UAbyssalScannerReadoutWidget::HandleScannerPulseStarted(FVector ScanOrigin, float EffectiveRadius)
+void UAbyssalScannerReadoutWidget::HandleScanHit(AActor* ScannedActor, FName DiscoveryId)
 {
-    BP_OnScannerPulseStarted(ScanOrigin, EffectiveRadius);
+    CurrentReadout = FAbyssalScanReadout();
+    CurrentReadout.bHasSignal = true;
+    CurrentReadout.DiscoveryId = DiscoveryId;
+
+    if (ScannedActor)
+    {
+        CurrentReadout.FocusLocation = ScannedActor->GetActorLocation();
+        if (ScannedActor->Implements<UAbyssalScannable>())
+        {
+            CurrentReadout.DisplayName = IAbyssalScannable::Execute_GetScanDisplayName(ScannedActor);
+        }
+        if (const APawn* OwningPawn = GetOwningPlayerPawn())
+        {
+            CurrentReadout.Distance = FVector::Dist(OwningPawn->GetActorLocation(), CurrentReadout.FocusLocation);
+        }
+    }
+
+    BP_OnScannerHit(ScannedActor, DiscoveryId);
+    BP_OnScannerReadoutChanged(CurrentReadout);
 }
 
-void UAbyssalScannerReadoutWidget::HandleScannerDiscoveryFound(ADiscoveryActor* Discovery, bool bNewDiscovery)
+void UAbyssalScannerReadoutWidget::HandleScanMissed()
 {
-    BP_OnScannerDiscoveryFound(Discovery, bNewDiscovery);
-}
-
-void UAbyssalScannerReadoutWidget::HandleScannerMissed()
-{
-    CurrentScanResult = FAbyssalScanResult();
+    CurrentReadout = FAbyssalScanReadout();
     BP_OnScannerMissed();
+    BP_OnScannerReadoutChanged(CurrentReadout);
 }
 
-void UAbyssalScannerReadoutWidget::BindToScanner(UScannerComponent* InScannerComponent)
+void UAbyssalScannerReadoutWidget::BindToScanner(UAbyssalScanComponent* InScanComponent)
 {
-    if (BoundScannerComponent == InScannerComponent)
+    if (BoundScanComponent == InScanComponent)
     {
         return;
     }
 
     UnbindFromScanner();
-    BoundScannerComponent = InScannerComponent;
+    BoundScanComponent = InScanComponent;
 
-    if (!BoundScannerComponent)
+    if (!BoundScanComponent)
     {
-        CurrentScanResult = FAbyssalScanResult();
+        CurrentReadout = FAbyssalScanReadout();
         return;
     }
 
-    CurrentScanResult = BoundScannerComponent->GetLastScanResult();
-    BoundScannerComponent->OnScanResultChanged.AddDynamic(this, &UAbyssalScannerReadoutWidget::HandleScannerResultChanged);
-    BoundScannerComponent->OnScanPulseStartedEvent.AddDynamic(this, &UAbyssalScannerReadoutWidget::HandleScannerPulseStarted);
-    BoundScannerComponent->OnScanDiscoveryFoundEvent.AddDynamic(this, &UAbyssalScannerReadoutWidget::HandleScannerDiscoveryFound);
-    BoundScannerComponent->OnScanMissedEvent.AddDynamic(this, &UAbyssalScannerReadoutWidget::HandleScannerMissed);
-    BP_OnScannerResultChanged(CurrentScanResult);
+    BoundScanComponent->OnScanPulseFired.AddDynamic(this, &UAbyssalScannerReadoutWidget::HandleScanPulseFired);
+    BoundScanComponent->OnScanHit.AddDynamic(this, &UAbyssalScannerReadoutWidget::HandleScanHit);
+    BoundScanComponent->OnScanMissed.AddDynamic(this, &UAbyssalScannerReadoutWidget::HandleScanMissed);
+    BP_OnScannerReadoutChanged(CurrentReadout);
 }
 
 void UAbyssalScannerReadoutWidget::UnbindFromScanner()
 {
-    if (!BoundScannerComponent)
+    if (!BoundScanComponent)
     {
         return;
     }
 
-    BoundScannerComponent->OnScanResultChanged.RemoveDynamic(this, &UAbyssalScannerReadoutWidget::HandleScannerResultChanged);
-    BoundScannerComponent->OnScanPulseStartedEvent.RemoveDynamic(this, &UAbyssalScannerReadoutWidget::HandleScannerPulseStarted);
-    BoundScannerComponent->OnScanDiscoveryFoundEvent.RemoveDynamic(this, &UAbyssalScannerReadoutWidget::HandleScannerDiscoveryFound);
-    BoundScannerComponent->OnScanMissedEvent.RemoveDynamic(this, &UAbyssalScannerReadoutWidget::HandleScannerMissed);
-    BoundScannerComponent = nullptr;
+    BoundScanComponent->OnScanPulseFired.RemoveDynamic(this, &UAbyssalScannerReadoutWidget::HandleScanPulseFired);
+    BoundScanComponent->OnScanHit.RemoveDynamic(this, &UAbyssalScannerReadoutWidget::HandleScanHit);
+    BoundScanComponent->OnScanMissed.RemoveDynamic(this, &UAbyssalScannerReadoutWidget::HandleScanMissed);
+    BoundScanComponent = nullptr;
 }

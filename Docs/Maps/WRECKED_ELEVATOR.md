@@ -23,14 +23,14 @@ Small linear space — roughly 6 m × 3 m × 4 m. No combat. No vitals pressure.
 - Brief platform outside the cab, shaft walls above and below.
 - Bioluminescent lichen on shaft walls — first alien material contact.
 - Camera auto-pans down to show the cavern abyss, then forward to the rift glow.
-- Player line (narrative beat): **PRO_009** — "Oh... shit."
+- Player line (narrative beat): **NAR_PRO_REVEAL** — "Oh... shit."
 - Transition: step forward → level stream to `LUMINOUS_RIFT` map.
 
 ## Key Beats
 | Beat ID | Trigger | Line |
 |---------|---------|------|
-| PRO_008_WAKE | Z0 enter | *(ambient groan, no caption)* |
-| PRO_009 | Z2 enter | "Oh... shit." |
+| NAR_PRO_WAKE | Z0 enter | *(ambient groan, no caption)* |
+| NAR_PRO_REVEAL | Z2 enter | "Oh... shit." |
 
 ## Discoveries
 | ID | Type | Location |

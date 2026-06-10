@@ -1,4 +1,5 @@
 #include "AbyssalScanComponent.h"
+#include "AbyssalAudioCueSubsystem.h"
 #include "AbyssalScannable.h"
 #include "DiscoverySubsystem.h"
 #include "DiscoverySaveGame.h"
@@ -13,6 +14,27 @@ UAbyssalScanComponent::UAbyssalScanComponent()
 void UAbyssalScanComponent::BeginPlay()
 {
     Super::BeginPlay();
+
+    if (UGameInstance* GI = UGameplayStatics::GetGameInstance(this))
+    {
+        if (UAbyssalAudioCueSubsystem* AudioCueSub = GI->GetSubsystem<UAbyssalAudioCueSubsystem>())
+        {
+            AudioCueSub->RegisterScanComponent(this);
+        }
+    }
+}
+
+void UAbyssalScanComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+    if (UGameInstance* GI = UGameplayStatics::GetGameInstance(this))
+    {
+        if (UAbyssalAudioCueSubsystem* AudioCueSub = GI->GetSubsystem<UAbyssalAudioCueSubsystem>())
+        {
+            AudioCueSub->UnregisterScanComponent(this);
+        }
+    }
+
+    Super::EndPlay(EndPlayReason);
 }
 
 void UAbyssalScanComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -56,6 +78,7 @@ bool UAbyssalScanComponent::ScanPulse()
     TArray<FOverlapResult> Overlaps;
     World->OverlapMultiByChannel(Overlaps, Origin, FQuat::Identity, ECC_Visibility, Sphere);
 
+    int32 BroadcastHits = 0;
     TSet<AActor*> HitActors;
     for (const FOverlapResult& Overlap : Overlaps)
     {
@@ -93,7 +116,13 @@ bool UAbyssalScanComponent::ScanPulse()
         if (!bAlreadyKnown || bRescanKnownActors)
         {
             OnScanHit.Broadcast(Actor, ScanId);
+            ++BroadcastHits;
         }
+    }
+
+    if (BroadcastHits == 0)
+    {
+        OnScanMissed.Broadcast();
     }
 
     return true;

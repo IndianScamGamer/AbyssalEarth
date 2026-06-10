@@ -1,5 +1,10 @@
 # Blueprint Implementation Notes
 
+> **Historical document.** Mentions of `BP_AbyssalExplorerCharacter` /
+> `AAbyssalExplorerCharacter` refer to the deleted legacy pawn; the current
+> pawn is `AAbyssalPlayerCharacter` (`BP_PlayerCharacter`). Canonical
+> step-by-step editor instructions live in `Docs/EditorGuides/`.
+
 These notes are for the Windows/Unreal Editor pass. They convert the current C++ and design docs into concrete Blueprint assets for the Luminous Rift vertical slice.
 
 Read alongside:

@@ -1,5 +1,10 @@
 # Next Tasks
 
+> **Note:** Older entries referencing `BP_AbyssalExplorerCharacter` predate the
+> pawn migration — the legacy explorer stack has been deleted. Substitute
+> `BP_PlayerCharacter` (parent `AAbyssalPlayerCharacter`) and follow
+> `Docs/EditorGuides/` for editor work.
+
 The hourly continuation worker should always pick the highest-impact available task from this list, update files directly, append a short entry to `Docs/HOURLY_LOG.md`, commit, and push when the change is coherent.
 
 ## Operating Rules

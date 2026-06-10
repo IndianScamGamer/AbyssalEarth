@@ -14,10 +14,6 @@ class UInputMappingContext;
  * binds the four gameplay actions (Interact, ScanPulse, ObservationMode,
  * Sprint) to forward calls to the possessed AAbyssalPlayerCharacter.
  *
- * Movement (Move/Look/Crouch) is kept identical to the legacy
- * AAbyssalExplorerCharacter pattern so it translates directly to the
- * new pawn without requiring separate IMC changes.
- *
  * All Input Action assets are EditDefaultsOnly — set them in the
  * BP_AbyssalPlayerController Blueprint subclass.
  */

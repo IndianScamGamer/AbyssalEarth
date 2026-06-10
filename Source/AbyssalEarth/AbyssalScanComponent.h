@@ -52,6 +52,10 @@ public:
     UPROPERTY(BlueprintAssignable, Category = "Abyssal Earth|Scan")
     FAbyssalScanPulseSignature OnScanCooldownComplete;
 
+    /** Fires when a pulse completes without broadcasting any OnScanHit. */
+    UPROPERTY(BlueprintAssignable, Category = "Abyssal Earth|Scan")
+    FAbyssalScanPulseSignature OnScanMissed;
+
     /** Sphere radius of the scan pulse in cm. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Abyssal Earth|Scan", meta=(ClampMin="10.0"))
     float ScanRadius = 800.0f;
@@ -66,6 +70,7 @@ public:
 
 protected:
     virtual void BeginPlay() override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
