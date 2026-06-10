@@ -90,12 +90,20 @@ bool UAbyssalUpgradeSubsystem::IsUpgradeInstalled(FName UpgradeItemId) const
 
 void UAbyssalUpgradeSubsystem::RegisterPlayerPawn(APawn* PlayerPawn)
 {
+    // Same pawn instance re-registering (e.g. checkpoint respawn teleports the
+    // existing pawn): its components already carry the upgrade effects, so
+    // re-applying would stack them again on every death.
+    if (CachedPawn.Get() == PlayerPawn)
+    {
+        return;
+    }
+
     CachedPawn = PlayerPawn;
     if (!PlayerPawn)
     {
         return;
     }
-    // Re-apply all installed upgrades to the fresh pawn
+    // Apply all installed upgrades to the fresh pawn
     for (const FName& Id : InstalledUpgrades)
     {
         ApplyUpgradeEffect(Id, 1.0f);

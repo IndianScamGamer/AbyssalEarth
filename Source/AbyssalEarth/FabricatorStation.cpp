@@ -12,6 +12,15 @@ AFabricatorStation::AFabricatorStation()
     RootComponent = MeshComponent;
 }
 
+void AFabricatorStation::BeginPlay()
+{
+    Super::BeginPlay();
+    // Register at level start, not just on first interact: a reloaded profile
+    // restores unlocked recipe IDs, and CanCraft needs the definitions known
+    // before the player touches the station.
+    RegisterRecipesWithSubsystem();
+}
+
 bool AFabricatorStation::CanInteract_Implementation(AActor* Interactor)
 {
     return AvailableRecipes.Num() > 0;
