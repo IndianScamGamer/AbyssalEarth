@@ -4,3 +4,4 @@ RIFT_CHARGING_01,Terminal,"[RIFT PROTOCOL INITIATED] Stabiliser accepted. Calcul
 RIFT_OPEN_01,Player,"It's open. It's actually open.",3.0,true
 RIFT_OPEN_02,Player,"I can see the surface. I can see it.",3.5,true
 RIFT_ENTER_01,Player,"Whatever this place is — whatever you are — I'll be back. I have to be.",5.0,true
+POSTCREDITS_DOUBLE_PULSE,,"[SENSOR LOG — AUTOMATED] Seismic array 7: double-pulse signature detected at 6,000 m. Pattern repeats. Pattern repeats.",6.0,true

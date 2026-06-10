@@ -144,6 +144,7 @@ void AAbyssalPlayerCharacter::RespawnAtCheckpoint()
 
     HealthComponent->Respawn();
     OxygenComponent->RefillOxygen();
+    StaminaComponent->RestoreStamina();
     TemperatureComponent->ResetTemperature();
     PressureComponent->ResetPressure();
     GetCharacterMovement()->SetMovementMode(MOVE_Walking);
