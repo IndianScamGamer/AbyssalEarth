@@ -23,8 +23,10 @@
 #include "ObjectiveSubsystem.h"
 #include "CheckpointSubsystem.h"
 #include "FabricationSubsystem.h"
+#include "NarrativeSubsystem.h"
 #include "AbyssalSaveSubsystem.h"
 #include "AbyssalTestSinks.h"
+#include "Engine/DataTable.h"
 
 namespace AbyssalTest
 {
@@ -302,6 +304,72 @@ bool FSaveSubsystemRoundTripTest::RunTest(const FString& /*Parameters*/)
     SaveSub->DeleteSlot(TestSlot);
     TestFalse(TEXT("Test slot deleted"), SaveSub->DoesSaveExist(TestSlot));
 
+    AbyssalTest::DestroyGameInstance(GI);
+    return true;
+}
+
+// ---------------------------------------------------------------------------
+// 6. NarrativeSubsystem — beat playback, play-once, queueing
+// ---------------------------------------------------------------------------
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(
+    FNarrativeSubsystemPlaybackTest,
+    "AbyssalEarth.NarrativeSubsystem.Playback",
+    EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+
+bool FNarrativeSubsystemPlaybackTest::RunTest(const FString& /*Parameters*/)
+{
+    UGameInstance* GI = AbyssalTest::CreateGameInstance();
+    UNarrativeSubsystem* Nar = GI->GetSubsystem<UNarrativeSubsystem>();
+    if (!TestNotNull(TEXT("NarrativeSubsystem exists"), Nar))
+    {
+        AbyssalTest::DestroyGameInstance(GI);
+        return false;
+    }
+
+    // Build a transient beat table
+    UDataTable* Table = NewObject<UDataTable>(GI);
+    Table->RowStruct = FAbyssalNarrativeBeat::StaticStruct();
+
+    FAbyssalNarrativeBeat BeatA;
+    BeatA.Caption = FText::FromString(TEXT("Test beat A"));
+    BeatA.Duration = 0.0f; // persists until next beat — keeps the test synchronous
+    BeatA.bPlayOnce = true;
+    Table->AddRow(TEXT("BEAT_TEST_A"), BeatA);
+
+    FAbyssalNarrativeBeat BeatB;
+    BeatB.Caption = FText::FromString(TEXT("Test beat B"));
+    BeatB.Duration = 0.0f;
+    BeatB.bPlayOnce = false;
+    Table->AddRow(TEXT("BEAT_TEST_B"), BeatB);
+
+    Nar->SetBeatTable(Table);
+
+    // Unknown beat is rejected
+    TestFalse(TEXT("Unknown beat returns false"), Nar->PlayBeat(TEXT("BEAT_DOES_NOT_EXIST")));
+
+    // First play starts immediately
+    TestTrue(TEXT("PlayBeat A succeeds"), Nar->PlayBeat(TEXT("BEAT_TEST_A")));
+    TestTrue(TEXT("A is playing"), Nar->IsPlaying());
+    TestEqual(TEXT("Active beat is A"), Nar->GetActiveBeatId(), FName(TEXT("BEAT_TEST_A")));
+    TestTrue(TEXT("A is marked played"), Nar->HasPlayed(TEXT("BEAT_TEST_A")));
+
+    // Play-once beat cannot start or queue again
+    TestFalse(TEXT("Replaying play-once A returns false"), Nar->PlayBeat(TEXT("BEAT_TEST_A")));
+
+    // A repeatable beat queues while A is active; queueing it twice is fine
+    TestTrue(TEXT("B queues while A plays"), Nar->PlayBeat(TEXT("BEAT_TEST_B")));
+    TestEqual(TEXT("A still active while B queued"), Nar->GetActiveBeatId(), FName(TEXT("BEAT_TEST_A")));
+
+    // StopAll clears active + queue
+    Nar->StopAll();
+    TestFalse(TEXT("Nothing playing after StopAll"), Nar->IsPlaying());
+
+    // Repeatable beat can play again after stopping
+    TestTrue(TEXT("B plays directly after StopAll"), Nar->PlayBeat(TEXT("BEAT_TEST_B")));
+    TestEqual(TEXT("Active beat is B"), Nar->GetActiveBeatId(), FName(TEXT("BEAT_TEST_B")));
+
+    Nar->StopAll();
     AbyssalTest::DestroyGameInstance(GI);
     return true;
 }
