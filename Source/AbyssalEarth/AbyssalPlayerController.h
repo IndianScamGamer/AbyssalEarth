@@ -59,6 +59,31 @@ protected:
     UPROPERTY(EditDefaultsOnly, Category = "Abyssal Earth|Input")
     TObjectPtr<UInputAction> ObservationModeAction;
 
+public:
+    // --- Debug console commands (PIE / development builds) ---
+    // Type into the ~ console. Exec routing reaches the PlayerController
+    // automatically; no CheatManager needed.
+
+    /** Complete the currently active objective. */
+    UFUNCTION(Exec)
+    void AbyssalCompleteObjective();
+
+    /** Add Count of ItemId to the inventory (default 1). */
+    UFUNCTION(Exec)
+    void AbyssalGiveItem(FName ItemId, int32 Count = 1);
+
+    /** Kill the player pawn to exercise the death → respawn flow. */
+    UFUNCTION(Exec)
+    void AbyssalKill();
+
+    /** Flush the active profile slot to disk. */
+    UFUNCTION(Exec)
+    void AbyssalSave();
+
+    /** Reload the active profile slot from disk. */
+    UFUNCTION(Exec)
+    void AbyssalLoad();
+
 private:
     // --- Input handlers (forward to current pawn) ---
 
