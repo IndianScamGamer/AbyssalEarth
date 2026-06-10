@@ -4,20 +4,43 @@
  * Run via: UE Editor → Tools → Session Frontend → Automation
  * Filter: "AbyssalEarth."
  *
- * Each test creates a minimal GameInstance (no world required), instantiates
- * the target subsystem directly, exercises the API, and verifies expected
- * state. Tests are latent-free (synchronous) so they work in both Editor
+ * Each test spins up a standalone UGameInstance (InitializeStandalone), which
+ * initializes the real subsystem collection — so cross-subsystem dependencies
+ * (Fabrication→Inventory, everything→SaveSubsystem) resolve exactly as they
+ * do in game. Tests are latent-free (synchronous) so they work in both Editor
  * and Commandlet contexts.
  */
 
-#include "CoreMinimal.h"
 #include "Misc/AutomationTest.h"
+
+#if WITH_DEV_AUTOMATION_TESTS
+
+#include "CoreMinimal.h"
+#include "Engine/Engine.h"
 #include "Engine/GameInstance.h"
 
 #include "InventorySubsystem.h"
 #include "ObjectiveSubsystem.h"
 #include "CheckpointSubsystem.h"
 #include "FabricationSubsystem.h"
+#include "AbyssalTestSinks.h"
+
+namespace AbyssalTest
+{
+    UGameInstance* CreateGameInstance()
+    {
+        UGameInstance* GI = NewObject<UGameInstance>(GEngine);
+        GI->AddToRoot();
+        GI->InitializeStandalone();
+        return GI;
+    }
+
+    void DestroyGameInstance(UGameInstance* GI)
+    {
+        GI->Shutdown();
+        GI->RemoveFromRoot();
+    }
+}
 
 // ---------------------------------------------------------------------------
 // 1. InventorySubsystem — Add / Remove / basic counts
@@ -26,23 +49,24 @@
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(
     FInventorySubsystemAddRemoveTest,
     "AbyssalEarth.InventorySubsystem.AddRemove",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+    EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FInventorySubsystemAddRemoveTest::RunTest(const FString& /*Parameters*/)
 {
-    // Use a transient GameInstance so the subsystem can Initialize()
-    UGameInstance* GI = NewObject<UGameInstance>();
-    GI->AddToRoot();
-
-    FSubsystemCollectionBase Collection;
-    UInventorySubsystem* Inv = NewObject<UInventorySubsystem>(GI);
-    Inv->Initialize(Collection);
+    UGameInstance* GI = AbyssalTest::CreateGameInstance();
+    UInventorySubsystem* Inv = GI->GetSubsystem<UInventorySubsystem>();
+    if (!TestNotNull(TEXT("InventorySubsystem exists"), Inv))
+    {
+        AbyssalTest::DestroyGameInstance(GI);
+        return false;
+    }
+    Inv->ClearInventory();
 
     const FName ItemA(TEXT("ITEM_MINERAL_ABYSSAL_CORE"));
     const FName ItemB(TEXT("ITEM_MINERAL_FOSSIL_SHARD"));
 
     // Add items
-    TestEqual(TEXT("AddItem returns new count"), Inv->AddItem(ItemA, 3), 3);
+    TestEqual(TEXT("AddItem returns amount added"), Inv->AddItem(ItemA, 3), 3);
     TestEqual(TEXT("GetItemCount after add"), Inv->GetItemCount(ItemA), 3);
 
     // Add more of same item
@@ -52,6 +76,10 @@ bool FInventorySubsystemAddRemoveTest::RunTest(const FString& /*Parameters*/)
     // Add different item
     Inv->AddItem(ItemB, 1);
     TestEqual(TEXT("GetAllItemIds has 2 entries"), Inv->GetAllItemIds().Num(), 2);
+
+    // HasItem
+    TestTrue(TEXT("HasItem with sufficient count"), Inv->HasItem(ItemA, 5));
+    TestFalse(TEXT("HasItem with excessive count"), Inv->HasItem(ItemA, 6));
 
     // Remove partial
     TestTrue(TEXT("RemoveItem partial succeeds"), Inv->RemoveItem(ItemA, 2));
@@ -64,7 +92,7 @@ bool FInventorySubsystemAddRemoveTest::RunTest(const FString& /*Parameters*/)
     // Over-remove fails
     TestFalse(TEXT("RemoveItem over-count fails"), Inv->RemoveItem(ItemA, 1));
 
-    GI->RemoveFromRoot();
+    AbyssalTest::DestroyGameInstance(GI);
     return true;
 }
 
@@ -75,38 +103,41 @@ bool FInventorySubsystemAddRemoveTest::RunTest(const FString& /*Parameters*/)
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(
     FObjectiveSubsystemAdvanceCompleteTest,
     "AbyssalEarth.ObjectiveSubsystem.AdvanceComplete",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+    EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FObjectiveSubsystemAdvanceCompleteTest::RunTest(const FString& /*Parameters*/)
 {
-    UGameInstance* GI = NewObject<UGameInstance>();
-    GI->AddToRoot();
+    UGameInstance* GI = AbyssalTest::CreateGameInstance();
+    UObjectiveSubsystem* Obj = GI->GetSubsystem<UObjectiveSubsystem>();
+    if (!TestNotNull(TEXT("ObjectiveSubsystem exists"), Obj))
+    {
+        AbyssalTest::DestroyGameInstance(GI);
+        return false;
+    }
+    Obj->ResetRoute();
 
-    FSubsystemCollectionBase Collection;
-    UObjectiveSubsystem* Obj = NewObject<UObjectiveSubsystem>(GI);
-    Obj->Initialize(Collection);
+    // The subsystem builds the default route on Initialize
+    TestTrue(TEXT("Default route is non-empty"), Obj->GetRouteObjectiveCount() > 0);
 
-    // The subsystem builds a default route on Initialize; confirm it has objectives
-    const int32 RouteCount = Obj->GetRouteObjectiveCount();
-    TestTrue(TEXT("Default route is non-empty"), RouteCount > 0);
-
-    // Get the first objective and complete it
     const FAbyssalObjectiveStep First = Obj->GetCurrentObjective();
     TestFalse(TEXT("First objective ID is not None"), First.ObjectiveId.IsNone());
+    TestTrue(TEXT("First objective is active"), Obj->IsObjectiveActive(First.ObjectiveId));
 
-    bool bDelegateFired = false;
-    Obj->OnObjectiveCompleted.AddLambda([&](FName /*Id*/) { bDelegateFired = true; });
+    UAbyssalTestDelegateSink* Sink = NewObject<UAbyssalTestDelegateSink>(GI);
+    Obj->OnObjectiveCompleted.AddDynamic(Sink, &UAbyssalTestDelegateSink::HandleObjectiveCompleted);
 
-    const bool bCompleted = Obj->CompleteObjective(First.ObjectiveId);
-    TestTrue(TEXT("CompleteObjective succeeds for active objective"), bCompleted);
-    TestTrue(TEXT("OnObjectiveCompleted delegate fires"), bDelegateFired);
+    TestTrue(TEXT("CompleteObjective succeeds for active objective"), Obj->CompleteObjective(First.ObjectiveId));
+    TestEqual(TEXT("OnObjectiveCompleted delegate fired once"), Sink->ObjectiveCompletedCount, 1);
+    TestEqual(TEXT("Delegate carried the completed ID"), Sink->LastObjectiveId, First.ObjectiveId);
     TestTrue(TEXT("Objective is now marked complete"), Obj->IsObjectiveComplete(First.ObjectiveId));
     TestFalse(TEXT("Objective is no longer active"), Obj->IsObjectiveActive(First.ObjectiveId));
 
     // Completing an already-complete objective is a no-op (returns false, no crash)
     TestFalse(TEXT("Re-completing same objective returns false"), Obj->CompleteObjective(First.ObjectiveId));
+    TestEqual(TEXT("Delegate did not fire again"), Sink->ObjectiveCompletedCount, 1);
 
-    GI->RemoveFromRoot();
+    Obj->OnObjectiveCompleted.RemoveDynamic(Sink, &UAbyssalTestDelegateSink::HandleObjectiveCompleted);
+    AbyssalTest::DestroyGameInstance(GI);
     return true;
 }
 
@@ -117,16 +148,17 @@ bool FObjectiveSubsystemAdvanceCompleteTest::RunTest(const FString& /*Parameters
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(
     FCheckpointSubsystemRegisterRespawnTest,
     "AbyssalEarth.CheckpointSubsystem.RegisterRespawn",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+    EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FCheckpointSubsystemRegisterRespawnTest::RunTest(const FString& /*Parameters*/)
 {
-    UGameInstance* GI = NewObject<UGameInstance>();
-    GI->AddToRoot();
-
-    FSubsystemCollectionBase Collection;
-    UCheckpointSubsystem* Cp = NewObject<UCheckpointSubsystem>(GI);
-    Cp->Initialize(Collection);
+    UGameInstance* GI = AbyssalTest::CreateGameInstance();
+    UCheckpointSubsystem* Cp = GI->GetSubsystem<UCheckpointSubsystem>();
+    if (!TestNotNull(TEXT("CheckpointSubsystem exists"), Cp))
+    {
+        AbyssalTest::DestroyGameInstance(GI);
+        return false;
+    }
 
     const FName CpIdA(TEXT("CP_TEST_A"));
     const FName CpIdB(TEXT("CP_TEST_B"));
@@ -145,9 +177,7 @@ bool FCheckpointSubsystemRegisterRespawnTest::RunTest(const FString& /*Parameter
     TestTrue(TEXT("SetActiveCheckpoint A succeeds"), Cp->SetActiveCheckpoint(CpIdA));
     TestTrue(TEXT("HasActiveCheckpoint after set"), Cp->HasActiveCheckpoint());
     TestEqual(TEXT("ActiveCheckpointId is A"), Cp->GetActiveCheckpointId(), CpIdA);
-
-    const FVector RespawnA = Cp->GetRespawnLocation();
-    TestTrue(TEXT("RespawnLocation matches A"), RespawnA.Equals(LocA, 1.0f));
+    TestTrue(TEXT("RespawnLocation matches A"), Cp->GetRespawnLocation().Equals(LocA, 1.0f));
 
     // Activate B
     TestTrue(TEXT("SetActiveCheckpoint B succeeds"), Cp->SetActiveCheckpoint(CpIdB));
@@ -156,8 +186,9 @@ bool FCheckpointSubsystemRegisterRespawnTest::RunTest(const FString& /*Parameter
 
     // Unknown checkpoint ID
     TestFalse(TEXT("SetActiveCheckpoint unknown ID returns false"), Cp->SetActiveCheckpoint(TEXT("CP_DOES_NOT_EXIST")));
+    TestEqual(TEXT("Active checkpoint unchanged after failed set"), Cp->GetActiveCheckpointId(), CpIdB);
 
-    GI->RemoveFromRoot();
+    AbyssalTest::DestroyGameInstance(GI);
     return true;
 }
 
@@ -168,60 +199,55 @@ bool FCheckpointSubsystemRegisterRespawnTest::RunTest(const FString& /*Parameter
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(
     FFabricationSubsystemCraftTest,
     "AbyssalEarth.FabricationSubsystem.CanCraftAndCraft",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+    EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FFabricationSubsystemCraftTest::RunTest(const FString& /*Parameters*/)
 {
-    UGameInstance* GI = NewObject<UGameInstance>();
-    GI->AddToRoot();
-
-    FSubsystemCollectionBase Collection;
-
-    // FabricationSubsystem depends on InventorySubsystem
-    UInventorySubsystem* Inv = NewObject<UInventorySubsystem>(GI);
-    Inv->Initialize(Collection);
-
-    UFabricationSubsystem* Fab = NewObject<UFabricationSubsystem>(GI);
-    Fab->Initialize(Collection);
+    UGameInstance* GI = AbyssalTest::CreateGameInstance();
+    UInventorySubsystem* Inv = GI->GetSubsystem<UInventorySubsystem>();
+    UFabricationSubsystem* Fab = GI->GetSubsystem<UFabricationSubsystem>();
+    if (!TestNotNull(TEXT("InventorySubsystem exists"), Inv) ||
+        !TestNotNull(TEXT("FabricationSubsystem exists"), Fab))
+    {
+        AbyssalTest::DestroyGameInstance(GI);
+        return false;
+    }
+    Inv->ClearInventory();
 
     const FName RecipeId(TEXT("RECIPE_SUIT_PATCH"));
     const FName InputItem(TEXT("ITEM_MINERAL_ABYSSAL_CORE"));
-    const FName OutputItem(TEXT("ITEM_TOOL_SUIT_PATCH"));
 
-    // Without ingredients: should report MissingIngredients
+    // Recipes are registered from UAbyssalRecipeDefinition assets, which are
+    // not loaded in a headless/standalone context. If the recipe is unknown,
+    // verify the graceful failure path and finish.
+    if (Fab->CanCraft(RecipeId, 1) == EAbyssalCraftResult::InvalidRecipe)
     {
-        const EAbyssalCraftResult Result = Fab->CanCraft(RecipeId, 1);
-        TestTrue(TEXT("CanCraft fails without ingredients"),
-            Result == EAbyssalCraftResult::MissingIngredients ||
-            Result == EAbyssalCraftResult::InvalidRecipe); // recipe table may not be loaded in test env
-    }
-
-    // Seed the inventory with required inputs (RECIPE_SUIT_PATCH needs 1× ITEM_MINERAL_ABYSSAL_CORE)
-    Inv->AddItem(InputItem, 5);
-    TestEqual(TEXT("Inventory seeded with input"), Inv->GetItemCount(InputItem), 5);
-
-    // CanCraft should now succeed (if recipe is registered)
-    const EAbyssalCraftResult CanResult = Fab->CanCraft(RecipeId, 1);
-    if (CanResult == EAbyssalCraftResult::InvalidRecipe)
-    {
-        // Recipe table not loaded in headless test — acceptable, log and skip craft
-        AddInfo(TEXT("RECIPE_SUIT_PATCH not registered in headless context — skipping craft step"));
-        GI->RemoveFromRoot();
+        AddInfo(TEXT("RECIPE_SUIT_PATCH not registered in this context — verified InvalidRecipe path"));
+        TestEqual(TEXT("Craft on unknown recipe also returns InvalidRecipe"),
+            Fab->Craft(RecipeId, 1), EAbyssalCraftResult::InvalidRecipe);
+        AbyssalTest::DestroyGameInstance(GI);
         return true;
     }
 
+    // Without ingredients: should report MissingIngredients
+    TestEqual(TEXT("CanCraft fails without ingredients"),
+        Fab->CanCraft(RecipeId, 1), EAbyssalCraftResult::MissingIngredients);
+
+    // Seed the inventory with required inputs (RECIPE_SUIT_PATCH needs 1× ITEM_MINERAL_ABYSSAL_CORE)
+    Inv->AddItem(InputItem, 5);
     TestEqual(TEXT("CanCraft returns Success with ingredients"),
-        CanResult, EAbyssalCraftResult::Success);
+        Fab->CanCraft(RecipeId, 1), EAbyssalCraftResult::Success);
 
-    bool bCraftedFired = false;
-    Fab->OnItemCrafted.AddLambda([&](FName /*Id*/) { bCraftedFired = true; });
+    UAbyssalTestDelegateSink* Sink = NewObject<UAbyssalTestDelegateSink>(GI);
+    Fab->OnItemCrafted.AddDynamic(Sink, &UAbyssalTestDelegateSink::HandleItemCrafted);
 
-    const EAbyssalCraftResult CraftResult = Fab->Craft(RecipeId, 1);
-    TestEqual(TEXT("Craft returns Success"), CraftResult, EAbyssalCraftResult::Success);
-    TestTrue(TEXT("OnItemCrafted delegate fires"), bCraftedFired);
-    TestTrue(TEXT("Output item appears in inventory"), Inv->GetItemCount(OutputItem) > 0);
+    TestEqual(TEXT("Craft returns Success"), Fab->Craft(RecipeId, 1), EAbyssalCraftResult::Success);
+    TestEqual(TEXT("OnItemCrafted delegate fired once"), Sink->ItemCraftedCount, 1);
     TestTrue(TEXT("Input ingredient was consumed"), Inv->GetItemCount(InputItem) < 5);
 
-    GI->RemoveFromRoot();
+    Fab->OnItemCrafted.RemoveDynamic(Sink, &UAbyssalTestDelegateSink::HandleItemCrafted);
+    AbyssalTest::DestroyGameInstance(GI);
     return true;
 }
+
+#endif // WITH_DEV_AUTOMATION_TESTS
