@@ -25,7 +25,9 @@ float AAbyssalRiftActor::GetChargePercent() const
     {
         return CurrentState == EAbyssalRiftState::Open || CurrentState == EAbyssalRiftState::Stable ? 1.0f : 0.0f;
     }
-    return FMath::Clamp(ChargeElapsed / ChargeDuration, 0.0f, 1.0f);
+    // Progress comes straight from the charge timer; the actor never ticks.
+    const float Elapsed = GetWorldTimerManager().GetTimerElapsed(ChargeTimer);
+    return FMath::Clamp(Elapsed / ChargeDuration, 0.0f, 1.0f);
 }
 
 bool AAbyssalRiftActor::CanInteract_Implementation(AActor* Interactor)

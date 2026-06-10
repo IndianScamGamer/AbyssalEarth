@@ -104,6 +104,5 @@ private:
     UPROPERTY()
     float CurrentPower = 0.0f;
 
-    float ChargeElapsed = 0.0f;
     FTimerHandle ChargeTimer;
 };
