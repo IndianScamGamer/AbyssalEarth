@@ -112,6 +112,15 @@ void AAbyssalCreature::OnPerceptionUpdated(const TArray<AActor*>& UpdatedActors)
             continue;
         }
 
+        // Only the player provokes a state change. Sight affiliation reports
+        // neutrals, which includes other creatures — without this filter two
+        // patrolling creatures perceive each other and escalate indefinitely.
+        const APawn* AsPawn = Cast<APawn>(Actor);
+        if (!AsPawn || !AsPawn->IsPlayerControlled())
+        {
+            continue;
+        }
+
         FActorPerceptionBlueprintInfo PerceptionInfo;
         PerceptionComponent->GetActorsPerception(Actor, PerceptionInfo);
 
