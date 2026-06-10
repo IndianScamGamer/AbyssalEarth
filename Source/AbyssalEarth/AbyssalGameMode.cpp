@@ -1,6 +1,7 @@
 #include "AbyssalGameMode.h"
 #include "AbyssalPlayerCharacter.h"
 #include "AbyssalPlayerController.h"
+#include "AbyssalSaveSubsystem.h"
 #include "NarrativeSubsystem.h"
 #include "Engine/DataTable.h"
 
@@ -13,6 +14,20 @@ AAbyssalGameMode::AAbyssalGameMode()
 void AAbyssalGameMode::BeginPlay()
 {
     Super::BeginPlay();
+
+    // Load the profile slot once per session so checkpoint/inventory/objective
+    // state restores on boot. Map transitions keep the already-active slot
+    // (HasActiveSlot guard) instead of re-reading disk and clobbering memory.
+    if (UGameInstance* GI = GetGameInstance())
+    {
+        if (UAbyssalSaveSubsystem* SaveSub = GI->GetSubsystem<UAbyssalSaveSubsystem>())
+        {
+            if (!SaveSub->HasActiveSlot())
+            {
+                SaveSub->LoadSlot(0);
+            }
+        }
+    }
 
     if (NarrativeBeatTable)
     {
