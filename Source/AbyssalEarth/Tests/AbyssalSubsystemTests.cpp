@@ -23,6 +23,7 @@
 #include "ObjectiveSubsystem.h"
 #include "CheckpointSubsystem.h"
 #include "FabricationSubsystem.h"
+#include "AbyssalSaveSubsystem.h"
 #include "AbyssalTestSinks.h"
 
 namespace AbyssalTest
@@ -246,6 +247,61 @@ bool FFabricationSubsystemCraftTest::RunTest(const FString& /*Parameters*/)
     TestTrue(TEXT("Input ingredient was consumed"), Inv->GetItemCount(InputItem) < 5);
 
     Fab->OnItemCrafted.RemoveDynamic(Sink, &UAbyssalTestDelegateSink::HandleItemCrafted);
+    AbyssalTest::DestroyGameInstance(GI);
+    return true;
+}
+
+// ---------------------------------------------------------------------------
+// 5. SaveSubsystem — full save → load round-trip through the provider pipeline
+// ---------------------------------------------------------------------------
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(
+    FSaveSubsystemRoundTripTest,
+    "AbyssalEarth.SaveSubsystem.RoundTrip",
+    EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::ProductFilter)
+
+bool FSaveSubsystemRoundTripTest::RunTest(const FString& /*Parameters*/)
+{
+    // High slot index so a developer's real profile (slot 0) is never touched
+    constexpr int32 TestSlot = 93;
+
+    UGameInstance* GI = AbyssalTest::CreateGameInstance();
+    UAbyssalSaveSubsystem* SaveSub = GI->GetSubsystem<UAbyssalSaveSubsystem>();
+    UInventorySubsystem* Inv = GI->GetSubsystem<UInventorySubsystem>();
+    UCheckpointSubsystem* Cp = GI->GetSubsystem<UCheckpointSubsystem>();
+    if (!TestNotNull(TEXT("SaveSubsystem exists"), SaveSub) ||
+        !TestNotNull(TEXT("InventorySubsystem exists"), Inv) ||
+        !TestNotNull(TEXT("CheckpointSubsystem exists"), Cp))
+    {
+        AbyssalTest::DestroyGameInstance(GI);
+        return false;
+    }
+
+    SaveSub->DeleteSlot(TestSlot); // clean start if a previous run aborted
+
+    // Fresh slot, then build some state
+    SaveSub->LoadSlot(TestSlot);
+    const FName Item(TEXT("ITEM_MINERAL_ABYSSAL_CORE"));
+    const FName CpId(TEXT("CP_ROUNDTRIP"));
+    Inv->ClearInventory();
+    Inv->AddItem(Item, 7);
+    Cp->RegisterCheckpoint(CpId, FVector(1.f, 2.f, 3.f), TEXT("PRO_001"));
+    Cp->SetActiveCheckpoint(CpId);
+
+    SaveSub->SaveActiveSlot();
+    TestTrue(TEXT("Save file exists after SaveActiveSlot"), SaveSub->DoesSaveExist(TestSlot));
+
+    // Wreck the in-memory state, then reload from disk
+    Inv->ClearInventory();
+    TestEqual(TEXT("State cleared before reload"), Inv->GetItemCount(Item), 0);
+
+    SaveSub->LoadSlot(TestSlot);
+    TestEqual(TEXT("Inventory restored from disk"), Inv->GetItemCount(Item), 7);
+    TestEqual(TEXT("Active checkpoint ID restored from disk"), Cp->GetActiveCheckpointId(), CpId);
+
+    SaveSub->DeleteSlot(TestSlot);
+    TestFalse(TEXT("Test slot deleted"), SaveSub->DoesSaveExist(TestSlot));
+
     AbyssalTest::DestroyGameInstance(GI);
     return true;
 }
