@@ -1,70 +1,75 @@
 # Editor Guide: WBP_VitalsHUD
 
-Widget Blueprint subclass of `UAbyssalHUDWidget` (the existing C++ HUD base). Displays the five vital readouts bound through `UAbyssalHUDSubsystem`.
+Widget Blueprint subclass of `UAbyssalVitalsWidget` (C++ base in
+`Source/AbyssalEarth/AbyssalVitalsWidget.h`). The base class binds
+`UAbyssalHUDSubsystem::OnVitalsUpdated` for you and pushes an initial
+snapshot on construct — the Blueprint only has to implement **one event**
+and lay out the bars.
+
+> **Scale note:** `HealthPercent` / `OxygenPercent` / `StaminaPercent` are
+> **0..1** fractions. `HeatPercent` / `PressurePercent` are **0..100** —
+> divide by 100 before feeding a ProgressBar.
 
 ## 1. Create the Widget Blueprint
 
 1. Content Browser → `Content/UI/` → **User Interface → Widget Blueprint**
-2. Parent class: **AbyssalHUDWidget**
+2. Pick parent class: **AbyssalVitalsWidget**
 3. Name: `WBP_VitalsHUD`
 
 ## 2. Layout (Designer panel)
 
-Recommended anchor: stretch-fill the full screen, then place sub-elements with anchors at screen corners/edges.
+Root: a `Canvas Panel` stretched full-screen; place sub-elements with
+corner/edge anchors.
 
 ### Health Bar
-- Widget: `UProgressBar` named `PB_Health`
-- Anchor: bottom-left corner `(0.02, 0.88)`, size `(200, 16)`
+- Widget: `ProgressBar` named `PB_Health`
+- Anchor: bottom-left `(0.02, 0.88)`, size `(200, 16)`
 - Fill Color: `(0.8, 0.1, 0.1, 1)` (red)
-- Percent binding: `Get Health Percent` from `UAbyssalHUDSubsystem`
 
-### Oxygen Meter (circular)
-- Widget: `UCircularThrobber` or a custom radial `UImage` driven by material
-- Anchor: bottom-left near health bar
-- Bind fill percentage to `Get Oxygen Percent`
-- Below 20%: trigger a **pulsing** animation (Timeline → opacity 1→0.3→1, 0.5s loop)
+### Oxygen Meter
+- Widget: `ProgressBar` named `PB_Oxygen` (or a radial material on an `Image`)
+- Anchor: bottom-left, above the health bar
+- Fill Color: `(0.4, 0.8, 1.0, 1)` (cyan)
+- Create a widget animation `Anim_OxygenWarning`: opacity 1 → 0.3 → 1 over 0.5s, looping
 
 ### Stamina Bar
-- Widget: `UProgressBar` named `PB_Stamina`
+- Widget: `ProgressBar` named `PB_Stamina`
 - Fill Color: `(0.2, 0.6, 1.0, 1)` (blue-white)
-- Bind percent to `Get Stamina Percent`
-- Visibility binding: **Collapsed** when percent ≥ 0.95 (fades out when full)
 
 ### Temperature Indicator (secondary)
-- Widget: `UTextBlock` + `UProgressBar` named `PB_Temperature`
+- Widget: `ProgressBar` named `PB_Temperature`
 - Fill Color: `(1.0, 0.4, 0.0, 1)` (orange)
-- Visibility: **Collapsed** unless `Get Heat Percent > 0.1`
+- Default Visibility: **Collapsed**
 
 ### Pressure Indicator (secondary)
-- Widget: `UProgressBar` named `PB_Pressure`
+- Widget: `ProgressBar` named `PB_Pressure`
 - Fill Color: `(0.5, 0.0, 0.8, 1)` (purple)
-- Visibility: **Collapsed** unless `Get Pressure Percent > 0.05`
+- Default Visibility: **Collapsed**
 
-## 3. Bind Data (Event Graph)
+## 3. Implement the event (Event Graph)
 
-`UAbyssalHUDWidget` calls these BlueprintImplementableEvents — implement them:
+Implement the single BlueprintImplementableEvent from the base class:
 
 ```
-Event OnHealthChanged (HealthComp, NewHealth, Delta)
-  → Set Percent (PB_Health, NewHealth / HealthComp.MaxHealth)
-  → [optional] Play Hit Flash animation if Delta < 0
+Event On Vitals Updated (Readout: AbyssalVitalReadout)
+  → PB_Health.SetPercent(Readout.HealthPercent)
+  → PB_Oxygen.SetPercent(Readout.OxygenPercent)
+  → PB_Stamina.SetPercent(Readout.StaminaPercent)
+  → PB_Temperature.SetPercent(Readout.HeatPercent / 100.0)
+  → PB_Pressure.SetPercent(Readout.PressurePercent / 100.0)
 
-Event OnOxygenChanged (OxygenPercent, bSubmerged)
-  → Set Percent (oxygen meter, OxygenPercent)
-  → Set Visibility (oxygen warning anim, OxygenPercent < 0.2 ? Visible : Collapsed)
-
-Event OnStaminaChanged (StaminaPercent)
-  → Set Percent (PB_Stamina, StaminaPercent)
-  → Set Visibility (PB_Stamina, StaminaPercent < 0.95 ? Visible : Collapsed)
-
-Event OnTemperatureChanged (HeatPercent, bInHeatZone)
-  → Set Percent (PB_Temperature, HeatPercent)
-  → Set Visibility (temperature row, HeatPercent > 0.1 ? Visible : Collapsed)
-
-Event OnPressureChanged (PressurePercent, bAboveRating)
-  → Set Percent (PB_Pressure, PressurePercent)
-  → Set Visibility (pressure row, PressurePercent > 0.05 ? Visible : Collapsed)
+  // Warnings / conditional visibility
+  → If Readout.OxygenPercent < 0.2 AND Readout.bSubmerged:
+        Play Animation (Anim_OxygenWarning, looping)
+    Else: Stop Animation (Anim_OxygenWarning)
+  → PB_Stamina.SetVisibility(Readout.StaminaPercent >= 0.95 ? Collapsed : Visible)
+  → PB_Temperature.SetVisibility(Readout.HeatPercent > 10.0 ? Visible : Collapsed)
+  → PB_Pressure.SetVisibility(Readout.PressurePercent > 5.0 ? Visible : Collapsed)
+  → If Readout.bDead: Play Animation (Anim_DeathFade) [optional]
 ```
+
+Useful flags on the readout struct: `bSubmerged`, `bOverheating`,
+`bAbovePressureRating`, `bExhausted`, `bDead`.
 
 ## 4. Add to Viewport
 
@@ -79,4 +84,8 @@ Event Begin Play
 
 ## 5. Verify
 
-PIE → HUD appears at bottom-left. Take damage → health bar decreases. Dive under water volume → oxygen meter starts depleting. Sprint → stamina bar appears and drains.
+PIE → HUD appears at bottom-left with full bars (initial snapshot, no vital
+change needed). Take damage → health bar decreases. Enter a water volume →
+oxygen depletes; below 20% the warning animation pulses. Sprint → stamina
+drains and the bar becomes visible. Stand in a heat zone → temperature bar
+appears and fills.
