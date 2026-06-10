@@ -1,8 +1,10 @@
 #include "AbyssalGameplayLibrary.h"
 #include "AbyssalAudioCueSubsystem.h"
+#include "AbyssalSaveSubsystem.h"
 #include "BeaconSubsystem.h"
 #include "DiscoverySubsystem.h"
 #include "ObjectiveSubsystem.h"
+#include "WorldFlowSubsystem.h"
 #include "Engine/Engine.h"
 #include "Engine/GameInstance.h"
 #include "Engine/World.h"
@@ -43,4 +45,16 @@ UAbyssalAudioCueSubsystem* UAbyssalGameplayLibrary::GetAudioCueSubsystem(const U
 {
     UGameInstance* GameInstance = ResolveGameInstance(WorldContextObject);
     return GameInstance ? GameInstance->GetSubsystem<UAbyssalAudioCueSubsystem>() : nullptr;
+}
+
+UAbyssalSaveSubsystem* UAbyssalGameplayLibrary::GetSaveSubsystem(const UObject* WorldContextObject)
+{
+    UGameInstance* GameInstance = ResolveGameInstance(WorldContextObject);
+    return GameInstance ? GameInstance->GetSubsystem<UAbyssalSaveSubsystem>() : nullptr;
+}
+
+UWorldFlowSubsystem* UAbyssalGameplayLibrary::GetWorldFlowSubsystem(const UObject* WorldContextObject)
+{
+    UGameInstance* GameInstance = ResolveGameInstance(WorldContextObject);
+    return GameInstance ? GameInstance->GetSubsystem<UWorldFlowSubsystem>() : nullptr;
 }
