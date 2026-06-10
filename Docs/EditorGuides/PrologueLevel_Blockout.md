@@ -97,9 +97,19 @@ Alternatively add a **WaterBodyOcean** actor and rely on the depth-tracking in `
 
 ## 10. Narrative Trigger
 
-At the top of the Airlock stairs, place a `BP_NarrativeTriggerActor` (overlap box):
-- **Beat Id to Play**: `NAR_PRO_BRIEFING`
-- **Trigger Once**: `true`
+First create `BP_NarrativeTriggerActor` (one-time setup, reused in every level):
+
+1. Content Browser → `Content/Blueprints/` → **Blueprint Class** → parent **Actor**
+2. Add a **Box Collision** component and make it the root (drag onto DefaultSceneRoot)
+   - Collision Preset: `Trigger` (Overlap Pawn)
+3. Add a **Narrative Trigger** component (`UNarrativeTriggerComponent`)
+   - It auto-fires when a pawn overlaps the owner's primitive root
+     (`bTriggerOnOverlap` and `bPawnOnly` default to true)
+
+Then place one at the top of the Airlock stairs:
+- **Beat Id**: `NAR_PRO_BRIEFING`
+- One-shot behaviour comes from the beat itself (`bPlayOnce` in the beat
+  table row), not from the trigger — no extra setting needed.
 
 ## 11. Build Lighting
 
