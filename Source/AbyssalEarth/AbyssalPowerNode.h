@@ -108,6 +108,11 @@ protected:
 private:
     void PropagatePower(float Power, int32 Depth);
 
+    /** Called by upstream nodes via PropagatePower. Updates this node's
+     *  contribution map and recalculates CurrentPower as the clamped sum
+     *  of all active inputs (fixes last-writer-wins in multi-source networks). */
+    void ReceivePower(AAbyssalPowerNode* FromNode, float Power);
+
     UPROPERTY()
     float CurrentPower = 0.0f;
 
@@ -116,4 +121,7 @@ private:
 
     // Visited guard to prevent infinite loops in cyclic graphs
     bool bPropagating = false;
+
+    // Per-source power contributions (used by Relay/Sink nodes only)
+    TMap<TObjectPtr<AAbyssalPowerNode>, float> InputContributions;
 };

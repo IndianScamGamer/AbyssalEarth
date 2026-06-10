@@ -1,4 +1,5 @@
 #include "AbyssalPlayerCharacter.h"
+#include "AbyssalGameMode.h"
 #include "AbyssalHealthComponent.h"
 #include "OxygenComponent.h"
 #include "StaminaComponent.h"
@@ -103,11 +104,26 @@ void AAbyssalPlayerCharacter::Input_SprintStop()
 
 void AAbyssalPlayerCharacter::HandleDeath(UAbyssalHealthComponent* /*HealthComp*/)
 {
-    // Stop all exertion and movement; the game mode drives the respawn flow
+    // Stop all exertion and movement; schedule respawn via GameMode after RespawnDelay
     ApplySprintState(false);
     GetCharacterMovement()->StopMovementImmediately();
     GetCharacterMovement()->DisableMovement();
     BP_OnDeath();
+
+    GetWorldTimerManager().SetTimer(
+        RespawnTimerHandle,
+        this,
+        &AAbyssalPlayerCharacter::TriggerRespawnFromGameMode,
+        RespawnDelay,
+        false);
+}
+
+void AAbyssalPlayerCharacter::TriggerRespawnFromGameMode()
+{
+    if (AAbyssalGameMode* GM = GetWorld()->GetAuthGameMode<AAbyssalGameMode>())
+    {
+        GM->RespawnPlayer();
+    }
 }
 
 void AAbyssalPlayerCharacter::RespawnAtCheckpoint()

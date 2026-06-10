@@ -69,6 +69,10 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Narrative")
     void StopAll();
 
+    /** Fire the post-credits double-pulse sensor beat (called by AAbyssalRiftActor after rift opens). */
+    UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Narrative")
+    void TriggerPostCreditsHook();
+
     UFUNCTION(BlueprintPure, Category = "Abyssal Earth|Narrative")
     bool HasPlayed(FName BeatId) const;
 

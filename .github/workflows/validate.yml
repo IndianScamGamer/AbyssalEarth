@@ -1,0 +1,70 @@
+name: AbyssalEarth Data Validation
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  csv-validate:
+    name: CSV / Cross-reference Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run data validator
+        run: python Tools/validate_data.py
+
+  header-check:
+    name: C++ Header Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install clang-format
+        run: sudo apt-get install -y clang-format
+
+      - name: Check format on changed .h/.cpp files
+        run: |
+          # Get changed C++ files vs. main (or all files on push to main)
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- '*.h' '*.cpp' | head -200)
+          else
+            FILES=$(git diff --name-only HEAD~1 HEAD -- '*.h' '*.cpp' | head -200)
+          fi
+
+          if [ -z "$FILES" ]; then
+            echo "No C++ files changed — skipping format check."
+            exit 0
+          fi
+
+          FAIL=0
+          for f in $FILES; do
+            if [ -f "$f" ]; then
+              clang-format --dry-run --Werror "$f" || FAIL=1
+            fi
+          done
+          exit $FAIL
+
+  doc-check:
+    name: Documentation Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for TODO/FIXME in shipped docs
+        run: |
+          # validate_data.py already covers this, but keep a fast grep fail here too
+          if grep -rn --include="*.md" -E "\b(TODO|FIXME)\b" Docs/; then
+            echo "ERROR: TODO/FIXME markers found in Docs/. Remove or resolve them before merging."
+            exit 1
+          fi
+          echo "No TODO/FIXME markers in Docs/."
