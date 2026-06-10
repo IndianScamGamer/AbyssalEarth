@@ -22,6 +22,8 @@ class ABYSSALEARTH_API AFabricatorStation : public AActor, public IAbyssalIntera
 public:
     AFabricatorStation();
 
+    virtual void BeginPlay() override;
+
     // IAbyssalInteractable
     virtual bool CanInteract_Implementation(AActor* Interactor) override;
     virtual FText GetInteractionPrompt_Implementation() override;
