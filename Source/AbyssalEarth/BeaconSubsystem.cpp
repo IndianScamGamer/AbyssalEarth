@@ -73,6 +73,24 @@ void UBeaconSubsystem::RegisterBeacon(ABeaconActor* Beacon)
     SaveBeacons();
 }
 
+bool UBeaconSubsystem::UpdateBeaconColor(ABeaconActor* Beacon)
+{
+    if (!Beacon)
+    {
+        return false;
+    }
+
+    const int32 ExistingIndex = FindBeaconIndex(Beacon->GetBeaconId());
+    if (ExistingIndex == INDEX_NONE)
+    {
+        return false;
+    }
+
+    SavedBeacons[ExistingIndex].LightColor = Beacon->GetBeaconLightColor();
+    SaveBeacons();
+    return true;
+}
+
 bool UBeaconSubsystem::RemoveBeacon(ABeaconActor* Beacon)
 {
     if (!Beacon)

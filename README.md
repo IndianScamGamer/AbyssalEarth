@@ -1,214 +1,298 @@
-# Abyssal Earth
+# AbyssalEarth
 
-**Abyssal Earth** is an Unreal Engine 5 first-person survival-exploration adventure that begins with humanity's first major expedition into Earth's abyssal plains, then strands the player in impossible subterranean worlds filled with alien climates, monsters, ancient technology, luminous caverns, and unknown physical systems.
+A single-player survival-exploration game built in Unreal Engine 5. You are a structural engineer sent to verify a robot-built elevator shaft into Earth's abyssal plains. The verification does not go to plan.
 
-The project prioritizes awe, atmosphere, traversal, survival, discovery, and visual fidelity over shooter-first combat. The player is not conquering the underworld. They are trying to survive long enough to understand alien technology, learn to use it, build with it, and eventually create a rift back to the surface.
+## Project Status
 
-![Luminous Rift core reference](Content/ArtDirection/References/luminous_rift_core_reference.png)
+**Backend: feature-complete.** All C++ gameplay systems are authored (see `Docs/BACKEND_SYSTEMS_ROADMAP.md`).  
+**Story: complete.** Full narrative script, story bible, and ending design (see `Docs/Story/`).  
+**Art assets: Blender scripts complete.** All 7 procedural generation scripts are in `ArtSource/Blender/Scripts/` — run them inside Blender to export FBX packs to `Content/ArtSourceExports/`.  
+**Remaining work** is editor-side: Blueprint subclasses, UMG layouts, level blockouts, animation, and audio assets.
 
-## Current Focus
+---
 
-The first playable map is **The Luminous Rift**: a colossal vertical cavern built around the core reference image above.
+## Concept Art Gallery
 
-The target composition is a dark subterranean rift where carved rock and ancient machine architecture frame a suspended blue-white energy sphere. Gold beam networks connect the orb to hexagonal collector panels. Blue crystals grow from black basalt and buried machinery. Suspended bridges, ledges, distant towers, hanging slabs, and a monumental gate wall sell the sense that the player is tiny inside an ancient system far larger than the visible map.
+### Key Reference — Luminous Rift Core
+![Luminous Rift Core](Content/ArtDirection/References/luminous_rift_core_reference.png)
 
-This reference is treated as the source of truth for the first map:
+---
 
-`Content/ArtDirection/References/luminous_rift_core_reference.png`
+### Prologue — Submarine & Descent
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Intro/intro_submarine_wide_concept.png) | ![](Content/ArtDirection/Concepts/Intro/intro_submarine_close_concept.png) | ![](Content/ArtDirection/Concepts/Intro/submarine_interior_command_concept.png) |
+| Submarine Wide | Submarine Close | Command Interior |
 
-## Design Pillars
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Environments/elevator_shaft_wide_concept.png) | ![](Content/ArtDirection/Concepts/Environments/elevator_shaft_mechanism_detail_concept.png) | ![](Content/ArtDirection/Concepts/Environments/crashed_elevator_exterior_concept.png) |
+| Elevator Shaft Wide | Mechanism Detail | Crashed Exterior |
 
-1. **Beauty first**: every major space should be screenshot-worthy.
-2. **Exploration over combat**: tension comes from scale, terrain, darkness, unknown systems, and environmental hazards.
-3. **Discovery has weight**: scanning, naming, mapping, journaling, and revisiting findings should matter.
-4. **Human smallness**: the player is capable, but visibly tiny against the cavern worlds.
-5. **Natural mystery**: alien spaces should still feel geologic, ancient, and physically grounded.
-6. **Story ends at the cavern**: after the opening crash and Luminous Rift reveal, normal dialogue/cutscene storytelling stops. The rest is survival, discovery, experimentation, and escape.
+| | |
+|--|--|
+| ![](Content/ArtDirection/Concepts/Environments/crashed_elevator_interior_concept.png) | ![](Content/ArtDirection/Concepts/Intro/expedition_wall_photo_concept.png) |
+| Crashed Interior | Expedition Wall |
 
-## Story Premise
+---
 
-The game opens with a submarine alone on a flat, empty ocean above Earth's abyssal plains. Inside, the player wears the diving/exploration suit they will upgrade throughout the game. A wall display reads **FIRST MAJOR EXPLORATION EXPEDITION OF EARTH'S ABYSSAL PLAINS** and explains that the autonomous Helios robot fleet has built an elevator shaft into the abyssal plain for human verification.
+### Act 1 — Luminous Rift
 
-The player descends, docks with the shaft, passes humanoid Helios robots who warn of an unresolved anomaly, and enters the elevator anyway. The descent is calm until the system fails, the cable cuts, and the elevator falls. The player wakes in the crushed elevator, pries the doors open, and steps into the Luminous Rift.
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-001.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-002.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-003.png) |
+| LR-001 | LR-002 | LR-003 |
 
-The player's final authored reaction is: **Oh... shit.**
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-004.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-005.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-006.png) |
+| LR-004 | LR-005 | LR-006 |
 
-The objective becomes **SURVIVE**. From there, normal story delivery is over.
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-007.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-008.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-009.png) |
+| LR-007 | LR-008 | LR-009 |
 
-The long-term objective arc becomes: survive, discover alien technology, understand how to use it, fabricate increasingly advanced devices, and eventually create a rift/portal back to the surface. End credits show the player making it out, the discoveries being announced, and future scientific progress.
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-010.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-011.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-012.png) |
+| LR-010 | LR-011 | LR-012 |
 
-## First Playable Route
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Elevator_Shaft_User_Made_Do_Not_Modify/LR-013.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-014.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-015.png) |
+| LR-013 | LR-014 | LR-015 |
 
-The current vertical slice route is:
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-016.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-017.png) | ![](Content/ArtDirection/Concepts/Luminous_Rift/LR-018.png) |
+| LR-016 | LR-017 | LR-018 |
 
-1. **Descent Elevator**: a recent human survey platform forced into black basalt.
-2. **First Overlook**: the initial concept-art reveal of the Luminous Rift.
-3. **Abyssal Approach**: broken rock ledges and ancient bridge spans descending into the void.
-4. **Crystal Galleries**: blue crystals growing through carved wall panels.
-5. **Collector Array**: the central energy orb, gold beams, hex collectors, and radial hub.
-6. **Ancient Gate**: a monumental wall with circular blue-lit mechanisms.
-7. **Second Sky Overlook**: the final reveal into an even deeper lower cavern.
+---
 
-The goal is a 10-15 minute playable slice with first-person traversal, scan/discovery interactions, deployable beacons, objective progression, atmospheric sound, and a strong visual payoff.
+### Act 2 — Fossil Sky
 
-## World Atlas
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Fossil_Sky/FS-001.png) | ![](Content/ArtDirection/Concepts/Fossil_Sky/FS-002.png) | ![](Content/ArtDirection/Concepts/Fossil_Sky/FS-003.png) |
+| FS-001 | FS-002 | FS-003 |
 
-Beyond the Luminous Rift, Abyssal Earth is planned as a descent through multiple impossible inner-Earth biomes. The full planning document is `Docs/WORLD_ATLAS.md`.
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Fossil_Sky/FS-004.png) | ![](Content/ArtDirection/Concepts/Fossil_Sky/FS-005.png) | ![](Content/ArtDirection/Concepts/Fossil_Sky/FS-006.png) |
+| FS-004 | FS-005 | FS-006 |
 
-### Glassroot Forest
+---
 
-![Glassroot Forest](Content/ArtDirection/WorldMaps/glassroot_forest_concept.png)
+### Act 2 — Glassroot Forest
 
-A living mineral forest of translucent root-columns, pearl terraces, shallow reflective pools, pale green bioluminescence, and red mineral sap. This map should feel like a biological cathedral and introduce scanner-reactive living systems.
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Glassroot_Forest/GR-001.png) | ![](Content/ArtDirection/Concepts/Glassroot_Forest/GR-002.png) | ![](Content/ArtDirection/Concepts/Glassroot_Forest/GR-003.png) |
+| GR-001 | GR-002 | GR-003 |
 
-### Inner Sea
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Glassroot_Forest/GR-004.png) | ![](Content/ArtDirection/Concepts/Glassroot_Forest/GR-005.png) | ![](Content/ArtDirection/Concepts/Glassroot_Forest/GR-006.png) |
+| GR-004 | GR-005 | GR-006 |
 
-![Inner Sea](Content/ArtDirection/WorldMaps/inner_sea_concept.png)
+---
 
-A vast underground ocean with silver-black water, dark teal fog, gold plankton trails, drowned machine ruins, broken piers, and hanging mineral shelves. This map expands navigation scale and makes beacons feel essential.
+### Act 3 — Gravity Well
 
-### Fossil Sky
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Gravity_Well/GW-001.png) | ![](Content/ArtDirection/Concepts/Gravity_Well/GW-002.png) | ![](Content/ArtDirection/Concepts/Gravity_Well/GW-003.png) |
+| GW-001 | GW-002 | GW-003 |
 
-![Fossil Sky](Content/ArtDirection/WorldMaps/fossil_sky_concept.png)
+| | |
+|--|--|
+| ![](Content/ArtDirection/Concepts/Gravity_Well/GW-004.png) | ![](Content/ArtDirection/Concepts/Gravity_Well/GW-005.png) |
+| GW-004 | GW-005 |
 
-A dry cavern where gigantic fossilized creatures line the ceiling above suspended observation walkways, amber dust shafts, bone-white stone, black chasms, and cyan scanner-reactive fossil veins.
+---
 
-### Gravity Well
+### Act 4 — Inner Sea
 
-![Gravity Well](Content/ArtDirection/WorldMaps/gravity_well_concept.png)
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Inner_Sea/IS-001.png) | ![](Content/ArtDirection/Concepts/Inner_Sea/IS-002.png) | ![](Content/ArtDirection/Concepts/Inner_Sea/IS-003.png) |
+| IS-001 | IS-002 | IS-003 |
 
-A spherical anomaly chamber where basalt platforms, crystal debris, and water ribbons float around a blue-white gravity core. This map is the long-term altered-gravity traversal target.
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Inner_Sea/IS-004.png) | ![](Content/ArtDirection/Concepts/Inner_Sea/IS-005.png) | ![](Content/ArtDirection/Concepts/Inner_Sea/IS-006.png) |
+| IS-004 | IS-005 | IS-006 |
 
-### Mantle Garden
+---
 
-![Mantle Garden](Content/ArtDirection/WorldMaps/mantle_garden_concept.png)
+### Act 4 — Mantle Garden
 
-A dangerous geothermal garden of black obsidian ridges, white steam columns, orange heat blooms, magenta mineral flowers, and ancient heat-resistant machinery. This is the main late-game environmental hazard map.
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Mantle_Garden/MG-001.png) | ![](Content/ArtDirection/Concepts/Mantle_Garden/MG-002.png) | ![](Content/ArtDirection/Concepts/Mantle_Garden/MG-003.png) |
+| MG-001 | MG-002 | MG-003 |
 
-## Core Gameplay
+| | |
+|--|--|
+| ![](Content/ArtDirection/Concepts/Mantle_Garden/MG-004.png) | ![](Content/ArtDirection/Concepts/Mantle_Garden/MG-005.png) |
+| MG-004 | MG-005 |
 
-- First-person movement with sprint, crouch, and future climb/mantle hooks.
-- Scanner pulse that identifies discoveries and route-relevant anomalies.
-- Discovery journal with entries for geology, structures, anomalies, biology, and human-made objects.
-- Deployable navigation beacons with persistent save/load support.
-- Objective chain guiding the player through the first Luminous Rift route.
-- Environmental hazard foundations, currently including an Ember Vent actor prototype for future hazard zones.
-- Monster and alien-climate survival pressure without turning the game into a shooter-first design.
-- Alien technology discovery and fabrication path that eventually leads to a return rift.
-- Later add-on: Abyssal Interface, a diegetic LLM-powered ancient terminal/interface for cryptic hints, lore fragments, warnings, and fabrication guidance once the core game is further along.
-- Blueprint-ready UI hooks for scanner readouts, journal views, objective HUD, damage feedback, and discovery toasts.
+---
 
-## Current Technical Foundation
+### Later Regions (Acts 4–5)
 
-The C++ foundation lives under `Source/AbyssalEarth/`.
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Later_Regions/LT-001.png) | ![](Content/ArtDirection/Concepts/Later_Regions/LT-002.png) | ![](Content/ArtDirection/Concepts/Later_Regions/LT-003.png) |
+| LT-001 | LT-002 | LT-003 |
 
-Implemented or scaffolded systems include:
-
-- `AAbyssalExplorerCharacter`: first-person exploration pawn.
-- `UScannerComponent`: scan targeting, line-of-sight filtering, discovery feedback hooks.
-- `ADiscoveryActor`: placeable scan target with journal metadata and optional objective completion.
-- `UDiscoverySubsystem`: discovery registration, category queries, save/load support, and new-discovery delegates.
-- `UAbyssalJournalWidget`: UMG base class for the discovery journal.
-- `UAbyssalScannerReadoutWidget`: UMG base class for scan feedback.
-- `UObjectiveSubsystem`: route progression through the revised Luminous Rift objective chain.
-- `AObjectiveTriggerActor`: map trigger volumes for objective completion.
-- `ABeaconActor` and `UBeaconSubsystem`: persistent player navigation beacons.
-- `AEmberVentHazard`: cyclical environmental hazard prototype.
-- `UAbyssalGameplayLibrary`: Blueprint accessors for project subsystems.
-- `UAbyssalHealthComponent`: reusable HP/damage/death component attached to the explorer and ready for survival HUD binding.
-
-## Asset Pipeline
-
-The current asset plan is built for Claude Code + Blender MCP collaboration. Unreal Editor and Blender work is expected to happen primarily on the Windows side, while repo/docs/code support can happen from Linux/OpenClaw.
-
-Generated concept art now lives under `Content/ArtDirection/Concepts/` and is organized by production use:
-
-- `Characters/`: protagonist diver, Helios humanoids, and creature silhouette references.
-- `Environments/`: descent shaft, crashed elevator, bridge/platform kit, and machinery-detail references.
-- `Intro/`: submarine exterior/interior and expedition-wall visual references for the opening sequence.
-- `Items/`: blue crystal harvestable, ancient terminal/fabricator, expedition props, and item model toolkit references.
-- Additional sorted folders at this level include `Luminous_Rift/`, future-map studies, material studies, composition studies, narrative beats, panoramas, regenerated tablet-journal/beacon references, and archived first passes.
-
-Key documents:
-
-- `Docs/CORE_REFERENCE_LUMINOUS_RIFT.md`: detailed visual analysis of the first-map reference.
-- `Docs/BLENDER_ASSET_PIPELINE.md`: asset-generation contract for Claude/Blender workers.
-- `Docs/ART_DIRECTION.md`: visual target, palette, lighting, shape language, and what to avoid.
-- `Docs/LUMINOUS_RIFT_BLOCKOUT.md`: route, scale, zones, placement checklist, and screenshot targets.
-- `Docs/BLUEPRINT_IMPLEMENTATION_NOTES.md`: Windows/Unreal Editor instructions for the central orb, gold beam splines, hex collectors, scanner readout, journal, and objective HUD.
-- `Docs/MATERIAL_SPECS.md`: master material targets and material instances.
-- `Docs/NARRATIVE_FOUNDATION.md`: opening sequence, post-cavern story rules, main objective arc, and ending.
-- `Docs/ABYSSAL_INTERFACE_AI_SYSTEM.md`: later add-on design for an LLM-backed in-game terminal/interface and backend contract.
-- `Docs/WORLD_ATLAS.md`: long-term map roadmap with generated concept references.
-- `Docs/CONCEPT_IMAGE_GENERATION.md`: prompt log for generated world-map concepts.
-- `Content/Design/LuminousRiftAssetManifest.csv`: prioritized asset manifest.
-- `Content/Design/LuminousRiftBlockoutChecklist.csv`: editor-trackable placement checklist for the first map.
-- `Content/Design/WorldMapManifest.csv`: planned map manifest.
-- `Content/Design/WorldAssetManifest.csv`: first-pass future-map asset manifest.
-- `ArtSource/Blender/LuminousRift/ASSET_NOTES.md`: notes file for Blender-created assets.
-
-Highest-priority asset families:
-
-- Dark basalt foreground ledges, arches, walls, and overhangs.
-- Ancient bridge/platform kit.
-- Central orb frame, hub, beam emitters, and energy orb Blueprint proxy.
-- Hex collector panels and broken cluster variants.
-- Blue crystal clusters in small, medium, large, and hero sizes.
-- Monumental ancient gate wall.
-- Distant towers, hanging slabs, and lower-abyss silhouettes.
-- Small human survey kit for scale.
-
-## Setup
-
-The project targets **Unreal Engine 5.4+**.
-
-For a fresh Windows checkout:
-
-1. Install Git LFS.
-2. Clone the repository.
-3. Run `git lfs install` once for the Windows user account.
-4. Open `AbyssalEarth.uproject` in Unreal Editor.
-5. Let Unreal generate project files and compile the `AbyssalEarth` module when prompted.
-6. Create Blueprint children from the C++ classes in `Source/AbyssalEarth`.
-7. Follow `Docs/MILESTONES.md` and `Docs/NEXT_TASKS.md` for the current vertical-slice priorities.
-
-Do not commit generated Unreal folders such as:
-
-- `Binaries/`
-- `DerivedDataCache/`
-- `Intermediate/`
-- `Saved/`
-
-Binary Unreal assets such as `.uasset` and `.umap` files are configured for Git LFS.
-
-## Collaboration Workflow
-
-Before starting work:
-
-1. Run `git fetch --prune`.
-2. Inspect `git status`.
-3. Pull safely, preferably with `git pull --ff-only` when there are no local changes.
-
-When finishing a coherent change:
-
-1. Run the smallest useful verification available.
-2. Commit with a focused message.
-3. Push so the Windows/Unreal/Blender side can pull the update.
-
-Never overwrite or revert unrelated work from the Windows side, Claude, or another contributor.
-
-## Project Structure
-
-- `Docs/`: design, art direction, technical plans, milestones, asset pipeline docs, and hourly logs.
-- `Source/AbyssalEarth/`: Unreal C++ gameplay foundation.
-- `Content/Design/`: CSV design data and asset manifests.
-- `Content/ArtDirection/`: reference images and visual direction material.
-- `Content/Maps/`: target location for playable maps.
-- `Content/Blueprints/`: Blueprint children and interactables.
-- `Content/Materials/`: master materials and material instances.
-- `ArtSource/Blender/`: source files and notes for Blender-created assets.
-- `Content/ArtSourceExports/`: interchange exports from Blender before Unreal import.
-
-## Development Status
-
-The project is early but active. The immediate push is asset production and playable game development: turn the Luminous Rift reference into an editor-built vertical slice with a coherent custom asset kit. Generated concept references are available for the opening sequence, character direction, early survival items, and Luminous Rift environment kits. The current foundation is strong enough to support map blockout, Blueprint wiring, scanner/discovery flow, objective progression, beacons, and first-pass visual development. The Abyssal Interface is documented as a future add-on, not an immediate priority.
+| | |
+|--|--|
+| ![](Content/ArtDirection/Concepts/Later_Regions/LT-004.png) | ![](Content/ArtDirection/Concepts/Later_Regions/LT-005.png) |
+| LT-004 | LT-005 |
+
+---
+
+### Characters
+
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Characters/protagonist_diver_model_concept.png) | ![](Content/ArtDirection/Concepts/Characters/helios_figure03_style_fullbody_concept.png) | ![](Content/ArtDirection/Concepts/Characters/rift_creature_silhouettes_concept.png) |
+| Protagonist Diver | Helios Figure 03 | Rift Creature Silhouettes |
+
+![](Content/ArtDirection/Concepts/Characters/helios_figure03_style_lineup_concept.png)
+*Helios Robot — Figure 03 Lineup*
+
+---
+
+### Items & Props
+
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Items/ancient_fabricator_concept.png) | ![](Content/ArtDirection/Concepts/Items/ancient_terminal_concept.png) | ![](Content/ArtDirection/Concepts/Items/blue_crystal_harvestable_concept.png) |
+| Ancient Fabricator | Interface Terminal | Blue Crystal |
+
+| | |
+|--|--|
+| ![](Content/ArtDirection/Concepts/Items/expedition_crates_props_concept.png) | ![](Content/ArtDirection/Concepts/Items/item_models_toolkit_concept.png) |
+| Expedition Crates | Item Toolkit |
+
+---
+
+### Asset Detail Sheets
+
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Asset_Details/AD-001.png) | ![](Content/ArtDirection/Concepts/Asset_Details/AD-002.png) | ![](Content/ArtDirection/Concepts/Asset_Details/AD-003.png) |
+| AD-001 | AD-002 | AD-003 |
+
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Asset_Details/AD-004.png) | ![](Content/ArtDirection/Concepts/Asset_Details/AD-005.png) | ![](Content/ArtDirection/Concepts/Asset_Details/AD-006.png) |
+| AD-004 | AD-005 | AD-006 |
+
+---
+
+### Composition Studies
+
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Elevator_Shaft_User_Made_Do_Not_Modify/CC-001.png) | ![](Content/ArtDirection/Concepts/Composition_Studies/CC-002.png) | ![](Content/ArtDirection/Concepts/Composition_Studies/CC-003.png) |
+| CC-001 | CC-002 | CC-003 |
+
+![](Content/ArtDirection/Concepts/Composition_Studies/CC-004.png)
+*CC-004*
+
+---
+
+### Material Studies
+
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Material_Studies/MS-001.png) | ![](Content/ArtDirection/Concepts/Material_Studies/MS-002.png) | ![](Content/ArtDirection/Concepts/Material_Studies/MS-003.png) |
+| MS-001 | MS-002 | MS-003 |
+
+| | |
+|--|--|
+| ![](Content/ArtDirection/Concepts/Material_Studies/MS-004.png) | ![](Content/ArtDirection/Concepts/Material_Studies/MS-005.png) |
+| MS-004 | MS-005 |
+
+---
+
+### Narrative Beat Storyboards
+
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Narrative_Beats/NR-001.png) | ![](Content/ArtDirection/Concepts/Narrative_Beats/NR-002.png) | ![](Content/ArtDirection/Concepts/Narrative_Beats/NR-003.png) |
+| NR-001 | NR-002 | NR-003 |
+
+| | |
+|--|--|
+| ![](Content/ArtDirection/Concepts/Narrative_Beats/NR-004.png) | ![](Content/ArtDirection/Concepts/Narrative_Beats/NR-005.png) |
+| NR-004 | NR-005 |
+
+---
+
+### Human Explorer Reference
+
+| | | |
+|--|--|--|
+| ![](Content/ArtDirection/Concepts/Human_Explorer/HE-001.png) | ![](Content/ArtDirection/Concepts/Human_Explorer/HE-002.png) | ![](Content/ArtDirection/Concepts/Human_Explorer/HE-004.png) |
+| HE-001 | HE-002 | HE-004 |
+
+![](Content/ArtDirection/Concepts/Human_Explorer/HE-005.png)
+*HE-005*
+
+---
+
+## Art Asset Scripts
+
+All procedural mesh generation scripts live in `ArtSource/Blender/Scripts/`. Run each inside Blender 3.6+:
+
+```
+blender --background --python <script>.py
+```
+
+| Script | Output Dir | Contents |
+|--------|-----------|----------|
+| `gen_gameplay_props.py` | `Content/ArtSourceExports/Slice/` | FabricatorStation, InterfaceTerminal, HarvestableNodes S/M/L, Beacon, Checkpoint, SteamVent, MagmaGeyser, HeliosRobot |
+| `gen_luminous_rift_env.py` | `Content/ArtSourceExports/LuminousRift/` | Crystal clusters S/M/L/Hero, ledges, arches, overhangs, hanging slabs, cavern walls |
+| `gen_luminous_rift_machines.py` | `Content/ArtSourceExports/LuminousRift/` | HexCollector tiles + cluster, OrbFrame + Hub, BeamEmitter, AncientWall Gate, BridgeSpan, PlatformNode, Tower segments |
+| `gen_human_survey_kit.py` | `Content/ArtSourceExports/Slice/` | Survey platform, crates, lamps, cable coil, field console, railing, tripod scanner, bedroll |
+| `gen_world_biomes.py` | `Content/ArtSourceExports/{FossilSky,GlassrootForest,GravityWell,InnerSea,MantleGarden}/` | Per-biome rock/flora/hazard kit for all 5 worlds |
+| `gen_characters.py` | `Content/ArtSourceExports/Characters/` | Protagonist diver, Helios robot (detailed), 3× rift creature silhouettes, AbyssalCreature patrol, 4 collectible item meshes |
+| `gen_prologue_submarine.py` | `Content/ArtSourceExports/{Prologue,ElevatorShaft}/` | Corridor sections, bulkhead door, bunk/engine/airlock rooms, elevator car + crashed variant, shaft mechanism, debris |
+
+---
+
+## Repository Layout
+
+```
+Source/AbyssalEarth/             All C++ gameplay systems
+Content/Design/                  DataTable CSVs (items, recipes, objectives, narrative beats)
+Content/ArtDirection/            Concept art, references, material studies, composition boards
+ArtSource/Blender/Scripts/       Procedural mesh generation scripts (bpy)
+Content/ArtSourceExports/        FBX export targets (generated by scripts above)
+Docs/
+  BACKEND_SYSTEMS_ROADMAP.md     System inventory, phase by phase
+  HOURLY_LOG.md                  Development log, tick by tick
+  Maps/                          14 map design docs (blockout-ready)
+  Story/                         Story bible, epilogue design
+  EditorGuides/                  Step-by-step guides for Blueprint + UMG + Level setup
+```
+
+## The Player Journey
+
+| Act | Objective | Maps |
+|-----|-----------|------|
+| Prologue | Verify the AI Robot Fleet HELIOS's work | Submarine Interior → Access Passage → Descent Elevator → Wrecked Elevator |
+| 1 | SURVIVE | Luminous Rift → Deep Channel |
+| 2 | DISCOVER WHAT THIS PLACE IS | Fossil Sky Upper → Fossil Sky |
+| 3 | MAKE THE MACHINE ANSWER | Gravity Well → Gravity Well Lower |
+| 4 | BUILD A WAY OUT | Mantle Garden → Mantle Garden Deep |
+| 5 | OPEN THE RIFT | Rift Chamber |
+
+## System Architecture (one paragraph)
+
+Everything persistent lives behind `UAbyssalSaveSubsystem` + `IAbyssalSaveProvider` (7 domain blobs in one `USaveGame`). The player pawn (`AAbyssalPlayerCharacter`) wires five vital components (health, oxygen, stamina, temperature, pressure), interaction, scanning, traversal, and observation mode; `UAbyssalHUDSubsystem` aggregates vitals for UMG. World content is driven by `AAbyssalHazardBase` subclasses (six biome hazards), `AAbyssalCreature` perception AI, `AHeliosRobot` NPCs, DataTable-driven objectives/items/recipes, a power-routing graph (`AAbyssalPowerNode`) feeding alien terminals, and the endgame `AAbyssalRiftActor`. Narrative is caption-beat based (`UNarrativeSubsystem` + CSVs per act).

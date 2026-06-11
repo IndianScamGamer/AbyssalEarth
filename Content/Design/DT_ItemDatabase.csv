@@ -1,0 +1,13 @@
+Name,DisplayName,Description,Category,MaxStackSize,bIsConsumable,RequiredStationTier
+ITEM_MINERAL_ABYSSAL_CORE,"Abyssal Core","Dense crystalline mineral unique to the cavern. Primary fabrication material.",Resource,99,false,0
+ITEM_MINERAL_FOSSIL_SHARD,"Fossil Shard","Fragment of ancient fossilized bone. Lightweight structural component.",Resource,99,false,0
+ITEM_MINERAL_MAGMA_RESIDUE,"Magma Residue","Cooled magma extract from Mantle Garden vents. High thermal resistance when refined.",Resource,50,false,1
+ITEM_MINERAL_GRAVITY_CRYSTAL,"Gravity Crystal","A crystal that distorts local gravity slightly. Core component for Gravity Shear tools.",Resource,20,false,2
+ITEM_TOOL_SUIT_PATCH,"Suit Patch","Emergency hull repair patch. Restores 20 armor rating for 3 minutes.",Consumable,10,true,0
+ITEM_TOOL_AIR_CANISTER,"Air Canister","Compressed oxygen canister. Instantly refills the rebreather tank.",Consumable,5,true,0
+ITEM_TOOL_HEAT_SHIELD,"Heat Shield Cell","Insulation cell that reduces heat gain rate by 50% for 60 seconds.",Consumable,5,true,1
+ITEM_UPGRADE_PRESSURE_LINER,"Pressure Liner","Suit upgrade component. Increases PressureRating by 50 atm when installed.",Equipment,1,false,2
+ITEM_UPGRADE_REBREATHER_MOD,"Rebreather Mod","Oxygen tank expansion. Increases max oxygen capacity by 30%.",Equipment,1,false,2
+ITEM_UPGRADE_THERMAL_WEAVE,"Thermal Weave","Suit lining upgrade. Adds 0.25 base Insulation against heat sources.",Equipment,1,false,3
+ITEM_KEY_RIFT_STABILISER,"Rift Stabiliser","Alien fabricated component required to activate the OPEN_RIFT sequence. Non-stackable.",Equipment,1,false,3
+ITEM_UPGRADE_ARMOR_PLATING,"Armor Plating","Suit hull reinforcement. Adds 10 flat armor rating when installed.",Equipment,1,false,2

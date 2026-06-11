@@ -1,0 +1,10 @@
+BeatId,Speaker,Caption,Duration,bPlayOnce
+ACT5_CHAMBER_01,Player,"The monoliths. All of them. A complete ring. This is the centre — this is what everything else was *for*.",6.0,true
+ACT5_WATCHERS_01,Player,"Hello again. You've grown.",2.5,true
+ACT5_LASTNODE_01,Player,"Last one. Everything after this is one direction.",3.0,true
+RIFT_ACTIVATE_01,Player,"Here goes nothing.",2.0,true
+RIFT_CHARGING_01,Terminal,"[RIFT PROTOCOL INITIATED] Stabiliser accepted. Calculating aperture dimensions. Stand clear.",5.0,true
+RIFT_OPEN_01,Player,"It's open. It's actually open.",3.0,true
+RIFT_OPEN_02,Player,"I can see the surface. I can see it.",3.5,true
+RIFT_ENTER_01,Player,"Whatever this place is — whatever you are — I'll be back. I have to be.",5.0,true
+POSTCREDITS_DOUBLE_PULSE,,"[SENSOR LOG — AUTOMATED] Seismic array 7: double-pulse signature detected at 6,000 m. Pattern repeats. Pattern repeats.",6.0,true

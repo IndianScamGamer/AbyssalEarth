@@ -27,6 +27,14 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Beacon")
     bool RemoveBeacon(ABeaconActor* Beacon);
 
+    /**
+     * Update the saved color of an already-registered beacon. Unlike
+     * RegisterBeacon this never adds a new entry, so cosmetic color changes
+     * on unplaced/preview beacons don't get persisted.
+     */
+    UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Beacon")
+    bool UpdateBeaconColor(ABeaconActor* Beacon);
+
     UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Beacon", meta=(WorldContext="WorldContextObject"))
     bool RemoveBeaconById(UObject* WorldContextObject, FGuid BeaconId);
 

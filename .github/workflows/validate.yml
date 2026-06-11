@@ -1,0 +1,53 @@
+name: AbyssalEarth Data Validation
+
+# Push trigger covers main only; feature branches are validated through their
+# PRs. Running both previously doubled every run (and any failure email).
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  csv-validate:
+    name: CSV / Cross-reference Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run data validator
+        run: python Tools/validate_data.py
+
+  cpp-guard:
+    name: C++ Banned-API Guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check for banned API patterns
+        run: python Tools/check_cpp_patterns.py
+
+  doc-check:
+    name: Documentation Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for TODO/FIXME in shipped docs
+        run: |
+          # validate_data.py already covers this, but keep a fast grep fail here too
+          if grep -rn --include="*.md" -E "\b(TODO|FIXME)\b" Docs/; then
+            echo "ERROR: TODO/FIXME markers found in Docs/. Remove or resolve them before merging."
+            exit 1
+          fi
+          echo "No TODO/FIXME markers in Docs/."

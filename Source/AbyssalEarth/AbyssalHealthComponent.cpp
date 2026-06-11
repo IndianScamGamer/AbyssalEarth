@@ -1,6 +1,5 @@
 #include "AbyssalHealthComponent.h"
 #include "GameFramework/Actor.h"
-#include "GameFramework/DamageType.h"
 
 UAbyssalHealthComponent::UAbyssalHealthComponent()
 {
@@ -10,120 +9,90 @@ UAbyssalHealthComponent::UAbyssalHealthComponent()
 void UAbyssalHealthComponent::BeginPlay()
 {
     Super::BeginPlay();
-
-    MaxHealth = FMath::Max(MaxHealth, 1.0f);
-    CurrentHealth = bStartAtMaxHealth ? MaxHealth : FMath::Clamp(CurrentHealth, 0.0f, MaxHealth);
-    bDead = CurrentHealth <= 0.0f;
+    CurrentHealth = MaxHealth;
 
     if (AActor* Owner = GetOwner())
     {
-        Owner->OnTakeAnyDamage.AddDynamic(this, &UAbyssalHealthComponent::HandleOwnerTakeAnyDamage);
+        Owner->OnTakeAnyDamage.AddDynamic(this, &UAbyssalHealthComponent::HandleTakeAnyDamage);
     }
 
-    OnHealthChanged.Broadcast(CurrentHealth, MaxHealth, 0.0f);
+    OnHealthChanged.Broadcast(this, CurrentHealth, 0.0f);
 }
 
-void UAbyssalHealthComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
+void UAbyssalHealthComponent::Heal(float Amount)
 {
-    if (AActor* Owner = GetOwner())
+    if (bIsDead || Amount <= 0.0f)
     {
-        Owner->OnTakeAnyDamage.RemoveDynamic(this, &UAbyssalHealthComponent::HandleOwnerTakeAnyDamage);
+        return;
     }
-
-    Super::EndPlay(EndPlayReason);
+    SetHealth(CurrentHealth + Amount);
 }
 
-float UAbyssalHealthComponent::ApplyHealthDamage(float DamageAmount, AActor* DamageCauser)
+void UAbyssalHealthComponent::ApplyDirectDamage(float Amount)
 {
-    if (DamageAmount <= 0.0f || (bDead && !bCanTakeDamageWhenDead))
+    if (bIsDead || Amount <= 0.0f)
     {
-        return CurrentHealth;
+        return;
     }
-
-    const float PreviousHealth = CurrentHealth;
-    SetCurrentHealth(CurrentHealth - DamageAmount, DamageCauser);
-
-    const float AppliedDamage = PreviousHealth - CurrentHealth;
-    if (AppliedDamage > 0.0f)
+    const float Effective = FMath::Max(0.0f, Amount - ArmorRating);
+    if (Effective <= 0.0f)
     {
-        OnDamaged.Broadcast(AppliedDamage, DamageCauser, CurrentHealth);
+        return;
     }
-
-    return CurrentHealth;
+    OnDamaged.Broadcast(this, Effective);
+    SetHealth(CurrentHealth - Effective);
 }
 
-float UAbyssalHealthComponent::Heal(float HealAmount)
+void UAbyssalHealthComponent::Respawn()
 {
-    if (HealAmount <= 0.0f || bDead)
+    bIsDead = false;
+    SetHealth(MaxHealth);
+}
+
+void UAbyssalHealthComponent::Kill()
+{
+    if (bIsDead)
     {
-        return CurrentHealth;
+        return;
     }
-
-    SetCurrentHealth(CurrentHealth + HealAmount);
-    return CurrentHealth;
-}
-
-void UAbyssalHealthComponent::RestoreFullHealth()
-{
-    bDead = false;
-    SetCurrentHealth(MaxHealth);
-}
-
-void UAbyssalHealthComponent::Kill(AActor* DamageCauser)
-{
-    SetCurrentHealth(0.0f, DamageCauser);
-}
-
-float UAbyssalHealthComponent::GetCurrentHealth() const
-{
-    return CurrentHealth;
-}
-
-float UAbyssalHealthComponent::GetMaxHealth() const
-{
-    return MaxHealth;
+    SetHealth(0.0f);
 }
 
 float UAbyssalHealthComponent::GetHealthPercent() const
 {
-    return MaxHealth > KINDA_SMALL_NUMBER ? CurrentHealth / MaxHealth : 0.0f;
+    return MaxHealth > 0.0f ? FMath::Clamp(CurrentHealth / MaxHealth, 0.0f, 1.0f) : 0.0f;
 }
 
-bool UAbyssalHealthComponent::IsDead() const
+void UAbyssalHealthComponent::HandleTakeAnyDamage(AActor* /*DamagedActor*/, float Damage,
+    const UDamageType* /*DamageType*/, AController* /*InstigatedBy*/, AActor* /*DamageCauser*/)
 {
-    return bDead;
-}
-
-void UAbyssalHealthComponent::HandleOwnerTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
-{
-    if (Damage <= 0.0f)
+    if (bIsDead || Damage <= 0.0f)
     {
         return;
     }
-
-    UE_LOG(LogTemp, Verbose, TEXT("[AbyssalEarth] %s took %.2f damage from %s (type %s)"),
-        DamagedActor ? *DamagedActor->GetName() : TEXT("<unknown>"),
-        Damage,
-        DamageCauser ? *DamageCauser->GetName() : TEXT("<unknown>"),
-        DamageType ? *DamageType->GetName() : TEXT("<none>"));
-
-    ApplyHealthDamage(Damage, DamageCauser);
+    const float Effective = FMath::Max(0.0f, Damage - ArmorRating);
+    if (Effective <= 0.0f)
+    {
+        return;
+    }
+    OnDamaged.Broadcast(this, Effective);
+    SetHealth(CurrentHealth - Effective);
 }
 
-void UAbyssalHealthComponent::SetCurrentHealth(float NewHealth, AActor* DamageCauser)
+void UAbyssalHealthComponent::SetHealth(float NewHealth)
 {
-    const float PreviousHealth = CurrentHealth;
+    const float Old = CurrentHealth;
     CurrentHealth = FMath::Clamp(NewHealth, 0.0f, MaxHealth);
-    const float Delta = CurrentHealth - PreviousHealth;
+    const float Delta = CurrentHealth - Old;
 
     if (!FMath::IsNearlyZero(Delta))
     {
-        OnHealthChanged.Broadcast(CurrentHealth, MaxHealth, Delta);
+        OnHealthChanged.Broadcast(this, CurrentHealth, Delta);
     }
 
-    if (!bDead && CurrentHealth <= 0.0f)
+    if (CurrentHealth <= 0.0f && !bIsDead)
     {
-        bDead = true;
-        OnDeath.Broadcast(GetOwner(), DamageCauser);
+        bIsDead = true;
+        OnDeath.Broadcast(this);
     }
 }

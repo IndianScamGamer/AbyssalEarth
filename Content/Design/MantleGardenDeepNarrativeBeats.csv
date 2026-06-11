@@ -1,0 +1,5 @@
+BeatId,Speaker,Caption,Duration,bPlayOnce
+MGD_FORGE_01,Player,"Okay. I know what this needs to be.",2.5,true
+MGD_ENTRY_01,Player,"This is the hottest place I've ever been. That's saying something.",3.0,true
+MGD_CRYSTAL_01,Player,"Gravity crystals. I've seen these before — in the Well. They're everywhere down here.",4.0,true
+MGD_RIFT_STAB_COMPLETE,Player,"That's it. That's the stabiliser. Now I just need to get it up there.",3.5,true

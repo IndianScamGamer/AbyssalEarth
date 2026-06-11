@@ -75,16 +75,18 @@ bool UDiscoverySubsystem::RegisterDiscoveryEntry(const FAbyssalDiscoveryEntry& E
         return false;
     }
 
-    const bool bAlreadyKnown = Entries.Contains(Entry.DiscoveryId);
-    Entries.Add(Entry.DiscoveryId, Entry);
-
-    if (!bAlreadyKnown)
+    // First write wins: a rich entry from the scanner (real display name,
+    // category) must not be clobbered by a later bare RegisterDiscovery(Id)
+    // from observation-mode tag scans.
+    if (Entries.Contains(Entry.DiscoveryId))
     {
-        OnDiscoveryAdded.Broadcast(Entry);
-        // Disk write deferred to next SaveActiveSlot call; no per-discovery flush.
+        return false;
     }
 
-    return !bAlreadyKnown;
+    Entries.Add(Entry.DiscoveryId, Entry);
+    OnDiscoveryAdded.Broadcast(Entry);
+    // Disk write deferred to next SaveActiveSlot call; no per-discovery flush.
+    return true;
 }
 
 bool UDiscoverySubsystem::IsDiscovered(FName DiscoveryId) const

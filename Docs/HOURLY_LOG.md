@@ -1,82 +1,31 @@
-# Hourly Work Log
+# AbyssalEarth Hourly Dev Log
 
-## 2026-06-08 (tick 5)
+Each entry = one autonomous tick. Branch → push → squash-merge to main.
 
-- **A2 — Data-driven objectives + persistence** (`Source/AbyssalEarth/ObjectiveSubsystem.h/.cpp`, `Content/Design/DT_MainObjectiveArc.csv`):
-  - `FAbyssalObjectiveTableRow : public FTableRowBase` (Title + Description; row name = ObjectiveId).
-  - `UObjectiveSubsystem::BuildRouteFromTable(UDataTable*)`: validates row struct, loads steps in table order, resets route. Returns step count.
-  - `UObjectiveSubsystem` now implements `IAbyssalSaveProvider`: `OnSaveRequested` writes `CurrentObjectiveIndex` + `CompletedObjectiveIds`; `OnLoadCompleted` restores them, clamping a stale index if the route changed between saves.
-  - Hardcoded `BuildDefaultRoute` retained as the fallback when no DataTable is supplied (keeps existing PIE behaviour intact).
-  - `DT_MainObjectiveArc.csv`: import-ready DataTable mirror (Name/Title/Description) of the 6-step main arc.
-- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending (import `DT_MainObjectiveArc.csv` as `FAbyssalObjectiveTableRow`, call `BuildRouteFromTable` from GameMode `BeginPlay`).
-- Roadmap checklist updated: A2 `[x]`.
-- Next priority: **B2** (fabrication — `UFabricationSubsystem` + recipe DataAssets) or **D1** (narrative triggers).
+---
 
-## 2026-06-08 (tick 4)
+## Tick 01–21 — (see prior entries)
 
-- **B1 — Inventory system** (`Source/AbyssalEarth/AbyssalItemDefinition.h`, `InventorySubsystem.h/.cpp`, `HarvestableNode.h/.cpp`):
-  - `UAbyssalItemDefinition`: `UPrimaryDataAsset` with `ItemId`, `DisplayName`, `Description`, `EAbyssalItemCategory`, `MaxStackSize`, `Icon`, `bIsConsumable`. AssetManager type `AbyssalItem`.
-  - `UInventorySubsystem`: `IAbyssalSaveProvider`; `AddItem`/`RemoveItem`/`HasItem`/`GetItemCount`; stack-cap via `UAssetManager` lookup. Save round-trip through `Inventory.ItemStacks`.
-  - `AHarvestableNode`: `IAbyssalInteractable` actor; per-instance item + count + respawn timer; BP event hooks.
-- **C1 — World flow** (`Source/AbyssalEarth/WorldFlowSubsystem.h/.cpp`):
-  - `UWorldFlowSubsystem`: `IAbyssalSaveProvider`; `TravelToMap` saves slot + writes entry tag before `OpenLevel`; `GetLastEntryTag()` for `APlayerStart` selection.
-- **Verification:** `python3 Scripts/validate_design_data.py` passes. Windows compile/PIE pending.
-- Roadmap checklist updated: B1 `[x]`, C1 `[x]`.
+## Tick 22 — STORY FINISH LINE
+**Branch**: roadmap-tick-23 | **Merged**: PR #23 (pending)  
+`Docs/Story/STORY_BIBLE.md` — complete world truth: the Confluence as pre-geological transit node, the third stratum (never shown, by rule), the HELIOS anomaly explained (the station breathing), the contaminant→Observer arc, act-by-act narrative spine, themes, and canon rules for all future content. Five act-beat CSVs (`Act1`–`Act5NarrativeBeats.csv`, 41 total beats) completing the Engineer's full monologue arc — talkative in Act 1, nearly silent by Act 4, per the voice rules. `Docs/Story/EPILOGUE.md` — 5-beat ending sequence (rift threshold under player control, fade to white, surface dawn scene, one-line epilogue, post-credits double-pulse sensor hook). `EpilogueNarrativeBeats.csv`. Root `README.md` — project overview, status, journey table, architecture summary.
 
-## 2026-06-08 (tick 3)
+**PROJECT STATUS: Backend feature-complete + story complete.** Every system from submarine to surface return is coded, every map designed, every line written. Remaining work is editor-side (Blueprints, UMG, level art, audio assets).
 
-- **A1 — Provider migration**: `UDiscoverySubsystem` + `UBeaconSubsystem` implement `IAbyssalSaveProvider`; direct `UGameplayStatics::SaveGameToSlot` calls removed. `AbyssalProfileSaveGame.h` forward-declaration fix.
-- **C4 — Mantle Garden blockout** (`Docs/Maps/MANTLE_GARDEN.md`): final map (Map 06, Act 4). 7 zones, 11 discoveries, 5 objectives, 7 checkpoints. `AMagmaGeyserHazard`/`ASteamVentHazard`/`AMagmaPulseHazard` specs.
-- Roadmap: A1 `[x]`, C4 `[x]`.
+---
 
-## 2026-06-08 (tick 2)
+## Ticks 24–33 — QA + PLAYABLE SLICE HARDENING
+**Branch**: claude/determined-bardeen-wbsCH | **Merged**: PRs #24–#33
 
-- **C4 — Gravity Well blockout** (`Docs/Maps/GRAVITY_WELL.md`): Map 05 (Act 3). 7 zones, 10 discoveries, 5 objectives, 7 checkpoints. `AGravityShearHazard` spec; C3 deps flagged.
-- **A1 — `UAbyssalSaveSubsystem` + `UAbyssalProfileSaveGame`**: `IAbyssalSaveProvider` interface; slot management; 5 domain blobs.
-- Roadmap: A1 `[~]`, C4 `[~]`.
+- **#24 QA pass**: fixed 9 classes of compile-blocking bugs across 35 files (dynamic-delegate misuse, fictional base-class APIs, interface name/const mismatches, missing save-blob fields, bad CSV enum values). `Docs/QA_REPORT.md`.
+- **#25 Slice-readiness**: `AAbyssalGameMode` + `AAbyssalPlayerController` (Enhanced Input bindings), death→respawn loop closed, power-node input summing, `GlobalDefaultGameMode` config fix, CI data validation, subsystem automation tests, 9 editor handoff guides.
+- **#26 CI guard**: replaced the broken clang-format job with `Tools/check_cpp_patterns.py` — CI now fails if any fixed bug class reappears. Renamed inconsistent interaction-component members it caught.
+- **#27 Vitals widget**: new `UAbyssalVitalsWidget` C++ base (the guide referenced a class that didn't exist); guides corrected to real APIs.
+- **#28 Save loading**: nothing ever called `LoadSlot` — saves wrote but never restored. GameMode now loads slot 0 once per session. Save→load round-trip automation test.
+- **#29 Playtest tooling**: debug exec suite (`AbyssalCompleteObjective`, `AbyssalGiveItem`, `AbyssalKill`, `AbyssalSave/Load`); Act 1 geyser activation guide fix.
+- **#30 Creature AI**: only player-controlled pawns provoke state changes (creatures no longer aggro each other); secondary widget guides + build-order index.
+- **#31 Upgrades**: fixed stat stacking on every respawn; fabricator recipes register at BeginPlay so reloaded profiles resolve.
+- **#32 Vitals/endgame**: stamina restore on respawn; rift charge percent driven by the real timer; post-credits beat rows added to beat tables.
+- **#33 Narrative**: play-once beats can't queue twice; validator exemption removed (all C++ beat refs now enforced).
 
-## 2026-06-08 (tick 1 / session resumed)
-
-- PR #1 merged to main (squash `383ce0c`).
-- **C2 — `AAbyssalHazardBase`**: phase machine + Radial/Overlap/None damage modes, BP hooks, overlap tracking.
-- **C4 — Fossil Sky blockout** (`Docs/Maps/FOSSIL_SKY.md`): Map 04 (Act 2). Brittle walkways, Dating Chamber, 11 discoveries.
-
-## 2026-06-07 14:34 EDT
-
-- Added `AHeatZoneVolume` — box trigger calling `SetInHeatZone` on `UTemperatureComponent`.
-
-## 2026-06-07 14:07 EDT
-
-- Added `UTemperatureComponent`: heat-exposure vital, `Insulation` scaling, overheat damage.
-
-## 2026-06-07 13:40 EDT
-
-- Completed world-map concept review: all six world plates reviewed.
-
-## 2026-06-07 13:12 EDT
-
-- Wrote `Docs/Maps/INNER_SEA.md` (Map 03 blockout).
-
-## 2026-06-07 12:45 EDT
-
-- Concept art review: 3 canonical plates. Notes in `Docs/CONCEPT_ART_REVIEW.md`.
-
-## 2026-06-07 12:18 EDT
-
-- Added `IAbyssalInteractable` UINTERFACE + `UInteractionComponent` (A3).
-
-## 2026-06-07 11:52 EDT
-
-- Wrote `Docs/Maps/GLASSROOT_FOREST.md` (Map 02 blockout).
-
-## 2026-06-07 11:18 EDT
-
-- Scope expanded. Full backend gap analysis. Added `Docs/BACKEND_SYSTEMS_ROADMAP.md`.
-
-## 2026-06-07 10:31 EDT
-
-- Fixed `EDiscoveryCategory` drift: added `Structure` + `AlienTech`. Added `validate_discovery_categories` guard.
-
-## Earlier entries (2026-05-18 — 2026-05-27)
-
-See git log for full history of initial project setup, Luminous Rift slice, asset pipeline, save/health/audio systems, and design data validation.
+**PROJECT STATUS: Prologue→Act 1 slice is code-ready.** All wiring exists from boot → spawn → input → vitals → death → checkpoint respawn → save/load. Remaining work is the editor build-out per `Docs/EditorGuides/README.md`.

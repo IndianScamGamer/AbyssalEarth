@@ -48,6 +48,9 @@ struct FAbyssalWorldFlowSaveBlob
 
     UPROPERTY()
     FName LastEntryTag;
+
+    UPROPERTY()
+    FName ActiveCheckpointId;
 };
 
 USTRUCT()
@@ -57,6 +60,27 @@ struct FAbyssalInventorySaveBlob
 
     UPROPERTY()
     TMap<FName, int32> ItemStacks;
+
+    UPROPERTY()
+    TArray<FName> InstalledUpgradeIds;
+};
+
+USTRUCT()
+struct FAbyssalFabricationSaveBlob
+{
+    GENERATED_BODY()
+
+    UPROPERTY()
+    TArray<FName> UnlockedRecipeIds;
+};
+
+USTRUCT()
+struct FAbyssalNarrativeSaveBlob
+{
+    GENERATED_BODY()
+
+    UPROPERTY()
+    TArray<FName> PlayedBeatIds;
 };
 
 /**
@@ -85,6 +109,12 @@ public:
 
     UPROPERTY()
     FAbyssalInventorySaveBlob Inventory;
+
+    UPROPERTY()
+    FAbyssalFabricationSaveBlob Fabrication;
+
+    UPROPERTY()
+    FAbyssalNarrativeSaveBlob Narrative;
 
     UPROPERTY()
     int32 SaveVersion = 1;

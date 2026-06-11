@@ -1,5 +1,12 @@
 # Technical Plan
 
+> **Historical document.** References to `AAbyssalExplorerCharacter`,
+> `UScannerComponent`, `UInteractionComponent`, and `AAbyssalEarthGameMode`
+> describe the legacy pawn stack, which has been **deleted**. The current
+> stack is `AAbyssalGameMode` → `AAbyssalPlayerCharacter` (with
+> `UAbyssalScanComponent` / `UAbyssalInteractionComponent`) and
+> `AAbyssalPlayerController`. For in-editor work use `Docs/EditorGuides/`.
+
 ## Current Constraint
 
 Unreal Editor is not installed or not discoverable from PATH on this machine. Work should remain UE-ready so the project can be opened and compiled once the engine is available.

@@ -1,0 +1,11 @@
+BeatId,Speaker,Caption,Duration,bPlayOnce
+ACT1_WAKE_01,Player,"Suit's holding. Barely.",2.5,true
+ACT1_FIRSTLIGHT_01,Player,"The light is coming from the *walls*.",3.0,true
+ACT1_VEIL_01,Player,"They're alive. The lights are alive.",3.0,true
+ACT1_CACHE_01,Player,"HELIOS supply crate. So the robots made it down here. Some of them.",4.0,true
+ACT1_LURKER_01,Player,"Okay. Big. Moving. Not investigating that.",3.0,true
+ACT1_BRIDGE_01,Player,"That does not look load-bearing.",2.5,true
+ACT1_BEACON_01,Player,"A beacon. Dead, but it's HELIOS-built. They were mapping this place.",4.0,true
+ACT1_SURVIVE_DONE,Player,"Still alive. New objective: figure out where 'here' is.",3.5,true
+ACT1_CHANNEL_01,Player,"Deep breath. Long swim.",2.0,true
+ACT1_AIRPOCKET_01,Player,"Air. Okay. Okay. — Someone carved a *seat* into this rock.",4.0,true

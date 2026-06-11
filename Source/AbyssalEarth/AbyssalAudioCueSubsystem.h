@@ -6,8 +6,7 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "AbyssalAudioCueSubsystem.generated.h"
 
-class ADiscoveryActor;
-class UScannerComponent;
+class UAbyssalScanComponent;
 
 UENUM(BlueprintType)
 enum class EAbyssalAudioCueType : uint8
@@ -57,11 +56,12 @@ public:
     virtual void Initialize(FSubsystemCollectionBase& Collection) override;
     virtual void Deinitialize() override;
 
+    /** Called automatically by UAbyssalScanComponent::BeginPlay; safe to call again for manual wiring. */
     UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Audio")
-    void RegisterScannerComponent(UScannerComponent* ScannerComponent);
+    void RegisterScanComponent(UAbyssalScanComponent* ScanComponent);
 
     UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Audio")
-    void UnregisterScannerComponent(UScannerComponent* ScannerComponent);
+    void UnregisterScanComponent(UAbyssalScanComponent* ScanComponent);
 
     UFUNCTION(BlueprintCallable, Category = "Abyssal Earth|Audio")
     void RequestAmbienceCue(FName CueId, FVector WorldLocation, float Intensity = 1.0f);
@@ -86,18 +86,18 @@ private:
     void HandleRouteCompleted();
 
     UFUNCTION()
-    void HandleScannerPulseStarted(FVector ScanOrigin, float EffectiveRadius);
+    void HandleScanPulseFired();
 
     UFUNCTION()
-    void HandleScannerDiscoveryFound(ADiscoveryActor* Discovery, bool bNewDiscovery);
+    void HandleScanHit(AActor* ScannedActor, FName DiscoveryId);
 
     UFUNCTION()
-    void HandleScannerMissed();
+    void HandleScanMissed();
 
     void BindCoreSubsystems(FSubsystemCollectionBase& Collection);
     void UnbindCoreSubsystems();
     void CleanRegisteredScanners();
 
     UPROPERTY()
-    TArray<TObjectPtr<UScannerComponent>> RegisteredScanners;
+    TArray<TObjectPtr<UAbyssalScanComponent>> RegisteredScanners;
 };

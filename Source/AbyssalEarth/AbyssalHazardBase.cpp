@@ -90,6 +90,7 @@ void AAbyssalHazardBase::EnterPhase(EHazardPhase NewPhase)
 {
     CurrentPhase = NewPhase;
     PhaseStartTime = GetWorld()->GetTimeSeconds();
+    OnPhaseChanged(NewPhase);
     BroadcastPhaseEvent(NewPhase);
 
     if (NewPhase == EHazardPhase::Active) { StartDamageTick(); }

@@ -32,12 +32,9 @@ void AObjectiveTriggerActor::HandleTriggerOverlap(
     bool bFromSweep,
     const FHitResult& SweepResult)
 {
-    if (ObjectiveIdToComplete.IsNone())
-    {
-        OnObjectiveTriggerActivated(false);
-        return;
-    }
-
+    // Filter the instigator first: with an unset objective id the IsNone
+    // branch below would otherwise fire the BP event for every overlapping
+    // actor (debris, creatures), bypassing the player filter.
     if (bOnlyPlayerControlledPawn)
     {
         const APawn* Pawn = Cast<APawn>(OtherActor);
@@ -45,6 +42,12 @@ void AObjectiveTriggerActor::HandleTriggerOverlap(
         {
             return;
         }
+    }
+
+    if (ObjectiveIdToComplete.IsNone())
+    {
+        OnObjectiveTriggerActivated(false);
+        return;
     }
 
     UObjectiveSubsystem* ObjectiveSubsystem = nullptr;

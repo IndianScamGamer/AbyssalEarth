@@ -94,6 +94,9 @@ bool UObjectiveSubsystem::CompleteObjective(FName ObjectiveId)
 {
     if (ObjectiveId.IsNone() || !IsObjectiveActive(ObjectiveId))
     {
+        UE_LOG(LogTemp, Warning,
+            TEXT("UObjectiveSubsystem::CompleteObjective — '%s' is not currently active (already complete, not in route, or wrong order). Call is a no-op."),
+            *ObjectiveId.ToString());
         return false;
     }
 
