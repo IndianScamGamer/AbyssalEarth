@@ -141,7 +141,10 @@ FVector UAbyssalInteractionComponent::GetTraceStart() const
     }
     FVector EyeLoc;
     FRotator EyeRot;
-    GetOwner()->GetActorEyesViewPoint(EyeLoc, EyeRot);
+    if (AActor* Owner = GetOwner())
+    {
+        Owner->GetActorEyesViewPoint(EyeLoc, EyeRot);
+    }
     return EyeLoc;
 }
 
@@ -149,6 +152,9 @@ FVector UAbyssalInteractionComponent::GetTraceEnd() const
 {
     FVector EyeLoc;
     FRotator EyeRot;
-    GetOwner()->GetActorEyesViewPoint(EyeLoc, EyeRot);
+    if (AActor* Owner = GetOwner())
+    {
+        Owner->GetActorEyesViewPoint(EyeLoc, EyeRot);
+    }
     return GetTraceStart() + EyeRot.Vector() * InteractDistance;
 }
