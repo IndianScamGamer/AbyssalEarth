@@ -6,11 +6,13 @@ if _SCRIPTS_ROOT not in sys.path:
     sys.path.insert(0, _SCRIPTS_ROOT)
 
 from prologue_submarine.elevator_shaft.run_all import run_all as run_elevator_shaft
+from prologue_submarine.exterior.run_all import run_all as run_exterior
 from prologue_submarine.submarine.run_all import run_all as run_submarine
 
 
 def run_all():
     run_elevator_shaft()
+    run_exterior()
     run_submarine()
 
 

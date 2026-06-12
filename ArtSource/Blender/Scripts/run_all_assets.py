@@ -12,10 +12,12 @@ from characters.run_all import run_all as run_characters
 from gameplay_props.run_all import run_all as run_gameplay_props
 from human_survey_kit.run_all import run_all as run_human_survey_kit
 from items.run_all import run_all as run_items
+from later_regions.run_all import run_all as run_later_regions
 from luminous_rift_env.run_all import run_all as run_luminous_rift_env
 from luminous_rift_machines.run_all import run_all as run_luminous_rift_machines
 from prologue_submarine.run_all import run_all as run_prologue_submarine
 from set_dressing.run_all import run_all as run_set_dressing
+from tools.run_all import run_all as run_tools
 from vfx_support.run_all import run_all as run_vfx_support
 from world_biomes.run_all import run_all as run_world_biomes
 
@@ -35,6 +37,9 @@ def main():
     print('--- items ---')
     run_items()
     print()
+    print('--- later_regions ---')
+    run_later_regions()
+    print()
     print('--- luminous_rift_env ---')
     run_luminous_rift_env()
     print()
@@ -46,6 +51,9 @@ def main():
     print()
     print('--- set_dressing ---')
     run_set_dressing()
+    print()
+    print('--- tools ---')
+    run_tools()
     print()
     print('--- vfx_support ---')
     run_vfx_support()
