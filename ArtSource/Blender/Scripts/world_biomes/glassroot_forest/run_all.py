@@ -7,7 +7,9 @@ if _SCRIPTS_ROOT not in sys.path:
 if _HERE not in sys.path:
     sys.path.insert(0, _HERE)
 
+from sm_glassroot_canopy_cluster import build as build_sm_glassroot_canopy_cluster
 from sm_glassroot_platform import build as build_sm_glassroot_platform
+from sm_glassroot_pool_terrace import build as build_sm_glassroot_pool_terrace
 from sm_glassroot_root_bridge_a import build as build_sm_glassroot_root_bridge_a
 from sm_glassroot_root_column_hero import build as build_sm_glassroot_root_column_hero
 from sm_glassroot_root_column_m import build as build_sm_glassroot_root_column_m
@@ -17,7 +19,9 @@ from sm_glassroot_trunk import build as build_sm_glassroot_trunk
 
 
 def run_all():
+    build_sm_glassroot_canopy_cluster()
     build_sm_glassroot_platform()
+    build_sm_glassroot_pool_terrace()
     build_sm_glassroot_root_bridge_a()
     build_sm_glassroot_root_column_hero()
     build_sm_glassroot_root_column_m()

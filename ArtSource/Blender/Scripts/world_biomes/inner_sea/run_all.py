@@ -10,6 +10,7 @@ if _HERE not in sys.path:
 from sm_inner_sea_basalt_dock_a import build as build_sm_inner_sea_basalt_dock_a
 from sm_inner_sea_broken_pier_a import build as build_sm_inner_sea_broken_pier_a
 from sm_inner_sea_dock import build as build_sm_inner_sea_dock
+from sm_inner_sea_quay_edge import build as build_sm_inner_sea_quay_edge
 from sm_inner_sea_submerged_ruin_a import build as build_sm_inner_sea_submerged_ruin_a
 from sm_stalactite import build as build_sm_stalactite
 
@@ -18,6 +19,7 @@ def run_all():
     build_sm_inner_sea_basalt_dock_a()
     build_sm_inner_sea_broken_pier_a()
     build_sm_inner_sea_dock()
+    build_sm_inner_sea_quay_edge()
     build_sm_inner_sea_submerged_ruin_a()
     build_sm_stalactite()
 
