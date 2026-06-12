@@ -10,6 +10,7 @@ if _HERE not in sys.path:
 from sm_lava_bridge import build as build_sm_lava_bridge
 from sm_lava_rock import build as build_sm_lava_rock
 from sm_mantle_garden_mineral_flower_a import build as build_sm_mantle_garden_mineral_flower_a
+from sm_mantle_garden_mineral_flower_patch import build as build_sm_mantle_garden_mineral_flower_patch
 from sm_mantle_garden_obsidian_ridge_a import build as build_sm_mantle_garden_obsidian_ridge_a
 from sm_mantle_garden_steam_vent_mesh_a import build as build_sm_mantle_garden_steam_vent_mesh_a
 from sm_purple_crystal import build as build_sm_purple_crystal
@@ -20,6 +21,7 @@ def run_all():
     build_sm_lava_bridge()
     build_sm_lava_rock()
     build_sm_mantle_garden_mineral_flower_a()
+    build_sm_mantle_garden_mineral_flower_patch()
     build_sm_mantle_garden_obsidian_ridge_a()
     build_sm_mantle_garden_steam_vent_mesh_a()
     build_sm_purple_crystal()
