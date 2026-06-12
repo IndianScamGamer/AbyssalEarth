@@ -11,6 +11,7 @@ from sm_beam_emitter import build as build_sm_beam_emitter
 from sm_bridge_span import build as build_sm_bridge_span
 from sm_gate_wall import build as build_sm_gate_wall
 from sm_hanging_platform import build as build_sm_hanging_platform
+from sm_hex_arm_joint import build as build_sm_hex_arm_joint
 from sm_hex_cluster import build as build_sm_hex_cluster
 from sm_hex_tile import build as build_sm_hex_tile
 from sm_orb_frame import build as build_sm_orb_frame
@@ -26,6 +27,7 @@ def run_all():
     build_sm_bridge_span()
     build_sm_gate_wall()
     build_sm_hanging_platform()
+    build_sm_hex_arm_joint()
     build_sm_hex_cluster()
     build_sm_hex_tile()
     build_sm_orb_frame()
