@@ -22,6 +22,32 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('Slice')
 
+
+def box_from_corners(bm, min_pt, max_pt):
+    x0,y0,z0 = min_pt
+    x1,y1,z1 = max_pt
+    verts = [
+        bm.verts.new((x0,y0,z0)), bm.verts.new((x1,y0,z0)),
+        bm.verts.new((x1,y1,z0)), bm.verts.new((x0,y1,z0)),
+        bm.verts.new((x0,y0,z1)), bm.verts.new((x1,y0,z1)),
+        bm.verts.new((x1,y1,z1)), bm.verts.new((x0,y1,z1)),
+    ]
+    faces = [(0,1,2,3),(7,6,5,4),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)]
+    for f in faces:
+        try:
+            bm.faces.new([verts[i] for i in f])
+        except Exception:
+            pass
+    return verts
+
+
+# ══════════════════════════════════════════════
+#  1. SURVEY PLATFORM
+# ══════════════════════════════════════════════
+# 10×10m modular elevated platform. Grid of square deck panels,
+# perimeter safety rail channel, 4 support legs with cross-braces.
+# Matches: expedition atmosphere of HE-001 through HE-005.
+
 def build():
     print("Building SM_Human_SurveyPlatform_A …")
     obj, bm = new_mesh("SM_Human_SurveyPlatform_A")

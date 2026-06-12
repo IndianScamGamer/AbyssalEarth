@@ -89,32 +89,6 @@ def build():
 # Main
 # ---------------------------------------------------------------------------
 
-if __name__ == "__main__":
-    print("=== gen_characters.py ===")
-
-    print("[1/7] Building SM_Diver_Protagonist_A ...")
-    build_diver()
-
-    print("[2/7] Building SM_HeliosRobot_Detailed_A ...")
-    build_helios_detailed()
-
-    print("[3/7] Building SM_RiftCreature_Silhouette_A ...")
-    build_rift_creature_a()
-
-    print("[4/7] Building SM_RiftCreature_Silhouette_B ...")
-    build_rift_creature_b()
-
-    print("[5/7] Building SM_RiftCreature_Silhouette_C ...")
-    build_rift_creature_c()
-
-    print("[6/7] Building SM_AbyssalCreature_Patrol_A ...")
-    build_abyssal_creature()
-
-    print("[7/7] Building collectible item meshes ...")
-    build_collectible_items()
-
-    print("=== gen_characters.py COMPLETE ===")
-    print(f"Output: {EXPORT_DIR}")
 
 if __name__ == "__main__":
     clear_scene()

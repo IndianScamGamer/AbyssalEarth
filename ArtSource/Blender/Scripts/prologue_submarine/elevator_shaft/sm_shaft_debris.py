@@ -75,48 +75,6 @@ def build():
 # Main
 # ===========================================================================
 
-if __name__ == "__main__":
-    print("=== gen_prologue_submarine.py ===")
-
-    print("[Sub 1/6] SM_Sub_CorridorSection_Straight_A ...")
-    build_corridor_straight()
-
-    print("[Sub 2/6] SM_Sub_CorridorSection_Corner_A ...")
-    build_corridor_corner()
-
-    print("[Sub 3/6] SM_Sub_BulkheadDoor_A ...")
-    build_bulkhead_door()
-
-    print("[Sub 4/6] SM_Sub_BunkRoom_Shell_A ...")
-    build_bunk_room()
-
-    print("[Sub 5/6] SM_Sub_EngineRoom_Shell_A ...")
-    build_engine_room()
-
-    print("[Sub 6/6] SM_Sub_AirlockChamber_A ...")
-    build_airlock()
-
-    print("[Sub Decor] SM_Sub_DecorPipes_Bundle_A ...")
-    build_pipe_bundle()
-
-    print("[Elev 1/4] SM_Elevator_ShaftSection_A ...")
-    build_shaft_section()
-
-    print("[Elev 2/4] SM_Elevator_Car_A ...")
-    build_elevator_car()
-
-    print("[Elev 3/4] SM_Elevator_CrashedCar_A ...")
-    build_crashed_car()
-
-    print("[Elev 4/4] SM_Elevator_Mechanism_A ...")
-    build_elevator_mechanism()
-
-    print("[Elev Debris] SM_Elevator_ShaftDebris_A ...")
-    build_shaft_debris()
-
-    print("=== gen_prologue_submarine.py COMPLETE ===")
-    print(f"Prologue → {EXPORT_DIR}")
-    print(f"Elevator → {EXPORT_DIR}")
 
 if __name__ == "__main__":
     clear_scene()

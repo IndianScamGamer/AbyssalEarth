@@ -10,10 +10,12 @@ if _HERE not in sys.path:
 from sm_beam_emitter import build as build_sm_beam_emitter
 from sm_bridge_span import build as build_sm_bridge_span
 from sm_gate_wall import build as build_sm_gate_wall
+from sm_hanging_hose_bundle import build as build_sm_hanging_hose_bundle
 from sm_hanging_platform import build as build_sm_hanging_platform
 from sm_hex_arm_joint import build as build_sm_hex_arm_joint
 from sm_hex_cluster import build as build_sm_hex_cluster
 from sm_hex_tile import build as build_sm_hex_tile
+from sm_machine_cliff_facade import build as build_sm_machine_cliff_facade
 from sm_orb_frame import build as build_sm_orb_frame
 from sm_orb_hub import build as build_sm_orb_hub
 from sm_platform_node import build as build_sm_platform_node
@@ -26,10 +28,12 @@ def run_all():
     build_sm_beam_emitter()
     build_sm_bridge_span()
     build_sm_gate_wall()
+    build_sm_hanging_hose_bundle()
     build_sm_hanging_platform()
     build_sm_hex_arm_joint()
     build_sm_hex_cluster()
     build_sm_hex_tile()
+    build_sm_machine_cliff_facade()
     build_sm_orb_frame()
     build_sm_orb_hub()
     build_sm_platform_node()

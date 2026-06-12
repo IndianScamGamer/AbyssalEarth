@@ -7,20 +7,28 @@ if _SCRIPTS_ROOT not in sys.path:
 if _HERE not in sys.path:
     sys.path.insert(0, _HERE)
 
+from sm_ammonite_fossil import build as build_sm_ammonite_fossil
 from sm_fossil_sky_ceiling_skeleton_hero_a import build as build_sm_fossil_sky_ceiling_skeleton_hero_a
 from sm_fossil_sky_giant_rib_a import build as build_sm_fossil_sky_giant_rib_a
 from sm_fossil_sky_observation_walkway_a import build as build_sm_fossil_sky_observation_walkway_a
+from sm_grated_walkway import build as build_sm_grated_walkway
+from sm_petrified_fish import build as build_sm_petrified_fish
 from sm_rib_arch import build as build_sm_rib_arch
 from sm_spine_segment import build as build_sm_spine_segment
+from sm_whale_skeleton_wall import build as build_sm_whale_skeleton_wall
 from sm_wood_dock import build as build_sm_wood_dock
 
 
 def run_all():
+    build_sm_ammonite_fossil()
     build_sm_fossil_sky_ceiling_skeleton_hero_a()
     build_sm_fossil_sky_giant_rib_a()
     build_sm_fossil_sky_observation_walkway_a()
+    build_sm_grated_walkway()
+    build_sm_petrified_fish()
     build_sm_rib_arch()
     build_sm_spine_segment()
+    build_sm_whale_skeleton_wall()
     build_sm_wood_dock()
 
 

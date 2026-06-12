@@ -167,6 +167,34 @@ def analyze_file(path, palette):
         if required not in info["calls"]:
             err(rel, f"build() never calls {required}()")
 
+    # 9. undefined-name lint: any Name loaded but never bound anywhere in the
+    # module (imports, assignments, defs, args, loop targets) and not a
+    # builtin is a runtime NameError waiting to happen (e.g. a helper typo).
+    import builtins
+    bound = set(dir(builtins)) | {"__file__", "__name__", "__doc__",
+                                   "__package__", "__spec__", "__loader__"}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Name) and isinstance(node.ctx, (ast.Store, ast.Del)):
+            bound.add(node.id)
+        elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            bound.add(node.name)
+        elif isinstance(node, ast.arg):
+            bound.add(node.arg)
+        elif isinstance(node, ast.Import):
+            for alias in node.names:
+                bound.add((alias.asname or alias.name).split(".")[0])
+        elif isinstance(node, ast.ImportFrom):
+            for alias in node.names:
+                bound.add(alias.asname or alias.name)
+        elif isinstance(node, (ast.Lambda,)):
+            for a in node.args.args:
+                bound.add(a.arg)
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load):
+            if node.id not in bound:
+                err(rel, f"undefined name {node.id!r} at line {node.lineno} "
+                         "(typo or missing import — would NameError at runtime)")
+
     return info
 
 
