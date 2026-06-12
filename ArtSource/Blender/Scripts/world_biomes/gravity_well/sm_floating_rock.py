@@ -20,9 +20,9 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
                            get_export_dir, mat_color, extrude_region,
                            add_subdivision, TAU, PI)
 
-EXPORT_DIR = get_export_dir('FossilSky')
+EXPORT_DIR = get_export_dir('GravityWell')
 
-def build(name, scale, seed=30):
+def build_variant(name, scale, seed=30):
     """Irregular floating rock chunk. Fractured faces, no clean flat bottom.
     Matches: gravity_well_concept.png — debris spiraling around vortex."""
     print(f"Building {name} …")
@@ -51,8 +51,22 @@ def build(name, scale, seed=30):
     finalise(obj, bm)
     smart_uv(obj)
     add_mat_slots(obj, ["mat_wet_basalt"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
     return obj
+
+VARIANTS = [
+    ('SM_GravityWell_FloatingRock_A', 4.0, 30),
+    ('SM_GravityWell_FloatingRock_B', 2.2, 35),
+    ('SM_GravityWell_FloatingRock_C', 1.0, 40),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

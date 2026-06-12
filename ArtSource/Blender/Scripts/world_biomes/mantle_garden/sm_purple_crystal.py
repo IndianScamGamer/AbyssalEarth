@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('MantleGarden')
 
-def build(name, scale, seed=90):
+def build_variant(name, scale, seed=90):
     """Purple amethyst-style crystal cluster. Similar silhouette to blue
     crystals but shorter, stockier, more angular.
     Matches: mantle_garden_concept.png — purple accents on dark lava rock."""
@@ -66,8 +66,21 @@ def build(name, scale, seed=90):
     finalise(obj, bm)
     smart_uv(obj)
     add_mat_slots(obj, ["mat_wet_basalt", "mat_purple_emissive"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
     return obj
+
+VARIANTS = [
+    ('SM_MantleGarden_PurpleCrystal_A', 1.8, 90),
+    ('SM_MantleGarden_PurpleCrystal_B', 1.0, 95),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

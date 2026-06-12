@@ -84,7 +84,8 @@ def build():
     smart_uv(obj)
     add_mat_slots(obj, ["mat_ancient_machine_dark", "mat_gold_emissive",
                         "mat_blue_emissive"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
+    export_fbx(obj, EXPORT_DIR, "SM_Rift_OrbHub_A")
     return obj
 
 

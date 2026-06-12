@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('FossilSky')
 
-def build(name, length, width, seed=5):
+def build_variant(name, length, width, seed=5):
     """Giant vertebra-style spine segment.
     Oval body with 4 transverse processes (bone wings)."""
     print(f"Building {name} …")
@@ -68,8 +68,21 @@ def build(name, length, width, seed=5):
     finalise(obj, bm)
     smart_uv(obj)
     add_mat_slots(obj, ["mat_fossil_bone"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
     return obj
+
+VARIANTS = [
+    ('SM_FossilSky_SpineSegment_A', 8, 3.5, 3),
+    ('SM_FossilSky_SpineSegment_B', 5, 2.4, 7),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

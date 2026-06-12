@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('InnerSea')
 
-def build(name, r_base, height, seed=50):
+def build_variant(name, r_base, height, seed=50):
     """Hanging cave stalactite. Natural tapered form with occasional
     bioluminescent tip. Matches: inner_sea_concept.png."""
     print(f"Building {name} …")
@@ -62,8 +62,22 @@ def build(name, r_base, height, seed=50):
     finalise(obj, bm)
     smart_uv(obj)
     add_mat_slots(obj, ["mat_wet_basalt", "mat_water_bioluminescent"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
     return obj
+
+VARIANTS = [
+    ('SM_InnerSea_Stalactite_A', 0.9, 6.5, 50),
+    ('SM_InnerSea_Stalactite_B', 0.55, 4.0, 55),
+    ('SM_InnerSea_Stalactite_C', 1.4, 10.0, 60),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

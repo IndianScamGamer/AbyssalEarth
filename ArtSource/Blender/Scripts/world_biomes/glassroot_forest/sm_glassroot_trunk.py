@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('GlassrootForest')
 
-def build(name, r, seed=10):
+def build_variant(name, r, seed=10):
     """Translucent glass-bark tree trunk with red vein channels.
     Smooth surface with occasional red emissive ridge.
     Matches: glassroot_forest_concept.png."""
@@ -82,8 +82,21 @@ def build(name, r, seed=10):
     finalise(obj, bm)
     smart_uv(obj)
     add_mat_slots(obj, ["mat_glass_bark", "mat_red_emissive_vein"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
     return obj
+
+VARIANTS = [
+    ('SM_Glassroot_TrunkBase_A', 2.2, 10),
+    ('SM_Glassroot_TrunkBase_B', 3.5, 17),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

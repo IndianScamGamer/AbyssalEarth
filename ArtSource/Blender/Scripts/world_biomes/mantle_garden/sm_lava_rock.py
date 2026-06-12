@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('MantleGarden')
 
-def build(name, scale, seed=80):
+def build_variant(name, scale, seed=80):
     """Jagged volcanic rock. Rough geometry, sharp edges, hot fissures.
     Matches: mantle_garden_concept.png — dark jagged formations."""
     print(f"Building {name} …")
@@ -76,8 +76,21 @@ def build(name, scale, seed=80):
     finalise(obj, bm)
     smart_uv(obj)
     add_mat_slots(obj, ["mat_wet_basalt", "mat_lava_emissive"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
     return obj
+
+VARIANTS = [
+    ('SM_MantleGarden_LavaRock_A', 5.0, 80),
+    ('SM_MantleGarden_LavaRock_B', 3.0, 85),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

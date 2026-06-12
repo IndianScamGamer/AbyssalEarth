@@ -68,7 +68,7 @@ def build():
     smart_uv(ob)
     add_mat_slots(ob, ["mat_wet_basalt", "mat_human_equipment"])
     set_origin_to_base(ob)
-    export_fbx(ob, ELEVATOR_DIR, "SM_Elevator_ShaftDebris_A")
+    export_fbx(ob, EXPORT_DIR, "SM_Elevator_ShaftDebris_A")
 
 
 # ===========================================================================
@@ -115,8 +115,8 @@ if __name__ == "__main__":
     build_shaft_debris()
 
     print("=== gen_prologue_submarine.py COMPLETE ===")
-    print(f"Prologue → {PROLOGUE_DIR}")
-    print(f"Elevator → {ELEVATOR_DIR}")
+    print(f"Prologue → {EXPORT_DIR}")
+    print(f"Elevator → {EXPORT_DIR}")
 
 if __name__ == "__main__":
     clear_scene()

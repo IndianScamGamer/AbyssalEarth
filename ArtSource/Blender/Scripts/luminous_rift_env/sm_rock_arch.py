@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('LuminousRift')
 
-def build(name, span, height, thickness, seed=3):
+def build_variant(name, span, height, thickness, seed=3):
     print(f"Building {name} …")
     obj, bm = new_mesh(name)
     rng = random.Random(seed)
@@ -115,6 +115,19 @@ def build(name, span, height, thickness, seed=3):
 # ══════════════════════════════════════════════
 # Dark rock overhangs that frame the top of the First Overlook composition.
 # Matches: AD-004, LR-004, LR-009.
+
+VARIANTS = [
+    ('SM_Rift_RockArch_A', 28, 18, 3.5, 3),
+    ('SM_Rift_RockArch_B', 42, 25, 5.0, 6),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

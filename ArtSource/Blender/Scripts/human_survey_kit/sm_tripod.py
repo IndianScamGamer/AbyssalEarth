@@ -77,7 +77,8 @@ def build():
     finalise(obj, bm)
     smart_uv(obj)
     add_mat_slots(obj, ["mat_human_equipment", "mat_blue_emissive"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
+    export_fbx(obj, EXPORT_DIR, "SM_Human_TripodScanner_A")
     return obj
 
 

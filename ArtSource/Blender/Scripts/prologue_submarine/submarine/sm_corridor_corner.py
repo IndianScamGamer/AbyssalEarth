@@ -58,7 +58,7 @@ def build():
     smart_uv(ob)
     add_mat_slots(ob, ["mat_human_equipment"])
     set_origin_to_base(ob)
-    export_fbx(ob, PROLOGUE_DIR, "SM_Sub_CorridorSection_Corner_A")
+    export_fbx(ob, EXPORT_DIR, "SM_Sub_CorridorSection_Corner_A")
 
 
 # ---------------------------------------------------------------------------

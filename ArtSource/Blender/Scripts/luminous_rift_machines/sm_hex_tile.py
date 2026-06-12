@@ -22,7 +22,13 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('LuminousRift')
 
-def build(name="SM_Rift_HexCollector_Tile_A",
+
+def hex_pts(cx, cy, r, z=0.0):
+    return [(cx + math.cos(i*TAU/6 + PI/6)*r,
+             cy + math.sin(i*TAU/6 + PI/6)*r, z)
+            for i in range(6)]
+
+def build_variant(name="SM_Rift_HexCollector_Tile_A",
                    outer_r=2.0, frame_w=0.22, pane_depth=0.04):
     print(f"Building {name} …")
     obj, bm = new_mesh(name)
@@ -98,7 +104,7 @@ def build(name="SM_Rift_HexCollector_Tile_A",
     smart_uv(obj)
     add_mat_slots(obj, ["mat_gold_emissive", "mat_collector_glass",
                         "mat_ancient_machine_dark"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
     return obj
 
 
@@ -108,6 +114,12 @@ def build(name="SM_Rift_HexCollector_Tile_A",
 # 7-tile flower arrangement (1 centre + 6 surrounding).
 # Centre connection node where all beam lines converge.
 # Matches: Luminous Rift hero image, AD-002.
+
+def build():
+    clear_scene()
+    obj = build_variant("SM_Rift_HexCollector_Tile_A")
+    export_fbx(obj, EXPORT_DIR, "SM_Rift_HexCollector_Tile_A")
+
 
 if __name__ == "__main__":
     clear_scene()

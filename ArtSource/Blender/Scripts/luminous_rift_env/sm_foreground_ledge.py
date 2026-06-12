@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('LuminousRift')
 
-def build(name, broken=False, seed=7):
+def build_variant(name, broken=False, seed=7):
     print(f"Building {name} …")
     obj, bm = new_mesh(name)
     rng = random.Random(seed)
@@ -105,6 +105,19 @@ def build(name, broken=False, seed=7):
 # ══════════════════════════════════════════════
 # Natural stone arch 30–60m span. Uneven sides, crystal sockets,
 # strong silhouette for cavern framing. Matches: AD-004.
+
+VARIANTS = [
+    ('SM_Rift_ForegroundLedge_A', False, 7),
+    ('SM_Rift_ForegroundLedge_B_Broken', True, 14),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('LuminousRift')
 
-def build(name, width, height, depth, seed=99):
+def build_variant(name, width, height, depth, seed=99):
     print(f"Building {name} …")
     obj, bm = new_mesh(name)
     rng = random.Random(seed)
@@ -76,6 +76,19 @@ def build(name, width, height, depth, seed=99):
 # ══════════════════════════════════════════════
 #  MAIN
 # ══════════════════════════════════════════════
+
+VARIANTS = [
+    ('SM_Rift_CavernWall_Large_A', 40, 30, 5, 99),
+    ('SM_Rift_CavernWall_Large_B', 60, 40, 8, 111),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

@@ -95,6 +95,7 @@ def build():
     smart_uv(obj)
     add_mat_slots(obj, ["mat_human_equipment", "mat_ancient_machine_dark"])
     set_origin_to_base(obj)
+    export_fbx(obj, EXPORT_DIR, "SM_HeliosRobot_Static")
     return obj
 
 

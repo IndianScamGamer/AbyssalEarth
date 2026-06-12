@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('LuminousRift')
 
-def build(name, width, depth, seed=15):
+def build_variant(name, width, depth, seed=15):
     print(f"Building {name} …")
     obj, bm = new_mesh(name)
     rng = random.Random(seed)
@@ -96,6 +96,19 @@ def build(name, width, depth, seed=15):
 # Large fractured rock slab suspended from the ceiling. Crystal clusters
 # embedded on underside. Convincing fracture geometry at anchor.
 # Matches: AD-006 (Hanging Slab — Ceiling Detail).
+
+VARIANTS = [
+    ('SM_Rift_Overhang_A', 22, 12, 11),
+    ('SM_Rift_Overhang_B', 35, 18, 22),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

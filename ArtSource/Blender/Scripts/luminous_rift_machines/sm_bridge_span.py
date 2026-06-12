@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('LuminousRift')
 
-def build(name, length=24.0, broken=False, seed=3):
+def build_variant(name, length=24.0, broken=False, seed=3):
     print(f"Building {name} …")
     obj, bm = new_mesh(name)
     rng = random.Random(seed)
@@ -118,7 +118,7 @@ def build(name, length=24.0, broken=False, seed=3):
     smart_uv(obj)
     add_mat_slots(obj, ["mat_ancient_machine_dark", "mat_blue_emissive",
                         "mat_ancient_machine_edge_wear", "mat_wet_basalt"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
     return obj
 
 
@@ -127,6 +127,19 @@ def build(name, length=24.0, broken=False, seed=3):
 # ══════════════════════════════════════════════
 # Floating circular platform ~18m diameter, layered slab underside,
 # ancient machine surface detail.
+
+VARIANTS = [
+    ('SM_Rift_BridgeSpan_A', 24, False, 3),
+    ('SM_Rift_BridgeSpan_B_Broken', 24, True, 6),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

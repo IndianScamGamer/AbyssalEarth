@@ -23,6 +23,9 @@ jobs:
       - name: Run data validator
         run: python Tools/validate_data.py
 
+      - name: Validate Blender asset scripts
+        run: python Tools/validate_asset_scripts.py
+
   cpp-guard:
     name: C++ Banned-API Guard
     runs-on: ubuntu-latest

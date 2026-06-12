@@ -20,9 +20,25 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
                            get_export_dir, mat_color, extrude_region,
                            add_subdivision, TAU, PI)
 
-EXPORT_DIR = get_export_dir('InnerSea')
+EXPORT_DIR = get_export_dir('FossilSky')
 
-def build(length=8.0, seed=4):
+
+def box(bm, mn, mx):
+    x0,y0,z0 = mn; x1,y1,z1 = mx
+    vv = [bm.verts.new((x0,y0,z0)), bm.verts.new((x1,y0,z0)),
+          bm.verts.new((x1,y1,z0)), bm.verts.new((x0,y1,z0)),
+          bm.verts.new((x0,y0,z1)), bm.verts.new((x1,y0,z1)),
+          bm.verts.new((x1,y1,z1)), bm.verts.new((x0,y1,z1))]
+    for fi in [(0,1,2,3),(7,6,5,4),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)]:
+        try: bm.faces.new([vv[i] for i in fi])
+        except: pass
+
+
+# ════════════════════════════════════════════════════════
+#  FOSSIL SKY
+# ════════════════════════════════════════════════════════
+
+def build_variant(length=8.0, seed=4):
     """Weathered wooden dock section. 2m wide plank-top walkway,
     support posts, cross-braces."""
     print("Building SM_FossilSky_WoodDock_A …")
@@ -55,13 +71,19 @@ def build(length=8.0, seed=4):
     finalise(obj, bm)
     smart_uv(obj)
     add_mat_slots(obj, ["mat_human_equipment"])  # wood-like
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
     return obj
 
 
 # ════════════════════════════════════════════════════════
 #  GLASSROOT FOREST
 # ════════════════════════════════════════════════════════
+
+def build():
+    clear_scene()
+    obj = build_variant(8.0, 4)
+    export_fbx(obj, EXPORT_DIR, "SM_FossilSky_WoodDock_A")
+
 
 if __name__ == "__main__":
     clear_scene()

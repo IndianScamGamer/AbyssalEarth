@@ -84,6 +84,7 @@ def build():
     smart_uv(obj)
     add_mat_slots(obj, ["mat_human_equipment", "mat_blue_emissive"])
     set_origin_to_base(obj)
+    export_fbx(obj, EXPORT_DIR, "SM_Beacon_A")
     return obj
 
 

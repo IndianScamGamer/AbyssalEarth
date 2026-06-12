@@ -74,6 +74,7 @@ _MATERIAL_COLORS = {
     "mat_human_equipment":        (0.18, 0.16, 0.14, 1),
     "mat_collector_glass":        (0.60, 0.85, 1.00, 1),
     "mat_orb_energy":             (0.40, 0.80, 1.00, 1),
+    "mat_amber_emissive":       (1.00, 0.50, 0.05, 1),
     "mat_lava_emissive":          (1.00, 0.25, 0.00, 1),
     "mat_purple_emissive":        (0.55, 0.10, 1.00, 1),
     "mat_red_emissive_vein":      (1.00, 0.05, 0.05, 1),

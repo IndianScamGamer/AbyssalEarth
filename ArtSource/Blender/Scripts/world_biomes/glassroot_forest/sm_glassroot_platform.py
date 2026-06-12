@@ -53,7 +53,8 @@ def build():
     finalise(obj, bm)
     smart_uv(obj)
     add_mat_slots(obj, ["mat_wet_basalt", "mat_glass_bark"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
+    export_fbx(obj, EXPORT_DIR, "SM_Glassroot_FloatingPlatform_A")
     return obj
 
 

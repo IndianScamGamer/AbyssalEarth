@@ -22,7 +22,13 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('LuminousRift')
 
-def build(name, broken=False, seed=1):
+
+def hex_pts(cx, cy, r, z=0.0):
+    return [(cx + math.cos(i*TAU/6 + PI/6)*r,
+             cy + math.sin(i*TAU/6 + PI/6)*r, z)
+            for i in range(6)]
+
+def build_variant(name, broken=False, seed=1):
     print(f"Building {name} …")
     obj, bm = new_mesh(name)
     rng = random.Random(seed)
@@ -97,7 +103,7 @@ def build(name, broken=False, seed=1):
     smart_uv(obj)
     add_mat_slots(obj, ["mat_gold_emissive", "mat_collector_glass",
                         "mat_ancient_machine_dark", "mat_blue_emissive"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
     return obj
 
 
@@ -107,6 +113,19 @@ def build(name, broken=False, seed=1):
 # Massive partial ring frame (~30m diameter) around the central orb.
 # Not a perfect circle — asymmetric, damaged, with beam arm attachment
 # points. Matches: AD-001 (Orb Apparatus — Mechanical Hub).
+
+VARIANTS = [
+    ('SM_Rift_HexCollector_Cluster_A', False, 1),
+    ('SM_Rift_HexCollector_Cluster_B_Broken', True, 2),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('Slice')
 
-def build(name, base_r, crystal_count, heights, rock_r):
+def build_variant(name, base_r, crystal_count, heights, rock_r):
     print(f"Building {name} …")
     obj, bm = new_mesh(name)
 
@@ -91,6 +91,20 @@ def build(name, base_r, crystal_count, heights, rock_r):
 # Compact expedition stake. 50cm stake, ring light band at mid-point,
 # small base disc with grip teeth, top emitter dome.
 # Matches: Regenerated/Beacon/deployable_beacon_prop_concept.png
+
+VARIANTS = [
+    ('SM_HarvestableNode_S', 0.18, 3, [0.28, 0.22, 0.32], 0.16),
+    ('SM_HarvestableNode_M', 0.28, 5, [0.55, 0.4, 0.65, 0.45, 0.5], 0.24),
+    ('SM_HarvestableNode_L', 0.4, 7, [0.9, 0.75, 1.05, 0.8, 0.7, 0.95, 0.85], 0.34),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

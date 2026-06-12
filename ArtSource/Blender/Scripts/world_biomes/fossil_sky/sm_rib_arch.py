@@ -22,7 +22,7 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('FossilSky')
 
-def build(name, span, height, rib_w, seed=1):
+def build_variant(name, span, height, rib_w, seed=1):
     """Giant fossil rib bone arching over a tunnel.
     Organic elongated parabola with bone texture striations.
     Matches: fossil_sky_concept.png — ribs arching over the entire tunnel ceiling."""
@@ -71,8 +71,22 @@ def build(name, span, height, rib_w, seed=1):
     finalise(obj, bm)
     smart_uv(obj)
     add_mat_slots(obj, ["mat_fossil_bone"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
     return obj
+
+VARIANTS = [
+    ('SM_FossilSky_RibArch_A', 22, 14, 2.2, 1),
+    ('SM_FossilSky_RibArch_B', 32, 20, 3.0, 5),
+    ('SM_FossilSky_RibArch_C', 15, 10, 1.6, 9),
+]
+
+
+def build():
+    for args in VARIANTS:
+        clear_scene()
+        obj = build_variant(*args)
+        export_fbx(obj, EXPORT_DIR, args[0])
+
 
 if __name__ == "__main__":
     clear_scene()

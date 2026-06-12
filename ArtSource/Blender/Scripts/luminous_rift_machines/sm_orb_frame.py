@@ -100,7 +100,8 @@ def build():
     add_mat_slots(obj, ["mat_ancient_machine_dark",
                         "mat_ancient_machine_edge_wear",
                         "mat_gold_emissive"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
+    export_fbx(obj, EXPORT_DIR, "SM_Rift_OrbFrame_A")
     return obj
 
 

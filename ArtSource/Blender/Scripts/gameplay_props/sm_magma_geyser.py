@@ -70,6 +70,7 @@ def build():
     smart_uv(obj)
     add_mat_slots(obj, ["mat_wet_basalt", "mat_lava_emissive"])
     set_origin_to_base(obj)
+    export_fbx(obj, EXPORT_DIR, "SM_MagmaGeyser_A")
     return obj
 
 

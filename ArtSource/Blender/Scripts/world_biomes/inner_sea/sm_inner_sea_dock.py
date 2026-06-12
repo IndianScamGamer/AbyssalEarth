@@ -22,6 +22,22 @@ from shared.utils import (clear_scene, new_mesh, finalise, smart_uv,
 
 EXPORT_DIR = get_export_dir('InnerSea')
 
+
+def box(bm, mn, mx):
+    x0,y0,z0 = mn; x1,y1,z1 = mx
+    vv = [bm.verts.new((x0,y0,z0)), bm.verts.new((x1,y0,z0)),
+          bm.verts.new((x1,y1,z0)), bm.verts.new((x0,y1,z0)),
+          bm.verts.new((x0,y0,z1)), bm.verts.new((x1,y0,z1)),
+          bm.verts.new((x1,y1,z1)), bm.verts.new((x0,y1,z1))]
+    for fi in [(0,1,2,3),(7,6,5,4),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)]:
+        try: bm.faces.new([vv[i] for i in fi])
+        except: pass
+
+
+# ════════════════════════════════════════════════════════
+#  FOSSIL SKY
+# ════════════════════════════════════════════════════════
+
 def build():
     """Floating harbour dock section. Plank walkway, rusty metal cleats,
     rope loops. Matches atmosphere of inner_sea_concept.png."""
@@ -61,7 +77,8 @@ def build():
     finalise(obj, bm)
     smart_uv(obj)
     add_mat_slots(obj, ["mat_human_equipment", "mat_amber_emissive"])
-    set_origin_bottom(obj)
+    set_origin_to_base(obj)
+    export_fbx(obj, EXPORT_DIR, "SM_InnerSea_WoodDock_A")
     return obj
 
 

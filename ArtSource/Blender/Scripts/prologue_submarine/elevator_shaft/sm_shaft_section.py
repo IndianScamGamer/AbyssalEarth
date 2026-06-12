@@ -70,7 +70,7 @@ def build():
     smart_uv(ob)
     add_mat_slots(ob, ["mat_ancient_machine_dark", "mat_human_equipment"])
     set_origin_to_base(ob)
-    export_fbx(ob, ELEVATOR_DIR, "SM_Elevator_ShaftSection_A")
+    export_fbx(ob, EXPORT_DIR, "SM_Elevator_ShaftSection_A")
 
 
 # ---------------------------------------------------------------------------

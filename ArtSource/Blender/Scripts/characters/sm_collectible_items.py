@@ -82,7 +82,7 @@ def build():
         smart_uv(ob)
         add_mat_slots(ob, [mat_name])
         set_origin_to_base(ob)
-        export_fbx(ob, name)
+        export_fbx(ob, EXPORT_DIR, name)
 
 
 # ---------------------------------------------------------------------------
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     build_collectible_items()
 
     print("=== gen_characters.py COMPLETE ===")
-    print(f"Output: {EXPORT_BASE}")
+    print(f"Output: {EXPORT_DIR}")
 
 if __name__ == "__main__":
     clear_scene()
