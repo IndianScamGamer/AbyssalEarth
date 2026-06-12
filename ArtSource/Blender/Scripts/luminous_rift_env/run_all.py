@@ -10,6 +10,7 @@ if _HERE not in sys.path:
 from sm_cavern_wall import build as build_sm_cavern_wall
 from sm_crystal_kit import build as build_sm_crystal_kit
 from sm_foreground_ledge import build as build_sm_foreground_ledge
+from sm_glow_sprout_cluster import build as build_sm_glow_sprout_cluster
 from sm_hanging_slab import build as build_sm_hanging_slab
 from sm_overhang import build as build_sm_overhang
 from sm_rock_arch import build as build_sm_rock_arch
@@ -19,6 +20,7 @@ def run_all():
     build_sm_cavern_wall()
     build_sm_crystal_kit()
     build_sm_foreground_ledge()
+    build_sm_glow_sprout_cluster()
     build_sm_hanging_slab()
     build_sm_overhang()
     build_sm_rock_arch()

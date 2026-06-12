@@ -9,6 +9,7 @@ if _HERE not in sys.path:
 
 from sm_abyssal_creature import build as build_sm_abyssal_creature
 from sm_collectible_items import build as build_sm_collectible_items
+from sm_creature_pack import build as build_sm_creature_pack
 from sm_diver import build as build_sm_diver
 from sm_helios_detailed import build as build_sm_helios_detailed
 from sm_rift_creature_a import build as build_sm_rift_creature_a
@@ -19,6 +20,7 @@ from sm_rift_creature_c import build as build_sm_rift_creature_c
 def run_all():
     build_sm_abyssal_creature()
     build_sm_collectible_items()
+    build_sm_creature_pack()
     build_sm_diver()
     build_sm_helios_detailed()
     build_sm_rift_creature_a()
