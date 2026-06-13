@@ -78,7 +78,7 @@ def make_composite(render_path, concept_path, out_path, label=""):
     _load_panel(render_path,  HALF_H + 22, f"BLENDER WIREFRAME — {label}")
 
     # Bottom label bar
-    draw.rectangle([0, TARGET_W // 2 * 2 - 2, TARGET_W, HALF_H * 2 + 40], fill=LABEL_BG)
+    draw.rectangle([0, HALF_H * 2 + 2, TARGET_W, HALF_H * 2 + 40], fill=LABEL_BG)
     note = (
         "Visual acceptance gate: geometry silhouette must clearly echo the concept art. "
         "Scale, mass distribution, and distinctive shape language are the checkpoints."
