@@ -272,6 +272,59 @@ def main():
     else:
         err(SCRIPTS_DIR, "missing run_all_assets.py")
 
+    # ── new checks (13–16) ──────────────────────────────────────────
+    for root, dirs, files in os.walk(SCRIPTS_DIR):
+        dirs[:] = [d for d in dirs if d not in ("__pycache__", "shared")]
+        for f in files:
+            if not (f.startswith("sm_") and f.endswith(".py")):
+                continue
+            path = os.path.join(root, f)
+            rel  = os.path.relpath(path)
+            try:
+                with open(path, encoding="utf-8") as fh:
+                    src = fh.read()
+            except OSError:
+                continue
+
+            # 13. Concept reference in docstring (warning until all scripts updated)
+            if "Concept:" not in src:
+                warn(rel, "missing 'Concept: <IMAGE-ID>' line in docstring — "
+                          "add e.g. 'Concept: AD-001, LR-006' to identify the reference art")
+
+            # 14. Floating-vert heuristic
+            vert_new_count = src.count("bm.verts.new(")
+            face_new_count = (src.count("bm.faces.new(") +
+                              src.count("bmesh.ops.create_") +
+                              src.count("bmesh.ops.extrude_") +
+                              src.count("bmesh.ops.convex_hull"))
+            if vert_new_count > 0 and face_new_count == 0:
+                warn(rel, f"has {vert_new_count} bm.verts.new() call(s) but no "
+                          "bm.faces.new() or bmesh.ops — likely floating/disconnected verts")
+            elif vert_new_count > 15 and face_new_count < vert_new_count // 6:
+                warn(rel, f"bm.verts.new() count ({vert_new_count}) greatly exceeds "
+                          f"face/ops count ({face_new_count}) — possible disconnected geometry")
+
+            # 15. Scale constants: at least one module-level UPPER_CASE variable
+            try:
+                tree = ast.parse(src)
+                has_scale_const = any(
+                    isinstance(node, ast.Assign) and
+                    all(isinstance(t, ast.Name) and t.id == t.id.upper() and "_" in t.id
+                        for t in node.targets)
+                    for node in ast.walk(tree)
+                    if isinstance(node, ast.Assign)
+                )
+                if not has_scale_const:
+                    warn(rel, "no module-level UPPER_CASE scale constants defined — "
+                              "add named dimensions (e.g. OUTER_RING_R = 38.0) for auditability")
+            except SyntaxError:
+                pass   # already caught in check 1
+
+            # 16. No bpy.ops.render calls (ERROR — renders must go through the harness)
+            if "bpy.ops.render.render" in src:
+                err(rel, "script calls bpy.ops.render.render() directly — "
+                         "rendering must be done via Tools/render_asset_preview.py")
+
     # report
     print(f"Scanned {file_count} asset scripts in {len(leaf_folders)} folders; "
           f"{len(all_mesh_names)} unique asset names")
