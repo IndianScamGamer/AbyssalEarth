@@ -23,7 +23,7 @@ jobs:
       - name: Run data validator
         run: python Tools/validate_data.py
 
-      - name: Validate Blender asset scripts
+      - name: Validate Blender asset scripts (16 checks)
         run: python Tools/validate_asset_scripts.py
 
   cpp-guard:
@@ -54,3 +54,69 @@ jobs:
             exit 1
           fi
           echo "No TODO/FIXME markers in Docs/."
+
+  asset-render-check:
+    name: Asset Render vs Concept Art
+    runs-on: ubuntu-latest
+    # Only run when Blender scripts are changed (expensive: installs bpy 374 MB)
+    if: |
+      github.event_name == 'pull_request' &&
+      contains(toJson(github.event.pull_request), 'ArtSource/Blender/Scripts')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # need full history for git diff
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip packages (bpy is large)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-bpy-${{ hashFiles('**/requirements-render.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-bpy-
+
+      - name: Install render dependencies
+        run: |
+          pip install --upgrade pip
+          pip install bpy==4.3.0 matplotlib numpy Pillow
+
+      - name: Find changed asset scripts
+        id: changed
+        run: |
+          git diff --name-only origin/${{ github.base_ref }}...HEAD \
+            | grep -E '^ArtSource/Blender/Scripts/.*sm_.*\.py$' \
+            > /tmp/changed_scripts.txt || true
+          echo "Changed scripts:"
+          cat /tmp/changed_scripts.txt || echo "(none)"
+
+      - name: Render wireframe previews for changed scripts
+        run: |
+          mkdir -p /tmp/renders /tmp/comparisons
+          while IFS= read -r script; do
+            [ -z "$script" ] && continue
+            echo "Rendering: $script"
+            python Tools/render_asset_preview.py --script "$script" --out /tmp/renders/ || true
+          done < /tmp/changed_scripts.txt
+
+      - name: Build concept art comparison composites
+        run: |
+          python Tools/compare_concept.py \
+            --renders-dir /tmp/renders/ \
+            --scripts-dir ArtSource/Blender/Scripts/ \
+            --concepts-dir Content/ArtDirection/Concepts/ \
+            --out /tmp/comparisons/ || true
+
+      - name: Upload comparison images as PR artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: concept-vs-render-${{ github.sha }}
+          path: |
+            /tmp/renders/*.png
+            /tmp/comparisons/*.png
+          if-no-files-found: warn
+          retention-days: 30

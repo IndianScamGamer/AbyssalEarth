@@ -596,3 +596,79 @@ Before accepting an asset:
 - Is it exportable to Unreal without cleanup?
 - Does it avoid clean generic sci-fi or generic cave styling?
 - Did the worker update `ASSET_NOTES.md`?
+
+---
+
+## Visual Validation
+
+Starting with PR #2 of the asset overhaul, every PR that changes an `sm_*.py` script
+triggers an automated visual validation pipeline before merge is allowed:
+
+### How it works
+
+1. **Render harness** (`Tools/render_asset_preview.py`) patches `shared.utils` to stub
+   operators, runs `build()`, extracts vertex/face data, and produces a three-view matplotlib
+   wireframe PNG (front / side / 3-quarter) for every changed script.
+
+2. **Comparison compositer** (`Tools/compare_concept.py`) reads the `Concept: IMAGE-ID` line
+   in each script's docstring, finds the matching concept art PNG in
+   `Content/ArtDirection/Concepts/`, and produces a side-by-side composite
+   (`*_vs_concept.png`).
+
+3. **CI uploads** both sets of PNGs as GitHub Actions artifacts attached to the PR.
+   Artifact name: `concept-vs-render-<sha>`.
+
+4. **Human review**: Before requesting merge, the PR author downloads the artifacts and
+   confirms that wireframe geometry clearly matches the concept art silhouette.
+
+5. **User approval** (Vivek): Explicit go/no-go per asset. Failed assets trigger a
+   refinement round with a new commit; the CI re-runs automatically.
+
+### Running locally
+
+```bash
+# Single script
+pip install matplotlib numpy bpy Pillow
+python3 Tools/render_asset_preview.py \
+    --script ArtSource/Blender/Scripts/luminous_rift_machines/sm_orb_hub.py \
+    --out /tmp/renders/
+
+# All scripts changed since main
+python3 Tools/render_asset_preview.py --changed-since origin/main --out /tmp/renders/
+
+# Build comparison composites
+python3 Tools/compare_concept.py \
+    --renders-dir /tmp/renders/ \
+    --scripts-dir ArtSource/Blender/Scripts/ \
+    --concepts-dir Content/ArtDirection/Concepts/ \
+    --out /tmp/comparisons/
+```
+
+### Adding a Concept: reference to a script
+
+Every `sm_*.py` must include a `Concept:` line in its module docstring:
+
+```python
+"""
+SM_Rift_OrbHub_A — AbyssalEarth procedural mesh.
+Concept: AD-001, LR-006, LR-007
+Run standalone:  blender --background --python <this_file>.py
+"""
+```
+
+CI check 13 warns when this line is absent. The render harness uses it to auto-locate
+the reference concept image for the comparison composite.
+
+### Acceptance criteria (visual)
+
+A script's geometry is approved when the wireframe composite shows:
+- **Correct scale relationship** — the asset occupies the right proportion of the frame
+  relative to the concept's implied scale (human figure comparison where applicable)
+- **Correct mass distribution** — dominant shapes are in the right positions and proportions
+- **Recognisable silhouette** — an observer who has seen both images can identify the
+  correspondence without labels
+- **No obvious anti-patterns** — no point clouds, icosphere blob chains, or flat slabs
+  where three-dimensional structure should be
+
+Visual acceptance overrides all other checks. An asset can pass all 16 CI checks and still
+fail visual review; it does not ship until the geometry matches the concept art.

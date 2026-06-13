@@ -181,3 +181,48 @@ Reference: `Content/ArtDirection/WorldMaps/mantle_garden_concept.png`
 - Silhouette: narrow ridges, steam columns, heat cracks, mineral flowers.
 - Mood: beautiful environmental danger near extreme heat.
 - Avoid: generic lava level, hell imagery, red-only palette.
+
+---
+
+## Geometry Quality Mandate
+
+These rules apply to every Blender asset script in the library. They are enforced by
+`Tools/validate_asset_scripts.py` (16 checks) and by visual review of render composites
+attached to every PR.
+
+### Ground truth is always the concept image
+
+Documentation, scale tables, and design docs are guidance. The concept art is the target.
+When they conflict, the concept art wins. Every script must carry a `Concept: IMAGE-ID`
+docstring line that names the reference image (e.g. `Concept: AD-001, LR-006`).
+
+### Silhouette first
+
+A well-built asset must read correctly as a distinct silhouette at 100 m distance in the
+Unreal viewport. If you cannot identify what the asset is from its outline alone, the geometry
+needs more work regardless of polycount or material quality.
+
+### No placeholder geometry
+
+Scripts may not ship with:
+- `bm.verts.new(...)` calls whose vertices are never connected to any face
+- Chains of icospheres used as "bones" or "spines" (they do not auto-merge)
+- Vertex positions set to `(0, 0, 0)` to simulate deletion (collapses geometry)
+- Zero-thickness planes
+
+### Scale must be documented in the script
+
+Every script must define at least one module-level `UPPER_CASE` constant specifying a
+key dimension. The scale must match the range in `Docs/ASSET_QUALITY_STANDARDS.md`. This
+allows CI to flag scripts where geometry is built at the wrong order of magnitude.
+
+### Visual acceptance protocol
+
+1. CI runs `Tools/render_asset_preview.py` on every changed script and uploads a
+   `*_vs_concept.png` composite to the PR as a GitHub Actions artifact.
+2. The PR author reviews the composite before requesting merge.
+3. The user (Vivek) gives explicit go/no-go per asset in the PR review.
+4. Assets not yet approved loop back for geometry refinement. There is no fixed iteration
+   limit; the loop continues until approval is given.
+
+See `Docs/ASSET_QUALITY_STANDARDS.md` for the full per-biome checklist.
