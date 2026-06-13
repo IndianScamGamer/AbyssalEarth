@@ -1,3 +1,4 @@
+# STANDALONE
 """
 SM_HeliosRobot_Detailed_A — AbyssalEarth procedural mesh.
 STANDALONE — no shared/ folder needed. Run from Blender text editor or:

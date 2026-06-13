@@ -150,17 +150,18 @@ def analyze_file(path, palette):
         if m not in palette:
             err(rel, f"material {m!r} not in shared/utils.py palette")
 
-    # 6. imports shared.utils
-    if "from shared.utils import" not in src:
+    # 6. imports shared.utils  (waived for STANDALONE scripts)
+    is_standalone = "# STANDALONE" in src
+    if not is_standalone and "from shared.utils import" not in src:
         err(rel, "does not import from shared.utils")
 
-    # 7. depth check
-    rel_to_scripts = os.path.relpath(path, SCRIPTS_DIR)
-    actual_depth = len(rel_to_scripts.split(os.sep)) - 1   # folders above file
-    m = re.search(r"_SCRIPTS_ROOT = os\.path\.normpath\(os\.path\.join\(_HERE(?:, '\.\.')+\)\)", src)
-    declared_depth = src.count("'..'")
-    if declared_depth != actual_depth:
-        err(rel, f"_SCRIPTS_ROOT depth is {declared_depth} but file is {actual_depth} folder(s) deep")
+    # 7. depth check  (waived for STANDALONE scripts — they have no _SCRIPTS_ROOT)
+    if not is_standalone:
+        rel_to_scripts = os.path.relpath(path, SCRIPTS_DIR)
+        actual_depth = len(rel_to_scripts.split(os.sep)) - 1   # folders above file
+        declared_depth = src.count("'..'")
+        if declared_depth != actual_depth:
+            err(rel, f"_SCRIPTS_ROOT depth is {declared_depth} but file is {actual_depth} folder(s) deep")
 
     # 8. required pipeline calls
     for required in ("finalise", "smart_uv", "set_origin_to_base"):
