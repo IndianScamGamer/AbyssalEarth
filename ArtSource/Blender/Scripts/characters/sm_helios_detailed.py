@@ -10,7 +10,15 @@ import bpy
 import bmesh
 from mathutils import Matrix, Vector
 
-_HERE        = os.path.dirname(os.path.abspath(__file__))
+try:
+    # Blender text editor: __file__ is the block name, not a real path.
+    # bpy.context.space_data.text.filepath gives the actual file on disk.
+    _fp = bpy.context.space_data.text.filepath
+    _HERE = os.path.dirname(os.path.realpath(bpy.path.abspath(_fp))) if _fp else ""
+    if not _HERE:
+        raise ValueError
+except Exception:
+    _HERE = os.path.dirname(os.path.abspath(__file__))
 _SCRIPTS_ROOT = os.path.normpath(os.path.join(_HERE, '..'))
 if _SCRIPTS_ROOT not in sys.path:
     sys.path.insert(0, _SCRIPTS_ROOT)
