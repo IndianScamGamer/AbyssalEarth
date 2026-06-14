@@ -1,6 +1,7 @@
 """
 SM_Rift_AncientWall_Gate_A — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: LR-008, LR-009
 """
 import sys
 import os
@@ -113,10 +114,10 @@ def build():
 
 
 # ══════════════════════════════════════════════
-#  TOWER SEGMENTS
+#  GATE WALL
 # ══════════════════════════════════════════════
-# Distant silhouette towers. Vertical grooves, cyan emissive strips,
-# broken tops. Matches: AD-003 (Tower Segment — Distant Structure).
+# Ancient gate wall structure. Massive stone pillars with emissive
+# rune sockets, nested ring channels. Matches: LR-008, LR-009.
 
 if __name__ == "__main__":
     clear_scene()

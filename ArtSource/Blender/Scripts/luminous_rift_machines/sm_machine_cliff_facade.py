@@ -1,6 +1,7 @@
 """
 SM_Rift_MachineCliff_Facade_A — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: LR-005, LR-017
 """
 import sys
 import os

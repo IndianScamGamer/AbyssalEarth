@@ -1,6 +1,7 @@
 """
 SM_Rift_HexCollector_ArmJoint_A — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: AD-002, LR-007
 """
 import sys
 import os

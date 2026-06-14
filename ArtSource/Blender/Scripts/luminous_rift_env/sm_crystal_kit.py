@@ -1,6 +1,7 @@
 """
 SM_CRYSTAL_KIT — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: LR-012
 """
 import sys
 import os

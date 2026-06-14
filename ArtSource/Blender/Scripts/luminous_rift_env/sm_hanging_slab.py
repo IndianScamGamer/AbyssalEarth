@@ -1,6 +1,7 @@
 """
 SM_HANGING_SLAB — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: LR-004, LR-015
 """
 import sys
 import os

@@ -1,6 +1,7 @@
 """
 SM_TOWER — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: AD-003, LR-017, LR-018
 """
 import sys
 import os
@@ -54,9 +55,20 @@ def build_variant(name, width, height, seed=2):
 
     # ── broken top (ragged edge) ──────────────────
     top_ring = rings[-1]
+    broken_top = []
     for j in range(segs):
         top_h = height + rng.uniform(-height*0.08, height*0.04)
-        bm.verts.new((top_ring[j].co.x, top_ring[j].co.y, top_h))
+        broken_top.append(bm.verts.new((top_ring[j].co.x, top_ring[j].co.y, top_h)))
+    for j in range(segs):
+        nj = (j + 1) % segs
+        try:
+            bm.faces.new([top_ring[j], top_ring[nj], broken_top[nj], broken_top[j]])
+        except Exception:
+            pass
+    try:
+        bm.faces.new(list(reversed(broken_top)))
+    except Exception:
+        pass
 
     # ── vertical groove cutouts ───────────────────
     for j in range(segs):

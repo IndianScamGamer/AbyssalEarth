@@ -1,6 +1,7 @@
 """
 SM_ROCK_ARCH — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: AD-004, LR-004, LR-009
 """
 import sys
 import os

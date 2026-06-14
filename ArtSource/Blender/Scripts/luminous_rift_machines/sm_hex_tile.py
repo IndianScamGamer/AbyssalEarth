@@ -1,6 +1,7 @@
 """
 SM_HEX_TILE — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: AD-002, LR-007
 """
 import sys
 import os

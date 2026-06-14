@@ -1,6 +1,7 @@
 """
 SM_Rift_RopeRailing_A — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: LR-010, LR-011
 """
 import sys
 import os

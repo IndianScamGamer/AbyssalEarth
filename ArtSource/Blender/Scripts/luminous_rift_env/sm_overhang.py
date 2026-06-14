@@ -1,6 +1,7 @@
 """
 SM_OVERHANG — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: AD-006, LR-006
 """
 import sys
 import os

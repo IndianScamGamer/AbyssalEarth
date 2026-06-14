@@ -1,6 +1,7 @@
 """
 SM_Rift_OrbFrame_A — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: AD-001, LR-006
 """
 import sys
 import os

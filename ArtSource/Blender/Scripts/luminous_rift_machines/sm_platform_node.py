@@ -1,6 +1,7 @@
 """
 SM_Rift_PlatformNode_A — AbyssalEarth procedural mesh.
 Run standalone:  blender --background --python <this_file>.py
+Concept: LR-010, LR-014
 """
 import sys
 import os
@@ -68,15 +69,13 @@ def build():
             hr_r   = hr * 3.5
             hcx    = math.cos(hangle) * hr_r
             hcy    = math.sin(hangle) * hr_r
-            for s in range(6):
-                a0 = s * TAU/6
-                a1 = (s+1)*TAU/6
-                pv = [bm.verts.new((hcx + math.cos(a)*1.6, hcy + math.sin(a)*1.6, 0.02))
-                      for a in (a0, a1, a1, a0)]
-                try:
-                    bm.faces.new(pv)
-                except Exception:
-                    pass
+            hex_v = [bm.verts.new((hcx + math.cos(s * TAU/6)*1.6,
+                                   hcy + math.sin(s * TAU/6)*1.6, 0.02))
+                     for s in range(6)]
+            try:
+                bm.faces.new(hex_v)
+            except Exception:
+                pass
 
     finalise(obj, bm)
     smart_uv(obj)
