@@ -215,11 +215,16 @@ Follow-up tasks:
 
 ## P2 - Gravity Well Tasks
 
-- Write `Docs/Maps/GRAVITY_WELL.md`.
+- ~~Write `Docs/Maps/GRAVITY_WELL.md`.~~ ✓ Done (June 2026).
+- **[NEW — June 2026 design update]** Gravity Well now features a **parkour approach corridor** (Zone 0a) before the main orbital space. Players fight gravity pull through ledge jumps and gap traversal using tethered floating rocks.
+- **[NEW]** Tethered floating rock mechanic: `BP_GW_TetherRock` — basalt shards chained to cave walls via iron cables, drifting on their tethers. Player fires tether at iron ring mount to swing across gaps. Blueprint PhysicsConstraint drives the chain arc.
+- **[NEW]** New Blender assets needed: `SM_GW_TetherRock_A/B`, `SM_GW_ParkourLedge_A`, `SM_GW_TetherAnchorPost_A` — scripts written June 2026.
+- **[NEW]** Add `D_Human_AbandonedParkourRig` discovery at Zone 0a: frayed tether harness and chalk marks from prior expedition.
 - Create prompts for floating platforms, curved stabilizer towers, anchor gates, crystal debris, and anomaly core.
-- Design gravity reorientation volumes in C++/Blueprint.
-- Define player tether behavior and route readability rules.
-- Create a technical risk note before implementation because gravity changes can destabilize traversal.
+- Design gravity reorientation volumes in C++/Blueprint — `AReorientationVolume` (0.5s lerp, configurable gravity direction vector).
+- Define player tether behavior: fire range, attachment validation, release mechanic, chain-swing stack (tether to drifting rock while airborne).
+- **Technical risk note:** Gravity direction changes + moving physics objects (tether rocks) + player character movement = highest instability risk in the game. Dedicate a full Windows/PIE tuning pass before content lock. Test edge cases: player tethered to rock that enters shear zone, chain length limit interactions, gravity-direction flip mid-swing.
+- Add `LR-019` concept art slot to Luminous_Rift folder (geodesic sphere reference — PNG must be placed manually from June 2026 review session).
 
 ## P2 - Mantle Garden Tasks
 

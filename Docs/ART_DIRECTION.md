@@ -226,3 +226,28 @@ allows CI to flag scripts where geometry is built at the wrong order of magnitud
    limit; the loop continues until approval is given.
 
 See `Docs/ASSET_QUALITY_STANDARDS.md` for the full per-biome checklist.
+
+## Geodesic Orb Reference — LR-019
+
+**File slot:** `Content/ArtDirection/Concepts/Luminous_Rift/LR-019.png`
+*(PNG to be placed manually — reference was provided as an inline image during review session June 13 2026)*
+
+**What it shows:**
+- A massive geodesic lattice sphere, approximately 12m diameter, centred in a stone ceremonial chamber.
+- The sphere is an open triangulated metal frame — NOT a solid ball. The triangular facets are structural struts with open voids between them. Brilliant blue-white light emanates from the sphere's interior core, passing through the open lattice.
+- The floor is wet black basalt, highly reflective — the sphere's glow creates a full-length mirror reflection below.
+- Stone columns with carved horizontal band-panel details flank both sides.
+- Above: a large multi-panel hexagonal crystal ceiling (like a geodesic dome skylight made of irregular stone-framed crystal panes). Diffuse white light filters through.
+- 6-8 amber-light pillar beacons arranged in a ring on the floor around the sphere.
+- Right wall: an ancient sci-fi terminal/control panel (rectangular, flush-mounted, circular diagram glowing on its face).
+- Overall mood: sacred, impossible, ancient, enormous — technology fused with cathedral stone architecture.
+
+**Design mandates from this reference:**
+
+1. **Orb Hub central orb geometry**: Must be a geodesic lattice structure (open triangular frame), NOT a smooth solid icosphere. The interior light passes through. Update `sm_orb_hub.py`.
+2. **Chamber language**: The hexagonal ceiling pane motif connects directly to `sm_hex_tile.py`. The hex collector tiles in the Luminous Rift are architectural echoes of this space.
+3. **Wet floor reflections**: The black basalt floor material (`mat_wet_basalt`) should be applied in the Orb Hub chamber area. The reflection of the orb glow is a key visual moment.
+4. **Amber pillar beacons**: The ring of light posts around the sphere establishes the visual framing for the hub chamber. These are `SM_GravityWell_AnchorLantern` equivalents for the Luminous Rift context.
+5. **Scale**: The sphere is surrounded by stone columns that are ~15m tall. The orb at 24m diameter (as specced in sm_orb_hub.py) should dwarf those columns — the reference confirms massive scale is correct.
+
+**Concept IDs updated:** sm_orb_hub.py docstring should reference `Concept: AD-001, LR-006, LR-007, LR-019`

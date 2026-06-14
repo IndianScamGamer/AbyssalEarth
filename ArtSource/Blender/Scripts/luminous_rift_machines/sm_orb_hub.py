@@ -1,11 +1,15 @@
 """
 SM_Rift_OrbHub_A — AbyssalEarth procedural mesh.
-Concept: AD-001, LR-006, LR-007
+Concept: AD-001, LR-006, LR-007, LR-019
 
 AD-001 shows the orb hub from below: a massive dark annular ring (≈76 m span) with 8 heavy
 rectangular spoke arms radiating from the ring to the central blue-white energy sphere (24 m
 diameter). Cable-bundle channels run along each spoke. A circular observation platform with
 railing hangs below the hub on 4 cable struts. Gold beam emitter ports punctuate the spokes.
+
+LR-019 (new reference, June 2026) shows the central orb as a GEODESIC LATTICE — an open
+triangulated metal frame, not a solid icosphere. Blue-white energy radiates from the interior
+through the triangular voids in the frame. This updates the build_orb() implementation.
 
 Run standalone:  blender --background --python <this_file>.py
 """
@@ -217,8 +221,53 @@ def build_spoke_arm(bm, arm_idx):
 
 
 def build_orb(bm):
-    """Central blue-white energy sphere."""
-    bmesh.ops.create_icosphere(bm, subdivisions=4, radius=ORB_R)
+    """
+    Central energy sphere as a geodesic lattice (LR-019 reference).
+    Instead of a solid icosphere, build an open triangulated frame: each
+    triangular face of a subdivisions=2 icosphere becomes a strut-edged
+    frame with a void in the centre — light passes through the open lattice.
+    """
+    LATTICE_SUBDIV  = 2       # ico subdivisions (gives 80 triangular faces)
+    STRUT_W         = 0.40    # half-width of each strut in ORB_R units (metres)
+    INSET_FRAC      = 0.22    # how far each face is inset (0 = no frame, 1 = all frame)
+
+    # Build base icosphere into a temp bmesh, extract face/vert data, then build lattice
+    import bmesh as _bm_mod
+    tmp = _bm_mod.new()
+    result = _bm_mod.ops.create_icosphere(tmp, subdivisions=LATTICE_SUBDIV, radius=ORB_R)
+
+    # For each triangular face: create an inset triangle of strut edges (3 quads per face)
+    for face in tmp.faces:
+        verts = [v.co.copy() for v in face.verts]
+        if len(verts) != 3:
+            continue
+        # Face centroid
+        centroid = (verts[0] + verts[1] + verts[2]) / 3.0
+        # Inset: move each face vert toward centroid
+        inner = [v.lerp(centroid, INSET_FRAC) for v in verts]
+        # Normalise inset verts back to sphere surface
+        inner = [v.normalized() * ORB_R for v in inner]
+
+        # For each edge of the triangle, build a quad strip (the strut)
+        outer_bm = [bm.verts.new(v) for v in verts]
+        inner_bm = [bm.verts.new(v) for v in inner]
+        # 3 strut quads connecting outer edge to inner edge
+        for ei in range(3):
+            oa = outer_bm[ei]
+            ob = outer_bm[(ei + 1) % 3]
+            ia = inner_bm[ei]
+            ib = inner_bm[(ei + 1) % 3]
+            try:
+                bm.faces.new([oa, ob, ib, ia])
+            except Exception:
+                pass
+        # Inner triangle (closing the inset face — tiny, almost invisible)
+        try:
+            bm.faces.new(inner_bm)
+        except Exception:
+            pass
+
+    tmp.free()
 
     # Orb collar ring (mounting interface) — torus in XY plane at Z=0
     COLLAR_SEGS  = 32

@@ -139,7 +139,7 @@ The first map proves the core loop, but Abyssal Earth should feel like a descent
 2. Glassroot Forest: living mineral ecosystem. Teaches biological scanning and softer route reading.
 3. Inner Sea: underground ocean. Expands route scale, navigation, and beacon value.
 4. Fossil Sky: deep-time fossil archive. Shifts awe upward and emphasizes scientific reconstruction.
-5. Gravity Well: local physics anomaly. Introduces altered traversal and orientation risk.
+5. Gravity Well: local physics anomaly. Introduces parkour-based descent, tethered floating rock traversal, altered gravity, and orientation risk. Feels unlike any other map — active kinetic movement through a zone that wants to pull you in.
 6. Mantle Garden: geothermal edge. Pushes environmental hazards without turning the game into combat.
 
 ### Long-Term Mechanical Arc
@@ -148,7 +148,7 @@ The first map proves the core loop, but Abyssal Earth should feel like a descent
 - Glassroot Forest: scanner timing, biological responses, spore interference, living gates.
 - Inner Sea: route marking over water, floating beacons/buoys, possible skiff traversal.
 - Fossil Sky: scanner reconstruction, brittle walkways, fossil pattern matching.
-- Gravity Well: reorientation volumes, tether anchors, spatial route planning.
+- Gravity Well: parkour-based descent with tethered drifting rocks, reorientation volumes, tether anchors, chain-swing traversal, spatial route planning.
 - Mantle Garden: heat management, timed safe windows, low-visibility steam, pressure vents.
 
 ### Discovery Philosophy
