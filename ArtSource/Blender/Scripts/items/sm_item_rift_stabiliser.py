@@ -43,8 +43,8 @@ def build():
     # 3 anchor prongs from ring to core
     for i in range(3):
         a = i * TAU / 3
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=5,
-            radius=0.006, depth=R - 0.035,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=5,
+            radius1=0.006, radius2=0.006, depth=R - 0.035,
             matrix=Matrix.Translation((math.cos(a)*R*0.55,
                                         math.sin(a)*R*0.55, 0.10))
             @ Matrix.Rotation(a + TAU/4, 4, 'Z')

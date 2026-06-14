@@ -33,8 +33,8 @@ def build():
         if v.co.z < 0.04:
             v.co.z = 0.04
     # base skirt
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=12,
-        radius=0.135, depth=0.045,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=12,
+        radius1=0.135, radius2=0.135, depth=0.045,
         matrix=Matrix.Translation((0, 0, 0.0225)))
     # rib bands over dome
     for band_a in [0, TAU/4]:
@@ -50,13 +50,13 @@ def build():
                 matrix=Matrix.Translation((math.cos(band_a)*rx,
                                             math.sin(band_a)*rx, rz)))
     # caged lamp on top
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.030, depth=0.045,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.030, radius2=0.030, depth=0.045,
         matrix=Matrix.Translation((0, 0, 0.185)))
     for i in range(4):
         a = i * TAU / 4
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=4,
-            radius=0.004, depth=0.05,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=4,
+            radius1=0.004, radius2=0.004, depth=0.05,
             matrix=Matrix.Translation((math.cos(a)*0.032,
                                         math.sin(a)*0.032, 0.185)))
     finalise(obj, bm)

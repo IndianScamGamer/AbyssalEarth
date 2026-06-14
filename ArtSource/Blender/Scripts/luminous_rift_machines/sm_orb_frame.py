@@ -66,9 +66,9 @@ def build():
         angle = i * TAU/8
         arm_x = math.cos(angle) * ring_r * 0.85
         arm_z = math.sin(angle) * ring_r * 0.85
-        sock  = bmesh.ops.create_cylinder(
+        sock  = bmesh.ops.create_cone(
             bm, cap_ends=True, cap_tris=False, segments=8,
-            radius=0.60, depth=1.2,
+            radius1=0.60, radius2=0.60, depth=1.2,
             matrix=Matrix.Translation(Vector((arm_x, 0, arm_z))) @
                    Matrix.Rotation(PI/2, 4, 'X'))
 

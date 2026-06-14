@@ -53,9 +53,9 @@ def build():
             (math.cos(a0)*r_out, 0.16, 0.10 + math.sin(a0)*r_out),
         ]
         face_verts = [bm.verts.new(p) for p in pts]
-        bm.faces.new(face_verts)
+        pf = bm.faces.new(face_verts)
         # extrude petal slightly
-        extrude_region(bm, [bm.faces[-1]], 0.02)
+        extrude_region(bm, [pf], 0.02)
 
     # ── 4 control nodes ───────────────────────────
     for a in (0, PI/2, PI, 3*PI/2):

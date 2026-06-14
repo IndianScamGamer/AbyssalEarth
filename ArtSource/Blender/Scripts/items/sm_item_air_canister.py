@@ -26,8 +26,8 @@ def build():
     """ITEM_TOOL_AIR_CANISTER — compressed oxygen cylinder with valve."""
     obj, bm = new_mesh("SM_Item_AirCanister_A")
     # tank body
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=12,
-        radius=0.045, depth=0.20,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=12,
+        radius1=0.045, radius2=0.045, depth=0.20,
         matrix=Matrix.Translation((0, 0, 0.10)))
     # dome top
     result = bmesh.ops.create_icosphere(bm, subdivisions=2, radius=0.045,
@@ -36,15 +36,15 @@ def build():
         if v.co.z < 0.20:
             v.co.z = 0.20
     # valve stem + knob
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.012, depth=0.035,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.012, radius2=0.012, depth=0.035,
         matrix=Matrix.Translation((0, 0, 0.262)))
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-        radius=0.022, depth=0.012,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+        radius1=0.022, radius2=0.022, depth=0.012,
         matrix=Matrix.Translation((0, 0, 0.286)))
     # gauge band
-    bmesh.ops.create_cylinder(bm, cap_ends=False, segments=14,
-        radius=0.048, depth=0.018,
+    bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=14,
+        radius1=0.048, radius2=0.048, depth=0.018,
         matrix=Matrix.Translation((0, 0, 0.155)))
     finalise(obj, bm)
     smart_uv(obj)

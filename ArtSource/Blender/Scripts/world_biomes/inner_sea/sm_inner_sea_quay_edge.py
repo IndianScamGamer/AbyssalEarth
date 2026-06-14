@@ -64,8 +64,8 @@ def build():
         @ Matrix.Scale(0.16, 4, (0, 0, 1)))
     # mooring ring posts every 2m
     for px in [-2.0, 0.0, 2.0]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-            radius=0.09, depth=0.35,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+            radius1=0.09, radius2=0.09, depth=0.35,
             matrix=Matrix.Translation((px, -0.4, 1.15)))
         # iron ring (sphere chain arc)
         for s in range(5):

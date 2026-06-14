@@ -47,7 +47,7 @@ def build():
     bm.faces.new(ceil_verts)
 
     # Outer hatch ring
-    bmesh.ops.create_cylinder(bm, cap_ends=False, cap_tris=False,
+    bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False,
                                segments=20, radius1=0.82, radius2=0.82,
                                depth=0.12,
                                matrix=Matrix.Translation((0, -R + 0.05, 0.80)))
@@ -60,12 +60,12 @@ def build():
                                @ Matrix.Scale(0.5, 4, (0, 0, 1)))
 
     # Warning stripe ring on floor
-    bmesh.ops.create_cylinder(bm, cap_ends=False, cap_tris=False,
+    bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False,
                                segments=20, radius1=1.65, radius2=1.65,
                                depth=0.02,
                                matrix=Matrix.Translation((0, 0, 0.01)))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_human_equipment", "mat_wet_basalt"])
     set_origin_to_base(ob)

@@ -58,8 +58,8 @@ def build_variant(length=8.0, seed=4):
     # support posts
     for py in [i/(4) * length - length/2 for i in range(5)]:
         for px in (-w/2 + 0.12, w/2 - 0.12):
-            bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                       segments=6, radius=0.055, depth=0.85,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                       segments=6, radius1=0.055, radius2=0.055, depth=0.85,
                                        matrix=Matrix.Translation(Vector((px, py, -0.42))))
 
     # cross-braces

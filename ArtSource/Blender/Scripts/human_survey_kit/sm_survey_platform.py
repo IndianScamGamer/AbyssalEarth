@@ -96,9 +96,9 @@ def build():
 
     # ── 4 support legs ─────────────────────────────
     for lx, ly in [(-4.2,-4.2),(4.2,-4.2),(4.2,4.2),(-4.2,4.2)]:
-        leg_verts = bmesh.ops.create_cylinder(
+        leg_verts = bmesh.ops.create_cone(
             bm, cap_ends=True, cap_tris=False, segments=6,
-            radius=0.14, depth=leg_h,
+            radius1=0.14, radius2=0.14, depth=leg_h,
             matrix=Matrix.Translation(Vector((lx, ly, -leg_h/2))))
         # cross-braces to adjacent legs
         for sign in (-1, 1):

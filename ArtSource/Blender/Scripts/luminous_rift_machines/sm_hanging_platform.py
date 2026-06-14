@@ -39,8 +39,8 @@ def build():
     bm.faces.new(list(reversed(lo)))
     bm.faces.new(hi)
     # circular inset detail on deck
-    bmesh.ops.create_cylinder(bm, cap_ends=False, segments=16,
-        radius=2.2, depth=0.06,
+    bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=16,
+        radius1=2.2, radius2=2.2, depth=0.06,
         matrix=Matrix.Translation((0, 0, T + 0.02)))
     # 4 chain runs to anchor ring (chain = stacks of small tori approximated
     # by alternating-rotation rings of spheres)
@@ -66,8 +66,8 @@ def build():
     # corner anchor lugs on deck
     for i in range(4):
         a = i * TAU / 4 + TAU / 8
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-            radius=0.18, depth=0.35,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+            radius1=0.18, radius2=0.18, depth=0.35,
             matrix=Matrix.Translation((math.cos(a)*R*0.8,
                                         math.sin(a)*R*0.8, T + 0.17)))
     finalise(obj, bm)

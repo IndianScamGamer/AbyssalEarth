@@ -42,13 +42,13 @@ def build():
         r = 0.42 * (1.0 - abs(t - 0.35) * 0.9) + 0.12
         spine.append((x, y, z, r))
         # vertebra body
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-            radius=r, depth=r * 1.1,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+            radius1=r, radius2=r, depth=r * 1.1,
             matrix=Matrix.Translation((x, y, z))
             @ Matrix.Rotation(TAU / 4, 4, 'Y'))
         # dorsal process
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=5,
-            radius=r * 0.22, depth=r * 1.8,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=5,
+            radius1=r * 0.22, radius2=r * 0.22, depth=r * 1.8,
             matrix=Matrix.Translation((x, y, z + r * 1.2)))
     # rib cage: 9 ribs sweeping down-out from the forward spine
     for k in range(9):

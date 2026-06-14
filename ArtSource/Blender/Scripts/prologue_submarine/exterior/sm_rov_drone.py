@@ -35,8 +35,8 @@ def build():
     # 4 thruster pods at corners
     for sx in [-1, 1]:
         for sy in [-1, 1]:
-            bmesh.ops.create_cylinder(bm, cap_ends=False, segments=10,
-                radius=0.10, depth=0.16,
+            bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=10,
+                radius1=0.10, radius2=0.10, depth=0.16,
                 matrix=Matrix.Translation((sx*0.34, sy*0.46, 0.30))
                 @ Matrix.Rotation(TAU/4, 4, 'X'))
     # front light bar
@@ -48,12 +48,12 @@ def build():
     # top antenna + sensor dome
     bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.09,
         matrix=Matrix.Translation((0, 0.1, 0.52)))
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=5,
-        radius=0.012, depth=0.22,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=5,
+        radius1=0.012, radius2=0.012, depth=0.22,
         matrix=Matrix.Translation((0.15, 0.3, 0.58)))
     # belly manipulator stub
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-        radius=0.035, depth=0.18,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+        radius1=0.035, radius2=0.035, depth=0.18,
         matrix=Matrix.Translation((0, -0.25, 0.08)))
     finalise(obj, bm)
     smart_uv(obj)

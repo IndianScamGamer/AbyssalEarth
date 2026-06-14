@@ -38,7 +38,7 @@ def build():
     # Segmented abdomen plates (3 bands)
     for i in range(3):
         az = 0.12 + i * 0.06
-        bmesh.ops.create_cylinder(bm, cap_ends=False, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False,
                                    segments=12, radius1=0.36 - i * 0.04,
                                    radius2=0.36 - i * 0.04,
                                    depth=0.03,
@@ -50,14 +50,14 @@ def build():
             lx = side * 0.42
             ly = (j - 1) * 0.22
             # Upper segment
-            bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                        segments=6, radius1=0.035, radius2=0.028,
                                        depth=0.28,
                                        matrix=Matrix.Translation(
                                            (lx + side * 0.12, ly, 0.22))
                                        @ Matrix.Rotation(math.radians(30 * side), 4, 'Z'))
             # Lower segment
-            bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                        segments=5, radius1=0.025, radius2=0.015,
                                        depth=0.28,
                                        matrix=Matrix.Translation(
@@ -67,20 +67,20 @@ def build():
     # Two pincer arms
     for side in [-1, 1]:
         # Arm
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=7, radius1=0.055, radius2=0.042,
                                    depth=0.45,
                                    matrix=Matrix.Translation(
                                        (side * 0.38, 0.32, 0.30))
                                    @ Matrix.Rotation(math.radians(20), 4, 'X'))
         # Pincer outer
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=4, radius1=0.04, radius2=0.008,
                                    depth=0.25,
                                    matrix=Matrix.Translation(
                                        (side * 0.40 + side * 0.05, 0.65, 0.38)))
         # Pincer inner (smaller)
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=4, radius1=0.030, radius2=0.005,
                                    depth=0.18,
                                    matrix=Matrix.Translation(
@@ -88,7 +88,7 @@ def build():
 
     # Head stalks with sensor orbs
     for side in [-1, 1]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=5, radius1=0.018, radius2=0.015,
                                    depth=0.22,
                                    matrix=Matrix.Translation(
@@ -97,7 +97,7 @@ def build():
                                     matrix=Matrix.Translation(
                                         (side * 0.12, 0.44, 0.58)))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_wet_basalt", "mat_blue_emissive"])
     set_origin_to_base(ob)

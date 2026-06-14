@@ -55,13 +55,13 @@ def build():
     segs = 16
 
     # ── main cylinder body ────────────────────────
-    body = bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                      segments=segs, radius=0.10, depth=0.28,
+    body = bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                      segments=segs, radius1=0.10, radius2=0.10, depth=0.28,
                                       matrix=Matrix.Translation(Vector((0,0,0.14))))
 
     # ── weighted base disc ─────────────────────────
-    base = bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                      segments=segs, radius=0.13, depth=0.04,
+    base = bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                      segments=segs, radius1=0.13, radius2=0.13, depth=0.04,
                                       matrix=Matrix.Translation(Vector((0,0,0.02))))
 
     # ── amber glow ring band ──────────────────────
@@ -79,8 +79,8 @@ def build():
             pass
 
     # ── top diffuser cap ──────────────────────────
-    top_cap = bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                         segments=segs, radius=0.08, depth=0.06,
+    top_cap = bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                         segments=segs, radius1=0.08, radius2=0.08, depth=0.06,
                                          matrix=Matrix.Translation(Vector((0,0,0.31))))
 
     # ── side panel emboss ──────────────────────────

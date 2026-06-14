@@ -35,12 +35,12 @@ def build():
     # dock posts
     for px in [-12, -6, 0, 6, 12]:
         for py in [-4, 4]:
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-                radius=0.22, depth=2.5,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+                radius1=0.22, radius2=0.22, depth=2.5,
                 matrix=Matrix.Translation((px, py, 1.5)))
             # mooring ring
-            bmesh.ops.create_cylinder(bm, cap_ends=False, segments=12,
-                radius=0.30, depth=0.08,
+            bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=12,
+                radius1=0.30, radius2=0.30, depth=0.08,
                 matrix=Matrix.Translation((px, py, 2.2)))
     # edge lip detail
     for side in [-1, 1]:

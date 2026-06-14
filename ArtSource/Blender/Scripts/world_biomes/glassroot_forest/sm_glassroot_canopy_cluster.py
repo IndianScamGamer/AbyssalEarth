@@ -42,8 +42,8 @@ def build():
             bx += dx * (1 - t * 0.4)
             by += dy * (1 - t * 0.4)
             bz += 0.85
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=5,
-                radius=0.10 * (1 - t * 0.6), depth=0.9,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=5,
+                radius1=0.10 * (1 - t * 0.6), radius2=0.10 * (1 - t * 0.6), depth=0.9,
                 matrix=Matrix.Translation((bx, by, bz)))
             # pods budding off each stem segment
             for p in range(2):

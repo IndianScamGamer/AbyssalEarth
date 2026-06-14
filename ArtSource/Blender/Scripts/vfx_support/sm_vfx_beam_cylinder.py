@@ -26,8 +26,8 @@ def build():
     """Unit beam cylinder — 1m long, 0.5m diameter open tube. Scaled per-beam
     in-engine; collector beam material pans along its length."""
     obj, bm = new_mesh("SM_VFX_BeamCylinder")
-    bmesh.ops.create_cylinder(bm, cap_ends=False, segments=16,
-        radius=0.25, depth=1.0,
+    bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=16,
+        radius1=0.25, radius2=0.25, depth=1.0,
         matrix=Matrix.Translation((0, 0, 0.5)))
     finalise(obj, bm)
     smart_uv(obj)

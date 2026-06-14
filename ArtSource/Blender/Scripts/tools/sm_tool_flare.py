@@ -25,17 +25,17 @@ EXPORT_DIR = get_export_dir('Tools')
 def build():
     """Emergency flare stick — grip tube with cap and red glow tip."""
     obj, bm = new_mesh("SM_Tool_Flare_A")
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.016, depth=0.18,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.016, radius2=0.016, depth=0.18,
         matrix=Matrix.Translation((0, 0, 0.09)))
     # grip rings
     for gz in [0.04, 0.08, 0.12]:
-        bmesh.ops.create_cylinder(bm, cap_ends=False, segments=8,
-            radius=0.018, depth=0.010,
+        bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=8,
+            radius1=0.018, radius2=0.018, depth=0.010,
             matrix=Matrix.Translation((0, 0, gz)))
     # glow tip
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.014, depth=0.035,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.014, radius2=0.014, depth=0.035,
         matrix=Matrix.Translation((0, 0, 0.198)))
     bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.015,
         matrix=Matrix.Translation((0, 0, 0.216)))

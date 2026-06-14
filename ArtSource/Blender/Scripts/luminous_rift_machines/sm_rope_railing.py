@@ -29,8 +29,8 @@ def build():
     L = 4.0
     # 2 posts
     for px in [-L/2, L/2]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=7,
-            radius=0.07, depth=1.1,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=7,
+            radius1=0.07, radius2=0.07, depth=1.1,
             matrix=Matrix.Translation((px, 0, 0.55)))
         # post cap
         bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.085,

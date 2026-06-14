@@ -49,26 +49,26 @@ def build():
 
     # Engine turbines
     for side in [-0.9, 0.9]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=16, radius1=0.55, radius2=0.55,
                                    depth=2.0,
                                    matrix=Matrix.Translation((side, D * 0.45, 1.0))
                                    @ Matrix.Rotation(math.radians(90), 4, 'X'))
         # Turbine front intake cowl
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=16, radius1=0.65, radius2=0.45,
                                    depth=0.35,
                                    matrix=Matrix.Translation((side, D * 0.45 - 1.17, 1.0))
                                    @ Matrix.Rotation(math.radians(90), 4, 'X'))
         # Turbine exhaust port
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=12, radius1=0.40, radius2=0.55,
                                    depth=0.28,
                                    matrix=Matrix.Translation((side, D * 0.45 + 1.14, 1.0))
                                    @ Matrix.Rotation(math.radians(90), 4, 'X'))
 
     # Central drive shaft
-    bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                segments=8, radius1=0.12, radius2=0.12,
                                depth=D * 0.7,
                                matrix=Matrix.Translation((0, D * 0.45, 0.65))
@@ -76,7 +76,7 @@ def build():
 
     # Conduit bundle ceiling
     for cx in [-1.5, -0.5, 0.5, 1.5]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=6, radius1=0.06, radius2=0.06,
                                    depth=D,
                                    matrix=Matrix.Translation((cx, D * 0.5, H - 0.20))
@@ -90,12 +90,12 @@ def build():
                            @ Matrix.Scale(1.2, 4, (0, 0, 1)))
     for gx in [-0.80, -0.26, 0.26, 0.80]:
         for gz in [1.3, 1.85]:
-            bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                        segments=12, radius1=0.10, radius2=0.10,
                                        depth=0.05,
                                        matrix=Matrix.Translation((gx, 0.10, gz)))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_human_equipment", "mat_wet_basalt", "mat_gold_emissive"])
     set_origin_to_base(ob)

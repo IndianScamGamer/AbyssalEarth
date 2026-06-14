@@ -41,8 +41,8 @@ def build():
     # corner bumpers
     for sx in [-1, 1]:
         for sy in [-1, 1]:
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-                radius=0.022, depth=0.030,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+                radius1=0.022, radius2=0.022, depth=0.030,
                 matrix=Matrix.Translation((sx*0.075, sy*0.105, 0.015)))
     # side clasps
     for sy in [-0.06, 0.06]:

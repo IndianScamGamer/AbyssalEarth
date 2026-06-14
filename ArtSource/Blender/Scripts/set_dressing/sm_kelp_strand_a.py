@@ -32,8 +32,8 @@ def build():
         t = i / (SEGS - 1)
         sx = math.sin(t * PI * 1.5) * 0.12
         sz = t * 2.5
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=5,
-            radius=0.025 * (1 - t * 0.6), depth=0.24,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=5,
+            radius1=0.025 * (1 - t * 0.6), radius2=0.025 * (1 - t * 0.6), depth=0.24,
             matrix=Matrix.Translation((sx, 0, sz + 0.12)))
     # leaf blades alternating sides
     for i in range(8):

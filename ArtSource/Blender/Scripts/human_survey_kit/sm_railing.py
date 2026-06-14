@@ -58,8 +58,8 @@ def build():
 
     # ── 2 end posts ────────────────────────────────
     for px in (0, length):
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                   segments=6, radius=post_r*1.4, depth=height,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                   segments=6, radius1=post_r*1.4, radius2=post_r*1.4, depth=height,
                                    matrix=Matrix.Translation(Vector((px, 0, height/2))))
         # snap connector
         box_from_corners(bm, (px-0.04, -0.03, -0.04), (px+0.04, 0.03, 0.04))
@@ -67,14 +67,14 @@ def build():
 
     # ── 4 intermediate balusters ────────────────────
     for bx in (0.60, 1.20, 1.80, 2.40):
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                   segments=6, radius=post_r, depth=height,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                   segments=6, radius1=post_r, radius2=post_r, depth=height,
                                    matrix=Matrix.Translation(Vector((bx, 0, height/2))))
 
     # ── 2 horizontal rail bars ──────────────────────
     for rz in (0.35, height):
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                   segments=6, radius=post_r, depth=length,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                   segments=6, radius1=post_r, radius2=post_r, depth=length,
                                    matrix=Matrix.Translation(Vector((length/2, 0, rz))) @
                                           Matrix.Rotation(PI/2, 4, 'Y'))
 

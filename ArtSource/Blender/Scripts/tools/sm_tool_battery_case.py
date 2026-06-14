@@ -41,8 +41,8 @@ def build():
     # 6 cells in 2x3 grid
     for cx in [-0.06, 0.0, 0.06]:
         for cy in [-0.028, 0.028]:
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-                radius=0.020, depth=0.045,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+                radius1=0.020, radius2=0.020, depth=0.045,
                 matrix=Matrix.Translation((cx, cy, 0.068)))
     # latch
     bmesh.ops.create_cube(bm, size=1,

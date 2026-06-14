@@ -46,7 +46,7 @@ def build():
         cy = math.sin(ang) * 0.30
         # Arm root segment
         arm_mat = Matrix.Translation((cx * 0.6, cy * 0.6, 0.0))
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=6, radius1=0.07, radius2=0.045,
                                    depth=0.40,
                                    matrix=arm_mat @ Matrix.Rotation(
@@ -54,7 +54,7 @@ def build():
                                    @ Matrix.Rotation(math.radians(90), 4, 'Y'))
         # Arm mid segment (angled down)
         mid_mat = Matrix.Translation((cx * 1.25, cy * 1.25, -0.15))
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=5, radius1=0.042, radius2=0.025,
                                    depth=0.38,
                                    matrix=mid_mat @ Matrix.Rotation(
@@ -65,7 +65,7 @@ def build():
             tip_offset = Vector((cx * 1.95 + j * cy * 0.08,
                                   cy * 1.95 + j * cx * 0.08,
                                   -0.38))
-            bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                        segments=4, radius1=0.020, radius2=0.004,
                                        depth=0.28,
                                        matrix=Matrix.Translation(tip_offset))
@@ -75,13 +75,13 @@ def build():
         ang = math.radians(-40 + i * 20)
         spine_x = math.sin(ang) * 0.22
         spine_z_top = 0.72 + 0.06 * math.cos(ang * 2)
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=3, radius1=0.012, radius2=0.002,
                                    depth=0.24,
                                    matrix=Matrix.Translation((spine_x, 0, spine_z_top))
                                    @ Matrix.Rotation(ang * 0.5, 4, 'Y'))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_water_bioluminescent", "mat_blue_emissive"])
     set_origin_to_base(ob)

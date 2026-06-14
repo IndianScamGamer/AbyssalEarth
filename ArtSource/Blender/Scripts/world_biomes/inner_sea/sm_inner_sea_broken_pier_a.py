@@ -36,8 +36,8 @@ def build():
     # support legs every 4m
     for lx in range(-18, 8, 4):
         for ly in [-1.8, 1.8]:
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-                radius=0.18, depth=3.5,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+                radius1=0.18, radius2=0.18, depth=3.5,
                 matrix=Matrix.Translation((lx, ly, -1.5)))
     # broken end (angled, cracked)
     for i in range(5):

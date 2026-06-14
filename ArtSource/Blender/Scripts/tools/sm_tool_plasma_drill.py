@@ -27,8 +27,8 @@ def build():
     In-hand visual for harvesting interactions."""
     obj, bm = new_mesh("SM_Tool_PlasmaDrill_A")
     # body
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=10,
-        radius=0.055, depth=0.20,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=10,
+        radius1=0.055, radius2=0.055, depth=0.20,
         matrix=Matrix.Translation((0, 0, 0.14))
         @ Matrix.Rotation(TAU/4, 4, 'X'))
     # drill bit (tapered, fluted)

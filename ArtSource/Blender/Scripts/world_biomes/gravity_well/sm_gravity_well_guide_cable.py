@@ -32,8 +32,8 @@ def build():
     L = 12.0
     # anchor posts (piton + eye ring)
     for px in [-L / 2, L / 2]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-            radius=0.07, depth=0.7,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+            radius1=0.07, radius2=0.07, depth=0.7,
             matrix=Matrix.Translation((px, 0, 0.35)))
         for s in range(6):
             sa = s * TAU / 6
@@ -54,8 +54,8 @@ def build():
         fx = -L / 2 + ft * L
         fz = 0.78 - math.sin(ft * PI) * 1.1
         # clip
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-            radius=0.05, depth=0.06,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+            radius1=0.05, radius2=0.05, depth=0.06,
             matrix=Matrix.Translation((fx, 0, fz)))
         # small triangular flag hanging below
         v0 = bm.verts.new((fx, 0.0, fz - 0.05))

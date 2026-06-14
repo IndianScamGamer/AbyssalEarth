@@ -53,11 +53,11 @@ def build():
     for i in range(6):
         a = i * TAU / 6 + TAU/12
         sx, sy = math.cos(a)*1.35, math.sin(a)*1.35
-        bmesh.ops.create_cylinder(bm, cap_ends=False, segments=8,
-            radius=0.14, depth=0.10,
+        bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=8,
+            radius1=0.14, radius2=0.14, depth=0.10,
             matrix=Matrix.Translation((sx, sy, 0.62)))
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-            radius=0.10, depth=0.04,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+            radius1=0.10, radius2=0.10, depth=0.04,
             matrix=Matrix.Translation((sx, sy, 0.60)))
     finalise(obj, bm)
     smart_uv(obj)

@@ -39,8 +39,8 @@ def build():
     # anchor cable stubs
     for i in range(4):
         a = i*TAU/4
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-            radius=0.15, depth=2.5,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+            radius1=0.15, radius2=0.15, depth=2.5,
             matrix=Matrix.Translation((math.cos(a)*4, math.sin(a)*4, -0.5)))
     # Tether mount posts — iron ring anchors at platform edges for player tether attachment
     MOUNT_R   = 0.065   # post radius

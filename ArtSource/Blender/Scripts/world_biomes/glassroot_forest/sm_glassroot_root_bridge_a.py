@@ -46,8 +46,8 @@ def build():
                 st = si/7
                 x = rx + side*math.sin(st*math.pi)*W*0.6
                 z = -math.sin(st*math.pi)*2.5 - 0.3
-                bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-                    radius=0.15*(1-st*0.5), depth=0.5,
+                bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+                    radius1=0.15*(1-st*0.5), radius2=0.15*(1-st*0.5), depth=0.5,
                     matrix=Matrix.Translation((x, 0, z)))
     finalise(obj, bm)
     smart_uv(obj)

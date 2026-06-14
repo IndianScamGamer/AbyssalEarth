@@ -49,7 +49,7 @@ def build():
         t = i / 6.0
         px = (t - 0.5) * 1.6
         pz = 0.18 + 0.12 * math.sin(math.pi * t)
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=3, radius1=0.025, radius2=0.005,
                                    depth=0.20,
                                    matrix=Matrix.Translation((px, 0, pz)))
@@ -57,7 +57,7 @@ def build():
     # Twin trailing tails
     for side in [-1, 1]:
         for seg, (tz, tr, tlen) in enumerate([(0, 0.055, 0.60), (-0.20, 0.040, 0.50), (-0.42, 0.020, 0.35)]):
-            bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                        segments=6, radius1=tr, radius2=tr * 0.75,
                                        depth=tlen,
                                        matrix=Matrix.Translation(
@@ -68,7 +68,7 @@ def build():
         bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.16,
                                     matrix=Matrix.Translation((side * 0.30, 0.85, 0.05)))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_water_bioluminescent", "mat_purple_emissive"])
     set_origin_to_base(ob)

@@ -27,8 +27,8 @@ def build():
     obj, bm = new_mesh("SM_Beacon_A")
 
     # ── main stake body ───────────────────────────
-    stake = bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                       segments=12, radius=0.025, depth=0.46)
+    stake = bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                       segments=12, radius1=0.025, radius2=0.025, depth=0.46)
     bmesh.ops.translate(bm, verts=stake['verts'], vec=Vector((0, 0, 0.23)))
 
     # ── pointed bottom spike ──────────────────────

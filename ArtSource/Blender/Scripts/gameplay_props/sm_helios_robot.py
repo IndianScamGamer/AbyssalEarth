@@ -32,9 +32,9 @@ def build():
             matrix=Matrix.Translation(Vector((cx, cy, cz))))['verts']
 
     def cyl(cx, cy, cz, r, h, segs=10):
-        return bmesh.ops.create_cylinder(
+        return bmesh.ops.create_cone(
             bm, cap_ends=True, cap_tris=False, segments=segs,
-            radius=r, depth=h,
+            radius1=r, radius2=r, depth=h,
             matrix=Matrix.Translation(Vector((cx, cy, cz + h/2))))['verts']
 
     # ── pelvis ─────────────────────────────────────

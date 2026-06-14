@@ -52,7 +52,7 @@ def build():
                                @ Matrix.Scale(H / 0.10, 4, (0, 0, 1)))
 
     # Cable run — back wall
-    bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                segments=6, radius1=0.045, radius2=0.045,
                                depth=H,
                                matrix=Matrix.Translation((0, W - 0.12, H * 0.5)))
@@ -66,7 +66,7 @@ def build():
             v3 = bm.verts.new((ax * 1.015, ay * 1.015, bz + 0.06))
             bm.faces.new([v0, v1, v2, v3])
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_ancient_machine_dark", "mat_human_equipment"])
     set_origin_to_base(ob)

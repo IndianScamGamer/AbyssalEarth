@@ -67,7 +67,7 @@ def build():
             rv = bm.verts.new(v.co + Vector((0.015 * (1 if v.co.x > 0 else -1),
                                               ring_z, 0.015)))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_human_equipment", "mat_wet_basalt"])
     set_origin_to_base(ob)

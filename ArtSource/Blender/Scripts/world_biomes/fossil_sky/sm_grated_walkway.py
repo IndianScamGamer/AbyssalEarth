@@ -63,20 +63,20 @@ def build():
     for side in [-1, 1]:
         for k in range(5):
             bx = -L / 2 + 0.3 + k * 1.35
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-                radius=0.022, depth=1.05,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+                radius1=0.022, radius2=0.022, depth=1.05,
                 matrix=Matrix.Translation((bx, side * W / 2, 0.64)))
         for rz in [0.70, 1.12]:
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-                radius=0.020, depth=L,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+                radius1=0.020, radius2=0.020, depth=L,
                 matrix=Matrix.Translation((0, side * W / 2, rz))
                 @ Matrix.Rotation(TAU / 4, 4, 'Y'))
     # under-truss: shallow V struts beneath the deck
     for k in range(4):
         tx = -L / 2 + 0.75 + k * 1.5
         for sx in [-1, 1]:
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=5,
-                radius=0.030, depth=0.85,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=5,
+                radius1=0.030, radius2=0.030, depth=0.85,
                 matrix=Matrix.Translation((tx + sx * 0.30, 0, -0.30))
                 @ Matrix.Rotation(sx * 0.75, 4, 'Y'))
         bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.06,
