@@ -26,6 +26,15 @@ traversal system — plan a dedicated Windows/PIE tuning pass.
 
 ## Zone Breakdown
 
+### Zone 0a — Parkour Approach Corridor (pre-entry)
+**Purpose:** Introduce the gravity pull threat through active parkour before the player reaches the shaft. A 120 m winding descent corridor where gravity subtly increases and ceiling debris pulls upward.
+- Crumbling stone ledges at various angles requiring precision jumps and mantling.
+- 6 tethered floating rocks (SM_GW_TetherRock_A): basalt shards 2-5m across, chained to cave walls by iron cables. They drift and sway on their tethers. Player can fire tether at them to swing across gaps or arrest a fall.
+- No platform mechanics yet — this is pure parkour and spatial reading.
+- The gravity shear starts mild (0.95g) and reaches 0.7g at the corridor's end, causing jumps to arc strangely.
+- MERIDIAN: "Your suit's gravity sensors are reading an anomaly below. Proceed carefully."
+- `CHK_GW_00a` (pre-shaft). Discovery: `D_Human_AbandonedParkourRig` — frayed personal tether harness and chalk marks left by a previous expedition member; evidence of the same route.
+
 ### Zone 0 — Approach Shaft (entry)
 **Purpose:** Introduce reduced gravity + tether tutorial. 60 m shaft, 10 m diameter.
 - Gravity: 0.8g → 0.4g over 30 m. Mandatory tether tutorial before proceeding.
@@ -65,9 +74,28 @@ traversal system — plan a dedicated Windows/PIE tuning pass.
 
 ---
 
+## Tethered Floating Object Mechanic
+
+**SM_GW_TetherRock_A/B** are floating basalt shards physically chained to cave anchor points by heavy iron cables (1.5-3m chain length). They drift in slow arcs on their tethers — not random, but following the gravity field's orbital influence. Visual behavior:
+- The chain hangs slack when the object is close to its anchor rest position.
+- The chain pulls taut when the object drifts to chain limit.
+- Amber rune marks on the anchor bolts (alien installation — the colonists used these for traversal too).
+
+**Player interaction:**
+- Fire tether at the rock → tether attaches to the iron ring mount on the rock's face.
+- While tethered to a drifting rock: the rock's momentum carries the player (swing across gap, descend controlled, use as moving platform).
+- Release tether: the rock continues its drift, player releases.
+- Stack mechanic: tether to Rock A → swing to Rock B → tether to Rock B → chain-swing.
+- Risk: if a Rock swings into a shear hazard zone, it carries the player with it.
+
+**Blueprint actor:** `BP_GW_TetherRock` (derives from `AAbyssalInteractable`). Uses a PhysicsConstraint with angular limit for the chain swing arc. Chain length configurable per instance (150-300 cm).
+
+---
+
 ## Discovery Catalog Rows
 
 ```
+D_Human_AbandonedParkourRig,    HumanMade, GW_00a, Personal tether harness and chalk route marks — a previous expedition member cleared this approach
 D_Anomaly_GravityGradient,      Anomaly,   GW_00, Measurable gravity reduction over 30 m — no natural geological cause
 D_AlienTech_RuneConduitPanel,   AlienTech, GW_01, Amber rune panel; activating three in sequence unlocks the inner ring
 D_Geo_BasaltShard_Orbital,      Geology,   GW_01, Seabed basalt fragment now suspended in orbital path around the core
@@ -84,6 +112,7 @@ D_Geo_ThermalConvectionSeam,    Geology,   GW_06, Heat-carrying geological seam 
 
 | ID | Location | Trigger |
 |---|---|---|
+| `CHK_GW_00a` | Zone 0a corridor end | `AObjectiveTriggerActor` |
 | `CHK_GW_00` | Zone 0 shaft top | `AObjectiveTriggerActor` |
 | `CHK_GW_01` | Zone 1 rune sequence | Objective complete callback |
 | `CHK_GW_02` | Zone 2 after Room C | `AObjectiveTriggerActor` |
@@ -121,3 +150,7 @@ OBJ_GW_EXIT,        "Descend to the Mantle Garden approach", GRAVITY_WELL, false
 | Amber rune panel | `Content/Environment/GravityWell/SM_GW_RunePanel` |
 | Orbital particle stream | `Content/VFX/GravityWell/NS_GW_OrbitalStream` |
 | Gravity shear VFX | `Content/VFX/GravityWell/NS_GW_GravityShear` |
+| Tether rock shard A | `Content/Environment/GravityWell/SM_GW_TetherRock_A` |
+| Tether rock shard B | `Content/Environment/GravityWell/SM_GW_TetherRock_B` |
+| Parkour approach ledge | `Content/Environment/GravityWell/SM_GW_ParkourLedge_A` |
+| Tether anchor post | `Content/Environment/GravityWell/SM_GW_TetherAnchorPost_A` |

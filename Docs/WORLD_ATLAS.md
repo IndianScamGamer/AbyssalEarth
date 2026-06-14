@@ -292,10 +292,12 @@ The player enters a circular chamber and sees the path continue sideways and upw
 
 ### Traversal Fantasy
 
-- Cross floating platforms.
-- Reorient gravity across route gates.
-- Use tethers or anchors for safety.
-- Track route direction by beacon color and scanner vectors.
+- Descend a parkour approach corridor where gravity pulls strangely and ledges crumble — tethered floating rocks are the only safe anchors.
+- Fire your tether at iron-ringed drifting rock shards to swing across void gaps and control your descent.
+- Cross orbital floating platforms once inside the well proper.
+- Reorient gravity across route gates — your sense of "down" shifts room by room.
+- Chain-tether across multiple drifting objects for complex routes the stabilizer towers define.
+- Track route direction by beacon color and scanner gravity-vector overlays.
 - Navigate water ribbons as moving obstacles or temporary bridges.
 
 ### Visual Pillars
@@ -315,6 +317,9 @@ The player enters a circular chamber and sees the path continue sideways and upw
 - `SM_GravityWell_AnchorGate_A`
 - `SM_GravityWell_WaterRibbon_A`
 - `SM_GravityWell_CrystalDebris_A/B`
+- `SM_GravityWell_TetherRock_A/B`
+- `SM_GravityWell_ParkourLedge_A`
+- `SM_GravityWell_TetherAnchorPost_A`
 - `BP_GravityWell_AnomalyCore`
 - `BP_GravityWell_ReorientationVolume`
 - `M_GravityWell_LensingEnergy_Master`
@@ -334,6 +339,8 @@ The player enters a circular chamber and sees the path continue sideways and upw
 - Floating debris impacts.
 - Loss of route orientation.
 - Timed stabilizer pulses.
+- Tethered rock collision (a drifting rock carrying the player into a shear zone).
+- Parkour ledge collapse (approach corridor crumbling stone).
 
 ### Sound Direction
 
