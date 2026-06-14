@@ -53,8 +53,8 @@ def build():
     obj, bm = new_mesh("SM_Human_BedrollBundle_A")
 
     # ── outer roll cylinder ────────────────────────
-    bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                               segments=20, radius=0.16, depth=0.62,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                               segments=20, radius1=0.16, radius2=0.16, depth=0.62,
                                matrix=Matrix.Translation(Vector((0, 0, 0.31))) @
                                       Matrix.Rotation(PI/2, 4, 'X'))
 

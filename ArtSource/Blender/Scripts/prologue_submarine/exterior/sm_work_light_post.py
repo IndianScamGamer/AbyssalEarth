@@ -27,12 +27,12 @@ def build():
     twin amber flood heads. Scatter around the shaft rim."""
     obj, bm = new_mesh("SM_WorkLight_Post_A")
     # weighted base disc
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=10,
-        radius=0.45, depth=0.15,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=10,
+        radius1=0.45, radius2=0.45, depth=0.15,
         matrix=Matrix.Translation((0, 0, 0.075)))
     # mast
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.06, depth=3.0,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.06, radius2=0.06, depth=3.0,
         matrix=Matrix.Translation((0, 0, 1.65)))
     # crossbar
     bmesh.ops.create_cube(bm, size=1,
@@ -49,8 +49,8 @@ def build():
             @ Matrix.Scale(0.12, 4, (0,1,0))
             @ Matrix.Scale(0.22, 4, (0,0,1)))
     # cable drape stub
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=5,
-        radius=0.02, depth=0.8,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=5,
+        radius1=0.02, radius2=0.02, depth=0.8,
         matrix=Matrix.Translation((0.3, 0.2, 0.4))
         @ Matrix.Rotation(0.9, 4, 'X'))
     finalise(obj, bm)

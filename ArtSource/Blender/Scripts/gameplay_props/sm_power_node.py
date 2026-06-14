@@ -37,8 +37,8 @@ def build():
     bm.faces.new(list(reversed(lo)))
     bm.faces.new(hi)
     # central column
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.10, depth=0.55,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.10, radius2=0.10, depth=0.55,
         matrix=Matrix.Translation((0, 0, 0.52)))
     # core energy sphere
     bmesh.ops.create_icosphere(bm, subdivisions=2, radius=0.22,
@@ -55,16 +55,16 @@ def build():
             bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.030,
                 matrix=Matrix.Translation((math.cos(a)*rx, math.sin(a)*rx, rz)))
     # top cap antenna
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-        radius=0.04, depth=0.45,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+        radius1=0.04, radius2=0.04, depth=0.45,
         matrix=Matrix.Translation((0, 0, 1.75)))
     bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.07,
         matrix=Matrix.Translation((0, 0, 2.05)))
     # 4 conduit ports on plinth
     for i in range(4):
         a = i * TAU / 4 + TAU/8
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-            radius=0.07, depth=0.12,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+            radius1=0.07, radius2=0.07, depth=0.12,
             matrix=Matrix.Translation((math.cos(a)*0.44, math.sin(a)*0.44, 0.12))
             @ Matrix.Rotation(a + TAU/4, 4, 'Z')
             @ Matrix.Rotation(TAU/4, 4, 'X'))

@@ -55,12 +55,12 @@ def build():
     # ── stand frame ───────────────────────────────
     # 2 vertical posts
     for sx in (-0.28, 0.28):
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                   segments=6, radius=0.04, depth=0.55,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                   segments=6, radius1=0.04, radius2=0.04, depth=0.55,
                                    matrix=Matrix.Translation(Vector((sx, 0, 0.275))))
     # horizontal axle
-    bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                               segments=8, radius=0.035, depth=0.58,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                               segments=8, radius1=0.035, radius2=0.035, depth=0.58,
                                matrix=Matrix.Translation(Vector((0, 0, 0.42))) @
                                       Matrix.Rotation(PI/2, 4, 'Y'))
     # base cross-bar

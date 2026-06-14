@@ -27,8 +27,8 @@ def build():
     obj, bm = new_mesh("SM_Item_RebreatherMod_A")
     # twin tubes
     for side in [-1, 1]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=10,
-            radius=0.028, depth=0.13,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=10,
+            radius1=0.028, radius2=0.028, depth=0.13,
             matrix=Matrix.Translation((side * 0.035, 0, 0.065)))
     # manifold block joining them
     bmesh.ops.create_cube(bm, size=1,

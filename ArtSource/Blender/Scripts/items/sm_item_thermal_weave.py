@@ -27,19 +27,19 @@ def build():
     random.seed(109)
     obj, bm = new_mesh("SM_Item_ThermalWeave_A")
     # rolled cylinder (lying on side)
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=14,
-        radius=0.045, depth=0.16,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=14,
+        radius1=0.045, radius2=0.045, depth=0.16,
         matrix=Matrix.Translation((0, 0, 0.045))
         @ Matrix.Rotation(TAU/4, 4, 'X'))
     # spiral edge detail: outer wrap lip
-    bmesh.ops.create_cylinder(bm, cap_ends=False, segments=14,
-        radius=0.048, depth=0.02,
+    bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=14,
+        radius1=0.048, radius2=0.048, depth=0.02,
         matrix=Matrix.Translation((0, 0.06, 0.045))
         @ Matrix.Rotation(TAU/4, 4, 'X'))
     # binding straps
     for sy in [-0.05, 0.05]:
-        bmesh.ops.create_cylinder(bm, cap_ends=False, segments=10,
-            radius=0.049, depth=0.012,
+        bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=10,
+            radius1=0.049, radius2=0.049, depth=0.012,
             matrix=Matrix.Translation((0, sy, 0.045))
             @ Matrix.Rotation(TAU/4, 4, 'X'))
     finalise(obj, bm)

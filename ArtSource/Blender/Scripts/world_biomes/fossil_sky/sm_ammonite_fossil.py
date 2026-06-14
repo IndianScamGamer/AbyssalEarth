@@ -71,8 +71,8 @@ def build():
                                             -0.05 - tube_r * 0.55,
                                             cz + math.sin(ang) * tube_r)))
     # flared aperture lip at the outer end
-    bmesh.ops.create_cylinder(bm, cap_ends=False, segments=10,
-        radius=0.19, depth=0.10,
+    bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=10,
+        radius1=0.19, radius2=0.19, depth=0.10,
         matrix=Matrix.Translation((0.62, -0.05, centre_z))
         @ Matrix.Rotation(TAU / 4, 4, 'Y'))
     finalise(obj, bm)

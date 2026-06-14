@@ -39,7 +39,7 @@ def build():
 
         if "Crystal" in name:
             # Hexagonal prism shard — faceted top
-            result = bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+            result = bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                                 segments=6, radius1=0.06, radius2=0.015,
                                                 depth=0.18,
                                                 matrix=Matrix.Translation((0, 0, 0.09)))
@@ -58,12 +58,12 @@ def build():
 
         elif "AncientCoin" in name:
             # Disc with radial grooves
-            bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                        segments=16, radius1=0.065, radius2=0.065,
                                        depth=0.012,
                                        matrix=Matrix.Translation((0, 0, 0.006)))
             # Inner ring detail
-            bmesh.ops.create_cylinder(bm, cap_ends=False, cap_tris=False,
+            bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False,
                                        segments=16, radius1=0.042, radius2=0.042,
                                        depth=0.013,
                                        matrix=Matrix.Translation((0, 0, 0.006)))
@@ -73,12 +73,12 @@ def build():
             result = bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.07,
                                                  matrix=Matrix.Translation((0, 0, 0.07)))
             # Equatorial band
-            bmesh.ops.create_cylinder(bm, cap_ends=False, cap_tris=False,
+            bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False,
                                        segments=12, radius1=0.075, radius2=0.075,
                                        depth=0.018,
                                        matrix=Matrix.Translation((0, 0, 0.07)))
 
-        finalise(ob, me, bm)
+        finalise(ob, bm)
         smart_uv(ob)
         add_mat_slots(ob, [mat_name])
         set_origin_to_base(ob)

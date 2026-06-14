@@ -83,8 +83,8 @@ def build():
     # ── 4 folding legs ────────────────────────────
     for lx, ly in [(-0.55, -0.30), (0.55, -0.30),
                    (0.55,  0.30),  (-0.55, 0.30)]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                   segments=5, radius=0.025, depth=0.68,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                   segments=5, radius1=0.025, radius2=0.025, depth=0.68,
                                    matrix=Matrix.Translation(Vector((lx, ly, 0.34))))
 
     # ── rubber foot pads ──────────────────────────

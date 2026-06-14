@@ -32,7 +32,7 @@ def build():
               (-0.04, -0.04, 0.035)]
 
     for px, py, pr in layout:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=8, radius1=pr, radius2=pr,
                                    depth=4.0,
                                    matrix=Matrix.Translation((px, py, 2.0))
@@ -40,12 +40,12 @@ def build():
 
     # Clamp bands every 1 m
     for cz in [0.5, 1.5, 2.5, 3.5]:
-        bmesh.ops.create_cylinder(bm, cap_ends=False, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False,
                                    segments=10, radius1=0.145, radius2=0.145,
                                    depth=0.06,
                                    matrix=Matrix.Translation((0, 0, cz)))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_human_equipment"])
     set_origin_to_base(ob)

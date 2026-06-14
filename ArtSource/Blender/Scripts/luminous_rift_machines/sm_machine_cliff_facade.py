@@ -67,8 +67,8 @@ def build():
     for k in range(4):
         pz = 14.0 + k * 1.3
         pr = random.uniform(0.30, 0.55)
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=10,
-            radius=pr, depth=W * 0.9,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=10,
+            radius1=pr, radius2=pr, depth=W * 0.9,
             matrix=Matrix.Translation((0, -D / 2 - 0.9, pz))
             @ Matrix.Rotation(TAU / 4, 4, 'Y'))
         # pipe saddle clamps
@@ -94,8 +94,8 @@ def build():
         @ Matrix.Scale(0.6, 4, (0, 0, 1)))
     # ledge support knees
     for kx in [-3.5, 2.0, 7.5]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=5,
-            radius=0.35, depth=2.6,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=5,
+            radius1=0.35, radius2=0.35, depth=2.6,
             matrix=Matrix.Translation((kx, -D / 2 - 1.2, 18.6))
             @ Matrix.Rotation(0.6, 4, 'X'))
     finalise(obj, bm)

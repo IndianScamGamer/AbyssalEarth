@@ -40,8 +40,8 @@ def build():
         @ Matrix.Scale(0.012, 4, (0,1,0))
         @ Matrix.Scale(0.075, 4, (0,0,1)))
     # sensor snout
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.030, depth=0.06,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.030, radius2=0.030, depth=0.06,
         matrix=Matrix.Translation((0, -0.11, 0.17))
         @ Matrix.Rotation(TAU/4, 4, 'X'))
     # pistol grip

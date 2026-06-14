@@ -35,8 +35,8 @@ def build():
             @ Matrix.Scale(0.115, 4, (0,1,0))
             @ Matrix.Scale(0.020, 4, (0,0,1)))
     # pivot boss
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.014, depth=0.026,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.014, radius2=0.014, depth=0.026,
         matrix=Matrix.Translation((0, 0.030, 0.012)))
     # plier jaws
     for side in [-1, 1]:

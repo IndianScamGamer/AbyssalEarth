@@ -55,8 +55,8 @@ def build():
     for t in [0.2, 0.5, 0.8]:
         a = -ARC/2 + t * ARC
         px, py = math.cos(a)*(R_IN + 1.0), math.sin(a)*(R_IN + 1.0)
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-            radius=0.08, depth=2.5,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+            radius1=0.08, radius2=0.08, depth=2.5,
             matrix=Matrix.Translation((px, py, 1.25)))
         bmesh.ops.create_cube(bm, size=1,
             matrix=Matrix.Translation((px, py, 2.6))

@@ -65,8 +65,8 @@ def build():
         leg_dir = Vector((tx, ty, 0.04 - leg_h)).normalized()
         for j in range(8):
             pass  # simplified: just thin cylinder
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                   segments=5, radius=0.018, depth=leg_h,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                   segments=5, radius1=0.018, radius2=0.018, depth=leg_h,
                                    matrix=(Matrix.Translation(Vector((tx/2, ty/2, leg_h/2))) @
                                            Matrix.Rotation(-math.atan2(math.sqrt(tx**2+ty**2),
                                                                          leg_h-0.04), 4, 'X') @
@@ -75,8 +75,8 @@ def build():
         box_from_corners(bm, (tx-0.06, ty-0.06, 0), (tx+0.06, ty+0.06, 0.04))
 
     # ── centre column ─────────────────────────────
-    bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                               segments=6, radius=0.025, depth=0.40,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                               segments=6, radius1=0.025, radius2=0.025, depth=0.40,
                                matrix=Matrix.Translation(Vector((0, 0, leg_h + 0.20))))
 
     # ── scanner head box ──────────────────────────

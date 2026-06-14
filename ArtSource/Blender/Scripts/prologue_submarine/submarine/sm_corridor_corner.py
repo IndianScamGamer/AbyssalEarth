@@ -54,7 +54,7 @@ def build():
     # Right wall segment
     bm.faces.new([v[2], v[3], v[7], v[6]])
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_human_equipment"])
     set_origin_to_base(ob)

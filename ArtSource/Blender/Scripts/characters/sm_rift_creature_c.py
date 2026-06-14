@@ -44,7 +44,7 @@ def build():
         ang = math.radians(i * 45)
         fx = math.cos(ang) * 0.28
         fy = math.sin(ang) * 0.28
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=4, radius1=0.03, radius2=0.005,
                                    depth=0.32,
                                    matrix=Matrix.Translation((fx, fy, frill_z + 0.16))
@@ -54,7 +54,7 @@ def build():
     # Head — elongated snout
     bmesh.ops.create_icosphere(bm, subdivisions=2, radius=0.18,
                                 matrix=Matrix.Translation((0, 0, 2.95)))
-    bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                segments=8, radius1=0.06, radius2=0.03,
                                depth=0.30,
                                matrix=Matrix.Translation((0, 0.28, 2.95)))
@@ -64,7 +64,7 @@ def build():
         bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.03,
                                     matrix=Matrix.Translation((side * 0.09, 0.16, 3.04)))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_water_bioluminescent", "mat_blue_emissive"])
     set_origin_to_base(ob)

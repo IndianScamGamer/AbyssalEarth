@@ -44,12 +44,12 @@ def build():
             hw = 0.065
             gv = [bm.verts.new((cx+dx*hw, cy+dy*hw, 0.04))
                   for dx, dy in ((-1,-1),(1,-1),(1,1),(-1,1))]
-            bm.faces.new(gv)
-            extrude_region(bm, [bm.faces[-1]], 0.05, Vector((0, 0, -1)))
+            gf = bm.faces.new(gv)
+            extrude_region(bm, [gf], 0.05, Vector((0, 0, -1)))
 
     # ── central pipe stub ─────────────────────────
-    pipe = bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                      segments=10, radius=0.09, depth=0.20)
+    pipe = bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                      segments=10, radius1=0.09, radius2=0.09, depth=0.20)
     bmesh.ops.translate(bm, verts=pipe['verts'], vec=Vector((0, 0, -0.20)))
 
     # ── bolted flange lip ─────────────────────────

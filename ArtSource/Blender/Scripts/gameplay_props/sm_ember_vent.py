@@ -51,8 +51,8 @@ def build():
         a = i * TAU / 8 + 0.2
         hr = random.uniform(0.30, 0.48)
         hz = random.uniform(0.10, 0.30)
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-            radius=0.035, depth=0.06,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+            radius1=0.035, radius2=0.035, depth=0.06,
             matrix=Matrix.Translation((math.cos(a)*hr, math.sin(a)*hr, hz))
             @ Matrix.Rotation(a, 4, 'Z') @ Matrix.Rotation(TAU/4, 4, 'Y'))
     finalise(obj, bm)

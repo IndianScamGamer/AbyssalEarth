@@ -38,16 +38,16 @@ def build():
     # metal bracket supports every 4m
     for bx in range(-18, 20, 4):
         for side in [-1, 1]:
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-                radius=0.05, depth=2.0,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+                radius1=0.05, radius2=0.05, depth=2.0,
                 matrix=Matrix.Translation((bx, side*W*0.4, 0.9)))
             # anchor node
             bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.08,
                 matrix=Matrix.Translation((bx, side*W*0.4, 1.9)))
     # side rails
     for side in [-1, 1]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-            radius=0.04, depth=L,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+            radius1=0.04, radius2=0.04, depth=L,
             matrix=Matrix.Translation((0, side*W*0.48, 1.0))
             @ Matrix.Rotation(TAU/4, 4, 'Y'))
     finalise(obj, bm)

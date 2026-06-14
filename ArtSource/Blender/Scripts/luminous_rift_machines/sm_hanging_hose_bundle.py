@@ -36,8 +36,8 @@ def build():
         @ Matrix.Scale(1.0, 4, (0, 1, 0))
         @ Matrix.Scale(0.7, 4, (0, 0, 1)))
     for px in [-0.7, 0.0, 0.7]:
-        bmesh.ops.create_cylinder(bm, cap_ends=False, segments=8,
-            radius=0.28, depth=0.45,
+        bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=8,
+            radius1=0.28, radius2=0.28, depth=0.45,
             matrix=Matrix.Translation((px, 0, 7.55)))
     # 5 drooping hoses: lofted tube along a hanging curve
     for h in range(5):
@@ -66,21 +66,21 @@ def build():
             prev_ring = ring
             # segment collar every 4th step
             if s % 4 == 2:
-                bmesh.ops.create_cylinder(bm, cap_ends=False, segments=8,
-                    radius=hr * 1.25, depth=0.12,
+                bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=8,
+                    radius1=hr * 1.25, radius2=hr * 1.25, depth=0.12,
                     matrix=Matrix.Translation((cx, cy, cz)))
         # frayed end: connector stub or torn strands
         end_x = x0 + math.sin(PI * 0.8) * sway
         end_y = -1.6
         end_z = 7.6 - drop
         if h % 2 == 0:
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-                radius=hr * 1.1, depth=0.30,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+                radius1=hr * 1.1, radius2=hr * 1.1, depth=0.30,
                 matrix=Matrix.Translation((end_x, end_y, end_z - 0.15)))
         else:
             for f in range(3):
-                bmesh.ops.create_cylinder(bm, cap_ends=True, segments=4,
-                    radius=0.025, depth=0.4,
+                bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=4,
+                    radius1=0.025, radius2=0.025, depth=0.4,
                     matrix=Matrix.Translation((end_x + random.uniform(-0.1, 0.1),
                                                 end_y + random.uniform(-0.1, 0.1),
                                                 end_z - 0.2))

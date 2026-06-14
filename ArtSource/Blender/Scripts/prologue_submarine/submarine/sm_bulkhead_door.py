@@ -49,15 +49,15 @@ def build():
         bm.verts.new((x, -0.04, z))
         bm.verts.new((x, -0.10, z))
     bm.verts.ensure_lookup_table()
-    # Door faces
-    base = 16
+    # Door faces — door verts begin right after the 8 frame-panel verts
+    base = 8
     for i in range(SEGS):
         ni = (i + 1) % SEGS
         bm.faces.new([v[base + i*2], v[base + i*2 + 1],
                        v[base + ni*2 + 1], v[base + ni*2]])
 
     # Wheel handle
-    bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                segments=12, radius1=0.28, radius2=0.28,
                                depth=0.04,
                                matrix=Matrix.Translation((0, -0.14, 1.10)))
@@ -66,7 +66,7 @@ def build():
         ang = math.radians(i * 45)
         sx = math.cos(ang) * 0.22
         sz = math.sin(ang) * 0.22
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=4, radius1=0.018, radius2=0.018,
                                    depth=0.44,
                                    matrix=Matrix.Translation((0, -0.16, 1.10))
@@ -77,7 +77,7 @@ def build():
         bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.04,
                                     matrix=Matrix.Translation((-0.56, -0.10, bz)))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_human_equipment", "mat_wet_basalt"])
     set_origin_to_base(ob)

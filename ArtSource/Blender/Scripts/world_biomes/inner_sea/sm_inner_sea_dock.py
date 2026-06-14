@@ -61,16 +61,16 @@ def build():
     # dock posts (cleats)
     for py in [-length/2 + 1, 0, length/2 - 1]:
         for px in (-width/2 - 0.02, width/2 + 0.02):
-            bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                       segments=6, radius=0.065, depth=0.45,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                       segments=6, radius1=0.065, radius2=0.065, depth=0.45,
                                        matrix=Matrix.Translation(Vector((px, py, -0.22))))
             box(bm, (px - 0.09, py - 0.025, 0.12), (px + 0.09, py + 0.025, 0.22))
 
     # floats (barrel-like)
     for fy in (-length/3, length/3):
         for fx in (-width/2 + 0.15, width/2 - 0.15):
-            bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
-                                       segments=12, radius=0.22, depth=0.40,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
+                                       segments=12, radius1=0.22, radius2=0.22, depth=0.40,
                                        matrix=Matrix.Translation(Vector((fx, fy, -0.20))) @
                                               Matrix.Rotation(PI/2, 4, 'X'))
 

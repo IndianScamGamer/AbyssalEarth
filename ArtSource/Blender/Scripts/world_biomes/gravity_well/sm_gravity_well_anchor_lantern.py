@@ -29,8 +29,8 @@ def build():
     platforms in GW-002."""
     obj, bm = new_mesh("SM_GravityWell_AnchorLantern_A")
     # spiked stake
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-        radius=0.020, depth=0.40,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+        radius1=0.020, radius2=0.020, depth=0.40,
         matrix=Matrix.Translation((0, 0, 0.20)))
     tip_ring = [bm.verts.new((math.cos(i * TAU / 6) * 0.018,
                                math.sin(i * TAU / 6) * 0.018, 0.02))
@@ -39,18 +39,18 @@ def build():
     for i in range(6):
         bm.faces.new([tip_ring[i], tip_ring[(i + 1) % 6], tip])
     # lamp housing: short cylinder with cage bars
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=10,
-        radius=0.075, depth=0.13,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=10,
+        radius1=0.075, radius2=0.075, depth=0.13,
         matrix=Matrix.Translation((0, 0, 0.47)))
     for i in range(4):
         a = i * TAU / 4
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=4,
-            radius=0.006, depth=0.15,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=4,
+            radius1=0.006, radius2=0.006, depth=0.15,
             matrix=Matrix.Translation((math.cos(a) * 0.078,
                                         math.sin(a) * 0.078, 0.47)))
     # lamp cap + hanging hook
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.085, depth=0.025,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.085, radius2=0.085, depth=0.025,
         matrix=Matrix.Translation((0, 0, 0.545)))
     for s in range(4):
         sa = PI * s / 3

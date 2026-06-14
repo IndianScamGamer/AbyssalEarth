@@ -52,8 +52,8 @@ def build():
             @ Matrix.Scale(0.06, 4, (0, 1, 0))
             @ Matrix.Scale(0.14, 4, (0, 0, 1)))
     # conduit stub from one end
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=6,
-        radius=0.015, depth=0.30,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=6,
+        radius1=0.015, radius2=0.015, depth=0.30,
         matrix=Matrix.Translation((L / 2 + 0.15, 0.02, 0.06))
         @ Matrix.Rotation(TAU / 4, 4, 'Y'))
     finalise(obj, bm)

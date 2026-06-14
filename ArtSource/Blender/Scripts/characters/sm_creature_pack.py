@@ -99,8 +99,8 @@ def build_crystal_prowler():
             _chain(bm, [hip, knee, foot], [0.16, 0.12, 0.10], segs=6)
             for c in range(3):
                 ca = (c - 1) * 0.5
-                bmesh.ops.create_cylinder(bm, cap_ends=True, segments=4,
-                    radius=0.025, depth=0.18,
+                bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=4,
+                    radius1=0.025, radius2=0.025, depth=0.18,
                     matrix=Matrix.Translation((side * (1.05 + 0.10),
                                                 sy + 0.15 + ca * 0.1, 0.04))
                     @ Matrix.Rotation(side * (0.9 + ca * 0.3), 4, 'Y'))
@@ -149,16 +149,16 @@ def build_stilt_dancer():
         _chain(bm, [hip, knee, shin, foot], [0.10, 0.075, 0.05, 0.04], segs=5)
         # splayed two-toe foot
         for ta in [-0.45, 0.45]:
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=4,
-                radius=0.022, depth=0.22,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=4,
+                radius1=0.022, radius2=0.022, depth=0.22,
                 matrix=Matrix.Translation((side * 0.35 + math.sin(ta) * 0.1,
                                             -0.42, 0.03))
                 @ Matrix.Rotation(ta, 4, 'Z')
                 @ Matrix.Rotation(TAU / 4 - 0.2, 4, 'X'))
     # segment collar fringes on the body
     for cz in [1.9, 2.3, 2.7]:
-        bmesh.ops.create_cylinder(bm, cap_ends=False, segments=8,
-            radius=0.30, depth=0.04,
+        bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=8,
+            radius1=0.30, radius2=0.30, depth=0.04,
             matrix=Matrix.Translation((0.02, 0, cz)))
     finalise(obj, bm)
     smart_uv(obj)
@@ -294,8 +294,8 @@ def build_armored_grazer():
                    [0.30, 0.26, 0.28], segs=7)
             for c in range(3):
                 ca = (c - 1) * 0.45
-                bmesh.ops.create_cylinder(bm, cap_ends=True, segments=4,
-                    radius=0.05, depth=0.28,
+                bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=4,
+                    radius1=0.05, radius2=0.05, depth=0.28,
                     matrix=Matrix.Translation((side * 1.05,
                                                 sy - 0.18 + ca * 0.2, 0.07))
                     @ Matrix.Rotation(ca, 4, 'Z')
@@ -339,8 +339,8 @@ def build_spindle_walker():
            [0.16, 0.20, 0.15, 0.10], segs=6)
     # rib fringe collars
     for cz in [2.85, 3.25]:
-        bmesh.ops.create_cylinder(bm, cap_ends=False, segments=7,
-            radius=0.24, depth=0.035,
+        bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=7,
+            radius1=0.24, radius2=0.24, depth=0.035,
             matrix=Matrix.Translation((0.02, 0, cz)))
     # head: small bulb with antler crown
     bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.13,

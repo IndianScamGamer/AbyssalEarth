@@ -69,8 +69,8 @@ def build():
             @ Matrix.Scale(0.06, 4, (0, 0, 1)))
         # frayed strands
         for f in range(3):
-            bmesh.ops.create_cylinder(bm, cap_ends=True, segments=4,
-                radius=0.008, depth=0.15,
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=4,
+                radius1=0.008, radius2=0.008, depth=0.15,
                 matrix=Matrix.Translation((ex + random.uniform(-0.05, 0.05),
                                             ey + random.uniform(-0.05, 0.05),
                                             ez - 0.10))

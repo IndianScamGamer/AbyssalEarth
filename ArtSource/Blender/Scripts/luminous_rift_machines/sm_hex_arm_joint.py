@@ -30,13 +30,13 @@ def build():
     obj, bm = new_mesh("SM_Rift_HexCollector_ArmJoint_A")
     # elbow hub: twin coaxial cylinders
     for off in [-0.09, 0.09]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=12,
-            radius=0.14, depth=0.10,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=12,
+            radius1=0.14, radius2=0.14, depth=0.10,
             matrix=Matrix.Translation((off, 0, 0.30))
             @ Matrix.Rotation(TAU/4, 4, 'Y'))
     # central pivot pin
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.05, depth=0.34,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.05, radius2=0.05, depth=0.34,
         matrix=Matrix.Translation((0, 0, 0.30))
         @ Matrix.Rotation(TAU/4, 4, 'Y'))
     # upper arm strut (angled up to tile A)
@@ -54,12 +54,12 @@ def build():
         @ Matrix.Scale(0.60, 4, (0, 1, 0))
         @ Matrix.Scale(0.07, 4, (0, 0, 1)))
     # piston rod alongside upper strut
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.025, depth=0.50,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.025, radius2=0.025, depth=0.50,
         matrix=Matrix.Translation((0.10, 0.24, 0.44))
         @ Matrix.Rotation(0.55, 4, 'X'))
-    bmesh.ops.create_cylinder(bm, cap_ends=True, segments=8,
-        radius=0.04, depth=0.22,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+        radius1=0.04, radius2=0.04, depth=0.22,
         matrix=Matrix.Translation((0.10, 0.10, 0.34))
         @ Matrix.Rotation(0.55, 4, 'X'))
     # clamp heads at both strut ends (grip the tile frames)

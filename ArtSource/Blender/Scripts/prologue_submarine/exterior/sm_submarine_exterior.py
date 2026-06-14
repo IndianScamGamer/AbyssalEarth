@@ -61,14 +61,14 @@ def build():
     bm.faces.new(h_rings[-1])
     # twin bow headlights
     for side in [-1, 1]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, segments=10,
-            radius=0.22, depth=0.25,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=10,
+            radius1=0.22, radius2=0.22, depth=0.25,
             matrix=Matrix.Translation((side*0.55, -11.2, 0.75))
             @ Matrix.Rotation(TAU/4, 4, 'X'))
     # stern prop shrouds
     for side in [-1, 1]:
-        bmesh.ops.create_cylinder(bm, cap_ends=False, segments=12,
-            radius=0.55, depth=0.5,
+        bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False, segments=12,
+            radius1=0.55, radius2=0.55, depth=0.5,
             matrix=Matrix.Translation((side*0.95, 11.0, 0.95))
             @ Matrix.Rotation(TAU/4, 4, 'X'))
         # hub + 4 blades

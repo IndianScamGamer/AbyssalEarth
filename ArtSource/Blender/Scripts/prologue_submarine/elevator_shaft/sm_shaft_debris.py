@@ -59,12 +59,12 @@ def build():
         cx = math.cos(ang) * (0.35 - t * 0.1)
         cy = math.sin(ang) * (0.35 - t * 0.1)
         cz = t * 0.5
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=5, radius1=0.022, radius2=0.022,
                                    depth=0.18,
                                    matrix=Matrix.Translation((cx, cy, cz)))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_wet_basalt", "mat_human_equipment"])
     set_origin_to_base(ob)

@@ -29,7 +29,7 @@ def build():
 
     # Structural arch frame (two vertical pillars + cross beam)
     for sx in [-2.2, 2.2]:
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=8, radius1=0.22, radius2=0.22,
                                    depth=4.0,
                                    matrix=Matrix.Translation((sx, 0, 2.0)))
@@ -54,12 +54,12 @@ def build():
                                    @ Matrix.Scale(0.5, 4, (0, 1, 0))
                                    @ Matrix.Scale(2.0, 4, (0, 0, 1)))
         # Gear hub
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=16, radius1=0.60, radius2=0.60,
                                    depth=0.18,
                                    matrix=Matrix.Translation((gx, 0, 3.50))
                                    @ Matrix.Rotation(math.radians(90), 4, 'X'))
-        bmesh.ops.create_cylinder(bm, cap_ends=True, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False,
                                    segments=8, radius1=0.18, radius2=0.18,
                                    depth=0.24,
                                    matrix=Matrix.Translation((gx, 0, 3.50))
@@ -80,7 +80,7 @@ def build():
 
     # Cable (twin cylinders from counterweight to gears)
     for cx in [-0.30, 0.30]:
-        bmesh.ops.create_cylinder(bm, cap_ends=False, cap_tris=False,
+        bmesh.ops.create_cone(bm, cap_ends=False, cap_tris=False,
                                    segments=5, radius1=0.025, radius2=0.025,
                                    depth=2.60,
                                    matrix=Matrix.Translation((cx, -1.60, 3.10)))
@@ -90,7 +90,7 @@ def build():
         bmesh.ops.create_icosphere(bm, subdivisions=1, radius=0.09,
                                     matrix=Matrix.Translation((nx, 0, 4.28)))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_ancient_machine_dark", "mat_gold_emissive", "mat_human_equipment"])
     set_origin_to_base(ob)

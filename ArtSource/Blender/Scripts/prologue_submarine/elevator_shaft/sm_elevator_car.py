@@ -80,7 +80,7 @@ def build():
                            @ Matrix.Scale(0.04, 4, (0, 1, 0))
                            @ Matrix.Scale(0.6, 4, (0, 0, 1)))
 
-    finalise(ob, me, bm)
+    finalise(ob, bm)
     smart_uv(ob)
     add_mat_slots(ob, ["mat_human_equipment", "mat_ancient_machine_dark", "mat_gold_emissive"])
     set_origin_to_base(ob)
